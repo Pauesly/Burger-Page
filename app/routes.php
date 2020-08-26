@@ -9,10 +9,12 @@
 $route[] = ['/',            'HomeController@index'];
 
 
-$route[] = ['/adm',         'AdmController@loginAdm'];
+$route[] = ['/adm',                     'AdmController@loginAdm'];
+$route[] = ['/login/valida_login',      'AdmController@validarLogin'];
 
 
 
+$route[] = ['/adm_index',           'AdmController@index',                  'auth'];
 
 
 

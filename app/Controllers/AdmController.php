@@ -25,11 +25,14 @@ class AdmController extends BaseController
     
     public function loginAdm(){
         $this->setPageTitle('LOGIN');
-        $this->renderView('adm/login/index');
+        $this->renderView('adm/login/login');
     }
     
     
-    
+    public function validarLogin(){
+        $this->setPageTitle('Adm');
+        $this->renderView('adm/home/inicio');
+    }
     
     
 }
