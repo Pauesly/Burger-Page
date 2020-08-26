@@ -7,7 +7,7 @@ use Core\Redirect;
 use Core\Validator;
 use App\Models\Email;
 
-class HomeController extends BaseController
+class AdmController extends BaseController
 {
     
     private $dados;
@@ -20,13 +20,13 @@ class HomeController extends BaseController
        // $this->email = new Email;
     }
     
+
+
     
-    public function index(){
-        $this->setPageTitle('Home');
-        $this->renderView('home/index', 'layout_main');
+    public function loginAdm(){
+        $this->setPageTitle('LOGIN');
+        $this->renderView('adm/login/index');
     }
-
-
     
     
     

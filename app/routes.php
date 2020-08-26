@@ -9,6 +9,9 @@
 $route[] = ['/',            'HomeController@index'];
 
 
+$route[] = ['/adm',         'AdmController@loginAdm'];
+
+
 
 
 

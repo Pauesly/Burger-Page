@@ -1,0 +1,3 @@
+INSERT INTO `Adm` (`id_adm`, `email`, `password`, `name`, `picture`, `obs`, `active`) VALUES ('1', 'paulowesley@gmail.com', '$2a$08$MTY3OTMwODM4NjVmNDVhYebX.J3n6lYQ.4DNo6xz5FFNOcF45Hh7y', 'Paulo Franco', '0', NULL, '1');
+
+Senha padrao 1234567 criptografada
