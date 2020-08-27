@@ -13,7 +13,14 @@ class Auth
     {
         if(Session::get('adm')){
             $user = Session::get('adm');
-            self::$id = $user['idAdm'];
+            self::$id = $user['id_adm'];
+            self::$name = $user['name'];
+            self::$email = $user['email'];
+        }
+        
+        if(Session::get('user')){
+            $user = Session::get('user');
+            self::$id = $user['id_user'];
             self::$name = $user['nome'];
             self::$email = $user['email'];
         }

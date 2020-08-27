@@ -13,15 +13,22 @@ document.getElementById("btn_entrar").addEventListener("mousedown", function(eve
  */
 function FazLoginAdm(){
     
+    document.getElementById("txt_email").disabled = true;
+    document.getElementById("txt_password").disabled = true;
+    document.getElementById("btn_entrar").disabled = true;
+    document.getElementById("btn_entrar").className = "btn btn-outline-warning disabled";
+    
+    
     //Coletando dados
     var email = document.getElementById("txt_email").value;
     var senha = document.getElementById("txt_password").value;
+    var keep  = document.getElementById("remember").checked;
     
-
 
         //Coleta dados
         document.getElementById("email").value          = email;
-        document.getElementById("nome").value           = senha;
+        document.getElementById("password").value       = senha;
+        document.getElementById("keep_conected").value  = keep;
 
        
         //Enviando

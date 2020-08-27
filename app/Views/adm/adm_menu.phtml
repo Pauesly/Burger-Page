@@ -1,0 +1,143 @@
+
+
+<div class=""  style="background: #FAFAFA">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
+        <div class="">
+            <a class="brand" href="/">
+                <img class="brand-logo-dark" src="images/logo-198x66.png" alt="" width="198" height="66"/>
+            </a>
+        </div>
+        
+        
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" ></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+            <ul class="navbar-nav ml-auto topnav" >
+                
+                <!--Pedido-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pedido 
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-tasks"></span> Gestão à vista</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-plus"></span> Novo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-search"></span> Consultar</a>
+                    </div>
+                </li>
+                
+                
+                <!--Cliente-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Cliente
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/add_customer" onclick="LaunchLoading();"><span class="glyphicon glyphicon-plus"></span> Inserir</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-search"></span> Consultar</a>
+                    </div>
+                </li>
+                
+                
+                <!--Estoque-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Estoque
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-barcode"></span> Itens</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-align-left"></span> Produtos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-align-justify"></span> Menu</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-tags"></span> Categorias</a>
+                    </div>
+                </li>
+                
+                
+                <!--Relatorios-->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Relatórios
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-usd"></span> Vendas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-align-left"></span> Itens</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-th"></span> Categorias</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-user"></span> Clientes</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-tags"></span> Produtos</a>
+                    </div>
+                </li>
+                
+                
+                
+                
+                
+                <!--Adm-->
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-info text-green" type="button" href="/adm_perfil" onclick="LaunchLoading();" ><span class="glyphicon glyphicon-user"></span><?php echo $this->view->nome?></a>                  
+                </li>
+                
+                <!--Logout-->
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-danger text-green" type="button" href="/logout" data-target="#myModal">Logout</a>                  
+                </li>
+            </ul>
+        </div>
+        
+        
+    </nav>
+    
+    <hr>
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal LOADING -->
+<div class="modal fade" id="loading" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Carregando informações...</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm text-center">
+                        <img src="/images/logo-198x66.png" alt="logged" style=" border-radius: 10%; opacity: 0.8;" >
+                    </div>
+                    <div class="col-sm">
+                        Por favor, aguarde enquanto carregamos as informações.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

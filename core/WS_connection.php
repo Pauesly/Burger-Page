@@ -1,5 +1,4 @@
 <?php
-namespace Core\Web_service;
 
     //Protege contra MySql Injection
 	function DBEscape($dados){
