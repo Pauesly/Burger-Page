@@ -38,7 +38,9 @@ class CustomerController extends BaseController
         $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
         $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
                               . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
-                              . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>';
+                              . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/adm/customer/add_customer.js" crossorigin="anonymous"></script>';
         $this->setPageTitle('Adicionar Cliente - Area Restrita');
         $this->renderView('adm/customer/add_customer', '/adm/adm_layout');
     }
