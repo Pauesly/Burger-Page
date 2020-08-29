@@ -20,7 +20,9 @@ $route[] = ['/adm_index',               'AdmController@index',                  
 
 
 //CUSTOMER
-$route[] = ['/add_customer',            'CustomerController@add_customer',                  'auth'];
+$route[] = ['/add_customer',                    'CustomerController@add_customer',                      'auth'];
+$route[] = ['/valida_telefone_unico',           'CustomerController@valida_telefone_unico',             'auth'];
+$route[] = ['/cadastrar_novo_cliente',          'CustomerController@cadastrar_novo_cliente',            'auth'];
 
 
 

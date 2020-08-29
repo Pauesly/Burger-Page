@@ -56,6 +56,54 @@ class WS_read
                 }
             break;   
 //------------------------------------------------------------------------------             
+            /**
+             * Verifica se telefone ja foi cadastrado
+             * Recebe TEL do cliente
+             * Retorna true / false
+             */
+            case "validar_telefone_unico":
+                $tel = $info['telefone'];
+                
+                $result1 = DBRead('Customer', "WHERE phone_number_1 LIKE '$tel' limit 1");
+                $result2 = DBRead('Customer', "WHERE phone_number_2 LIKE '$tel' limit 1");
+                
+                if(($result1 != false) || ($result2 != false)){
+                    $status['erro'] = false;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+                
+                
+                
+            break;   
+//------------------------------------------------------------------------------  
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             

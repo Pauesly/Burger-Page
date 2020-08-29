@@ -21,35 +21,22 @@ class WS_write
 
 //------------------------------------------------------------------------------
             /**
-             * Salva dados QFAC
+             * Salva dados Cliente
              * Recebe Todos os dados relevantes
              * Retorna confirmacao de cadastro
              */
-            case "salvar_nova_qfac":
+            case "cadastrar_novo_cliente":
                 
                 $dados = array();
-                $dados['fk_id_adm']             = $data['fk_id_adm'];
-                $dados['fk_id_faculdade']       = $data['fk_id_faculdade'];
-                $dados['fk_id_curso']           = $data['fk_id_curso']  ;
-                $dados['fk_id_disciplina_fac']  = $data['fk_id_disciplina_fac'];
-                $dados['ano']                   = $data['ano'] ;
-                $dados['enunciado']             = $data['enunciado'];
-                $dados['resposta1']             = $data['resposta1'] ;
-                $dados['resposta1check']        = $data['resposta1check'] == 'true' ? 1 : 0;
-                $dados['resposta2']             = $data['resposta2'];
-                $dados['resposta2check']        = $data['resposta2check'] == 'true' ? 1 : 0;
-                $dados['resposta3']             = $data['resposta3'];
-                $dados['resposta3check']        = $data['resposta3check'] == 'true' ? 1 : 0;
-                $dados['resposta4']             = $data['resposta4'];
-                $dados['resposta4check']        = $data['resposta4check'] == 'true' ? 1 : 0;
-                $dados['resposta5']             = $data['resposta5'];
-                $dados['resposta5check']        = $data['resposta5check'] == 'true' ? 1 : 0;
-                $dados['comentario']            = $data['comentario'];
-                $dados['imagem']                = $data['imagem'];
-                $dados['ativa']                 = $data['ativa'];
-                $dados['created_at']            = $data['created_at'];
+                $dados['phone_number_1']    = $data['phone_number_1'];
+                $dados['phone_number_2']    = $data['phone_number_2'];
+                $dados['name']              = $data['name'];
+                $dados['cpf']               = $data['cpf'];
+                $dados['obs']               = $data['obs'];
+                $dados['active']            = $data['active'];
+                $dados['created_at']        = $data['created_at'];
                 
-                if($status['id_cadastro'] = DBCreate('Qfac', $dados, true)){
+                if($status['id_cadastro'] = DBCreate('Customer', $dados, true)){
                     $status['erro'] = false;
                 }   
                 
@@ -60,23 +47,132 @@ class WS_write
              * Recebe Todos os dados relevantes
              * Retorna confirmacao de cadastro
              */
-            case "salvar_novo_artigo":
+            case "cadastra_novo_endereco":
+                
                 
                 $dados = array();
-                $dados['fk_id_adm']          = $data['fk_id_adm'];
-                $dados['id_nome']            = $data['id_nome'];
-                $dados['titulo']             = $data['titulo'];
-                $dados['descricao']          = $data['descricao'];
-                $dados['imagem']             = $data['imagem'];
-                $dados['created_at']         = $data['created_at'];
-                $dados['ativo']              = $data['ativo'];
+                $dados['fk_id_customer']        = $data['fk_id_customer'];
+                $dados['local']                 = $data['local'];
+                $dados['cep']                   = $data['cep'];
+                $dados['rua']                   = $data['rua'];
+                $dados['numero_complemento']    = $data['numero_complemento'];
+                $dados['bairro']                = $data['bairro'];
+                $dados['cidade']                = $data['cidade'];
+                $dados['estado']                = $data['estado'];
+                $dados['referencia']            = $data['referencia'];
+                $dados['obs']                   = $data['obs'];
+                $dados['active']                = $data['active'];
                 
-                if($status['id_cadastro'] = DBCreate('Artigo', $dados, true)){
+                if($status['id_cadastro'] = DBCreate('Address', $dados, true)){
                     $status['erro'] = false;
                 }   
                 
             break;
 //------------------------------------------------------------------------------
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+//------------------------------------------------------------------------------
+            
             /**
              * Salva Pagamento ADM
              * Recebe Todos os dados relevantes

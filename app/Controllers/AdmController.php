@@ -157,9 +157,6 @@ class AdmController extends BaseController
         $admin  =  Session::get('adm');
         
         
-        
-        
-        
         $nome_array = explode(' ',$admin['name']);
         $this->view->nome = $nome_array[0];
         

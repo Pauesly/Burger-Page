@@ -23,11 +23,14 @@
                     <label for="inputState">Telefones</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Principal</span>
+                            <span class="input-group-text" id="basic-addon1">
+                                Principal
+                                <span class="" id="loading_phone1" role="status" aria-hidden="true"></span>
+                            </span>
                         </div>
-                        <input type="text" class="form-control" id="txt_telefone_1" name="txt_telefone_1" placeholder="(99) 9 9999-9999" aria-label="Telefone" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="txt_telefone_1" name="txt_telefone_1"  onblur="validaTelefone1(this.value);"  placeholder="(99) 9 9999-9999" aria-label="Telefone" aria-describedby="basic-addon1">
                         <div class="valid-feedback">Número Válido!</div>
-                        <div class="invalid-feedback">Número já cadastrado!</div>
+                        <div class="invalid-feedback">Número já cadastrado ou inválido!</div>
                     </div>
             </div>
             
@@ -35,9 +38,12 @@
                     <label for="inputState">.</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Secundário</span>
+                            <span class="input-group-text" id="basic-addon1">
+                                Secundário
+                                <span class="" id="loading_phone2" role="status" aria-hidden="true"></span>
+                            </span>
                         </div>
-                        <input type="text" class="form-control" id="txt_telefone_2" name="txt_telefone_2" placeholder="(99) 9 9999-9999" aria-label="Telefone" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="txt_telefone_2" name="txt_telefone_2" onblur="validaTelefone2(this.value);" placeholder="(99) 9 9999-9999" aria-label="Telefone" aria-describedby="basic-addon1">
                         <div class="valid-feedback">Número Válido!</div>
                         <div class="invalid-feedback">Número já cadastrado!</div>
                     </div>
@@ -54,9 +60,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Nome</span>
                         </div>
-                        <input type="text" class="form-control" id="txt_name" name="txt_name" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1">
-                        <div class="valid-feedback">Nome valido.</div>
-                        <div class="invalid-feedback">Digite o nome.</div>
+                        <input type="text" class="form-control" id="txt_name" name="txt_name" onblur="validaNome(this.value);"  placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="60">
+                        <div class="invalid-feedback">Nome obrigatório.</div>
                     </div>
             </div>
 	</div>
@@ -70,7 +75,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">CPF</span>
                         </div>
-                        <input type="text" class="form-control" id="txt_cpf" name="txt_cpf" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="txt_cpf" name="txt_cpf" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="14">
                     </div>
             </div>
 	</div>
@@ -81,7 +86,7 @@
             <div class="form-group col-md-12">
                     <div class="form-group">
                     <label for="exampleFormControlTextarea1">Observações</label>
-                    <textarea class="form-control" id="txt_obs_customer" rows="3"></textarea>
+                    <textarea class="form-control" id="txt_obs_customer" rows="3" maxlength="255"></textarea>
                   </div>
             </div>
 	</div>
@@ -89,33 +94,34 @@
         
         
         <hr>
-        <!-- Button trigger modal -->
+        <!-- ENDERECOS -->
         
+        <!--Controles-->
         <div class="form-row">
             <div class="form-group col-md-6">
                 <div class="input-group mb-3">
-                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#add_address">
+                    <button type="button" class="btn btn-outline-info" id="btn_add_Adress" data-toggle="modal" data-target="#add_address">
                         Endereço 1
                     </button>
+                    <div class="invalid-feedback">Endereço obrigatório.</div>
                 </div>
-                
-                
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <p id="p_end_1_1"></p>
-                        <p id="p_end_1_2"></p>
                     </div>
-               </div>
-                
-                
-                
-                
+                </div>
             </div>
-            <div class="form-group col-md-6">
+            
+             <div class="form-group col-md-6">
                 <div class="input-group mb-3">
                     <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#add_address2">
                         Endereço 2
                     </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <p id="p_end_1_2"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -138,7 +144,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de Endereço</span>
                                     </div>
-                                    <input type="text" class="form-control" id="tipo" name="tipo" placeholder="" aria-label="tipo" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="tipo" name="tipo" placeholder="" aria-label="tipo" aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                         </div>
@@ -162,7 +168,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Rua</span>
                                     </div>
-                                    <input type="text" class="form-control" id="rua" name="rua" placeholder="" aria-label="CEP"   aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="rua" name="rua" placeholder="" aria-label="CEP"   aria-describedby="basic-addon1" maxlength="255">
                                 </div>
                             </div>
                         </div>
@@ -174,7 +180,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Número e complemento</span>
                                     </div>
-                                    <input type="text" class="form-control" id="numero" name="numero" placeholder="" aria-label="numero"   aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="numero" name="numero" placeholder="" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -182,7 +188,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Bairro</span>
                                     </div>
-                                    <input type="text" class="form-control" id="bairro" name="bairro" placeholder="" aria-label="Bairro"   aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="bairro" name="bairro" placeholder="" aria-label="Bairro"   aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                         </div>
@@ -194,7 +200,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Cidade</span>
                                     </div>
-                                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="" aria-label="numero"   aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
@@ -202,7 +208,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado</span>
                                     </div>
-                                    <input type="text" class="form-control" id="uf" name="uf" placeholder="" aria-label="numero"   aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="uf" name="uf" placeholder="" aria-label="numero"   aria-describedby="basic-addon1" maxlength="2">
                                 </div>
                             </div>
                         </div>
@@ -214,7 +220,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Ponto de referência</span>
                                     </div>
-                                    <input type="text" class="form-control" id="referencia" name="referencia" placeholder="" aria-label="numero"   aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="referencia" name="referencia" placeholder="" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                         </div>
@@ -224,7 +230,7 @@
                             <div class="form-group col-md-12">
                                     <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Observações</label>
-                                    <textarea class="form-control" id="txt_obs_endereco_1" rows="3"></textarea>
+                                    <textarea class="form-control" id="txt_obs_endereco_1" rows="3" maxlength="60"></textarea>
                                   </div>
                             </div>
                         </div>
@@ -239,8 +245,6 @@
                             </div>
                         </div>
                         
-                        
-                        
                     </div>
                 </div>
             </div>
@@ -248,15 +252,130 @@
         
         
         
+        <!--ENDERECO 2-->
+        <div class="modal fade" id="add_address2" data-keyboard="false" >
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Adicionar endereço 2</h5>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <!--Tipo-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo de Endereço</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="tipo2" name="tipo2" placeholder="" aria-label="tipo" aria-describedby="basic-addon1" maxlength="60">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Cep-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Cep</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="cep2" name="cep2" placeholder="" aria-label="CEP"  onblur="pesquisacep2(this.value);"  aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Rua-->
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Rua</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="rua2" name="rua2" placeholder="" aria-label="CEP"   aria-describedby="basic-addon1" maxlength="255">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Numero Bairro-->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Número e complemento</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="numero2" name="numero2" placeholder="" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Bairro</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="bairro2" name="bairro2" placeholder="" aria-label="Bairro"   aria-describedby="basic-addon1" maxlength="60">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Cidade Estado-->
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Cidade</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="cidade2" name="cidade2" placeholder="" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Estado</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="uf2" name="uf2" placeholder="" aria-label="numero"   aria-describedby="basic-addon1" maxlength="2">
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <!--Ponto de referentia-->
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Ponto de referência</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="referencia2" name="referencia2" placeholder="" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!--Observacoes-->
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                    <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Observações</label>
+                                    <textarea class="form-control" id="txt_obs_endereco_2" rows="3" maxlength="60"></textarea>
+                                  </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <div class="form-row mb-4 mt-3">
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Sair sem salvar</button>
+                            </div>
+                            <!--VALIDAR e SEGUIR-->
+                            <div class="form-row mb-4 mt-3">
+                                <a id="btn_salvar_end_2" name="btn_salvar_end_2" class="btn btn-outline-success" href="#" role="button">Salvar</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
         <hr>
-        
-        
-        
-        
-        
-
-
-        
         
         
         <div class="esconder" role="alert" id="msg_questao_repetida">
@@ -277,32 +396,44 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 </div>
 
 
 
 
+
+<!--form salvar-->
+    <form action="/cadastrar_novo_cliente" method="POST" id="cadastrar_novo_cliente">
+        
+        <input type='hidden'    name="phone_1"                      id="phone_1">
+        <input type='hidden'    name="phone_2"                      id="phone_2">
+        <input type='hidden'    name="nome"                         id="nome">
+        <input type='hidden'    name="cpf"                          id="cpf">
+        <input type='hidden'    name="obs"                          id="obs">
+        
+        <!--endereco1-->
+        <input type='hidden'    name="address_tipo1"                id="address_tipo1">
+        <input type='hidden'    name="address_cep1"                 id="address_cep1">
+        <input type='hidden'    name="address_rua1"                 id="address_rua1">
+        <input type='hidden'    name="address_numero1"              id="address_numero1">
+        <input type='hidden'    name="address_bairro1"              id="address_bairro1">
+        <input type='hidden'    name="address_cidade1"              id="address_cidade1">
+        <input type='hidden'    name="address_estado1"              id="address_estado1">
+        <input type='hidden'    name="address_referencia1"          id="address_referencia1">
+        <input type='hidden'    name="address_obs1"                 id="address_obs1">
+        
+        <!--endereco2-->
+        <input type='hidden'    name="address_tipo2"                id="address_tipo2">
+        <input type='hidden'    name="address_cep2"                 id="address_cep2">
+        <input type='hidden'    name="address_rua2"                 id="address_rua2">
+        <input type='hidden'    name="address_numero2"              id="address_numero2">
+        <input type='hidden'    name="address_bairro2"              id="address_bairro2">
+        <input type='hidden'    name="address_cidade2"              id="address_cidade2">
+        <input type='hidden'    name="address_estado2"              id="address_estado2">
+        <input type='hidden'    name="address_referencia2"          id="address_referencia2">
+        <input type='hidden'    name="address_obs2"                 id="address_obs2">
+        
+    </form>
 
 
 
