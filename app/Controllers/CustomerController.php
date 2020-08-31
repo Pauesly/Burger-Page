@@ -46,15 +46,29 @@ class CustomerController extends BaseController
     
     public function valida_telefone_unico($request){
         
-        $validacao = Customer::validar_telefone_unico(self::FormataTelefone($request->get->telefone_check));
-            
-        if($validacao->erro == true){
-            echo(json_encode(true));
-            return;
+        if(isset($request->get->id_customer)){
+            $validacao = Customer::validar_telefone_unico_de_customer(self::FormataTelefone($request->get->telefone_check), $request->get->id_customer);
+                
+            if($validacao->erro == true){
+                echo(json_encode(true));
+                return;
+            }else{
+                echo(json_encode(false));
+                return;
+            }
         }else{
-            echo(json_encode(false));
-            return;
+            $validacao = Customer::validar_telefone_unico(self::FormataTelefone($request->get->telefone_check));
+                
+            if($validacao->erro == true){
+                echo(json_encode(true));
+                return;
+            }else{
+                echo(json_encode(false));
+                return;
+            }
         }
+        
+        
     }
     
     
@@ -117,14 +131,128 @@ class CustomerController extends BaseController
     
     
     
+    public function consultar_customer(){
+        $admin  =  Session::get('adm');
+        
+        
+        //Conteudo do corpo
+        $resultado = Customer::adm_relatorio_all_customers();
+                
+        $total_ativa = 0;
+        $total_inativa = 0;
+        foreach ($resultado->resultado as $value) {
+            if($value->active == 1)
+                $total_ativa++;
+            if($value->active == 0)
+                $total_inativa++;
+        }
+        
+        $this->view->total_ativa = $total_ativa;
+        $this->view->total_inativa = $total_inativa;
+        
+        
+
+        if($resultado->erro == false){
+            $this->view->existe = true;
+            $this->view->conteudo_tabela = $resultado->resultado;
+        }else{
+            $this->view->existe = false;
+        }
+        
+        
+        $nome_array = explode(' ',$admin['name']);
+        $this->view->nome = $nome_array[0];
+        
+        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        
+        $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+        
+        $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
+                              . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<link rel="stylesheet" type="text/css" href="assets/js/data_table/datatables.css"/>'
+                              . '<script type="text/javascript" src="assets/js/data_table/datatables.js"></script>'
+                              . '<script type="text/javascript" src="assets/js/adm/customer/consultar_customer.js"></script>';
+        
+        $this->setPageTitle('Consultar Cliente - Area Restrita');
+        $this->renderView('adm/customer/consulta_customer', '/adm/adm_layout');
+    }
+    
+     
+
+    //Pagina Edit perfil MAster
+    public function edit_customer($request){
+        //Validacoes obrigatorias
+        $admin  =  Session::get('adm');
+        
+        $dados_customer = Customer::full_data_customer_com_id($request->get->id);
+//        $dados_adm = json_decode($dados_customer);
+        
+        $this->view->dados_customer = $dados_customer->resultado[0];
+        
+        //Inclusoes Obrigatorias em todas as rotas
+        $nome_array = explode(' ',$admin['name']);
+        $this->view->nome = $nome_array[0];
+        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+        $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
+                              . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/adm/customer/edit_customer.js" crossorigin="anonymous"></script>';
+
+        $this->setPageTitle('Perfil');
+        $this->renderView('adm/customer/edit_customer', '/adm/adm_layout' );
+    }
     
     
-    
-    
-    
-    
-    
-    
+    public function salva_editar_cliente($request){
+        
+        
+        $resultado = Customer::salva_editar_cliente(
+                $request->post->id_customer,
+                $request->post->active,
+                self::FormataTelefone($request->post->phone_1),
+                self::FormataTelefone($request->post->phone_2),
+                $request->post->nome,
+                $request->post->cpf,
+                $request->post->obs,
+                $request->post->id_dress_1,
+                $request->post->address_tipo1,
+                $request->post->address_cep1,
+                $request->post->address_rua1,
+                $request->post->address_numero1,
+                $request->post->address_bairro1,
+                $request->post->address_cidade1,
+                $request->post->address_estado1,
+                $request->post->address_referencia1,
+                $request->post->address_obs1,
+                $request->post->id_dress_2,
+                $request->post->address_tipo2,
+                $request->post->address_cep2,
+                $request->post->address_rua2,
+                $request->post->address_numero2,
+                $request->post->address_bairro2,
+                $request->post->address_cidade2,
+                $request->post->address_estado2,
+                $request->post->address_referencia2,
+                $request->post->address_obs2
+                );
+        
+
+        if($resultado != 0){
+            return Redirect::route('/adm_index', [
+                'errors' => ['Erro 001 - Erro ao tentar salvar. Contate Administrador.'],
+                'inputs' => [""]
+            ]);
+        }else{
+            return Redirect::route('/adm_index', [
+                'success' => ['Alterações salvas com sucesso!'],
+                'inputs' => [""]
+            ]);
+        }
+    }
     
     
     

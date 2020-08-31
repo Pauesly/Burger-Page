@@ -23,6 +23,22 @@ $route[] = ['/adm_index',               'AdmController@index',                  
 $route[] = ['/add_customer',                    'CustomerController@add_customer',                      'auth'];
 $route[] = ['/valida_telefone_unico',           'CustomerController@valida_telefone_unico',             'auth'];
 $route[] = ['/cadastrar_novo_cliente',          'CustomerController@cadastrar_novo_cliente',            'auth'];
+$route[] = ['/consultar_customer',              'CustomerController@consultar_customer',                'auth'];
+$route[] = ['/edit_customer',                   'CustomerController@edit_customer',                     'auth'];
+$route[] = ['/salva_editar_cliente',            'CustomerController@salva_editar_cliente',              'auth'];
+
+//ITENS
+$route[] = ['/gestao_item',             'ItemController@gestao_item',               'auth'];
+$route[] = ['/add_item',                'ItemController@add_item',                  'auth'];
+$route[] = ['/cadastrar_novo_item',     'ItemController@cadastrar_novo_item',       'auth'];
+
+
+
+
+
+
+
+
 
 
 
