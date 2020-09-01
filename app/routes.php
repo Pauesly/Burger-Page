@@ -31,6 +31,12 @@ $route[] = ['/salva_editar_cliente',            'CustomerController@salva_editar
 $route[] = ['/gestao_item',             'ItemController@gestao_item',               'auth'];
 $route[] = ['/add_item',                'ItemController@add_item',                  'auth'];
 $route[] = ['/cadastrar_novo_item',     'ItemController@cadastrar_novo_item',       'auth'];
+$route[] = ['/edit_item',               'ItemController@edit_item',                 'auth'];
+$route[] = ['/salvar_edit_item',        'ItemController@salvar_edit_item',          'auth'];
+
+//CATEGORIAS
+$route[] = ['/gestao_categoria',                'CategoriaController@gestao_categoria',          'auth'];
+$route[] = ['/add_categoria',                   'CategoriaController@add_categoria',             'auth'];
 
 
 

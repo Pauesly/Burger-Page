@@ -5,6 +5,9 @@ Local: CustomerControle - Funcao: to_cadastrar_novo_cliente_user
 Detalhe: Erro ao tentar salvar. Contate Administrador.
 
 
+#001 - Por favor tente mais tarde.
+Local: ItemControle - Funcao: cadastrar_novo_item
+Detalhe: Erro ao tentar salvar. Contate Administrador.
 
 
 

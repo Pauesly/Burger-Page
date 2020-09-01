@@ -3,7 +3,13 @@ document.getElementById("btn_entrar").addEventListener("mousedown", function(eve
     FazLoginAdm();
 });
 
-
+//Valida Senha em branco
+document.getElementById("txt_password").addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        FazLoginAdm();
+    }
+});
 
 
 
@@ -12,11 +18,12 @@ document.getElementById("btn_entrar").addEventListener("mousedown", function(eve
  * Funcao que esconde a tela e valida dados ADM
  */
 function FazLoginAdm(){
-    
+    document.getElementById("remember").disabled = true;
     document.getElementById("txt_email").disabled = true;
     document.getElementById("txt_password").disabled = true;
-    document.getElementById("btn_entrar").disabled = true;
-    document.getElementById("btn_entrar").className = "btn btn-outline-warning disabled";
+    
+    document.getElementById("show_load").className = "col-md-6 offset-md-4";
+    document.getElementById("show_btn").className = "esconder";
     
     
     //Coletando dados

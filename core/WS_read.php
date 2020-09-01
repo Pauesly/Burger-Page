@@ -151,8 +151,60 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
-            
-            
+            /**
+             * Seleciona todos os itens do banco
+             * Retorna clientes
+             */
+            case "busca_item_com_id":
+                
+                $id = $info['id_item'];
+                
+                $result = DBRead('Item', "WHERE id_item LIKE '$id' limit 1");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os Categorias do banco
+             * Retorna clientes
+             */
+            case "relatorio_all_categorias":
+                
+                $campos = "id_category, description, active, created_at";
+                
+                $result = DBRead('Category', "", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os Categorias do banco
+             * Retorna clientes
+             */
+            case "busca_categoria_com_id":
+                
+                $id = $info['id_category'];
+                
+                $result = DBRead('Category', "WHERE id_category LIKE '$id' limit 1");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
             
             
             

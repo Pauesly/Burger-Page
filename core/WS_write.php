@@ -69,8 +69,46 @@ class WS_write
                 
             break;
 //------------------------------------------------------------------------------
-            
-            
+            /**
+             * Cadastra Item
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "cadastra_novo_item":
+                
+                $dados = array();
+                $dados['name']          = $data['name'];
+                $dados['description']   = $data['description'];
+                $dados['un']            = $data['un'];
+                $dados['cost']          = $data['cost'];
+                $dados['picture']       = $data['picture'];
+                $dados['active']        = $data['active'];
+                $dados['created_at']    = $data['created_at'];
+                
+                if($status['id_cadastro'] = DBCreate('Item', $dados, true)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------
+            /**
+             * Cadastra Categoria
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "cadastra_nova_categoria":
+                
+                $dados = array();
+                $dados['description']   = $data['description'];
+                $dados['active']        = $data['active'];
+                $dados['created_at']    = $data['created_at'];
+                
+                if($status['id_cadastro'] = DBCreate('Category', $dados, true)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------
             
             
             

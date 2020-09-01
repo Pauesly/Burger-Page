@@ -16,10 +16,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="assets/css/login.css">
-    
-    
-    
-    
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
     
     <title>Login - Jazz Grill</title>
 </head>
@@ -52,7 +50,7 @@
                             <div class="form-group row">
                                 <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="txt_email" class="form-control" name="email-address" required autofocus>
+                                    <input type="text" id="txt_email" class="form-control" name="email-address" value="<?php echo (isset($this->inputs['email'])) ? $this->inputs['email'] : '' ?>" required autofocus>
                                 </div>
                             </div>
 
@@ -72,10 +70,18 @@
                                     </div>
                                 </div>
                             </div>
+                            
 
-                            <div class="col-md-6 offset-md-4">
-                                <a class="btn btn-outline-info" href="#" id="btn_entrar" role="button">Entrar
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <div class="col-md-6 offset-md-4" id="show_btn">
+                                <a class="btn btn-outline-info" href="#" id="btn_entrar" role="button">  
+                                    <span class="esconder" id="" role="status" aria-hidden="true"></span>
+                                    Entrar
+                                </a>
+                            </div>
+                            <div class="esconder" id="show_load">
+                                <a class="btn btn-warning disabled" href="#" id="btn_entrar" role="button">  
+                                    <span class="spinner-border spinner-border-sm" id="" role="status" aria-hidden="true"></span>
+                                    Carregando...
                                 </a>
                             </div>
                     </div>

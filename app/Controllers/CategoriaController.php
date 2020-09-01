@@ -6,12 +6,12 @@ use Core\BaseController;
 use Core\Redirect;
 use Core\Validator;
 use App\Models\Email;
-use App\Models\Item;
+use App\Models\Categoria;
 use App\Models\Customer;
 use App\Models\Bcrypt;
 use Core\Session;
 
-class ItemController extends BaseController
+class CategoriaController extends BaseController
 {
     
     private $dados;
@@ -27,11 +27,11 @@ class ItemController extends BaseController
 
 
     
-    public function gestao_item(){
+    public function gestao_categoria(){
         $admin  =  Session::get('adm');
         
         //Conteudo do corpo
-        $resultado = Item::relatorio_all_itens();
+        $resultado = Categoria::relatorio_all_categorias();
                 
         $total_ativa = 0;
         $total_inativa = 0;
@@ -68,15 +68,15 @@ class ItemController extends BaseController
                               . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
                               . '<link rel="stylesheet" type="text/css" href="assets/js/data_table/datatables.css"/>'
                               . '<script type="text/javascript" src="assets/js/data_table/datatables.js"></script>'
-                              . '<script type="text/javascript" src="assets/js/adm/item/gestao_item.js"></script>';
+                              . '<script type="text/javascript" src="assets/js/adm/categoria/gestao_categoria.js"></script>';
         
-        $this->setPageTitle('Gestao de Itens - Area Restrita');
-        $this->renderView('adm/item/gestao_item', '/adm/adm_layout');
+        $this->setPageTitle('Gestao de Categorias - Area Restrita');
+        $this->renderView('adm/categoria/gestao_categoria', '/adm/adm_layout');
     }
     
      
-
-    public function add_item(){
+COMECAR ACERTAR DAQUI.!!!!! JA COPIEI E COLEI DE ITEM. EDITAR TUDO PARA CATEGORIA
+    public function add_categoria(){
         $admin  =  Session::get('adm');
         
         $nome_array = explode(' ',$admin['name']);

@@ -15,6 +15,22 @@ document.getElementById("btn_validar").addEventListener("mousedown", function(ev
 
 
 
+// Listener botao ATIVA
+document.getElementById("ativo_sim").addEventListener("mousedown", function(event) {
+    document.getElementById("ativo_sim").className = "btn btn-success btn-block";
+    document.getElementById("ativo_nao").className = "btn btn-outline-danger btn-block";
+    document.getElementById("active").value = "1";
+});
+
+// Listener botao INATIVA
+document.getElementById("ativo_nao").addEventListener("mousedown", function(event) {
+    document.getElementById("ativo_sim").className = "btn btn-outline-success btn-block";
+    document.getElementById("ativo_nao").className = "btn btn-danger btn-block";
+    document.getElementById("active").value = "0";
+});
+
+
+
 
 
 /*

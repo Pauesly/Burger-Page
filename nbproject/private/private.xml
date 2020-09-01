@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Burger-page/Burger-Page/app/Models/Item.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Controllers/ItemController.php</file>
             <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/adm_menu.phtml</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/item/add_item.phtml</file>
-            <file>file:/C:/Burger-page/Burger-Page/public/assets/js/adm/item/add_item.js</file>
+            <file>file:/C:/Burger-page/Burger-Page/app/Models/Categoria.php</file>
             <file>file:/C:/Burger-page/Burger-Page/app/routes.php</file>
+            <file>file:/C:/Burger-page/Burger-Page/app/Controllers/CategoriaController.php</file>
         </group>
     </open-files>
 </project-private>

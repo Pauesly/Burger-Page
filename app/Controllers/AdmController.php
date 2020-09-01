@@ -122,7 +122,7 @@ class AdmController extends BaseController
             //Se retornar erro == Busca vazia == Usuario nao cadastrado
             return Redirect::route('/adm', [
                 'errors' => ['Usuário ou senha estão incorretos'],
-                'inputs' => ['email' => $request->post->email_user]
+                'inputs' => ['email' => $request->post->email]
             ]);
         }else{
             $senha_digitada =   $request->post->password;
@@ -144,7 +144,7 @@ class AdmController extends BaseController
                 //Se retornar erro == Busca vazia == Usuario nao cadastrado
                 return Redirect::route('/adm', [
                     'errors' => ['Usuário ou senha estão incorretos'],
-                    'inputs' => ['email' => $request->post->email_user]
+                    'inputs' => ['email' => $request->post->email]
                 ]);
             }
             
