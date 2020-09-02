@@ -32,62 +32,11 @@ class Categoria
     
     
     //Busca adm com email para Login
-    public static function cadastra_novo_item($name, $description, $un, $cost, $picture) {
-        //Dados obrigatorios
-        $array = [
-            "funcao"    => "cadastra_novo_item",
-            "name"      => $name,
-            "description" => $description,
-            "un"        => $un,
-            "cost"      => $cost,
-            "picture"   => $picture,
-            "active"   => 1,
-            "created_at"   => Padroes_gerais::data_e_hora()
-        ];
-        $resultado = WS_write::white($array);
-        return  json_decode($resultado);
-    }
-    
-    
-    //Busca adm com email para Login
-    public static function busca_item_com_id($id) {
-        //Dados obrigatorios
-        $array = [
-            "funcao"  => "busca_item_com_id",
-            "id_item" => $id
-            
-        ];
-        $resultado = WS_read::ler_dados($array);
-        return  json_decode($resultado);
-    }
-    
-    
-    
-    
-    //Busca adm com email para Login
-    public static function altera_item($id_item, $active, $name, $description, $un, $cost, $picture) {
-        //Dados obrigatorios
-        $array = [
-            "funcao"    => "altera_item",
-            "id_item"   => $id_item,
-            "active"    => $active,
-            "name"      => $name,
-            "description" => $description,
-            "un"        => $un,
-            "cost"      => $cost,
-            "picture"   => $picture
-        ];
-        $resultado = WS_update::alterar_dados($array);
-        return  json_decode($resultado);
-    }
-    
-    
-    //Busca adm com email para Login
-    public static function cadastra_nova_categoria($description) {
+    public static function cadastrar_nova_categoria($description) {
         //Dados obrigatorios
         $array = [
             "funcao"        => "cadastra_nova_categoria",
-            "description"   => description,
+            "description"   => $description,
             "active"        => 1,
             "created_at"    => Padroes_gerais::data_e_hora()
         ];
@@ -101,7 +50,7 @@ class Categoria
         //Dados obrigatorios
         $array = [
             "funcao"  => "busca_categoria_com_id",
-            "id_item" => $id
+            "id_category" => $id
             
         ];
         $resultado = WS_read::ler_dados($array);
@@ -112,21 +61,26 @@ class Categoria
     
     
     //Busca adm com email para Login
-    public static function altera_categoria($id_item, $active, $name, $description, $un, $cost, $picture) {
+    public static function altera_categoria($id_category, $active, $description) {
         //Dados obrigatorios
         $array = [
             "funcao"    => "altera_categoria",
-            "id_item"   => $id_item,
+            "id_category"   => $id_category,
             "active"    => $active,
-            "name"      => $name,
-            "description" => $description,
-            "un"        => $un,
-            "cost"      => $cost,
-            "picture"   => $picture
+            "description"      => $description
         ];
         $resultado = WS_update::alterar_dados($array);
         return  json_decode($resultado);
     }
+    
+    
+    
+    
+    
+
+    
+    
+  
     
     
     

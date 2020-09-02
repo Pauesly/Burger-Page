@@ -75,7 +75,7 @@ class CategoriaController extends BaseController
     }
     
      
-COMECAR ACERTAR DAQUI.!!!!! JA COPIEI E COLEI DE ITEM. EDITAR TUDO PARA CATEGORIA
+
     public function add_categoria(){
         $admin  =  Session::get('adm');
         
@@ -88,34 +88,26 @@ COMECAR ACERTAR DAQUI.!!!!! JA COPIEI E COLEI DE ITEM. EDITAR TUDO PARA CATEGORI
                               . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
-                              . '<script src="/assets/js/adm/item/add_item.js" crossorigin="anonymous"></script>';
-        $this->setPageTitle('Adicionar Item - Area Restrita');
-        $this->renderView('adm/item/add_item', '/adm/adm_layout');
+                              . '<script src="/assets/js/adm/categoria/add_categoria.js" crossorigin="anonymous"></script>';
+        $this->setPageTitle('Adicionar Categoria - Area Restrita');
+        $this->renderView('adm/categoria/add_categoria', '/adm/adm_layout');
     }
     
     
-    
-    
-    public function cadastrar_novo_item($request){
+    public function cadastrar_nova_categoria($request){
         
-        $preco = str_replace(',', '', $request->post->cost); 
-        
-        $resultado = Item::cadastra_novo_item(
-                $request->post->name,
-                $request->post->description,
-                $request->post->un,
-                $preco,
-                $request->post->picture
+        $resultado = Categoria::cadastrar_nova_categoria(
+                $request->post->description
                 );
         
         if($resultado->erro){
-            return Redirect::route('/gestao_item', [
-                'errors' => ['Erro 002 - Erro ao tentar salvar. Contate Administrador.'],
+            return Redirect::route('/gestao_categoria', [
+                'errors' => ['Erro 003 - Erro ao tentar salvar. Contate Administrador.'],
                 'inputs' => [""]
             ]);
         }else{
-            return Redirect::route('/gestao_item', [
-                'success' => ["Item [  $resultado->id_cadastro ] cadastrado com sucesso!"],
+            return Redirect::route('/gestao_categoria', [
+                'success' => ["Categoria [  $resultado->id_cadastro ] cadastrada com sucesso!"],
                 'inputs' => [""]
             ]);
         }
@@ -123,10 +115,10 @@ COMECAR ACERTAR DAQUI.!!!!! JA COPIEI E COLEI DE ITEM. EDITAR TUDO PARA CATEGORI
     
     
     
-    public function edit_item($request){
+    public function edit_categoria($request){
         $admin  =  Session::get('adm');
         
-        $dados_item = Item::busca_item_com_id($request->get->id);
+        $dados_item = Categoria::busca_categoria_com_id($request->get->id);
 //        $dados_adm = json_decode($dados_customer);
         
         $this->view->dados = $dados_item->resultado[0];
@@ -140,38 +132,30 @@ COMECAR ACERTAR DAQUI.!!!!! JA COPIEI E COLEI DE ITEM. EDITAR TUDO PARA CATEGORI
                               . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
-                              . '<script src="/assets/js/adm/item/edit_item.js" crossorigin="anonymous"></script>';
-        $this->setPageTitle('Editar Item - Area Restrita');
-        $this->renderView('adm/item/edit_item', '/adm/adm_layout');
+                              . '<script src="/assets/js/adm/categoria/edit_categoria.js" crossorigin="anonymous"></script>';
+        $this->setPageTitle('Editar Categoria - Area Restrita');
+        $this->renderView('adm/categoria/edit_categoria', '/adm/adm_layout');
     }
     
 
     
     
-    public function salvar_edit_item($request){
+    public function salvar_edit_categoria($request){
         
-        $preco = str_replace(',', '', $request->post->cost); 
-        
-        $resultado = Item::altera_item(
-                $request->post->id_item,
+        $resultado = Categoria::altera_categoria(
+                $request->post->id_category,
                 $request->post->active,
-                $request->post->name,
-                $request->post->description,
-                $request->post->un,
-                $preco,
-                $request->post->picture
+                $request->post->description
                 );
-        
-//                var_dump($resultado);die;
-        
+
         if($resultado == 0){
-            return Redirect::route('/gestao_item', [
-                'errors' => ['Erro 002 - Erro ao tentar salvar. Contate Administrador.'],
+            return Redirect::route('/gestao_categoria', [
+                'errors' => ['Erro 004 - Erro ao tentar salvar. Contate Administrador.'],
                 'inputs' => [""]
             ]);
         }else{
-            return Redirect::route('/gestao_item', [
-                'success' => ["Item alterado com sucesso!"],
+            return Redirect::route('/gestao_categoria', [
+                'success' => ["Categoria alterado com sucesso!"],
                 'inputs' => [""]
             ]);
         }

@@ -117,7 +117,26 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------    
-            
+            /**
+             * Altera Dados do cadastro do Item
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "altera_categoria":
+                
+                $id_category      = $data['id_category'];
+	    
+	        $array = array(
+                    "active"            => $data['active'],
+                    "description"       => $data['description'],
+                );
+
+                $result = BDUpdate('Category', $array, "id_category LIKE '$id_category'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------  
             
             
             

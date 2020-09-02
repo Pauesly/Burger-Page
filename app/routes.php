@@ -37,6 +37,10 @@ $route[] = ['/salvar_edit_item',        'ItemController@salvar_edit_item',      
 //CATEGORIAS
 $route[] = ['/gestao_categoria',                'CategoriaController@gestao_categoria',          'auth'];
 $route[] = ['/add_categoria',                   'CategoriaController@add_categoria',             'auth'];
+$route[] = ['/add_categoria',                   'CategoriaController@add_categoria',             'auth'];
+$route[] = ['/cadastrar_nova_categoria',        'CategoriaController@cadastrar_nova_categoria',  'auth'];
+$route[] = ['/edit_categoria',                  'CategoriaController@edit_categoria',            'auth'];
+$route[] = ['/salvar_edit_categoria',           'CategoriaController@salvar_edit_categoria',     'auth'];
 
 
 
