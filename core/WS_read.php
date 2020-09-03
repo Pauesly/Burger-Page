@@ -191,6 +191,24 @@ class WS_read
              * Seleciona todos os Categorias do banco
              * Retorna clientes
              */
+            case "relatorio_all_categorias_ativas":
+                
+                $campos = "id_category, description";
+                
+                $result = DBRead('Category', "WHERE active LIKE 1", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os Categorias do banco
+             * Retorna clientes
+             */
             case "busca_categoria_com_id":
                 
                 $id = $info['id_category'];
@@ -205,6 +223,63 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os produtos
+             * Retorna clientes
+             */
+            case "relatorio_all_produtos":
+                
+//                $campos = "id_product, name, star, price_new, active";
+                
+//                $result = DBRead('Category', "", $campos);
+                
+                
+                $result = DBRead('Product',
+                        
+                        "JOIN Category "
+                            . "ON Category.id_category = Product.fk_id_category"
+                    	
+			. "",
+                        
+                                "Product.id_product as id_product, 
+                                Product.name as name, 
+                                Product.star as star,
+                                Product.price_new as price_new, 
+                                Product.active as active,
+                                Category.description as category_description");
+                
+                
+                
+                
+                
+                
+                
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             

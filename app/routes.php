@@ -42,8 +42,10 @@ $route[] = ['/cadastrar_nova_categoria',        'CategoriaController@cadastrar_n
 $route[] = ['/edit_categoria',                  'CategoriaController@edit_categoria',            'auth'];
 $route[] = ['/salvar_edit_categoria',           'CategoriaController@salvar_edit_categoria',     'auth'];
 
-
-
+//PRODUTO
+$route[] = ['/gestao_produto',                      'produtoController@gestao_produto',                 'auth'];
+$route[] = ['/add_produto',                         'produtoController@add_produto',                    'auth'];
+$route[] = ['/cadastrar_novo_produto',              'produtoController@cadastrar_novo_produto',         'auth'];
 
 
 
