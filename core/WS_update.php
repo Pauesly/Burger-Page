@@ -137,6 +137,33 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------  
+            /**
+             * Altera Dados do cadastro do Produto
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "salva_edit_produto":
+                
+                $id_product      = $data['id_product'];
+	    
+	        $array = array(
+                    "fk_id_category"    => $data['fk_id_category'],
+                    "name"              => $data['name'],
+                    "description"       => $data['description'],
+                    "star"              => $data['star'],
+                    "picture_thumb"     => $data['picture_thumb'],
+                    "picture_large"     => $data['picture_large'],
+                    "active"            => $data['active'],
+                    "price_new"         => $data['preco_new'],
+                    "price_old"         => $data['preco_old']
+                );
+
+                $result = BDUpdate('Product', $array, "id_product LIKE '$id_product'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------    
             
             
             

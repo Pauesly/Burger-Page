@@ -109,6 +109,31 @@ class WS_write
                 
             break;
 //------------------------------------------------------------------------------
+            /**
+             * Cadastra Produto
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "cadastra_novo_produto":
+                
+                $dados = array();
+                $dados['fk_id_category']= $data['fk_id_category'];
+                $dados['name']          = $data['name'];
+                $dados['description']   = $data['description'];
+                $dados['picture_thumb'] = $data['picture_thumb'];
+                $dados['picture_large'] = $data['picture_large'];
+                $dados['star']          = $data['star'];
+                $dados['price_new']     = $data['price_new'];
+                $dados['price_old']     = $data['price_old'];
+                $dados['active']        = $data['active'];
+                $dados['created_at']    = $data['created_at'];
+                
+                if($status['id_cadastro'] = DBCreate('Product', $dados, true)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------
             
             
             

@@ -316,7 +316,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">ID</span>
                                         </div>
-                                        <input type="text" class="form-control" id="txt_id_end2" name="txt_id_end2" disabled value="<?php echo $this->view->dados_customer->end[1]->id_address ?>" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="14">
+                                        <input type="text" class="form-control" id="txt_id_end2" name="txt_id_end2" disabled value="<?php echo isset($this->view->dados_customer->end[1]->id_address) ? $this->view->dados_customer->end[1]->id_address : "" ?>" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="14">
                                     </div>
                             </div>
                         </div>
@@ -328,7 +328,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Tipo de Endereço</span>
                                     </div>
-                                    <input type="text" class="form-control" id="tipo2" name="tipo2" value="<?php echo $this->view->dados_customer->end[1]->local ?>" aria-label="tipo" aria-describedby="basic-addon1" maxlength="60">
+                                    <input type="text" class="form-control" id="tipo2" name="tipo2" value="<?php echo  isset($this->view->dados_customer->end[1]->local) ? $this->view->dados_customer->end[1]->local : "" ?>" aria-label="tipo" aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                         </div>
@@ -340,7 +340,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Cep</span>
                                     </div>
-                                    <input type="text" class="form-control" id="cep2" name="cep2" value="<?php echo $this->view->dados_customer->end[1]->cep ?>" aria-label="CEP"  onblur="pesquisacep2(this.value);"  aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" id="cep2" name="cep2" value="<?php echo isset($this->view->dados_customer->end[1]->cep) ? $this->view->dados_customer->end[1]->cep : "" ?>" aria-label="CEP"  onblur="pesquisacep2(this.value);"  aria-describedby="basic-addon1">
                                 </div>
                             </div>
                         </div>
@@ -352,7 +352,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Rua</span>
                                     </div>
-                                    <input type="text" class="form-control" id="rua2" name="rua2" value="<?php echo $this->view->dados_customer->end[1]->rua ?>" aria-label="CEP"   aria-describedby="basic-addon1" maxlength="255">
+                                    <input type="text" class="form-control" id="rua2" name="rua2" value="<?php echo isset($this->view->dados_customer->end[1]->rua) ? $this->view->dados_customer->end[1]->rua : "" ?>" aria-label="CEP"   aria-describedby="basic-addon1" maxlength="255">
                                 </div>
                             </div>
                         </div>
@@ -364,7 +364,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Número e complemento</span>
                                     </div>
-                                    <input type="text" class="form-control" id="numero2" name="numero2" value="<?php echo $this->view->dados_customer->end[1]->numero_complemento ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
+                                    <input type="text" class="form-control" id="numero2" name="numero2" value="<?php echo isset($this->view->dados_customer->end[1]->numero_complemento) ? $this->view->dados_customer->end[1]->numero_complemento : "" ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                             <div class="form-group col-md-6">
@@ -372,7 +372,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Bairro</span>
                                     </div>
-                                    <input type="text" class="form-control" id="bairro2" name="bairro2" value="<?php echo $this->view->dados_customer->end[1]->bairro ?>" aria-label="Bairro"   aria-describedby="basic-addon1" maxlength="60">
+                                    <input type="text" class="form-control" id="bairro2" name="bairro2" value="<?php echo isset($this->view->dados_customer->end[1]->bairro) ? $this->view->dados_customer->end[1]->bairro : "" ?>" aria-label="Bairro"   aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                         </div>
@@ -384,7 +384,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Cidade</span>
                                     </div>
-                                    <input type="text" class="form-control" id="cidade2" name="cidade2" value="<?php echo $this->view->dados_customer->end[1]->cidade ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
+                                    <input type="text" class="form-control" id="cidade2" name="cidade2" value="<?php echo isset($this->view->dados_customer->end[1]->cidade) ? $this->view->dados_customer->end[1]->cidade : "" ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
@@ -392,7 +392,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Estado</span>
                                     </div>
-                                    <input type="text" class="form-control" id="uf2" name="uf2" value="<?php echo $this->view->dados_customer->end[1]->estado ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="2">
+                                    <input type="text" class="form-control" id="uf2" name="uf2" value="<?php echo isset($this->view->dados_customer->end[1]->estado) ? $this->view->dados_customer->end[1]->estado : "" ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="2">
                                 </div>
                             </div>
                         </div>
@@ -404,7 +404,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Ponto de referência</span>
                                     </div>
-                                    <input type="text" class="form-control" id="referencia2" name="referencia2" value="<?php echo $this->view->dados_customer->end[1]->referencia ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
+                                    <input type="text" class="form-control" id="referencia2" name="referencia2" value="<?php echo isset($this->view->dados_customer->end[1]->referencia) ? $this->view->dados_customer->end[1]->referencia : "" ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
                                 </div>
                             </div>
                         </div>
@@ -414,7 +414,7 @@
                             <div class="form-group col-md-12">
                                     <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Observações</label>
-                                    <textarea class="form-control" id="txt_obs_endereco_2" rows="3" maxlength="60"><?php echo $this->view->dados_customer->end[1]->obs ?></textarea>
+                                    <textarea class="form-control" id="txt_obs_endereco_2" rows="3" maxlength="60"><?php echo isset($this->view->dados_customer->end[1]->obs) ? $this->view->dados_customer->end[1]->obs : "" ?></textarea>
                                   </div>
                             </div>
                         </div>

@@ -5,12 +5,12 @@ namespace App\Controllers;
 use Core\BaseController;
 use Core\Redirect;
 use Core\Validator;
-use App\Models\Item;
+use App\Models\Status;
 use App\Models\Customer;
 use App\Models\Bcrypt;
 use Core\Session;
 
-class ItemController extends BaseController
+class StatusController extends BaseController
 {
     
     private $dados;

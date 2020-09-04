@@ -148,21 +148,29 @@ function validaTelefone1(tel) {
     document.getElementById("loading_phone1").className = "spinner-border spinner-border-sm text-warning";
     document.getElementById("txt_telefone_1").disabled = true;
     
-    // Fazendo a consulta
-    $.getJSON('/valida_telefone_unico?search=',{telefone_check: tel, ajax: 'true'}, function(retorno){
-        
-           if(retorno === true){
-                document.getElementById("txt_telefone_1").className = "form-control is-valid";
-                document.getElementById("btn_validar").className = "btn btn-outline-success btn-lg btn-block";
-                document.getElementById("loading_phone1").className = "";
-                document.getElementById("txt_telefone_1").disabled = false;
-           }else{
-                document.getElementById("txt_telefone_1").className = "form-control is-invalid";
-                document.getElementById("btn_validar").className = "btn btn-outline-danger btn-lg btn-block disabled";
-                document.getElementById("loading_phone1").className = "";
-                document.getElementById("txt_telefone_1").disabled = false;
-           }
-    });
+    if(tel.length < 14){
+        document.getElementById("txt_telefone_1").className = "form-control is-invalid";
+        document.getElementById("btn_validar").className = "btn btn-outline-danger btn-lg btn-block disabled";
+        document.getElementById("loading_phone1").className = "";
+        document.getElementById("txt_telefone_1").disabled = false;
+    }else{
+        // Fazendo a consulta
+        $.getJSON('/valida_telefone_unico?search=',{telefone_check: tel, ajax: 'true'}, function(retorno){
+
+               if(retorno === true){
+                    document.getElementById("txt_telefone_1").className = "form-control is-valid";
+                    document.getElementById("btn_validar").className = "btn btn-outline-success btn-lg btn-block";
+                    document.getElementById("loading_phone1").className = "";
+                    document.getElementById("txt_telefone_1").disabled = false;
+               }else{
+                    document.getElementById("txt_telefone_1").className = "form-control is-invalid";
+                    document.getElementById("btn_validar").className = "btn btn-outline-danger btn-lg btn-block disabled";
+                    document.getElementById("loading_phone1").className = "";
+                    document.getElementById("txt_telefone_1").disabled = false;
+               }
+        });
+    }
+    
 }
 
 function validaTelefone2(tel) {
@@ -170,21 +178,29 @@ function validaTelefone2(tel) {
     document.getElementById("loading_phone2").className = "spinner-border spinner-border-sm text-warning";
     document.getElementById("txt_telefone_2").disabled = true;
     
-    // Fazendo a consulta
-    $.getJSON('/valida_telefone_unico?search=',{telefone_check: tel, ajax: 'true'}, function(retorno){
-        
-           if(retorno === true){
-                document.getElementById("txt_telefone_2").className = "form-control is-valid";
-                document.getElementById("btn_validar").className = "btn btn-outline-success btn-lg btn-block";
-                document.getElementById("loading_phone2").className = "";
-                document.getElementById("txt_telefone_2").disabled = false;
-           }else{
-               document.getElementById("txt_telefone_2").className = "form-control is-invalid";
-               document.getElementById("btn_validar").className = "btn btn-outline-danger btn-lg btn-block disabled";
-                document.getElementById("loading_phone2").className = "";
-                document.getElementById("txt_telefone_2").disabled = false;
-           }
-    });
+    if(tel == ""){
+        document.getElementById("txt_telefone_2").className = "form-control";
+        document.getElementById("loading_phone2").className = "";
+        document.getElementById("txt_telefone_2").disabled = false;
+    }else{
+        // Fazendo a consulta
+        $.getJSON('/valida_telefone_unico?search=',{telefone_check: tel, ajax: 'true'}, function(retorno){
+                if(retorno === true){
+                     document.getElementById("txt_telefone_2").className = "form-control is-valid";
+                     document.getElementById("btn_validar").className = "btn btn-outline-success btn-lg btn-block";
+                     document.getElementById("loading_phone2").className = "";
+                     document.getElementById("txt_telefone_2").disabled = false;
+                }else{
+                    document.getElementById("txt_telefone_2").className = "form-control is-invalid";
+                    document.getElementById("btn_validar").className = "btn btn-outline-danger btn-lg btn-block disabled";
+                     document.getElementById("loading_phone2").className = "";
+                     document.getElementById("txt_telefone_2").disabled = false;
+                }
+         });
+    }
+    
+    
+    
 }
 
 

@@ -229,11 +229,6 @@ class WS_read
              */
             case "relatorio_all_produtos":
                 
-//                $campos = "id_product, name, star, price_new, active";
-                
-//                $result = DBRead('Category', "", $campos);
-                
-                
                 $result = DBRead('Product',
                         
                         "JOIN Category "
@@ -247,13 +242,24 @@ class WS_read
                                 Product.price_new as price_new, 
                                 Product.active as active,
                                 Category.description as category_description");
+
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona produto especifico
+             * Retorna clientes
+             */
+            case "busca_produto_com_id":
                 
+                $id = $info['id_produto'];
                 
-                
-                
-                
-                
-                
+                $result = DBRead('Product', "WHERE id_product LIKE '$id' limit 1");
                 
                 if($result){
                     $status['erro'] = false;
@@ -263,7 +269,6 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
-            
             
             
             

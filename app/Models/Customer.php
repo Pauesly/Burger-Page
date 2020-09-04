@@ -91,60 +91,71 @@ class Customer
             return $save_cli;
         }else{
             
-            //Dados Endereco 1
-            $array = [
-                "funcao" => "cadastra_novo_endereco",
-                "fk_id_customer"    => $save_cli->id_cadastro,
-                "local"             => $address_tipo1,
-                "cep"               => $address_cep1,
-                "rua"               => $address_rua1,
-                "numero_complemento"=> $address_numero1,
-                "bairro"            => $address_bairro1,
-                "cidade"            => $address_cidade1,
-                "estado"            => $address_estado1,
-                "referencia"        => $address_referencia1,
-                "obs"               => $address_obs1,
-                "active"            => 1,
-            ];
-            $resultado1 = WS_write::white($array);
-            $rest1 = json_decode($resultado1);
-            
-            
-            if(strlen($address_cep2) > 5){
-                //Dados Endereco 2
-                $array = [
-                    "funcao" => "cadastra_novo_endereco",
-                    "fk_id_customer"    => $save_cli->id_cadastro,
-                    "local"             => $address_tipo2,
-                    "cep"               => $address_cep2,
-                    "rua"               => $address_rua2,
-                    "numero_complemento"=> $address_numero2,
-                    "bairro"            => $address_bairro2,
-                    "cidade"            => $address_cidade2,
-                    "estado"            => $address_estado2,
-                    "referencia"        => $address_referencia2,
-                    "obs"               => $address_obs2,
-                    "active"            => 1,
-                ];
-                $resultado2 = WS_write::white($array);
-                $rest2 = json_decode($resultado2);
-            }else{
-                //Dados Endereco 1
-                $array = ["erro" => "false"];
-                $rest2 = json_decode($array);
-            }
-            
-            
-            if(($rest1->erro == false) && ($rest2->erro == false)){
+            if(strlen($address_cep1) < 5){
                 $array = [
                     "erro" => "false",
                     "id_cadastro" => $save_cli->id_cadastro
                     ];
                 return json_decode($array);
             }else{
-                $array = ["erro" => "true" ];
-                return json_decode($array);
+                    //Dados Endereco 1
+                    $array = [
+                        "funcao" => "cadastra_novo_endereco",
+                        "fk_id_customer"    => $save_cli->id_cadastro,
+                        "local"             => $address_tipo1,
+                        "cep"               => $address_cep1,
+                        "rua"               => $address_rua1,
+                        "numero_complemento"=> $address_numero1,
+                        "bairro"            => $address_bairro1,
+                        "cidade"            => $address_cidade1,
+                        "estado"            => $address_estado1,
+                        "referencia"        => $address_referencia1,
+                        "obs"               => $address_obs1,
+                        "active"            => 1,
+                    ];
+                    $resultado1 = WS_write::white($array);
+                    $rest1 = json_decode($resultado1);
+
+
+                    if(strlen($address_cep2) > 5){
+                        //Dados Endereco 2
+                        $array = [
+                            "funcao" => "cadastra_novo_endereco",
+                            "fk_id_customer"    => $save_cli->id_cadastro,
+                            "local"             => $address_tipo2,
+                            "cep"               => $address_cep2,
+                            "rua"               => $address_rua2,
+                            "numero_complemento"=> $address_numero2,
+                            "bairro"            => $address_bairro2,
+                            "cidade"            => $address_cidade2,
+                            "estado"            => $address_estado2,
+                            "referencia"        => $address_referencia2,
+                            "obs"               => $address_obs2,
+                            "active"            => 1,
+                        ];
+                        $resultado2 = WS_write::white($array);
+                        $rest2 = json_decode($resultado2);
+                    }else{
+                        //Dados Endereco 1
+                        $array = ["erro" => "false"];
+                        $rest2 = json_decode($array);
+                    }
+
+
+                    if(($rest1->erro == false) && ($rest2->erro == false)){
+                        $array = [
+                            "erro" => "false",
+                            "id_cadastro" => $save_cli->id_cadastro
+                            ];
+                        return json_decode($array);
+                    }else{
+                        $array = ["erro" => "true" ];
+                        return json_decode($array);
+                    }
+                
             }
+            
+            
         }
     }
  
@@ -242,22 +253,24 @@ class Customer
         ];
         $rest1 = WS_update::alterar_dados($array);
 
-
-        //Dados Endereco 2
-        $array = [
-            "funcao" => "atualiza_endereco",
-            "id_address"        => $id_dress_2,
-            "local"             => $address_tipo2,
-            "cep"               => $address_cep2,
-            "rua"               => $address_rua2,
-            "numero_complemento"=> $address_numero2,
-            "bairro"            => $address_bairro2,
-            "cidade"            => $address_cidade2,
-            "estado"            => $address_estado2,
-            "referencia"        => $address_referencia2,
-            "obs"               => $address_obs2
-        ];
-        $rest2 = WS_update::alterar_dados($array);
+        if(strlen($address_cep2) > 5){
+            //Dados Endereco 2
+            $array = [
+                "funcao" => "atualiza_endereco",
+                "id_address"        => $id_dress_2,
+                "local"             => $address_tipo2,
+                "cep"               => $address_cep2,
+                "rua"               => $address_rua2,
+                "numero_complemento"=> $address_numero2,
+                "bairro"            => $address_bairro2,
+                "cidade"            => $address_cidade2,
+                "estado"            => $address_estado2,
+                "referencia"        => $address_referencia2,
+                "obs"               => $address_obs2
+            ];
+            $rest2 = WS_update::alterar_dados($array);
+        }
+        
 
         return 0;
     }

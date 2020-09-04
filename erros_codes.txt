@@ -1,23 +1,24 @@
 CODIGOS DOS ERROS DO SITE
 
-#001 - Por favor tente mais tarde.
+#001 - Erro ao tentar salvar. Contate Administrador.
 Local: CustomerControle - Funcao: to_cadastrar_novo_cliente_user
 Detalhe: Erro ao tentar salvar. Contate Administrador.
 
 
-#002 - Por favor tente mais tarde.
+#002 - Erro ao tentar salvar. Contate Administrador.
 Local: ItemControle - Funcao: cadastrar_novo_item
 Detalhe: Erro ao tentar salvar. Contate Administrador.
 
 
-#003 - Por favor tente mais tarde.
+#003 - Erro ao tentar salvar. Contate Administrador.
 Local: CategoriaControle - Funcao: cadastrar_nova_categoria
 Detalhe: Erro ao tentar salvar. Contate Administrador.
 
 
 
-
-
+#004 - Erro ao tentar salvar. Contate Administrador.
+Local: ProdutoControle - Funcao: cadastrar_novo_produto
+Detalhe: Erro ao tentar salvar. Contate Administrador.
 
 
 

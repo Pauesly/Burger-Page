@@ -32,30 +32,33 @@ class Produto
     
     
     //Busca adm com email para Login
-    public static function cadastra_novo_item($name, $description, $un, $cost, $picture) {
+    public static function cadastrar_novo_produto($fk_id_category, $name, $description, $picture_thumb, $picture_large, $star, $preco_new, $preco_old) {
         //Dados obrigatorios
         $array = [
-            "funcao"    => "cadastra_novo_item",
-            "name"      => $name,
-            "description" => $description,
-            "un"        => $un,
-            "cost"      => $cost,
-            "picture"   => $picture,
-            "active"   => 1,
-            "created_at"   => Padroes_gerais::data_e_hora()
+            "funcao"            => "cadastra_novo_produto",
+            "fk_id_category"    => $fk_id_category,
+            "name"              => $name,
+            "description"       => $description,
+            "picture_thumb"     => $picture_thumb,
+            "picture_large"     => $picture_large,
+            "star"              => $star,
+            "price_new"         => $preco_new,
+            "price_old"         => $preco_old,
+            "active"            => 1,
+            "created_at"        => Padroes_gerais::data_e_hora()
         ];
+//        var_dump($array); die;
         $resultado = WS_write::white($array);
         return  json_decode($resultado);
     }
     
     
     //Busca adm com email para Login
-    public static function busca_item_com_id($id) {
+    public static function busca_produto_com_id($id) {
         //Dados obrigatorios
         $array = [
-            "funcao"  => "busca_item_com_id",
-            "id_item" => $id
-            
+            "funcao"     => "busca_produto_com_id",
+            "id_produto" => $id
         ];
         $resultado = WS_read::ler_dados($array);
         return  json_decode($resultado);
@@ -65,17 +68,20 @@ class Produto
     
     
     //Busca adm com email para Login
-    public static function altera_item($id_item, $active, $name, $description, $un, $cost, $picture) {
+    public static function salva_edit_produto($id_product, $fk_id_category, $name, $description, $star, $picture_thumb, $picture_large, $active, $preco_new, $preco_old) {
         //Dados obrigatorios
         $array = [
-            "funcao"    => "altera_item",
-            "id_item"   => $id_item,
-            "active"    => $active,
-            "name"      => $name,
-            "description" => $description,
-            "un"        => $un,
-            "cost"      => $cost,
-            "picture"   => $picture
+            "funcao"            => "salva_edit_produto",
+            "id_product"        => $id_product,
+            "fk_id_category"    => $fk_id_category,
+            "name"              => $name,
+            "description"       => $description,
+            "star"              => $star,
+            "picture_thumb"     => $picture_thumb,
+            "picture_large"     => $picture_large,
+            "active"            => $active,
+            "preco_new"         => $preco_new,
+            "preco_old"         => $preco_old
         ];
         $resultado = WS_update::alterar_dados($array);
         return  json_decode($resultado);

@@ -67,8 +67,6 @@ class CustomerController extends BaseController
                 return;
             }
         }
-        
-        
     }
     
     

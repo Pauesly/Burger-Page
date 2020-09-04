@@ -75,7 +75,6 @@ class ProdutoController extends BaseController
     }
     
      
-
     public function add_produto(){
         $admin  =  Session::get('adm');
         
@@ -100,33 +99,30 @@ class ProdutoController extends BaseController
     }
     
     
-    
-    
     public function cadastrar_novo_produto($request){
         
+        $preco_new = str_replace(',', '', $request->post->price_new); 
+        $preco_old = str_replace(',', '', $request->post->price_old); 
         
-        var_dump($request); die;
-        
-        
-        
-        $preco = str_replace(',', '', $request->post->cost); 
-        
-        $resultado = Item::cadastra_novo_item(
+        $resultado = Produto::cadastrar_novo_produto(
+                $request->post->fk_id_category,
                 $request->post->name,
                 $request->post->description,
-                $request->post->un,
-                $preco,
-                $request->post->picture
+                $request->post->picture_thumb,
+                $request->post->picture_large,
+                $request->post->star,
+                $preco_new,
+                $preco_old
                 );
         
         if($resultado->erro){
-            return Redirect::route('/gestao_item', [
-                'errors' => ['Erro 002 - Erro ao tentar salvar. Contate Administrador.'],
+            return Redirect::route('/gestao_produto', [
+                'errors' => ['Erro 004 - Erro ao tentar salvar. Contate Administrador.'],
                 'inputs' => [""]
             ]);
         }else{
-            return Redirect::route('/gestao_item', [
-                'success' => ["Item [  $resultado->id_cadastro ] cadastrado com sucesso!"],
+            return Redirect::route('/gestao_produto', [
+                'success' => ["Produto [  $resultado->id_cadastro ] cadastrado com sucesso!"],
                 'inputs' => [""]
             ]);
         }
@@ -134,11 +130,15 @@ class ProdutoController extends BaseController
     
     
     
-    public function edit_item($request){
+    public function edit_produto($request){
         $admin  =  Session::get('adm');
         
-        $dados_item = Item::busca_item_com_id($request->get->id);
+        $dados_item = Produto::busca_produto_com_id($request->get->id);
 //        $dados_adm = json_decode($dados_customer);
+        
+        $categorias = Categoria::relatorio_all_categorias_ativas();
+        $this->view->categorias = $categorias->resultado;
+        
         
         $this->view->dados = $dados_item->resultado[0];
         
@@ -147,42 +147,46 @@ class ProdutoController extends BaseController
         
         $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
         $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+        $this->view->extra_css = '<link  href="/assets/css/bootstrap-select.css" rel="stylesheet" />';
         $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
                               . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
-                              . '<script src="/assets/js/adm/item/edit_item.js" crossorigin="anonymous"></script>';
-        $this->setPageTitle('Editar Item - Area Restrita');
-        $this->renderView('adm/item/edit_item', '/adm/adm_layout');
+                              . '<script src="/assets/js/bootstrap-select.js"></script>'
+                              . '<script src="/assets/js/adm/produto/edit_produto.js" crossorigin="anonymous"></script>';
+        $this->setPageTitle('Editar Produto - Area Restrita');
+        $this->renderView('adm/produto/edit_produto', '/adm/adm_layout');
     }
     
 
     
     
-    public function salvar_edit_item($request){
+    public function salva_edit_produto($request){
         
-        $preco = str_replace(',', '', $request->post->cost); 
+        $preco_new = str_replace(',', '', $request->post->price_new); 
+        $preco_old = str_replace(',', '', $request->post->price_old); 
         
-        $resultado = Item::altera_item(
-                $request->post->id_item,
-                $request->post->active,
+        $resultado = Produto::salva_edit_produto(
+                $request->post->id_product,
+                $request->post->fk_id_category,
                 $request->post->name,
                 $request->post->description,
-                $request->post->un,
-                $preco,
-                $request->post->picture
+                $request->post->star,
+                $request->post->picture_thumb,
+                $request->post->picture_large,
+                $request->post->active,
+                $preco_new,
+                $preco_old
                 );
         
-//                var_dump($resultado);die;
-        
-        if($resultado == 0){
-            return Redirect::route('/gestao_item', [
-                'errors' => ['Erro 002 - Erro ao tentar salvar. Contate Administrador.'],
+        if($resultado->erro){
+            return Redirect::route('/gestao_produto', [
+                'errors' => ['Erro 004 - Erro ao tentar salvar. Contate Administrador.'],
                 'inputs' => [""]
             ]);
         }else{
-            return Redirect::route('/gestao_item', [
-                'success' => ["Item alterado com sucesso!"],
+            return Redirect::route('/gestao_produto', [
+                'success' => ["Produto alterado com sucesso!"],
                 'inputs' => [""]
             ]);
         }
@@ -191,7 +195,28 @@ class ProdutoController extends BaseController
     
     
     
-    
+    public function menuonline(){
+        $admin  =  Session::get('adm');
+        
+        $cardapio = Categoria::relatorio_all_categorias_ativas();
+        
+        $this->view->cardapio = $cardapio->resultado;
+        
+        $nome_array = explode(' ',$admin['name']);
+        $this->view->nome = $nome_array[0];
+        
+        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+        $this->view->extra_css = '<link  href="/assets/css/bootstrap-select.css" rel="stylesheet" />';
+        $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
+                              . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/bootstrap-select.js"></script>'
+                              . '<script src="/assets/js/adm/produto/add_produto.js" crossorigin="anonymous"></script>';
+        $this->setPageTitle('Adicionar Produto - Area Restrita');
+        $this->renderView('adm/produto/add_produto', '/adm/adm_layout');
+    }
     
     
     

@@ -28,6 +28,9 @@
                         <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-plus"></span> Novo</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-search"></span> Consultar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/gestao_status" onclick="LaunchLoading();"><span class="glyphicon glyphicon-sort-by-attributes"></span> Status</a>
+                        <a class="dropdown-item" href="/gestao_forma_pagamento" onclick="LaunchLoading();"><span class="glyphicon glyphicon-usd"></span> Formas de pagamento</a>
                     </div>
                 </li>
                 
@@ -53,11 +56,11 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/gestao_item" onclick="LaunchLoading();"><span class="glyphicon glyphicon-barcode"></span> Itens</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/gestao_categoria" onclick="LaunchLoading();"><span class="glyphicon glyphicon-tags"></span> Categorias</a>
+                        <a class="dropdown-item" href="/gestao_categoria" onclick="LaunchLoading();"><span class="glyphicon glyphicon-tags"></span>&nbsp Categorias</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/gestao_produto" onclick="LaunchLoading();"><span class="glyphicon glyphicon-align-left"></span> Produtos</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/gestao_menu" onclick="LaunchLoading();"><span class="glyphicon glyphicon-align-justify"></span> Menu</a>
+                        <a class="dropdown-item" href="/menuonline" onclick="LaunchLoading();"><span class="glyphicon glyphicon-align-justify"></span> Cardápio no site</a>
                     </div>
                 </li>
                 
@@ -69,14 +72,6 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-usd"></span> Vendas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-align-left"></span> Itens</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-th"></span> Categorias</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-user"></span> Clientes</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-tags"></span> Produtos</a>
                     </div>
                 </li>
                 
@@ -86,7 +81,7 @@
                 
                 <!--Adm-->
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-info text-green" type="button" href="/adm_perfil" onclick="LaunchLoading();" ><span class="glyphicon glyphicon-user"></span><?php echo $this->view->nome?></a>                  
+                    <a class="nav-link btn btn-outline-info text-green" type="button" href="/adm" onclick="LaunchLoading();" ><span class="glyphicon glyphicon-user"></span><?php echo $this->view->nome?></a>                  
                 </li>
                 
                 <!--Logout-->

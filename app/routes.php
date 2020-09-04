@@ -46,8 +46,14 @@ $route[] = ['/salvar_edit_categoria',           'CategoriaController@salvar_edit
 $route[] = ['/gestao_produto',                      'produtoController@gestao_produto',                 'auth'];
 $route[] = ['/add_produto',                         'produtoController@add_produto',                    'auth'];
 $route[] = ['/cadastrar_novo_produto',              'produtoController@cadastrar_novo_produto',         'auth'];
+$route[] = ['/edit_produto',                        'produtoController@edit_produto',                   'auth'];
+$route[] = ['/salva_edit_produto',                  'produtoController@salva_edit_produto',             'auth'];
+
+$route[] = ['/menuonline',                          'HomeController@index'];
 
 
+// STATUS
+$route[] = ['/gestao_status',               'StatusController@gestao_status',             'auth'];
 
 
 
