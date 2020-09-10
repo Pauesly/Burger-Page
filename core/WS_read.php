@@ -269,12 +269,114 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
-            
-            
-            
-            
-            
-            
+            /**
+             * Seleciona todos os itens do banco
+             * Retorna clientes
+             */
+            case "relatorio_all_status":
+                
+                $campos = "id_status, status, active, sequence";
+                
+                $result = DBRead('Status', "", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os itens do banco
+             * Retorna clientes
+             */
+            case "busca_status_com_id":
+                
+                $id = $info['id_status'];
+                
+                $result = DBRead('Status', "WHERE id_status LIKE '$id' limit 1");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os itens do banco
+             * Retorna clientes
+             */
+            case "relatorio_all_forma_pagamento":
+                
+                $campos = "id_payment_term, name, active";
+                
+                $result = DBRead('PaymentTerm', "", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------
+            /**
+             * Seleciona todos os itens do banco
+             * Retorna clientes
+             */
+            case "busca_forma_pagamento_com_id":
+                
+                $id = $info['id_status'];
+                
+                $result = DBRead('PaymentTerm', "WHERE id_payment_term LIKE '$id' limit 1");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os itens do banco
+             * Retorna clientes
+             */
+            case "relatorio_all_testemunho":
+                
+                $campos = "id_testimony, name, testimony, active";
+                
+                $result = DBRead('Testimony', "", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os itens do banco
+             * Retorna clientes
+             */
+            case "busca_testemunho_com_id":
+                
+                $id = $info['id_status'];
+                
+                $result = DBRead('Testimony', "WHERE id_testimony LIKE '$id' limit 1");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
             
             
             

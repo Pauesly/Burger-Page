@@ -37,7 +37,6 @@ $route[] = ['/salvar_edit_item',        'ItemController@salvar_edit_item',      
 //CATEGORIAS
 $route[] = ['/gestao_categoria',                'CategoriaController@gestao_categoria',          'auth'];
 $route[] = ['/add_categoria',                   'CategoriaController@add_categoria',             'auth'];
-$route[] = ['/add_categoria',                   'CategoriaController@add_categoria',             'auth'];
 $route[] = ['/cadastrar_nova_categoria',        'CategoriaController@cadastrar_nova_categoria',  'auth'];
 $route[] = ['/edit_categoria',                  'CategoriaController@edit_categoria',            'auth'];
 $route[] = ['/salvar_edit_categoria',           'CategoriaController@salvar_edit_categoria',     'auth'];
@@ -53,8 +52,27 @@ $route[] = ['/menuonline',                          'HomeController@index'];
 
 
 // STATUS
-$route[] = ['/gestao_status',               'StatusController@gestao_status',             'auth'];
+$route[] = ['/gestao_status',               'StatusController@gestao_status',               'auth'];
+$route[] = ['/add_status',                  'StatusController@add_status',                  'auth'];
+$route[] = ['/cadastrar_novo_status',       'StatusController@cadastrar_novo_status',       'auth'];
+$route[] = ['/edit_status',                 'StatusController@edit_status',                 'auth'];
+$route[] = ['/salvar_edit_status',          'StatusController@salvar_edit_status',          'auth'];
 
+
+// STATUS
+$route[] = ['/gestao_forma_pagamento',               'FormaPagamentoController@gestao_forma_pagamento',               'auth'];
+$route[] = ['/add_forma_pagamento',                  'FormaPagamentoController@add_forma_pagamento',                  'auth'];
+$route[] = ['/cadastrar_nova_forma_pagamento',       'FormaPagamentoController@cadastrar_nova_forma_pagamento',       'auth'];
+$route[] = ['/edit_forma_pagamento',                 'FormaPagamentoController@edit_forma_pagamento',                 'auth'];
+$route[] = ['/salvar_edit_forma_pagamento',          'FormaPagamentoController@salvar_edit_forma_pagamento',          'auth'];
+
+
+// STATUS
+$route[] = ['/gestao_testemunho',               'TestemunhoController@gestao_testemunho',                       'auth'];
+$route[] = ['/add_testemunho',                  'TestemunhoController@add_testemunho',                          'auth'];
+$route[] = ['/cadastrar_novo_testemunho',       'TestemunhoController@cadastrar_novo_testemunho',      'auth'];
+$route[] = ['/edit_testemunho',                 'TestemunhoController@edit_testemunho',                'auth'];
+$route[] = ['/salvar_edit_testemunho',          'TestemunhoController@salvar_edit_testemunho',         'auth'];
 
 
 

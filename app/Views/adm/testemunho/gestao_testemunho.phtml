@@ -1,0 +1,92 @@
+<div class="container" style="padding-bottom: 0px">
+    
+    <!-- Cabecalho Login -->
+    <div  style="background-color: #cbcbcb;">
+            <hr>
+            <h3 class="font-shadow" style="text-align: center;  font-family: Arial Black" >GESTÃO TESTEMUNHOS</h3>
+            <hr>
+    </div>
+    
+    <!--Alerts-->
+    <div class="">
+        <?php $this->renderView('alerts/_success'); ?>
+        <?php $this->renderView('alerts/_errors') ?>
+    </div>
+    
+    <div class="container">
+    <!--Cabecalho contas-->
+            <div class="row mb-2">
+                <div class="col-sm">
+                        <h4 class="text-center">Total Ativos: <?= $this->view->total_ativa ?></h4>
+                        <h4 class="text-center">Total Inativos: <?= $this->view->total_inativa ?></h4>
+                </div>
+                
+                <div class="col-sm mt-3">
+                    
+                    <div class="row">
+                        <div class="col-sm">
+                            <a class="btn btn-outline-success btn-block" id="btn_rel_questao" href="/add_testemunho"  role="button" onclick="LaunchLoading();">
+                                <span class="glyphicon glyphicon-plus"></span>&nbsp Adicionar Testemunho</a>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                </div>
+            </div>
+    
+    
+     <hr>
+        
+    <div class="container_light text-left">
+        
+        <table class="table  table-hover" id="tabela_principal" id="tabela_principal">
+              <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Testemunho</th>
+                      <th scope="col">Ativo</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    
+                     <?php
+                        $cont = 1;
+                        foreach ($this->view->conteudo_tabela as  $value) { ?>
+                            
+                            <tr style="transform: rotate(0);">
+                                <th scope="row"><a id="lll" onclick="LaunchLoading();" href="/edit_testemunho?id=<?php echo $value->id_testimony?>" class="stretched-link"><?php echo $cont;?></a></th>
+                                <td><?php echo $value->id_testimony?></td>
+                                <td><?php echo $value->name?></td>
+                                <td><?php echo substr($value->testimony, 0, 60) ?>...</td>
+                                <td><?php echo $value->active == 1 ? "Sim" : "Não"?></td>
+                            </tr>
+                            
+                    <?php    $cont++; } ?>
+                    
+                </tbody>
+        </table>
+        
+        
+        
+    </div>
+    </div>
+    
+</div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		

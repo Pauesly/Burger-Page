@@ -21,7 +21,9 @@ Local: ProdutoControle - Funcao: cadastrar_novo_produto
 Detalhe: Erro ao tentar salvar. Contate Administrador.
 
 
-
+#005 - Erro ao tentar salvar. Contate Administrador.
+Local: StatusControle - Funcao: cadastrar_novo_status
+Detalhe: Erro ao tentar salvar. Contate Administrador.
 
 
 

@@ -1,0 +1,172 @@
+<div class="container" style="padding-bottom: 0px">
+    
+    <!-- Cabecalho Login -->
+    <div  style="background-color: #cbcbcb;">
+            <hr>
+            <h3 class="font-shadow" style="text-align: center;  font-family: Arial Black" >EDITAR TESTEMUNHO</h3>
+            <hr>
+    </div>
+    
+    <div class="">
+        <?php $this->renderView('alerts/_success'); ?>
+        <?php $this->renderView('alerts/_errors') ?>
+    </div>
+    
+	
+    
+    <div class="container">
+        
+        
+        <!--ID e ATIVO-->
+        <div class="row mb-2">
+                <div class="col-sm">
+                    <!--ID-->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                                <label for="inputState">Identificador</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">ID</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txt_id" name="txt_id" disabled value="<?php echo $this->view->dados->id_testimony  ?>" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="14">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm mt-3">
+                    <div class="row">&nbsp Item Ativo</div>
+                    <div class="row">
+                            <div class=" col-sm">
+                                <a class="<?= $this->view->dados->active == 1 ? "btn btn-success btn-block" : "btn btn-outline-success btn-block"?>" id="ativo_sim" role="button">ATIVO</a>
+                            </div>
+                            <div class="col-sm">
+                                <a class="<?= $this->view->dados->active == 0 ? "btn btn-danger btn-block" : "btn btn-outline-danger btn-block"?>" id="ativo_nao" role="button">INATIVO</a>
+                            </div>
+                    </div>
+                </div>
+        </div>
+        
+        
+
+        <!--NOME-->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                    <label for="inputState">Nome</label>
+                    <div class="input-group mb-12">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Nome</span>
+                        </div>
+                        <input type="text" class="form-control" id="txt_name" name="txt_name"  value="<?php echo $this->view->dados->name  ?>"  aria-describedby="basic-addon1" maxlength="60">
+                        <div class="invalid-feedback">Nome obrigatório.</div>
+                    </div>
+            </div>
+	</div>
+        
+        <!--Descricao-->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                    <label for="inputState">Testemunho</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Testemunho</span>
+                        </div>
+                        <textarea class="form-control" id="txt_testemunho" rows="2" maxlength="159"><?php echo $this->view->dados->testimony  ?></textarea>
+                        <div class="invalid-feedback">Descrição obrigatório.</div>
+                    </div>
+            </div>
+	</div>
+        
+        
+        
+        <!--Descricao-->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                    <label for="inputState">Título</label>
+                    <div class="input-group mb-12">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Titulo</span>
+                        </div>
+                        <input type="text" class="form-control" id="txt_titulo" name="txt_titulo"  value="<?php echo $this->view->dados->status  ?>"  aria-describedby="basic-addon1" maxlength="20">
+                        <div class="invalid-feedback">Nome obrigatório.</div>
+                    </div>
+            </div>
+            
+            
+	</div>
+       
+        
+        
+        
+        
+        
+        <!--Foto-->
+        <div class="col-auto">
+
+
+                    <div class="container " id="container_imgagem">
+                        <div class="">
+                            <div class="">
+                                <label>Inserir Imagem</label>
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <span class="btn btn-default btn-file">
+                                            <input type="file" id="img_select" name="img_select" accept="image/*">
+                                        </span>
+                                    </span>
+                                    <input type="text" class="form-control" id="img_nome" name="img_nome" readonly>
+                                </div>
+                                <img id='img-upload' name='img-upload' <?php echo $this->view->dados->thumb != "0" ? 'src="data:image/jpg;base64,' . $this->view->dados->thumb  . '"' : "" ; ?>/>
+                                    
+                            </div>
+                            <div class="text-left" style="color: white">
+                                <a class="btn btn-danger" role="button" id="btn_limpa_imagem"><span class="glyphicon glyphicon-remove"></span> Limpar imagem</a>
+                            </div>
+                        </div>
+                    </div>
+            
+        </div>
+        
+        
+        
+        
+        <hr>
+        
+        <!--VALIDAR e SEGUIR-->
+        <div class="form-row mb-4 mt-3">
+            <a id="btn_validar" name="btn_validar" class="btn btn-outline-success btn-lg btn-block" href="#" role="button">Salvar</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--form salvar-->
+    <form action="/salvar_edit_testemunho" method="POST" id="cadastrar_novo_item">
+        
+        <input type='hidden'    name="id_testimony"                 id="id_testimony" value="<?php echo $this->view->dados->id_testimony  ?>">
+        <input type='hidden'    name="active"                       id="active" value="<?php echo $this->view->dados->active  ?>">
+        <input type='hidden'    name="name"                         id="name">
+        <input type='hidden'    name="testimony"                    id="testimony">
+        <input type='hidden'    name="status"                       id="status">
+        <input type='hidden'    name="thumb"                        id="thumb">
+        
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

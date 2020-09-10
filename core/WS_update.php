@@ -164,8 +164,70 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------    
-            
-            
+            /**
+             * Altera Dados do cadastro do Status
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "altera_status":
+                
+                $id_status      = $data['id_status'];
+	    
+	        $array = array(
+                    "active"             => $data['active'],
+                    "status"             => $data['name'],
+                    "sequence"           => $data['sequence']
+                );
+
+                $result = BDUpdate('Status', $array, "id_status LIKE '$id_status'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------   
+            /**
+             * Altera Dados do cadastro do Status
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "altera_forma_pagamento":
+                
+                $id_payment_term      = $data['id_payment_term'];
+	    
+	        $array = array(
+                    "active"             => $data['active'],
+                    "name"             => $data['name']
+                );
+
+                $result = BDUpdate('PaymentTerm', $array, "id_payment_term LIKE '$id_payment_term'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------   
+            /**
+             * Altera Dados do cadastro do Status
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "altera_testemunho":
+                
+                $id_status      = $data['id_testimony'];
+	    
+	        $array = array(
+                    "active"            => $data['active'],
+                    "name"              => $data['name'],
+                    "testimony"         => $data['testimony'],
+                    "status"            => $data['status'],
+                    "thumb"             => $data['thumb']
+                );
+
+                $result = BDUpdate('Testimony', $array, "id_testimony LIKE '$id_status'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------ 
             
             
             

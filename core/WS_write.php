@@ -134,9 +134,62 @@ class WS_write
                 
             break;
 //------------------------------------------------------------------------------
-            
-            
-            
+            /**
+             * Cadastra Status
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "cadastra_novo_status":
+                
+                $dados = array();
+                $dados['status']        = $data['status'];
+                $dados['sequence']      = $data['sequence'];
+                $dados['active']        = $data['active'];
+                
+                if($status['id_cadastro'] = DBCreate('Status', $dados, true)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------
+            /**
+             * Cadastra Status
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "cadastra_nova_forma_pagamento":
+                
+                $dados = array();
+                $dados['name']        = $data['name'];
+                $dados['active']        = $data['active'];
+                
+                if($status['id_cadastro'] = DBCreate('PaymentTerm', $dados, true)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------
+            /**
+             * Cadastra Status
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "cadastrar_novo_testemunho":
+                
+                $dados = array();
+                $dados['name']          = $data['name'];
+                $dados['testimony']     = $data['testimony'];
+                $dados['status']        = $data['status'];
+                $dados['thumb']         = $data['thumb'];
+                $dados['created_at']    = $data['created_at'];
+                $dados['active']        = $data['active'];
+                
+                if($status['id_cadastro'] = DBCreate('Testimony', $dados, true)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------
             
             
             
