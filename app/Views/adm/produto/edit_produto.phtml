@@ -183,9 +183,18 @@
         
         
         
-        <!--Foto-->
+        <!--Foto Mini-->
         <div class="col-auto">
                 <div class="card card-body bg-light" id="card_img_1">
+                    
+                    <label for="exampleFormControlTextarea1">Imagem Miniatura</label>
+                    <p>
+                        <button class="btn btn-info" id="btn_insert_img" type="button" data-toggle="collapse" data-target="#collapseImg" aria-expanded="false" aria-controls="collapseImg">
+                            Imagem Miniatura
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapseImg">
+                    <div class="card card-body">
 
                     <div class="container " id="container_imgagem">
                         <div class="">
@@ -208,8 +217,9 @@
                         </div>
                     </div>
                 </div>
+                </div>
+                </div>
         </div>
-        
         
         
         <br>
@@ -217,6 +227,15 @@
         <!--Foto-->
         <div class="col-auto">
                 <div class="card card-body bg-light" id="card_img_2">
+                    
+                    <label for="exampleFormControlTextarea1">Foto Produto</label>
+                    <p>
+                        <button class="btn btn-info" id="btn_insert_img" type="button" data-toggle="collapse" data-target="#collapseImg2" aria-expanded="false" aria-controls="collapseImg">
+                            Foto Produto
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapseImg2">
+                    <div class="card card-body">
 
                     <div class="container " id="container_imgagem2">
                         <div class="">
@@ -238,18 +257,103 @@
                             </div>
                         </div>
                     </div>
+                    </div>
+                    </div>
                 </div>
+        </div>
+        
+        
+        <br>
+        
+        <!--VALIDAR e SEGUIR-->
+        <div class="form-row mb-4 mt-3">
+            <a id="btn_validar" name="btn_validar" class="btn btn-outline-success btn-lg btn-block" href="#" role="button">Salvar Produto</a>
+        </div>
+        
+        <br>
+    </div>
+    
+    
+
+    <div class="bg-light">
+        <hr>
+        <hr>
+        <hr>
+    </div>
+    
+
+    
+    <!--ITENS PRODUTO-->
+    <div class="container">
+        <h2 class="text-center"><u>ITENS DO PRODUTO</u></h2>
+        
+        
+        <div class="form-row">
+            <!--ITENS-->
+            <div class="form-group col-md-6">
+                <label for="inputState">Insira os itens <span class="spinner-border spinner-border-sm" id="loading_item"></span></label>
+                    <select id="select_item" name="select_item" disabled class="selectpicker form-control" data-live-search="true" data-header="Escolha um Item" data-style="btn-outline-dark">
+                        <option value="0"></option>
+                        <?php
+                            if (isset($this->view->itens)){ 
+
+                                foreach ($this->view->itens as $key => $value){ 
+                        ?>
+                                     <option value="<?php echo $value->id_item?>">
+                                        <?php echo $value->name?> 
+                                     </option>
+                        <?php   }       
+                            }else{
+                        ?>
+                                <option value="" selected>Não há valores para mostrar.</option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+            </div>
+            
+            <!--Preco Custo-->
+            <div class="form-group col-md-6 mt-4">
+                <h4 id="txtcusto_total" class="text-right bg-light">Custo total R$ 0,00</h4>
             </div>
         </div>
         
         
-        <hr>
         
-        <!--VALIDAR e SEGUIR-->
-        <div class="form-row mb-4 mt-3">
-            <a id="btn_validar" name="btn_validar" class="btn btn-outline-success btn-lg btn-block" href="#" role="button">Salvar</a>
+        
+        <div class="container mt-4">
+
+<!--            <button onclick="adicionaLinha('table_itens')">Adicionar</button>-->
+
+            <table class="table table-hover" id="table_itens" name="table_itens">
+                <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">UN</th>
+                        <th scope="col">Custo</th>
+                        <th scope="col"></th>
+                </tr>
+            </table> 
         </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
 

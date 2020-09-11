@@ -190,7 +190,23 @@ class WS_write
                 
             break;
 //------------------------------------------------------------------------------
-            
+            /**
+             * Cadastra Item X produto
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "add_item_produto":
+                
+                $dados = array();
+                $dados['fk_id_product']  = $data['fk_id_product'];
+                $dados['fk_id_item']     = $data['fk_id_item'];
+                
+                if($status['id_cadastro'] = DBCreate('ItemProduct', $dados, true)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------
             
             
             

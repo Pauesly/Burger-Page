@@ -30,6 +30,16 @@ class Item
         return  json_decode($resultado);
     }
     
+    //Busca adm com email para Login
+    public static function relatorio_all_itens_ativos() {
+        //Dados obrigatorios
+        $array = [
+            "funcao" => "relatorio_all_itens_ativos"
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
     
     //Busca adm com email para Login
     public static function cadastra_novo_item($name, $description, $un, $cost, $picture) {

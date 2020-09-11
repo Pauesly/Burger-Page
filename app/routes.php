@@ -47,6 +47,9 @@ $route[] = ['/add_produto',                         'produtoController@add_produ
 $route[] = ['/cadastrar_novo_produto',              'produtoController@cadastrar_novo_produto',         'auth'];
 $route[] = ['/edit_produto',                        'produtoController@edit_produto',                   'auth'];
 $route[] = ['/salva_edit_produto',                  'produtoController@salva_edit_produto',             'auth'];
+$route[] = ['/busca_itens_produto',                 'produtoController@busca_itens_produto',            'auth'];
+$route[] = ['/add_item_produto',                    'produtoController@add_item_produto',               'auth'];
+$route[] = ['/remove_item_produto',                 'produtoController@remove_item_produto',            'auth'];
 
 $route[] = ['/menuonline',                          'HomeController@index'];
 

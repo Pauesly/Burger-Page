@@ -7,6 +7,8 @@ use Core\Redirect;
 use Core\Validator;
 use App\Models\Produto;
 use App\Models\Categoria;
+use App\Models\Item;
+use App\Models\ItemProduto;
 use App\Models\Customer;
 use App\Models\Bcrypt;
 use Core\Session;
@@ -121,23 +123,36 @@ class ProdutoController extends BaseController
                 'inputs' => [""]
             ]);
         }else{
-            return Redirect::route('/gestao_produto', [
-                'success' => ["Produto [  $resultado->id_cadastro ] cadastrado com sucesso!"],
+            return Redirect::route("/edit_produto?id=$resultado->id_cadastro" , [
+                'success' => ["Produto [  $resultado->id_cadastro ] cadastrado com sucesso! <br> Inclua abaixo os itens que o compõe."],
                 'inputs' => [""]
             ]);
         }
+        
+//        if($resultado->erro){
+//            return Redirect::route('/gestao_produto', [
+//                'errors' => ['Erro 004 - Erro ao tentar salvar. Contate Administrador.'],
+//                'inputs' => [""]
+//            ]);
+//        }else{
+//            return Redirect::route('/gestao_produto', [
+//                'success' => ["Produto [  $resultado->id_cadastro ] cadastrado com sucesso!"],
+//                'inputs' => [""]
+//            ]);
+//        }
     }
-    
     
     
     public function edit_produto($request){
         $admin  =  Session::get('adm');
         
         $dados_item = Produto::busca_produto_com_id($request->get->id);
-//        $dados_adm = json_decode($dados_customer);
         
         $categorias = Categoria::relatorio_all_categorias_ativas();
         $this->view->categorias = $categorias->resultado;
+        
+        $itens = Item::relatorio_all_itens_ativos();
+        $this->view->itens = $itens->resultado;
         
         
         $this->view->dados = $dados_item->resultado[0];
@@ -159,8 +174,6 @@ class ProdutoController extends BaseController
     }
     
 
-    
-    
     public function salva_edit_produto($request){
         
         $preco_new = str_replace(',', '', $request->post->price_new); 
@@ -191,6 +204,29 @@ class ProdutoController extends BaseController
             ]);
         }
     }
+    
+    
+    public function add_item_produto($request){
+        ItemProduto::add_item_produto($request->get->id_produto, $request->get->id_item);
+        $dados = ItemProduto::busca_itens_de_produto($request->get->id_produto);
+        echo(json_encode($dados));
+    }
+    
+    
+    public function busca_itens_produto($request){
+        $dados = ItemProduto::busca_itens_de_produto($request->get->id_produto);
+        echo(json_encode($dados));
+    }
+    
+    
+    public function remove_item_produto($request){
+        ItemProduto::remove_item_produto($request->get->id_item_produto);
+        $dados = ItemProduto::busca_itens_de_produto($request->get->id_produto);
+        echo(json_encode($dados));
+    }
+    
+    
+    
     
     
     

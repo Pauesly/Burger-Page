@@ -252,7 +252,31 @@ class WS_update
             
             
             
-            
+        
+        
+        
+        
+        
+        
+        
+        
+        //------------------------------------------------------------------------------   
+            /**
+             * DELETA ITEM PEDIDO
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "remove_item_produto":
+                
+                $id      = $data['id_item_product'];
+	    
+                $result = DBDelete('ItemProduct', "id_item_product LIKE $id");
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------ 
+
             
             
             

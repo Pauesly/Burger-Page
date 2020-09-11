@@ -155,6 +155,24 @@ class WS_read
              * Seleciona todos os itens do banco
              * Retorna clientes
              */
+            case "relatorio_all_itens_ativos":
+                
+                $campos = "id_item, name, cost";
+                
+                $result = DBRead('Item', "WHERE active LIKE 1", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os itens do banco
+             * Retorna clientes
+             */
             case "busca_item_com_id":
                 
                 $id = $info['id_item'];
@@ -377,7 +395,38 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
-            
+            /**
+             * Seleciona todos os iten de determinado produto
+             * Retorna clientes
+             */
+            case "busca_itens_de_produto":
+                
+                $id = $info['fk_id_product'];
+                
+//                $result = DBRead('ItemProduct', "WHERE fk_id_product LIKE '$id'");
+        
+                $result = DBRead('ItemProduct',
+                        
+                        "JOIN Item "
+                            . "ON Item.id_item = ItemProduct.fk_id_item"
+                    	
+			. " WHERE fk_id_product LIKE '$id' ORDER BY name_item",
+                        
+                                "ItemProduct.id_item_product as id_item_product, 
+                                ItemProduct.fk_id_product as fk_id_product, 
+                                ItemProduct.fk_id_item as fk_id_item,
+                                Item.un as un,
+                                Item.cost as cost,
+                                Item.name as name_item");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
             
             
             

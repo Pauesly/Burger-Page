@@ -1,6 +1,35 @@
 $(document).ready(function(){
-    $('#txt_preco_old').mask("#,##0.00", {reverse: true});
-    $('#txt_preco_new').mask("#,##0.00", {reverse: true});
+    
+    //PREENCHENDO DADOS INICIAIS
+    let id_produto = document.getElementById("id_product").value;
+        
+    // Fazendo a consulta
+    $.getJSON('/busca_itens_produto?search=',{id_produto:id_produto, ajax: 'true'}, function(retorno){
+        
+            clearTable('table_itens', 1);
+            soma_custo = 0;
+            document.getElementById("txtcusto_total").innerHTML = "Custo total R$ " + soma_custo;
+
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                document.getElementById("loading_item").className = "";
+                document.getElementById("select_item").disabled = false;
+                $('#select_item').selectpicker('refresh');
+
+            }else{
+                //Setting Screen
+                document.getElementById("loading_item").className = "";
+                document.getElementById("select_item").disabled = false;
+                $('#select_item').selectpicker('refresh');
+
+                retorno['resultado'].forEach(PreencheTabela);
+                var arredondado = parseFloat(soma_custo.toFixed(2));
+                document.getElementById("txtcusto_total").innerHTML = "Custo total R$ " + arredondado;
+            }
+    });
+    
+    
 });
 
 
@@ -26,17 +55,12 @@ document.getElementById("ativo_nao").addEventListener("mousedown", function(even
 
 
 
-
-
 // Listener botao ENVIAR
 document.getElementById("btn_validar").addEventListener("mousedown", function(event) {
     if(ValidaCamposObrigatorios()){
         SalvarCliente();
     }
 });
-
-
-
 
 
 /*
@@ -61,7 +85,6 @@ function SalvarCliente(){
     document.getElementById('salva_edit_produto').submit();
 
 }
-
 
 
 /**
@@ -145,9 +168,6 @@ function ValidaCamposObrigatorios() {
 }
 
 
-
-
-
 //Select Faculdade
 $(function(){
     $('#select_categoria').change(function(){
@@ -225,12 +245,6 @@ document.getElementById("txt_preco_new").addEventListener("keyup", function(even
 });
 
 
-
-
-
-
-
-
 function getSelectedRadio() {
     if(document.getElementById("inlineRadio1").checked)
         return 1;
@@ -246,6 +260,147 @@ function getSelectedRadio() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+//CONTROLES DOS ITENS
+
+let soma_custo = 0;
+
+//Select Faculdade
+$(function(){
+    $('#select_item').change(function(){
+        //Setting Screen
+        document.getElementById("loading_item").className = "spinner-border spinner-border-sm";
+        document.getElementById("select_item").disabled = true;
+        $('#select_item').selectpicker('refresh');
+        
+        let id_produto = document.getElementById("id_product").value;
+        
+
+        // Fazendo a consulta
+        $.getJSON('/add_item_produto?search=',{id_produto:id_produto , id_item: $(this).val(), ajax: 'true'}, function(retorno){
+                
+                clearTable('table_itens', 1);
+                soma_custo = 0;
+                document.getElementById("txtcusto_total").innerHTML = "Custo total R$ " + soma_custo;
+                
+               //Erro. Busca vazia ou execucao da consulta
+                if(retorno['erro']){
+                    //Setting Screen
+                    document.getElementById("loading_item").className = "";
+                    document.getElementById("select_item").disabled = false;
+                    $('#select_item').selectpicker('refresh');
+                    
+                }else{
+                    //Setting Screen
+                    document.getElementById("loading_item").className = "";
+                    document.getElementById("select_item").disabled = false;
+                    $('#select_item').selectpicker('refresh');
+                    
+                    retorno['resultado'].forEach(PreencheTabela);
+                    var arredondado = parseFloat(soma_custo.toFixed(2));
+                    document.getElementById("txtcusto_total").innerHTML = "Custo total R$ " + arredondado;
+                }
+        });
+    });
+});   
+
+
+function PreencheTabela(item, indice) {
+    
+    let custo = parseFloat(item.cost);
+    
+    soma_custo = soma_custo + custo;
+    
+    var tabela = document.getElementById("table_itens");
+    var numeroLinhas = tabela.rows.length;
+    var linha = tabela.insertRow(numeroLinhas);
+    var celula1 = linha.insertCell(0);
+    var celula2 = linha.insertCell(1);   
+    var celula3 = linha.insertCell(2); 
+    var celula4 = linha.insertCell(3); 
+    var celula5 = linha.insertCell(4); 
+    var celula6 = linha.insertCell(5); 
+    celula1.innerHTML = indice + 1; 
+    celula2.innerHTML = item.id_item_product; 
+    celula3.innerHTML = item.name_item; 
+    celula4.innerHTML = item.un; 
+    celula5.innerHTML = "R$ " + item.cost; 
+    celula6.innerHTML =  "<button class='btn btn-danger' onclick='removeItem(this)'>Remover</button>";
+    
+}
+
+// funcao remove uma linha da tabela
+function removeItem(linha) {
+    //Setting Screen
+    document.getElementById("loading_item").className = "spinner-border spinner-border-sm";
+    document.getElementById("select_item").disabled = true;
+    $('#select_item').selectpicker('refresh');
+    
+
+    var row = linha.parentNode.parentNode;
+    var element = row.getElementsByTagName("td");
+    var cell = element[1].innerText; //a celula 1 tem o ID do Item X Produto
+    
+     let id_produto = document.getElementById("id_product").value;
+
+
+    // Fazendo a consulta
+    $.getJSON('/remove_item_produto?search=',{id_produto: id_produto, id_item_produto: cell, ajax: 'true'}, function(retorno){
+
+            clearTable('table_itens', 1);
+            soma_custo = 0;
+            document.getElementById("txtcusto_total").innerHTML = "Custo total R$ " + soma_custo;
+
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                document.getElementById("loading_item").className = "";
+                document.getElementById("select_item").disabled = false;
+                $('#select_item').selectpicker('refresh');
+
+            }else{
+                //Setting Screen
+                document.getElementById("loading_item").className = "";
+                document.getElementById("select_item").disabled = false;
+                $('#select_item').selectpicker('refresh');
+
+                retorno['resultado'].forEach(PreencheTabela);
+                var arredondado = parseFloat(soma_custo.toFixed(2));
+                document.getElementById("txtcusto_total").innerHTML = "Custo total R$ " + arredondado;
+            }
+    });
+
+
+    
+}      
+
+
+
+
+
+
+
+function clearTable(_idTab, _linhaPersistente){
+        var linhas = document.getElementById(_idTab).rows;
+        var i = 0;
+        for (i= linhas.length-1; i>=0; i--){
+                //alert(linhas[i].innerHTML);
+                if (i != (_linhaPersistente-1) ){
+                        document.getElementById(_idTab).deleteRow(i);
+                }
+        }
+}
 
 
 
@@ -370,8 +525,8 @@ function ResizeImage() {
                 var ctx = canvas.getContext("2d");
                 ctx.drawImage(img, 0, 0);
 
-                var MAX_WIDTH = 800;
-                var MAX_HEIGHT = 800;
+                var MAX_WIDTH = 162;
+                var MAX_HEIGHT = 162;
                 var width = img.width;
                 var height = img.height;
 
