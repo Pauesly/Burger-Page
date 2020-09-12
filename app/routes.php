@@ -26,6 +26,7 @@ $route[] = ['/cadastrar_novo_cliente',          'CustomerController@cadastrar_no
 $route[] = ['/consultar_customer',              'CustomerController@consultar_customer',                'auth'];
 $route[] = ['/edit_customer',                   'CustomerController@edit_customer',                     'auth'];
 $route[] = ['/salva_editar_cliente',            'CustomerController@salva_editar_cliente',              'auth'];
+$route[] = ['/busca_cliente_por_telefone',      'CustomerController@busca_cliente_por_telefone'];
 
 //ITENS
 $route[] = ['/gestao_item',             'ItemController@gestao_item',               'auth'];
@@ -73,10 +74,14 @@ $route[] = ['/salvar_edit_forma_pagamento',          'FormaPagamentoController@s
 // STATUS
 $route[] = ['/gestao_testemunho',               'TestemunhoController@gestao_testemunho',                       'auth'];
 $route[] = ['/add_testemunho',                  'TestemunhoController@add_testemunho',                          'auth'];
-$route[] = ['/cadastrar_novo_testemunho',       'TestemunhoController@cadastrar_novo_testemunho',      'auth'];
-$route[] = ['/edit_testemunho',                 'TestemunhoController@edit_testemunho',                'auth'];
-$route[] = ['/salvar_edit_testemunho',          'TestemunhoController@salvar_edit_testemunho',         'auth'];
+$route[] = ['/cadastrar_novo_testemunho',       'TestemunhoController@cadastrar_novo_testemunho',               'auth'];
+$route[] = ['/edit_testemunho',                 'TestemunhoController@edit_testemunho',                         'auth'];
+$route[] = ['/salvar_edit_testemunho',          'TestemunhoController@salvar_edit_testemunho',                  'auth'];
 
+
+//PEDIDO
+$route[] = ['/novo_pedido',                         'PedidoController@novo_pedido',                                 'auth'];
+$route[] = ['/novo_pedido_plus/{id}',               'PedidoController@novo_pedido_plus',                            'auth'];
 
 
 

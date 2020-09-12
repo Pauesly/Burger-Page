@@ -41,7 +41,14 @@ document.getElementById("btn_salvar_end_1").addEventListener("mousedown", functi
 document.getElementById("btn_salvar_end_2").addEventListener("mousedown", function(event) {
     RegistraEndereco2();
 });
-
+// Listener botao End 1
+document.getElementById("btn_cancelar_end_1").addEventListener("mousedown", function(event) {
+    CancelaEditEnd1();
+});
+// Listener botao End 2
+document.getElementById("btn_cancelar_end_2").addEventListener("mousedown", function(event) {
+    CancelaEditEnd2();
+});
 
 /**
  * ontroles Enderecos
@@ -57,6 +64,16 @@ function RegistraEndereco1() {
     
     document.getElementById("btn_add_Adress").className = "btn btn-outline-info";
     
+    document.getElementById("address_tipo1").value =        document.getElementById("tipo").value;
+    document.getElementById("address_cep1").value =         document.getElementById("cep").value;
+    document.getElementById("address_rua1").value =         document.getElementById("rua").value;
+    document.getElementById("address_numero1").value =      document.getElementById("numero").value;
+    document.getElementById("address_bairro1").value =      document.getElementById("bairro").value;
+    document.getElementById("address_cidade1").value =      document.getElementById("cidade").value;
+    document.getElementById("address_estado1").value =      document.getElementById("uf").value;
+    document.getElementById("address_referencia1").value =  document.getElementById("referencia").value;
+    document.getElementById("address_obs1").value =         document.getElementById("txt_obs_endereco_1").value;
+    
     $('#add_address').modal('hide');
 }
 function RegistraEndereco2() {
@@ -68,9 +85,51 @@ function RegistraEndereco2() {
     Referencia: " + document.getElementById("referencia2").value + "<br>\n\
     Observações: " + document.getElementById("txt_obs_endereco_2").value;
     
+    document.getElementById("address_tipo2").value =        document.getElementById("tipo2").value;
+    document.getElementById("address_cep2").value =         document.getElementById("cep2").value;
+    document.getElementById("address_rua2").value =         document.getElementById("rua2").value;
+    document.getElementById("address_numero2").value =      document.getElementById("numero2").value;
+    document.getElementById("address_bairro2").value =      document.getElementById("bairro2").value;
+    document.getElementById("address_cidade2").value =      document.getElementById("cidade2").value;
+    document.getElementById("address_estado2").value =      document.getElementById("uf2").value;
+    document.getElementById("address_referencia2").value =  document.getElementById("referencia2").value;
+    document.getElementById("address_obs2").value =         document.getElementById("txt_obs_endereco_2").value;
+    
     
     $('#add_address2').modal('hide');
 }
+
+function CancelaEditEnd1() {
+    
+    document.getElementById("tipo").value =         document.getElementById("address_tipo1").value;
+    document.getElementById("cep").value =          document.getElementById("address_cep1").value;
+    document.getElementById("rua").value =          document.getElementById("address_rua1").value;
+    document.getElementById("numero").value =       document.getElementById("address_numero1").value;
+    document.getElementById("bairro").value =       document.getElementById("address_bairro1").value;
+    document.getElementById("cidade").value =       document.getElementById("address_cidade1").value;
+    document.getElementById("uf").value =           document.getElementById("address_estado1").value;
+    document.getElementById("referencia").value =   document.getElementById("address_referencia1").value;
+    document.getElementById("txt_obs_endereco_1").value = document.getElementById("address_obs1").value;
+    
+    $('#add_address').modal('hide');
+}
+
+function CancelaEditEnd2() {
+    
+    document.getElementById("tipo2").value =         document.getElementById("address_tipo2").value;
+    document.getElementById("cep2").value =          document.getElementById("address_cep2").value;
+    document.getElementById("rua2").value =          document.getElementById("address_rua2").value;
+    document.getElementById("numero2").value =       document.getElementById("address_numero2").value;
+    document.getElementById("bairro2").value =       document.getElementById("address_bairro2").value;
+    document.getElementById("cidade2").value =       document.getElementById("address_cidade2").value;
+    document.getElementById("uf2").value =           document.getElementById("address_estado2").value;
+    document.getElementById("referencia2").value =   document.getElementById("address_referencia2").value;
+    document.getElementById("txt_obs_endereco_2").value = document.getElementById("address_obs2").value;
+    
+    $('#add_address2').modal('hide');
+}
+
+
 
 
 
@@ -98,24 +157,8 @@ function SalvarCliente(){
     document.getElementById("nome").value =                 document.getElementById("txt_name").value;
     document.getElementById("cpf").value =                  document.getElementById("txt_cpf").value;
     document.getElementById("obs").value =                  document.getElementById("txt_obs_customer").value;
-    document.getElementById("address_tipo1").value =        document.getElementById("tipo").value;
-    document.getElementById("address_cep1").value =         document.getElementById("cep").value;
-    document.getElementById("address_rua1").value =         document.getElementById("rua").value;
-    document.getElementById("address_numero1").value =      document.getElementById("numero").value;
-    document.getElementById("address_bairro1").value =      document.getElementById("bairro").value;
-    document.getElementById("address_cidade1").value =      document.getElementById("cidade").value;
-    document.getElementById("address_estado1").value =      document.getElementById("uf").value;
-    document.getElementById("address_referencia1").value =  document.getElementById("referencia").value;
-    document.getElementById("address_obs1").value =         document.getElementById("txt_obs_endereco_1").value;
-    document.getElementById("address_tipo2").value =        document.getElementById("tipo2").value;
-    document.getElementById("address_cep2").value =         document.getElementById("cep2").value;
-    document.getElementById("address_rua2").value =         document.getElementById("rua2").value;
-    document.getElementById("address_numero2").value =      document.getElementById("numero2").value;
-    document.getElementById("address_bairro2").value =      document.getElementById("bairro2").value;
-    document.getElementById("address_cidade2").value =      document.getElementById("cidade2").value;
-    document.getElementById("address_estado2").value =      document.getElementById("uf2").value;
-    document.getElementById("address_referencia2").value =  document.getElementById("referencia2").value;
-    document.getElementById("address_obs2").value =         document.getElementById("txt_obs_endereco_2").value;
+    
+    
     
 
     //Enviando

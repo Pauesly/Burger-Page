@@ -1,0 +1,112 @@
+<div class="container" style="padding-bottom: 0px">
+    
+    <!-- Cabecalho Novo pedido -->
+    <div  style="background-color: #cbcbcb;">
+            <hr>
+            <h3 class="font-shadow" style="text-align: center;  font-family: Arial Black" >NOVO PEDIDO</h3>
+            <hr>
+    </div>
+    
+    <!--Alerts-->
+    <div class="">
+        <?php $this->renderView('alerts/_success'); ?>
+        <?php $this->renderView('alerts/_errors') ?>
+    </div>
+    
+    <div class="container">
+        
+        
+        <!--Buscando-->
+        <div class="form-row">
+                <!--Telefones-->
+                <div class="form-group col-md-6">
+                        <label for="inputState">Busque pelo Telefone</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                    Telefone
+                                    <span class="" id="loading_phone1" role="status" aria-hidden="true"></span>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" id="txt_telefone" name="txt_telefone" value="<?php echo isset($this->view->tel) ? $this->view->tel : ""?>"   placeholder="(99) 9 9999-9999" aria-label="Telefone" aria-describedby="basic-addon1">
+                        </div>
+                </div>
+                <!--<div class="form-group col-md-6">
+                        <label for="inputState">Busque pelo Nome</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Nome</span>
+                            </div>
+                            <input type="text" class="form-control" id="txt_name" name="txt_name"  placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="60">
+                        </div>
+                </div>-->
+                <div class="esconder" role="alert" id="alert_nao_encontrado">
+                        <strong>Cliente não encontrado!</strong> Deseja cadastrar?
+                        <button type="button" class="btn btn-outline-success" id="btn_new_cliente">Cadastrar</button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+        </div>
+        
+        
+        <!--Dados do cliente encontrado-->
+        <div class="esconder" id="box_dados_cliente">
+            <div class="form-group col-md-12">
+                <div class="alert alert-info  " role="alert">
+                    <h4 class="alert-heading" id="txt_nome_cliente"></h4>
+                    <p id="txt_tel1_cliente"></p>
+                    <p id="txt_tel2_cliente"></p>
+                    <hr>
+                    <p id="txt_obs_cliente"></p>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+</div>
+<!--FIM DIV PRINCIPAL-->
+
+
+
+
+
+
+<!--form Armazenando dados-->
+<form action="/" method="POST" id="form_dados" class="esconder">
+    <hr>
+    <hr>
+    <hr>
+    <input type='text'    name="id_customer"                    id="id_customer">
+    <input type='text'    name="phone_number_1"                 id="phone_number_1">
+    <input type='text'    name="phone_number_2"                 id="phone_number_2">
+</form>
+
+
+
+
+
+
+
+
+
+<!--add new cliente-->
+<form action="/add_customer" method="POST" id="form_add_new_cliente" class="esconder">
+    <input type='text'    name="new_tel"                 id="new_tel">
+</form>
+
+
+
+
+
+
+
+		

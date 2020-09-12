@@ -427,6 +427,37 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
+            /**
+             * Busca Cliente por Telefone
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "busca_cliente_por_telefone":
+                
+                $phone = $info['phone'];
+                
+                $result = DBRead('Customer', "WHERE active LIKE 1 AND phone_number_1 LIKE '$phone' OR phone_number_2 LIKE '$phone' ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             

@@ -28,7 +28,7 @@
                                 <span class="" id="loading_phone1" role="status" aria-hidden="true"></span>
                             </span>
                         </div>
-                        <input type="text" class="form-control" id="txt_telefone_1" name="txt_telefone_1"  onblur="validaTelefone1(this.value);"  placeholder="(99) 9 9999-9999" aria-label="Telefone" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="txt_telefone_1" name="txt_telefone_1" value="<?php echo isset($this->view->new_tel) ? $this->view->new_tel : ""?>" onblur="validaTelefone1(this.value);"  placeholder="" aria-label="Telefone" aria-describedby="basic-addon1">
                         <div class="valid-feedback">Número Válido!</div>
                         <div class="invalid-feedback">Número já cadastrado ou inválido!</div>
                     </div>
@@ -43,7 +43,7 @@
                                 <span class="" id="loading_phone2" role="status" aria-hidden="true"></span>
                             </span>
                         </div>
-                        <input type="text" class="form-control" id="txt_telefone_2" name="txt_telefone_2" onblur="validaTelefone2(this.value);" placeholder="(99) 9 9999-9999" aria-label="Telefone" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" id="txt_telefone_2" name="txt_telefone_2" onblur="validaTelefone2(this.value);" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1">
                         <div class="valid-feedback">Número Válido!</div>
                         <div class="invalid-feedback">Número já cadastrado!</div>
                     </div>
@@ -129,7 +129,7 @@
         
         
         <!--ENDERECO 1-->
-        <div class="modal fade" id="add_address" data-keyboard="false" >
+        <div class="modal fade" id="add_address" data-keyboard="false" data-backdrop="static" >
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
                 <div class="modal-content">
                     <div class="modal-header">
@@ -237,7 +237,8 @@
                         
                         <div class="modal-footer">
                             <div class="form-row mb-4 mt-3">
-                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Sair sem salvar</button>
+                                <button type="button" class="btn btn-outline-danger" id="btn_cancelar_end_1" name="btn_cancelar_end_1">Sair sem salvar</button>
+                                <!--<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Sair sem salvar</button>-->
                             </div>
                             <!--VALIDAR e SEGUIR-->
                             <div class="form-row mb-4 mt-3">
@@ -253,7 +254,7 @@
         
         
         <!--ENDERECO 2-->
-        <div class="modal fade" id="add_address2" data-keyboard="false" >
+        <div class="modal fade" id="add_address2" data-keyboard="false" data-backdrop="static" >
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
                 <div class="modal-content">
                     <div class="modal-header">
@@ -361,7 +362,7 @@
                         
                         <div class="modal-footer">
                             <div class="form-row mb-4 mt-3">
-                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Sair sem salvar</button>
+                                <button type="button" class="btn btn-outline-danger" id="btn_cancelar_end_2" name="btn_cancelar_end_2">Sair sem salvar</button>
                             </div>
                             <!--VALIDAR e SEGUIR-->
                             <div class="form-row mb-4 mt-3">

@@ -26,8 +26,12 @@ class CustomerController extends BaseController
     
 
 
-    public function add_customer(){
+    public function add_customer($request){
         $admin  =  Session::get('adm');
+        
+        if(isset($request->post->new_tel)){
+            $this->view->new_tel = $request->post->new_tel;
+        }
         
         $nome_array = explode(' ',$admin['name']);
         $this->view->nome = $nome_array[0];
@@ -70,7 +74,6 @@ class CustomerController extends BaseController
     }
     
     
-    
     public function cadastrar_novo_cliente($request){
         
         
@@ -101,21 +104,36 @@ class CustomerController extends BaseController
                 $request->post->address_obs2
                 );
         
-
-        if($resultado->erro){
+        if($resultado->erro == true){
             return Redirect::route('/adm_index', [
                 'errors' => ['Erro 001 - Erro ao tentar salvar. Contate Administrador.'],
                 'inputs' => [""]
             ]);
         }else{
-            return Redirect::route('/adm_index', [
-                'success' => ['Cliente cadastrado com sucesso!'],
-                'inputs' => [""]
-            ]);
+//            var_dump($resultado);die;
+            $tel = self::FormataTelefone($request->post->phone_1);
+            $texto_sucesso = "Cliente [ $resultado->id_cadastro ] cadastrado com sucesso! Abrir pedido? <a class=&#34;btn btn-primary&#34; href=novo_pedido_plus/$tel role=&#34;button&#34;>clique aqui</a>";
+  
+            if($resultado->end_1 == true){
+                $texto_sucesso .= "<br> Obs: Não salvou endereço 1.";
+                return Redirect::route('/adm_index', [
+                    'success' => [$texto_sucesso],
+                    'inputs' => [""]
+                ]);
+            }else if($resultado->end_2 == true){
+                $texto_sucesso .= "<br> Obs: Não salvou endereço 2.";
+                return Redirect::route('/adm_index', [
+                    'success' => [$texto_sucesso],
+                    'inputs' => [""]
+                ]);
+            }else{
+                return Redirect::route('/adm_index', [
+                    'success' => [$texto_sucesso],
+                    'inputs' => [""]
+                ]);
+            }
         }
     }
-    
-    
     
     
     public static function FormataTelefone($tel){
@@ -126,7 +144,6 @@ class CustomerController extends BaseController
         $new_tel = str_replace('%20', '', $new_tel); 
         return $new_tel;
     }
-    
     
     
     public function consultar_customer(){
@@ -178,7 +195,6 @@ class CustomerController extends BaseController
     }
     
      
-
     //Pagina Edit perfil MAster
     public function edit_customer($request){
         //Validacoes obrigatorias
@@ -206,7 +222,6 @@ class CustomerController extends BaseController
     
     
     public function salva_editar_cliente($request){
-        
         
         $resultado = Customer::salva_editar_cliente(
                 $request->post->id_customer,
@@ -238,19 +253,53 @@ class CustomerController extends BaseController
                 $request->post->address_obs2
                 );
         
-
-        if($resultado != 0){
+//                var_dump($resultado); die;
+        if($resultado->erro == true){
             return Redirect::route('/adm_index', [
                 'errors' => ['Erro 001 - Erro ao tentar salvar. Contate Administrador.'],
                 'inputs' => [""]
             ]);
         }else{
-            return Redirect::route('/adm_index', [
-                'success' => ['Alterações salvas com sucesso!'],
-                'inputs' => [""]
-            ]);
+            $tel = self::FormataTelefone($request->post->phone_1);
+            $texto_sucesso = "Alterações salvas com sucesso! Abrir pedido? <a class=&#34;btn btn-primary&#34; href=novo_pedido_plus/$tel role=&#34;button&#34;>clique aqui</a>";
+  
+            if($resultado->end_1 == true){
+                $texto_sucesso .= "<br> Obs: Não salvou endereço 1.";
+                return Redirect::route('/adm_index', [
+                    'success' => [$texto_sucesso],
+                    'inputs' => [""]
+                ]);
+            }else if($resultado->end_2 == true){
+                $texto_sucesso .= "<br> Obs: Não salvou endereço 2.";
+                return Redirect::route('/adm_index', [
+                    'success' => [$texto_sucesso],
+                    'inputs' => [""]
+                ]);
+            }else{
+                return Redirect::route('/adm_index', [
+                    'success' => [$texto_sucesso],
+                    'inputs' => [""]
+                ]);
+            }
+            
+            
+            
         }
     }
+    
+    
+    public function busca_cliente_por_telefone($request){
+        
+        $resultado = Customer::busca_cliente_por_telefone(self::FormataTelefone($request->get->phone));
+        echo(json_encode($resultado));
+
+    }
+    
+    
+    
+    
+    
+    
     
     
     
