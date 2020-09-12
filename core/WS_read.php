@@ -446,7 +446,25 @@ class WS_read
                 }
             break;            
 //------------------------------------------------------------------------------ 
-            
+            /**
+             * Busca endereco de cliente    
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "busca_enderecos_de_cliente":
+                
+                $id = $info['id'];
+                
+                $result = DBRead('Address', "WHERE active LIKE 1 AND fk_id_customer LIKE '$id' ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
             
             
             

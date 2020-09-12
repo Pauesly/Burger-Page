@@ -82,6 +82,7 @@ $route[] = ['/salvar_edit_testemunho',          'TestemunhoController@salvar_edi
 //PEDIDO
 $route[] = ['/novo_pedido',                         'PedidoController@novo_pedido',                                 'auth'];
 $route[] = ['/novo_pedido_plus/{id}',               'PedidoController@novo_pedido_plus',                            'auth'];
+$route[] = ['/busca_enderecos_de_cliente',          'PedidoController@busca_enderecos_de_cliente',                  'auth'];
 
 
 

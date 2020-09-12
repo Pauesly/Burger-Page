@@ -58,20 +58,58 @@ function BuscaTelefone() {
                 //Setting Screen
                 document.getElementById("loading_phone1").className = "";
                 document.getElementById("txt_telefone").disabled = false;
-                document.getElementById("box_dados_cliente").className = "form-row";
+                document.getElementById("box_dados_cliente").className   = "form-row";
                 
                 //Dados Ocultos
                 document.getElementById("id_customer").value = retorno['resultado'][0]['id_customer'];
                 document.getElementById("phone_number_1").value = retorno['resultado'][0]['phone_number_1'];
                 
-                //Dados Visiveis
+                //Dados Visiveis cliente
                 document.getElementById("txt_nome_cliente").innerHTML = retorno['resultado'][0]['name'];
                 document.getElementById("txt_tel1_cliente").innerHTML = "<strong>Telefone 1: </strong>" + retorno['resultado'][0]['phone_number_1'];
                 document.getElementById("txt_tel2_cliente").innerHTML = "<strong>Telefone 2: </strong>" + retorno['resultado'][0]['phone_number_2'];
                 document.getElementById("txt_obs_cliente").innerHTML  = "<strong>Observações: </strong>" + retorno['resultado'][0]['obs'];
+                
+                BuscaEndereco(retorno['resultado'][0]['id_customer']);
             }
     });
 }
+
+
+
+
+/**
+ * Comment
+ */
+function BuscaEndereco($id_cliente) {
+    document.getElementById("loading_endereco").className   = "text-center";
+    
+    $.getJSON('/busca_enderecos_de_cliente?search=',{id:$id_cliente, ajax: 'true'}, function(retorno){
+        console.log(retorno);
+            document.getElementById("loading_endereco").className   = "esconder";
+        
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                document.getElementById("alerto_erro_endereco").className = "text-center";
+                document.getElementById("loading_endereco").className   = "esconder";
+            }else{
+                //Setting Screen
+                document.getElementById("loading_endereco").className   = "esconder";
+                document.getElementById("box_dados_enderecos").className   = "row";
+                
+                //Dados Visiveis cliente
+                document.getElementById("txt_local_1").innerHTML   = "Local: " + retorno['resultado'][0]['bairro'];
+                
+            }
+    });
+    
+}
+
+
+
+
+
 
 
 

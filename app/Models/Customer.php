@@ -302,7 +302,17 @@ class Customer
     
     
     
-    
+    //Dados de cliente especifico
+    public static function busca_enderecos_de_cliente($id) {
+        //Dados obrigatorios
+         $array = [
+            "funcao"          => "busca_enderecos_de_cliente",
+            "id"              => $id
+        ];
+        
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     
