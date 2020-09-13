@@ -316,7 +316,37 @@ class Customer
     
     
     
-    
+    //Dados de cliente especifico
+    public static function salva_edit_endereco(
+            $id_dress,
+            $address_tipo,
+            $address_cep,
+            $address_rua,
+            $address_numero,
+            $address_bairro,
+            $address_cidade,
+            $address_estado,
+            $address_referencia,
+            $address_obs
+            ) {
+        //Dados obrigatorios
+        //Dados Endereco 2
+        $array_end = [
+            "funcao" => "atualiza_endereco",
+            "id_address"        => $id_dress,
+            "local"             => $address_tipo,
+            "cep"               => $address_cep,
+            "rua"               => $address_rua,
+            "numero_complemento"=> $address_numero,
+            "bairro"            => $address_bairro,
+            "cidade"            => $address_cidade,
+            "estado"            => $address_estado,
+            "referencia"        => $address_referencia,
+            "obs"               => $address_obs
+        ];
+        $resultado = WS_update::alterar_dados($array_end);
+        return  json_decode($resultado);
+    }
     
     
     

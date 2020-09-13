@@ -26,7 +26,8 @@ $route[] = ['/cadastrar_novo_cliente',          'CustomerController@cadastrar_no
 $route[] = ['/consultar_customer',              'CustomerController@consultar_customer',                'auth'];
 $route[] = ['/edit_customer',                   'CustomerController@edit_customer',                     'auth'];
 $route[] = ['/salva_editar_cliente',            'CustomerController@salva_editar_cliente',              'auth'];
-$route[] = ['/busca_cliente_por_telefone',      'CustomerController@busca_cliente_por_telefone'];
+$route[] = ['/busca_cliente_por_telefone',      'CustomerController@busca_cliente_por_telefone',        'auth'];
+$route[] = ['/salva_edit_endereco',             'CustomerController@salva_edit_endereco',               'auth'];
 
 //ITENS
 $route[] = ['/gestao_item',             'ItemController@gestao_item',               'auth'];
@@ -83,6 +84,9 @@ $route[] = ['/salvar_edit_testemunho',          'TestemunhoController@salvar_edi
 $route[] = ['/novo_pedido',                         'PedidoController@novo_pedido',                                 'auth'];
 $route[] = ['/novo_pedido_plus/{id}',               'PedidoController@novo_pedido_plus',                            'auth'];
 $route[] = ['/busca_enderecos_de_cliente',          'PedidoController@busca_enderecos_de_cliente',                  'auth'];
+$route[] = ['/abrir_pedido',                        'PedidoController@abrir_pedido',                                'auth'];
+$route[] = ['/gerir_pedido',                        'PedidoController@gerir_pedido',                                'auth'];
+
 
 
 

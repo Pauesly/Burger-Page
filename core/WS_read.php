@@ -509,6 +509,17 @@ class WS_read
             
             
             
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             /**
              * retorna Erro se funcao solicitaada nao for encontrada
              */

@@ -72,7 +72,7 @@
         
         
         
-        <!--ID e ATIVO-->
+        <!--IENDERECOS-->
         <div class="esconder" id="box_dados_enderecos">
               
                     <!--Endereco 1-->
@@ -110,10 +110,27 @@
                
         
         
+        <!--ID e ATIVO-->
+        <div class="esconder" id="box_confirma_abrir_pedido">
+            <input type='hidden'    name="end_choose"                    id="end_choose">
+            <div class="alert alert-info" role="alert">
+                Confirma abertura de pedido? <a class="btn btn-outline-primary" id="btn_confirma_abrir_pedido" role="button">Confirmar</a>
+            </div>
+        </div>
         
         
+        <!--ID e ATIVO-->
+        <div class="esconder" id="loading_abrir_pedido">
+            <div class="text-center" >
+                <div class="alert alert-light" role="alert">
+                    <img class="brand-logo-dark" src="/images/loading.gif" alt=""/>Abrindo Pedido...
+                </div>
+            </div>
+        </div>
         
-        
+        <div class="esconder" id="alert_erro_abrir_pedido" role="alert">
+            Erro ao abrir pedido. Contacte Administrador.
+       </div>
         
         
         
@@ -128,12 +145,14 @@
 
 
 <!--form Armazenando dados-->
-<form action="/" method="POST" id="form_dados" class="">
+<form action="/gerir_pedido" method="POST" id="form_gerir_pedido" class="esconder">
     <hr>
     <hr>
     <hr>
+    <input type='text'    name="id_adm"                         id="id_adm" value="<?php echo $this->view->id_adm ?>">
     <input type='text'    name="id_customer"                    id="id_customer">
     <input type='text'    name="endereco_entrega"               id="endereco_entrega">
+    <input type='text'    name="id_pedido"                      id="id_pedido">
 </form>
 
 
@@ -274,6 +293,10 @@
                           </div>
                     </div>
                 </div>
+                
+                <div class="esconder" id="alert_erro_end_1" role="alert">
+                     Erro ao salvar. Contacte Administrador.
+                </div>
 
                 <div class="modal-footer">
                     <div class="form-row mb-4 mt-3">
@@ -281,7 +304,10 @@
                     </div>
                     <!--VALIDAR e SEGUIR-->
                     <div class="form-row mb-4 mt-3">
-                        <a id="btn_salvar_end_1" name="btn_salvar_end_1" class="btn btn-outline-success" role="button">Salvar</a>
+                        <a id="btn_salvar_end_1" name="btn_salvar_end_1" class="btn btn-outline-success" role="button">
+                            <div class="esconder" id="spinner_salva_end1" role="status"><span class="sr-only">Loading...</span></div>
+                            Salvar
+                        </a>
                     </div>
                 </div>
 
@@ -410,15 +436,21 @@
                           </div>
                     </div>
                 </div>
+                
+                <div class="esconder" id="alert_erro_end_2" role="alert">
+                     Erro ao salvar. Contacte Administrador.
+                </div>
 
                 <div class="modal-footer">
                     <div class="form-row mb-4 mt-3">
                         <button type="button" class="btn btn-outline-danger" id="btn_cancelar_end_2" name="btn_cancelar_end_2">Sair sem salvar</button>
-                        <!--<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Sair sem salvar</button>-->
                     </div>
                     <!--VALIDAR e SEGUIR-->
                     <div class="form-row mb-4 mt-3">
-                        <a id="btn_salvar_end_2" name="btn_salvar_end_2" class="btn btn-outline-success" href="#" role="button">Salvar</a>
+                        <a id="btn_salvar_end_2" name="btn_salvar_end_2" class="btn btn-outline-success" href="#" role="button">
+                        <div class="esconder" id="spinner_salva_end2" role="status"><span class="sr-only">Loading...</span></div>
+                            Salvar
+                        </a>
                     </div>
                 </div>
 

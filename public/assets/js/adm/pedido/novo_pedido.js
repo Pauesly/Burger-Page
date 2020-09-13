@@ -26,6 +26,8 @@ document.getElementById("btn_new_cliente").addEventListener("mousedown", functio
 document.getElementById("txt_telefone").addEventListener("keyup", function(event) {
     document.getElementById("alert_nao_encontrado").className = "esconder";
     document.getElementById("box_dados_cliente").className = "esconder";
+    document.getElementById("box_confirma_abrir_pedido").className = "esconder";
+    document.getElementById("box_dados_enderecos").className = "esconder";
     if (event.keyCode === 13) {
         event.preventDefault();
         if(validaTelefone()){
@@ -166,6 +168,8 @@ document.getElementById("btn_choose_end_1").addEventListener("mousedown", functi
     document.getElementById('alert_end_1').className = "alert alert-success";
     document.getElementById('alert_end_2').className = "alert alert-secondary";
     document.getElementById('endereco_entrega').value = document.getElementById('txt_id_end_1').value;
+    document.getElementById('box_confirma_abrir_pedido').className = "";
+    document.getElementById('end_choose').value = "1";
 });
 
 
@@ -174,8 +178,9 @@ document.getElementById("btn_choose_end_2").addEventListener("mousedown", functi
     document.getElementById('alert_end_1').className = "alert alert-secondary";
     document.getElementById('alert_end_2').className = "alert alert-success";
     document.getElementById('endereco_entrega').value = document.getElementById('txt_id_end_2').value;
+    document.getElementById('box_confirma_abrir_pedido').className = "";
+    document.getElementById('end_choose').value = "2";
 });
-
 
 
 // Listener botao select Endereco
@@ -196,10 +201,174 @@ document.getElementById("btn_cancelar_end_2").addEventListener("mousedown", func
 
 
 document.getElementById("btn_salvar_end_1").addEventListener("mousedown", function(event) {
-    alert("Endereço alterado com sucesso!");
-    $('#add_address').modal('hide');
-    BuscaEndereco(document.getElementById("id_customer").value);
+    
+    document.getElementById("btn_cancelar_end_1").disabled = true;
+    document.getElementById("btn_salvar_end_1").className = "btn btn-outline-success disabled";
+    document.getElementById("spinner_salva_end1").className = "spinner-border text-success";
+    
+    //Coletando Dados
+    let id_address          = document.getElementById("txt_id_end1").value;
+    let local                = document.getElementById("tipo").value;
+    let cep                 = document.getElementById("cep").value;
+    let rua                 = document.getElementById("rua").value;
+    let numero_complemento  = document.getElementById("numero").value;
+    let bairro              = document.getElementById("bairro").value;
+    let cidade              = document.getElementById("cidade").value;
+    let estado              = document.getElementById("uf").value;
+    let referencia          = document.getElementById("referencia").value;
+    let obs                 = document.getElementById("txt_obs_endereco_1").value;
+    
+  
+        
+    $.getJSON('/salva_edit_endereco?search=',{
+        id_address:id_address,
+        tipo:local,
+        cep:cep,
+        rua:rua,
+        numero_complemento:numero_complemento,
+        bairro:bairro,
+        cidade:cidade,
+        estado:estado,
+        referencia:referencia,
+        obs:obs,
+        ajax: 'true'}, function(retorno){
+        
+        console.log(retorno);
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno === 0){
+                //Setting Screen
+                document.getElementById("btn_cancelar_end_1").disabled = false;
+                document.getElementById("btn_salvar_end_1").className = "btn btn-outline-success";
+                document.getElementById("spinner_salva_end1").className = "esconder";
+
+                document.getElementById("alert_erro_end_1").className = "alert alert-danger";
+            }else{
+                //Setting Screen
+                document.getElementById("btn_cancelar_end_1").disabled = false;
+                document.getElementById("btn_salvar_end_1").className = "btn btn-outline-success";
+                document.getElementById("spinner_salva_end1").className = "esconder";
+                $('#add_address').modal('hide');
+                BuscaEndereco(document.getElementById("id_customer").value);
+            }
+    });
 });
+
+
+document.getElementById("btn_salvar_end_2").addEventListener("mousedown", function(event) {
+    
+    document.getElementById("btn_cancelar_end_2").disabled = true;
+    document.getElementById("btn_salvar_end_2").className = "btn btn-outline-success disabled";
+    document.getElementById("spinner_salva_end2").className = "spinner-border text-success";
+    
+    //Coletando Dados
+    let id_address          = document.getElementById("txt_id_end2").value;
+    let local               = document.getElementById("tipo2").value;
+    let cep                 = document.getElementById("cep2").value;
+    let rua                 = document.getElementById("rua2").value;
+    let numero_complemento  = document.getElementById("numero2").value;
+    let bairro              = document.getElementById("bairro2").value;
+    let cidade              = document.getElementById("cidade2").value;
+    let estado              = document.getElementById("uf2").value;
+    let referencia          = document.getElementById("referencia2").value;
+    let obs                 = document.getElementById("txt_obs_endereco_2").value;
+    
+  
+        
+    $.getJSON('/salva_edit_endereco?search=',{
+        id_address:id_address,
+        tipo:local,
+        cep:cep,
+        rua:rua,
+        numero_complemento:numero_complemento,
+        bairro:bairro,
+        cidade:cidade,
+        estado:estado,
+        referencia:referencia,
+        obs:obs,
+        ajax: 'true'}, function(retorno){
+        
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno === 0){
+                //Setting Screen
+                document.getElementById("btn_cancelar_end_2").disabled = false;
+                document.getElementById("btn_salvar_end_2").className = "btn btn-outline-success";
+                document.getElementById("spinner_salva_end2").className = "esconder";
+
+                document.getElementById("alert_erro_end_2").className = "alert alert-danger";
+            }else{
+                //Setting Screen
+                document.getElementById("btn_cancelar_end_2").disabled = false;
+                document.getElementById("btn_salvar_end_2").className = "btn btn-outline-success";
+                document.getElementById("spinner_salva_end2").className = "esconder";
+                $('#add_address2').modal('hide');
+                BuscaEndereco(document.getElementById("id_customer").value);
+            }
+    });
+});
+
+
+
+
+
+
+
+// Listener botao select Endereco
+document.getElementById("btn_confirma_abrir_pedido").addEventListener("mousedown", function(event) {
+    AbrirPedido();
+});
+
+
+/**
+ * Abrir pedido
+ */
+function AbrirPedido() {
+    
+    document.getElementById("box_confirma_abrir_pedido").className = "esconder";
+    document.getElementById("loading_abrir_pedido").className = "";
+    
+    
+    let fk_id_adm       = document.getElementById("id_adm").value;
+    let fk_id_customer  = document.getElementById("id_customer").value;
+    let fk_id_address   = document.getElementById("endereco_entrega").value;
+    
+    $.getJSON('/abrir_pedido?search=',{
+        fk_id_adm:fk_id_adm,
+        fk_id_customer:fk_id_customer,
+        fk_id_address:fk_id_address,
+        ajax: 'true'}, function(retorno){
+        
+        console.log(retorno);
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                document.getElementById("loading_abrir_pedido").className = "esconder";
+                document.getElementById("alert_erro_abrir_pedido").className = "alert alert-danger";
+                
+            }else{
+                //Setting Screen
+                document.getElementById("id_pedido").value = retorno['id_cadastro'];
+                document.getElementById('form_gerir_pedido').submit();
+            }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**

@@ -207,7 +207,26 @@ class WS_write
                 
             break;
 //------------------------------------------------------------------------------
-            
+            /**
+             * Cadastra Novo pedido
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "abrir_pedido":
+                
+                $dados = array();
+                $dados['fk_id_adm']         = $data['fk_id_adm'];
+                $dados['fk_id_customer']    = $data['fk_id_customer'];
+                $dados['fk_id_address']     = $data['fk_id_address'];
+                $dados['created_at']        = $data['created_at'];
+                $dados['active']            = $data['active'];
+                
+                if($status['id_cadastro'] = DBCreate('Orders', $dados, true)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------
             
             
             

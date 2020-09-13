@@ -297,7 +297,22 @@ class CustomerController extends BaseController
     
     
     
-    
+    public function salva_edit_endereco($request){
+        
+        $resultado = Customer::salva_edit_endereco(
+                $request->get->id_address, 
+                $request->get->tipo, 
+                $request->get->cep, 
+                $request->get->rua, 
+                $request->get->numero_complemento, 
+                $request->get->bairro, 
+                $request->get->cidade, 
+                $request->get->estado, 
+                $request->get->referencia, 
+                $request->get->obs);
+        echo(json_encode($resultado));
+
+    }
     
     
     

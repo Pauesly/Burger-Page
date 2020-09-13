@@ -29,6 +29,7 @@ class PedidoController extends BaseController
         
         $nome_array = explode(' ',$admin['name']);
         $this->view->nome = $nome_array[0];
+        $this->view->id_adm = $admin['id_adm'];
         
         $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
         $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
@@ -62,18 +63,23 @@ class PedidoController extends BaseController
     
     
     public function busca_enderecos_de_cliente($request){
-        
         $resultado = Customer::busca_enderecos_de_cliente($request->get->id);
         echo(json_encode($resultado));
-        
-        
+    }
+    
+    
+    public function abrir_pedido($request){
+        $resultado = Pedido::abrir_pedido($request->get->fk_id_adm, $request->get->fk_id_customer, $request->get->fk_id_address);
+        echo(json_encode($resultado));
     }
     
     
     
-    
-    
-    
+    public function gerir_pedido($request){
+        var_dump($request);die;
+        
+        
+    }
     
     
     
