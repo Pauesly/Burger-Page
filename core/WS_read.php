@@ -465,12 +465,122 @@ class WS_read
                 }
             break;            
 //------------------------------------------------------------------------------ 
-            
-            
-            
-            
-            
-            
+            /**
+             * Seleciona todos os dados de determinado pedido
+             * Retorna clientes
+             */
+            case "busca_dados_pedido":
+                
+                $id = $info['id_pedido'];
+                
+                $result = DBRead('Orders',
+                        
+                        "JOIN Customer "
+                            . "ON Customer.id_customer = Orders.fk_id_customer"
+//                       ."JOIN Adm "
+//                            . "ON Adm.id_adm = Orders.fk_id_adm"
+                        
+                    	
+			. " WHERE id_order LIKE '$id' ",
+                        
+                               "Orders.id_order             as id_order, 
+                                Orders.fk_id_adm            as fk_id_adm, 
+                                Orders.fk_id_customer       as fk_id_customer,
+                                Orders.fk_id_address        as fk_id_address,
+                                Orders.fk_id_payment_term   as fk_id_payment_term,
+                                Orders.obs                  as obs,
+                                Orders.payment_status       as payment_status,
+                                Orders.active               as active,
+                                Orders.created_at           as created_at,
+                                
+                                Customer.name               as name,
+                                Customer.phone_number_1     as phone_number_1,
+                                Customer.phone_number_2     as phone_number_2
+                                ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Busca Produtos do pedido
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "busca_produtos_de_pedido":
+                
+                $id_pedido = $info['id'];
+                
+                $result = DBRead('ProductOrder', "WHERE fk_id_order LIKE '$id_pedido'");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            /**
+             * Busca Endereco de entrega
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "busca_endereco_por_id":
+                
+                $id_address = $info['id_address'];
+                
+                $result = DBRead('Address', "WHERE id_address LIKE '$id_address'");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            /**
+             * Busca todas as formas de pagamento
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "busca_formas_de_pagamento":
+                
+                
+                $result = DBRead('PaymentTerm', "WHERE active LIKE '1'");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            /**
+             * Busca status de determinado pedido
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "busca_status_de_pedido":
+                
+                $id_pedido = $info['id_pedido'];
+                
+                $result = DBRead('OrderStatus', "WHERE fkr_id_order LIKE '$id_pedido' ORDER BY created_at");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
             
             
             

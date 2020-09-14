@@ -15,38 +15,32 @@ use App\Models\Padroes_gerais;
 
 
 
-class Pedido 
+class OrderStatus 
 {
 
 
     //Busca adm com email para Login
-    public static function abrir_pedido($fk_id_adm, $fk_id_customer, $fk_id_address) {
+    public static function busca_status_de_pedido($id_pedido) {
         //Dados obrigatorios
         $array = [
-            "funcao"            => "abrir_pedido",
-            "fk_id_adm"         => $fk_id_adm,
-            "fk_id_customer"    => $fk_id_customer,
-            "fk_id_address"     => $fk_id_address,
-            "payment_status"    => 0,
-            "created_at"        => Padroes_gerais::data_e_hora(),
-            "active"            => 1
-        ];
-        $resultado = WS_write::white($array);
-        return  json_decode($resultado);
-    }
-    
-    
-    //Busca adm com email para Login
-    public static function busca_dados_pedido($id_pedido) {
-        //Dados obrigatorios
-        $array = [
-            "funcao"            => "busca_dados_pedido",
+            "funcao"            => "busca_status_de_pedido",
             "id_pedido"         => $id_pedido
         ];
         $resultado = WS_read::ler_dados($array);
         return  json_decode($resultado);
     }
     
+
+    //Busca adm com email para Login
+    public static function status_pedido_aberto($id_pedido) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "busca_status_de_pedido",
+            "id_pedido"         => $id_pedido
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     

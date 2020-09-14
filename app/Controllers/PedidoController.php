@@ -6,7 +6,11 @@ use Core\BaseController;
 use Core\Redirect;
 use Core\Validator;
 use App\Models\Pedido;
+use App\Models\ProdutoPedido;
 use App\Models\Customer;
+use App\Models\Endereco;
+use App\Models\PaymentTerm;
+use App\Models\OrderStatus;
 use App\Models\Bcrypt;
 use Core\Session;
 
@@ -48,7 +52,8 @@ class PedidoController extends BaseController
         
         $nome_array = explode(' ',$admin['name']);
         $this->view->nome = $nome_array[0];
-        
+        $this->view->id_adm = $admin['id_adm'];
+         
         $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
         $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
         $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
@@ -70,15 +75,40 @@ class PedidoController extends BaseController
     
     public function abrir_pedido($request){
         $resultado = Pedido::abrir_pedido($request->get->fk_id_adm, $request->get->fk_id_customer, $request->get->fk_id_address);
+        @@@@@@@@@@@@ FAZER SALVAMENTO DO STATUS DO PEDIDO RECEM ABERTO
         echo(json_encode($resultado));
     }
     
     
     
     public function gerir_pedido($request){
-        var_dump($request);die;
+        $admin  =  Session::get('adm');
+
+        $this->view->id_pedido          = $request->post->id_pedido;
+        $this->view->id_customer        = $request->post->id_customer;
+        $this->view->endereco_entrega   = $request->post->endereco_entrega;
         
+        $this->view->dados_pedido       = Pedido::busca_dados_pedido($request->post->id_pedido);
+        $this->view->product_order      = ProdutoPedido::busca_produtos_de_pedido($request->post->id_pedido);
+        $this->view->endereco_entrega   = Endereco::busca_endereco_por_id($request->post->endereco_entrega);
+        $this->view->formas_de_pagamento= PaymentTerm::busca_formas_de_pagamento();
+        $this->view->status_pedido      = OrderStatus::busca_status_de_pedido($request->post->id_pedido);
         
+        var_dump($this->view->status_pedido); die;
+        
+        $nome_array = explode(' ',$admin['name']);
+        $this->view->nome = $nome_array[0];
+        $this->view->id_adm = $admin['id_adm'];
+         
+        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+        $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
+                              . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/adm/pedido/gerir_pedido.js" crossorigin="anonymous"></script>';
+        $this->setPageTitle('Gerir Pedido - Area Restrita');
+        $this->renderView('adm/pedido/gerir_pedido', '/adm/adm_layout');
     }
     
     

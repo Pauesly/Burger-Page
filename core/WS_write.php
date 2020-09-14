@@ -218,6 +218,7 @@ class WS_write
                 $dados['fk_id_adm']         = $data['fk_id_adm'];
                 $dados['fk_id_customer']    = $data['fk_id_customer'];
                 $dados['fk_id_address']     = $data['fk_id_address'];
+                $dados['payment_status']    = $data['payment_status'];
                 $dados['created_at']        = $data['created_at'];
                 $dados['active']            = $data['active'];
                 
