@@ -16,127 +16,125 @@
     <div class="container">
         
         
-        <!--Buscando-->
-        <div class="form-row">
-                <!--Telefones-->
-                <div class="form-group col-md-6">
-                        <label for="inputState">Busque pelo Telefone</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">
-                                    Telefone
-                                    <span class="" id="loading_phone1" role="status" aria-hidden="true"></span>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" id="txt_telefone" name="txt_telefone" value="<?php echo isset($this->view->tel) ? $this->view->tel : ""?>"   placeholder="(99) 9 9999-9999" aria-label="Telefone" aria-describedby="basic-addon1">
-                        </div>
-                </div>
-                <div class="esconder" role="alert" id="alert_nao_encontrado">
-                        <strong>Cliente não encontrado!</strong> Deseja cadastrar?
-                        <button type="button" class="btn btn-outline-success" id="btn_new_cliente">Cadastrar</button>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                </div>
-        </div>
-        
-        
-        <!--Dados do cliente encontrado-->
-        <div class="esconder" id="box_dados_cliente">
-            <div class="form-group col-md-12">
-                <div class="alert alert-secondary" role="alert">
-                    <h4 class="alert-heading" id="txt_nome_cliente"></h4>
-                    <p id="txt_tel1_cliente"></p>
-                    <p id="txt_tel2_cliente"></p>
-                    <hr>
-                    <p id="txt_obs_cliente"></p>
-                </div>
-            </div>
-        </div>
-        
-        
-        <!--loading enddreco-->
-        <div class="esconder" id="loading_endereco">
-            <div class="spinner-border text-primary text-center" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-            <strong>Carregando endereços...</strong>
-        </div>
-        
-        <!--Erro endereco-->
-        <div class="esconder" id="alerto_erro_endereco">
-            <strong>Não há endereços cadastrados.</strong>
-        </div>
-        
-        
-        
-        
-        
-        <!--IENDERECOS-->
-        <div class="esconder" id="box_dados_enderecos">
-              
-                    <!--Endereco 1-->
-                    <div class="form-group col-md-6">
-                        <div class="alert alert-warning" role="alert" id="alert_end_1">
-                            <input type='hidden'    name="txt_id_end_1" id="txt_id_end_1">
-                            <strong id="txt_local_1"></strong>
-                            <p id="txt_end_1"></p>
-                            <p id="txt_end__ref_1"></p>
-                            <p id="txt_end__obs_1"></p>
-                            <div class="text-right">
-                                <a class="btn btn-outline-warning" role="button" id="btn_edit_end_1">Editar</a>
-                                <a class="btn btn-outline-success" role="button" id="btn_choose_end_1">Escolher</a>
-                            </div>
-                        </div>
-                    </div>   
+        <!--CABECALHO Dados Iniciais-->
+        <div class="form-row" >
+                <!--Canto Esquerdo-->
+                <div class="form-group col-md-6 rounded p-3" style="background: #EFEFEF">
+                    <dl class="row">
                         
-                
-                    <!--Endereco 2-->
-                    <div class="form-group col-md-6">
-                        <div class="alert alert-warning" role="alert" id="alert_end_2">
-                            <input type='hidden'    name="txt_id_end_2" id="txt_id_end_2">
-                            <strong id="txt_local_2"></strong>
-                            <p id="txt_end_2"></p>
-                            <p id="txt_end__ref_2"></p>
-                            <p id="txt_end__obs_2"></p>
-                            <div class="text-right">
-                                <a class="btn btn-outline-warning" role="button" id="btn_edit_end_2">Editar</a>
-                                <a class="btn btn-outline-success" role="button" id="btn_choose_end_2">Escolher</a>
-                            </div>
-                        </div>
-                    </div>  
-        </div>
-                
-               
-        
-        
-        <!--ID e ATIVO-->
-        <div class="esconder" id="box_confirma_abrir_pedido">
-            <input type='hidden'    name="end_choose"                    id="end_choose">
-            <div class="alert alert-info" role="alert">
-                Confirma abertura de pedido? <a class="btn btn-outline-primary" id="btn_confirma_abrir_pedido" role="button">Confirmar</a>
-            </div>
-        </div>
-        
-        
-        <!--ID e ATIVO-->
-        <div class="esconder" id="loading_abrir_pedido">
-            <div class="text-center" >
-                <div class="alert alert-light" role="alert">
-                    <img class="brand-logo-dark" src="/images/loading.gif" alt=""/>Abrindo Pedido...
+                        <dt class="col-sm-3">Data Pedido</dt>
+                        <dd class="col-sm-9">
+                            <?php echo isset($this->view->dados_pedido->resultado[0]->created_at) ? (new DateTime( $this->view->dados_pedido->resultado[0]->created_at))->format('d/m/Y H:i') : ""?>
+                            <hr>
+                        </dd>
+
+                        <dt class="col-sm-3">Nome Cliente</dt>
+                        <dd class="col-sm-9">
+                            <?php echo isset($this->view->dados_pedido->resultado[0]->name) ? $this->view->dados_pedido->resultado[0]->name : ""?>
+                            <hr>
+                        </dd>
+
+                        <dt class="col-sm-3">Entrega</dt>
+                        <dd class="col-sm-9">
+                            <?php 
+                                if ($this->view->endereco_entrega->erro == false){
+                                    echo "<p>Local: " . $this->view->endereco_entrega->resultado[0]->local  . "</p>" .
+                                                        $this->view->endereco_entrega->resultado[0]->rua . ", " . 
+                                                        $this->view->endereco_entrega->resultado[0]->numero_complemento . " - " .
+                                                        $this->view->endereco_entrega->resultado[0]->bairro . " - " . 
+                                                        $this->view->endereco_entrega->resultado[0]->cidade . " - " . 
+                                                        $this->view->endereco_entrega->resultado[0]->estado . " - ". 
+                                                        $this->view->endereco_entrega->resultado[0]->cep . "</p>". 
+                                         "<p>Referência: " . $this->view->endereco_entrega->resultado[0]->referencia . "</p>";
+                                         "<p>Obs: " . $this->view->endereco_entrega->resultado[0]->obs . "</p>";
+                                }
+                            ?>
+                        </dd>
+                    </dl>
                 </div>
-            </div>
+                
+                
+                <!--Canto Direito-->
+                <div class="form-group col-md-6 rounded p-3">
+                    <dl class="row">
+                        
+                        <!--PAGO-->
+                        <dt class="col-sm-4">Pago <span class="" role="status" id="loading_pago" aria-hidden="true"></span></dt>
+                        <dd class="col-sm-8  text-right">
+                            <a class="<?php echo $this->view->dados_pedido->resultado[0]->payment_status == 1 ? "btn btn-success" : "btn btn-outline-success"?>" id="btn_pago_sim" role="button">SIM</a>
+                            <a class="<?php echo $this->view->dados_pedido->resultado[0]->payment_status == 0 ? "btn btn-danger" : "btn btn-outline-danger"?>" id="btn_pago_nao" role="button">NÃO</a>
+                            <hr>
+                        </dd>
+                        
+                        
+                        
+                        
+                        <!--FORMA DE PAGAMENTO-->
+                        <dt class="col-sm-4">Forma Pagamento <span class="" id="loading_forma_pagamento" role="status" aria-hidden="true"></span></dt>
+                        <dd class="col-sm-8">
+                            <select id="select_forma_pagamento" name="select_forma_pagamento" class="selectpicker form-control" data-live-search="true" data-header="Escolha uma Categoria" data-style="btn-outline-dark">
+                                <?php
+                                    if (isset($this->view->formas_de_pagamento->resultado)){ 
+                                ?>
+                                        <option value="0" selected></option>
+                                <?php 
+                                        foreach ($this->view->formas_de_pagamento->resultado as $key => $value){ 
+                                ?>
+                                             <option value="<?php echo $value->id_payment_term ?>"> <?php echo $value->name?> </option>
+                                <?php   }       
+                                    }else{
+                                ?>
+                                        <option value="" selected>Não há valores para mostrar.</option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                            <hr>
+                        </dd>
+                      
+                        
+                        <!--OBS-->
+                        <dt class="col-sm-4">Observações <span class="" role="status" id="loading_obs" aria-hidden="true"></span></dt>
+                        <dd class="col-sm-8 text-right">
+                            <textarea class="form-control" id="txt_obs_customer" rows="3" maxlength="255"><?php echo $this->view->dados_pedido->resultado[0]->obs  ?></textarea>
+                            <a class="btn btn-outline-success disabled mt-1" id="btn_salvar_obs" role="button">Salvo </a>
+                            <hr>
+                        </dd>
+                        
+                    </dl>
+                </div>
+                
         </div>
         
-        <div class="esconder" id="alert_erro_abrir_pedido" role="alert">
-            Erro ao abrir pedido. Contacte Administrador.
-       </div>
         
         
         
         
         
-</div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+   
+        <dl class="row">
+                        
+            <dt class="col-sm-4">CANCELAR PEDIDO <div class="" id="loading_po" role="status"></div></dt>
+            <dd class="col-sm-8">
+                <a class="btn btn-danger btn-lg btn-block" id="" role="button">CANCELAR</a>
+                <hr>
+            </dd>
+
+        </dl>
+        
+        
+        
+        
+    </div>
 <!--FIM DIV PRINCIPAL-->
 
 
@@ -145,319 +143,16 @@
 
 
 <!--form Armazenando dados-->
-<form action="/gerir_pedido" method="POST" id="form_gerir_pedido" class="esconder">
+<form action="/gerir_pedido" method="POST" id="form_gerir_pedido" class="">
     <hr>
     <hr>
     <hr>
     <input type='text'    name="id_adm"                         id="id_adm" value="<?php echo $this->view->id_adm ?>">
     <input type='text'    name="id_customer"                    id="id_customer">
     <input type='text'    name="endereco_entrega"               id="endereco_entrega">
-    <input type='text'    name="id_pedido"                      id="id_pedido">
+    <input type='text'    name="id_pedido"                      id="id_pedido" value="<?= $this->view->dados_pedido->resultado[0]->id_order?>">
 </form>
 
-
-
-
-
-
-
-
-
-<!--add new cliente-->
-<form action="/add_customer" method="POST" id="form_add_new_cliente" class="esconder">
-    <input type='text'    name="new_tel"                 id="new_tel">
-</form>
-
-
-
-
-
-
-
-<!--ENDERECO 1-->
-<div class="modal fade" id="add_address" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar endereço 1</h5>
-            </div>
-            <div class="modal-body">
-
-                <!--ID-->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                            <label for="inputState">Identificador</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">ID</span>
-                                </div>
-                                <input type="text" class="form-control" id="txt_id_end1" name="txt_id_end1" disabled  placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="14">
-                            </div>
-                    </div>
-                </div>
-
-                <!--Tipo-->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Tipo de Endereço</span>
-                            </div>
-                            <input type="text" class="form-control" id="tipo" name="tipo"  aria-label="tipo" aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Cep-->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Cep</span>
-                            </div>
-                            <input type="text" class="form-control" id="cep" name="cep"  aria-label="CEP"  onblur="pesquisacep(this.value);"  aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Rua-->
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Rua</span>
-                            </div>
-                            <input type="text" class="form-control" id="rua" name="rua"  aria-label="CEP"   aria-describedby="basic-addon1" maxlength="255">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Numero Bairro-->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Número e complemento</span>
-                            </div>
-                            <input type="text" class="form-control" id="numero" name="numero"  aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Bairro</span>
-                            </div>
-                            <input type="text" class="form-control" id="bairro" name="bairro"  aria-label="Bairro"   aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Cidade Estado-->
-                <div class="form-row">
-                    <div class="form-group col-md-8">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Cidade</span>
-                            </div>
-                            <input type="text" class="form-control" id="cidade" name="cidade"  aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Estado</span>
-                            </div>
-                            <input type="text" class="form-control" id="uf" name="uf"  aria-label="numero"   aria-describedby="basic-addon1" maxlength="2">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Ponto de referentia-->
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Ponto de referência</span>
-                            </div>
-                            <input type="text" class="form-control" id="referencia" name="referencia"  aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Observacoes-->
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                            <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Observações</label>
-                            <textarea class="form-control" id="txt_obs_endereco_1"  rows="3" maxlength="60"></textarea>
-                          </div>
-                    </div>
-                </div>
-                
-                <div class="esconder" id="alert_erro_end_1" role="alert">
-                     Erro ao salvar. Contacte Administrador.
-                </div>
-
-                <div class="modal-footer">
-                    <div class="form-row mb-4 mt-3">
-                        <button type="button" class="btn btn-outline-danger" id="btn_cancelar_end_1" name="btn_cancelar_end_1">Sair sem salvar</button>
-                    </div>
-                    <!--VALIDAR e SEGUIR-->
-                    <div class="form-row mb-4 mt-3">
-                        <a id="btn_salvar_end_1" name="btn_salvar_end_1" class="btn btn-outline-success" role="button">
-                            <div class="esconder" id="spinner_salva_end1" role="status"><span class="sr-only">Loading...</span></div>
-                            Salvar
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--ENDERECO 2-->
-<div class="modal fade" id="add_address2" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered modal-xl" role="document" >
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Adicionar endereço 2</h5>
-            </div>
-            <div class="modal-body">
-
-                <!--ID-->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                            <label for="inputState">Identificador</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1">ID</span>
-                                </div>
-                                <input type="text" class="form-control" id="txt_id_end2" name="txt_id_end2" disabled value="<?php echo isset($this->view->dados_customer->end[1]->id_address) ? $this->view->dados_customer->end[1]->id_address : "" ?>" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="14">
-                            </div>
-                    </div>
-                </div>
-
-                <!--Tipo-->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Tipo de Endereço</span>
-                            </div>
-                            <input type="text" class="form-control" id="tipo2" name="tipo2" value="<?php echo  isset($this->view->dados_customer->end[1]->local) ? $this->view->dados_customer->end[1]->local : "" ?>" aria-label="tipo" aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Cep-->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Cep</span>
-                            </div>
-                            <input type="text" class="form-control" id="cep2" name="cep2" value="<?php echo isset($this->view->dados_customer->end[1]->cep) ? $this->view->dados_customer->end[1]->cep : "" ?>" aria-label="CEP"  onblur="pesquisacep2(this.value);"  aria-describedby="basic-addon1">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Rua-->
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Rua</span>
-                            </div>
-                            <input type="text" class="form-control" id="rua2" name="rua2" value="<?php echo isset($this->view->dados_customer->end[1]->rua) ? $this->view->dados_customer->end[1]->rua : "" ?>" aria-label="CEP"   aria-describedby="basic-addon1" maxlength="255">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Numero Bairro-->
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Número e complemento</span>
-                            </div>
-                            <input type="text" class="form-control" id="numero2" name="numero2" value="<?php echo isset($this->view->dados_customer->end[1]->numero_complemento) ? $this->view->dados_customer->end[1]->numero_complemento : "" ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Bairro</span>
-                            </div>
-                            <input type="text" class="form-control" id="bairro2" name="bairro2" value="<?php echo isset($this->view->dados_customer->end[1]->bairro) ? $this->view->dados_customer->end[1]->bairro : "" ?>" aria-label="Bairro"   aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Cidade Estado-->
-                <div class="form-row">
-                    <div class="form-group col-md-8">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Cidade</span>
-                            </div>
-                            <input type="text" class="form-control" id="cidade2" name="cidade2" value="<?php echo isset($this->view->dados_customer->end[1]->cidade) ? $this->view->dados_customer->end[1]->cidade : "" ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Estado</span>
-                            </div>
-                            <input type="text" class="form-control" id="uf2" name="uf2" value="<?php echo isset($this->view->dados_customer->end[1]->estado) ? $this->view->dados_customer->end[1]->estado : "" ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="2">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Ponto de referentia-->
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Ponto de referência</span>
-                            </div>
-                            <input type="text" class="form-control" id="referencia2" name="referencia2" value="<?php echo isset($this->view->dados_customer->end[1]->referencia) ? $this->view->dados_customer->end[1]->referencia : "" ?>" aria-label="numero"   aria-describedby="basic-addon1" maxlength="60">
-                        </div>
-                    </div>
-                </div>
-
-                <!--Observacoes-->
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                            <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Observações</label>
-                            <textarea class="form-control" id="txt_obs_endereco_2" rows="3" maxlength="60"><?php echo isset($this->view->dados_customer->end[1]->obs) ? $this->view->dados_customer->end[1]->obs : "" ?></textarea>
-                          </div>
-                    </div>
-                </div>
-                
-                <div class="esconder" id="alert_erro_end_2" role="alert">
-                     Erro ao salvar. Contacte Administrador.
-                </div>
-
-                <div class="modal-footer">
-                    <div class="form-row mb-4 mt-3">
-                        <button type="button" class="btn btn-outline-danger" id="btn_cancelar_end_2" name="btn_cancelar_end_2">Sair sem salvar</button>
-                    </div>
-                    <!--VALIDAR e SEGUIR-->
-                    <div class="form-row mb-4 mt-3">
-                        <a id="btn_salvar_end_2" name="btn_salvar_end_2" class="btn btn-outline-success" href="#" role="button">
-                        <div class="esconder" id="spinner_salva_end2" role="status"><span class="sr-only">Loading...</span></div>
-                            Salvar
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

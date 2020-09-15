@@ -228,21 +228,99 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------ 
+            /**
+             * Altera Condicao de pagamento Pedido
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "salva_pagamento_pedido":
+                
+                $id_order      = $data['id_pedido'];
+	    
+	        $array = array(
+                    "payment_status"            => $data['payment_status']
+                );
+
+                $result = BDUpdate('Orders', $array, "id_order LIKE '$id_order'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Altera OBS Pedido
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "salva_obs_pedido":
+                
+                $id_order      = $data['id_pedido'];
+	    
+	        $array = array(
+                    "obs"            => $data['obs']
+                );
+
+                $result = BDUpdate('Orders', $array, "id_order LIKE '$id_order'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Altera Forma PAgamento
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "salva_forma_pagamento":
+                
+                $id_order      = $data['id_pedido'];
+	    
+	        $array = array(
+                    "fk_id_payment_term"            => $data['fk_id_payment_term']
+                );
+
+                $result = BDUpdate('Orders', $array, "id_order LIKE '$id_order'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------ 
             
             
             
             
             
             
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
             
             
             
             
             
             
-            
-            
-            
+        
+        
+        
+        
+        
+        
+        
+        
             
             
             
@@ -276,12 +354,6 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------ 
-
-            
-            
-            
-            
-            
 
 
 //------------------------------------------------------------------------------            

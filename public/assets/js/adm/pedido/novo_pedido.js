@@ -337,7 +337,6 @@ function AbrirPedido() {
         fk_id_address:fk_id_address,
         ajax: 'true'}, function(retorno){
         
-        console.log(retorno);
            //Erro. Busca vazia ou execucao da consulta
             if(retorno['erro']){
                 //Setting Screen

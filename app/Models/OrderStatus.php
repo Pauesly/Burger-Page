@@ -44,7 +44,19 @@ class OrderStatus
     
     
     
-    
+    //Altera status de pedido
+    public static function altera_status_pedido($fk_id_adm, $fkr_id_order, $fk_id_status) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"        => "altera_status_pedido",
+            "fk_id_adm"     => $fk_id_adm,
+            "fkr_id_order"  => $fkr_id_order,
+            "fk_id_status"  => $fk_id_status,
+            "created_at"    => Padroes_gerais::data_e_hora()
+        ];
+        $resultado = WS_write::white($array);
+        return  json_decode($resultado);
+    }
     
     
     

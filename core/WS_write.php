@@ -486,6 +486,47 @@ class WS_write
                 
             break;
 //------------------------------------------------------------------------------   
+            /**
+             * Salva Novo Status de Pedido
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "altera_status_pedido":
+                
+                $dados = array();
+                $dados['fk_id_adm']         = $data['fk_id_adm'];
+                $dados['fkr_id_order']      = $data['fkr_id_order'];
+                $dados['fk_id_status']      = $data['fk_id_status'];
+                $dados['created_at']        = $data['created_at'];
+                
+                if($status['id_cadastro'] = DBCreate('OrderStatus', $dados, false)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------  
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             

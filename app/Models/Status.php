@@ -59,8 +59,7 @@ class Status
     }
     
     
-    
-    
+
     //Busca adm com email para Login
     public static function altera_status($id_status, $active, $name, $sequence) {
         //Dados obrigatorios

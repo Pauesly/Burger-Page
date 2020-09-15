@@ -75,8 +75,15 @@ class PedidoController extends BaseController
     
     public function abrir_pedido($request){
         $resultado = Pedido::abrir_pedido($request->get->fk_id_adm, $request->get->fk_id_customer, $request->get->fk_id_address);
-        @@@@@@@@@@@@ FAZER SALVAMENTO DO STATUS DO PEDIDO RECEM ABERTO
-        echo(json_encode($resultado));
+        
+        if($resultado->erro){
+            $array = [
+                "erro" => "true"];
+            echo(json_encode($array));
+        }else{
+            $restt = OrderStatus::altera_status_pedido($request->get->fk_id_adm, $resultado->id_cadastro, 1);
+            echo(json_encode($resultado));
+        }
     }
     
     
@@ -94,7 +101,7 @@ class PedidoController extends BaseController
         $this->view->formas_de_pagamento= PaymentTerm::busca_formas_de_pagamento();
         $this->view->status_pedido      = OrderStatus::busca_status_de_pedido($request->post->id_pedido);
         
-        var_dump($this->view->status_pedido); die;
+//        var_dump($this->view->endereco_entrega); die;
         
         $nome_array = explode(' ',$admin['name']);
         $this->view->nome = $nome_array[0];
@@ -102,10 +109,12 @@ class PedidoController extends BaseController
          
         $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
         $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+        $this->view->extra_css = '<link  href="/assets/css/bootstrap-select.css" rel="stylesheet" />';
         $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
                               . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/bootstrap-select.js"></script>'
                               . '<script src="/assets/js/adm/pedido/gerir_pedido.js" crossorigin="anonymous"></script>';
         $this->setPageTitle('Gerir Pedido - Area Restrita');
         $this->renderView('adm/pedido/gerir_pedido', '/adm/adm_layout');
@@ -113,16 +122,28 @@ class PedidoController extends BaseController
     
     
     
+    public function salva_pagamento_sim($request){
+        $resultado = Pedido::salva_pagamento_sim($request->get->id_pedido);
+        echo(json_encode($resultado));
+    }
     
     
+    public function salva_pagamento_nao($request){
+        $resultado = Pedido::salva_pagamento_nao($request->get->id_pedido);
+        echo(json_encode($resultado));
+    }
     
     
+    public function salva_obs($request){
+        $resultado = Pedido::salva_obs($request->get->id_pedido, $request->get->txt_obs);
+        echo(json_encode($resultado));
+    }
     
     
-    
-    
-    
-    
+    public function salva_forma_pagamento($request){
+        $resultado = Pedido::salva_forma_pagamento($request->get->id_pedido, $request->get->id_forma_pagamento);
+        echo(json_encode($resultado));
+    }
     
     
     

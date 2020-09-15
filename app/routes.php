@@ -84,8 +84,12 @@ $route[] = ['/salvar_edit_testemunho',          'TestemunhoController@salvar_edi
 $route[] = ['/novo_pedido',                         'PedidoController@novo_pedido',                                 'auth'];
 $route[] = ['/novo_pedido_plus/{id}',               'PedidoController@novo_pedido_plus',                            'auth'];
 $route[] = ['/busca_enderecos_de_cliente',          'PedidoController@busca_enderecos_de_cliente',                  'auth'];
-$route[] = ['/abrir_pedido',                        'PedidoController@abrir_pedido'];
-$route[] = ['/gerir_pedido',                        'PedidoController@gerir_pedido'];
+$route[] = ['/abrir_pedido',                        'PedidoController@abrir_pedido',                                'auth'];
+$route[] = ['/gerir_pedido',                        'PedidoController@gerir_pedido',                                'auth'];
+$route[] = ['/salva_pagamento_sim',                 'PedidoController@salva_pagamento_sim',                         'auth'];
+$route[] = ['/salva_pagamento_nao',                 'PedidoController@salva_pagamento_nao',                         'auth'];
+$route[] = ['/salva_obs',                           'PedidoController@salva_obs',                                   'auth'];
+$route[] = ['/salva_forma_pagamento',               'PedidoController@salva_forma_pagamento',                       'auth'];
 
 
 

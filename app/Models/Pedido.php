@@ -48,17 +48,57 @@ class Pedido
     }
     
     
+    //Busca adm com email para Login
+    public static function salva_pagamento_sim($id_pedido) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "salva_pagamento_pedido",
+            "id_pedido"         => $id_pedido,
+            "payment_status"    => 1
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    //Busca adm com email para Login
+    public static function salva_pagamento_nao($id_pedido) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "salva_pagamento_pedido",
+            "id_pedido"         => $id_pedido,
+            "payment_status"    => 0
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     
+    //Sallva OBS
+    public static function salva_obs($id_pedido, $txt_obs) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "salva_obs_pedido",
+            "id_pedido"         => $id_pedido,
+            "obs"               => $txt_obs
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
     
     
-    
-    
-    
-    
-    
-    
+    //Sallva OBS
+    public static function salva_forma_pagamento($id_pedido, $id_forma) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "salva_forma_pagamento",
+            "id_pedido"         => $id_pedido,
+            "fk_id_payment_term" => $id_forma
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     
