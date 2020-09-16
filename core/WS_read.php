@@ -515,8 +515,27 @@ class WS_read
                 
                 $id_pedido = $info['id'];
                 
-                $result = DBRead('ProductOrder', "WHERE fk_id_order LIKE '$id_pedido'");
+//                $result = DBRead('ProductOrder', "WHERE fk_id_order LIKE '$id_pedido'");
+                $result = DBRead('ProductOrder',
+                        
+                        "JOIN Product "
+                            . "ON Product.id_product = ProductOrder.fk_id_product"
+                        
+			. " WHERE fk_id_order LIKE '$id_pedido' ",
+                        
+                               "ProductOrder.id_product_order   as id_product_order, 
+                                ProductOrder.fk_id_order        as fk_id_order, 
+                                ProductOrder.fk_id_product      as fk_id_product,
+                                ProductOrder.qtd                as qtd,
+                                ProductOrder.price_unit         as price_unit,
+                                ProductOrder.price_total        as price_total,
+                                ProductOrder.obs                as obs,
+                                
+                                Product.name                as name,
+                                Product.description         as description
+                                ");
                 
+
                 if($result){
                     $status['erro'] = false;
                     $status['resultado'] = $result;

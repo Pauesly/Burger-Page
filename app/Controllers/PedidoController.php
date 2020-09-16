@@ -96,7 +96,7 @@ class PedidoController extends BaseController
         $this->view->endereco_entrega   = $request->post->endereco_entrega;
         
         $this->view->dados_pedido       = Pedido::busca_dados_pedido($request->post->id_pedido);
-        $this->view->product_order      = ProdutoPedido::busca_produtos_de_pedido($request->post->id_pedido);
+//        $this->view->product_order      = ProdutoPedido::busca_produtos_de_pedido($request->post->id_pedido);
         $this->view->endereco_entrega   = Endereco::busca_endereco_por_id($request->post->endereco_entrega);
         $this->view->formas_de_pagamento= PaymentTerm::busca_formas_de_pagamento();
         $this->view->status_pedido      = OrderStatus::busca_status_de_pedido($request->post->id_pedido);
@@ -146,7 +146,10 @@ class PedidoController extends BaseController
     }
     
     
-    
+    public function carrega_produtos_pedido($request){
+        $resultado = ProdutoPedido::busca_produtos_de_pedido($request->get->id_pedido);
+        echo(json_encode($resultado));
+    }
     
     
     
