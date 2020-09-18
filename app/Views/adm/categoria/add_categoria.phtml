@@ -33,6 +33,21 @@
             </div>
 	</div>
         
+        
+        <!--Sequencia-->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                    <label for="inputState">Sequência</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Ordem</span>
+                        </div>
+                        <input  type="number" class="form-control" id="txt_ordem" name="txt_ordem"  placeholder=""  aria-describedby="basic-addon1" maxlength="2">
+                        <div class="invalid-feedback">Sequência obrigatório.</div>
+                    </div>
+            </div>
+	</div>
+        
         <hr>
         
         <!--VALIDAR e SEGUIR-->
@@ -50,6 +65,7 @@
     <form action="/cadastrar_nova_categoria" method="POST" id="cadastrar_novo_item">
         
         <input type='hidden'    name="description"               id="description">
+        <input type='hidden'    name="sequence"                  id="sequence">
     </form>
 
 

@@ -193,7 +193,7 @@ class WS_read
              */
             case "relatorio_all_categorias":
                 
-                $campos = "id_category, description, active, created_at";
+                $campos = "id_category, description, sequence, active, created_at";
                 
                 $result = DBRead('Category', "", $campos);
                 
@@ -260,6 +260,75 @@ class WS_read
                                 Product.price_new as price_new, 
                                 Product.active as active,
                                 Category.description as category_description");
+
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os produtos ativos no menu
+             * Retorna clientes
+             */
+            case "relatorio_all_produtos_ativos_menu":
+                
+                $result = DBRead('Product',
+                        
+                        "JOIN Category "
+                            . "ON Category.id_category = Product.fk_id_category"
+                    	
+			. " WHERE Product.active LIKE 1 ORDER BY Category.sequence",
+                        
+                               "Product.id_product          as id_product, 
+                                Product.fk_id_category      as fk_id_category, 
+                                Product.name                as name,
+                                Product.description         as description, 
+                                Product.picture_thumb       as picture_thumb,
+                                Product.picture_large       as picture_large,
+                                Product.star                as star,
+                                Product.price_old           as price_old,
+                                Product.price_new           as price_new,
+                                
+                                Category.description        as category_description,
+                                Category.sequence           as sequence"
+                        );
+
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os produtos ativos no menu
+             * Retorna clientes
+             */
+            case "relatorio_all_produtos_ativos_menu_no_pic":
+                
+                $result = DBRead('Product',
+                        
+                        "JOIN Category "
+                            . "ON Category.id_category = Product.fk_id_category"
+                    	
+			. " WHERE Product.active LIKE 1 ORDER BY Category.sequence",
+                        
+                               "Product.id_product          as id_product, 
+                                Product.fk_id_category      as fk_id_category, 
+                                Product.name                as name,
+                                Product.description         as description, 
+                                Product.picture_thumb       as picture_thumb,
+                                Product.star                as star,
+                                Product.price_old           as price_old,
+                                Product.price_new           as price_new,
+                                
+                                Category.description        as category_description,
+                                Category.sequence           as sequence"
+                        );
 
                 if($result){
                     $status['erro'] = false;
@@ -488,6 +557,7 @@ class WS_read
                                 Orders.fk_id_customer       as fk_id_customer,
                                 Orders.fk_id_address        as fk_id_address,
                                 Orders.fk_id_payment_term   as fk_id_payment_term,
+                                Orders.fk_id_status         as fk_id_status,
                                 Orders.obs                  as obs,
                                 Orders.payment_status       as payment_status,
                                 Orders.active               as active,
@@ -590,7 +660,28 @@ class WS_read
                 
                 $id_pedido = $info['id_pedido'];
                 
-                $result = DBRead('OrderStatus', "WHERE fkr_id_order LIKE '$id_pedido' ORDER BY created_at");
+//                $result = DBRead('OrderStatus', "WHERE fkr_id_order LIKE '$id_pedido' ORDER BY created_at");
+                
+                $result = DBRead('OrderStatus',
+                        
+                        "JOIN Adm "
+                            . "ON Adm.id_adm = OrderStatus.fk_id_adm "
+                       ."JOIN Status "
+                            . "ON Status.id_status = OrderStatus.fk_id_status "
+                        
+			. " WHERE fk_id_order LIKE '$id_pedido' ORDER BY OrderStatus.created_at ",
+                        
+                               "OrderStatus.id_order_status     as id_order_status, 
+                                OrderStatus.fk_id_adm           as fk_id_adm, 
+                                OrderStatus.fk_id_order         as fk_id_order,
+                                OrderStatus.fk_id_status        as fk_id_status,
+                                OrderStatus.created_at          as created_at,
+                                
+                                Adm.name                    as adm_name,
+                                Status.status               as status_name
+                                ");
+                
+                
                 
                 if($result){
                     $status['erro'] = false;

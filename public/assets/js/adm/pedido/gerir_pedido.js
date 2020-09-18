@@ -1,15 +1,7 @@
 $(document).ready(function(){
-    var SPMaskBehavior = function (val) {
-      return val.replace(/\D/g, '').length === 11 ? '(00) 0 0000-0000' : '(00) 0000-00009';
-    },
-    spOptions = {
-      onKeyPress: function(val, e, field, options) {
-          field.mask(SPMaskBehavior.apply({}, arguments), options);
-        }
-    };
-//    $('#txt_telefone').mask(SPMaskBehavior, spOptions);
-    
-//    document.getElementById("txt_telefone").focus();
+    $('#txt_add_preco').mask("#,##0.00", {reverse: true});
+    $('#select_forma_pagamento')        .selectpicker('val', $("#id_status_pedido")       .val());
+    $('#select_status_pedido')          .selectpicker('val', $("#fk_id_status")       .val());
     CarregaProdutosPedido();
 });
 
@@ -93,6 +85,75 @@ document.getElementById("btn_salvar_obs").addEventListener("mousedown", function
 });
 
 
+
+// Listener botao Historico Staus
+document.getElementById("btn_historico_status").addEventListener("mousedown", function(event) {
+    document.getElementById("loading_historico_status").className = "spinner-border spinner-border-sm text-primary";
+    document.getElementById("btn_historico_status").className = "disabled";
+    CarregaHistoricoStatus();
+});
+
+
+// Listener botao ADD Produto
+document.getElementById("btn_add_produto").addEventListener("mousedown", function(event) {
+    $('#modal_cardapio').modal('show');
+});
+
+
+
+/**
+ * Carrega Status Pedido
+ */
+function CarregaHistoricoStatus() {
+    
+    let id_pedido = document.getElementById("id_pedido").value;
+    clearTable("table_historico_status", 1);
+    
+    $.getJSON('/carrega_historico_status_pedido?search=',{id_pedido:id_pedido, ajax: 'true'}, function(retorno){
+
+            
+            document.getElementById("loading_historico_status").className = "";
+            document.getElementById("btn_historico_status").className = "btn btn-outline-info";
+        
+        
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                document.getElementById("loading_historico_status").className = "";
+            }else{
+                //Setting Screen
+                document.getElementById("loading_historico_status").className = "";
+                
+                
+                for(let i=0; i < retorno['resultado'].length; i++){
+                    var tabela = document.getElementById("table_historico_status");
+                    var numeroLinhas = tabela.rows.length;
+                    var linha = tabela.insertRow(numeroLinhas);
+                    
+                    var celula1 = linha.insertCell(0); //item
+                    var celula2 = linha.insertCell(1); //adm_name
+                    var celula3 = linha.insertCell(2); //fk_id_status
+                    var celula4 = linha.insertCell(3); //status_name
+                    var celula5 = linha.insertCell(4); //created_at
+                    
+                    celula1.innerHTML = i+1; 
+                    celula2.innerHTML =  retorno['resultado'][i]['adm_name']; 
+                    celula3.innerHTML =  retorno['resultado'][i]['fk_id_status'];
+                    celula4.innerHTML =  retorno['resultado'][i]['status_name'];
+                    celula5.innerHTML =  retorno['resultado'][i]['created_at'];
+                    $('#modal_hostorico_status').modal('show');
+                }
+            }
+            
+    });
+    
+}
+
+
+
+
+
+
 /**
  * Salva Pagamento sim
  */
@@ -118,7 +179,57 @@ function SalvaObs() {
 
 
 
-//Select Faculdade
+//Select Status Pedido
+$(function(){
+    $('#select_status_pedido').change(function(){
+        //Setting Screen
+        if ($('#select_status_pedido').val() === "0"){
+            $('#select_status_pedido').selectpicker('setStyle', 'selectpicker form-control is-invalid');
+            $('#select_status_pedido').selectpicker('refresh');
+            $('#select_status_pedido').selectpicker('setStyle', 'is-valid', 'remove');
+            $('#select_status_pedido').selectpicker('refresh');
+        }else{
+            
+            document.getElementById("loading_status_pedido").className = "spinner-border spinner-border-sm text-primary";
+            $('#select_status_pedido').selectpicker('setStyle', 'is-valid', 'remove');
+            $('#select_status_pedido').selectpicker('refresh');
+            $('#select_status_pedido').selectpicker('setStyle', 'is-invalid', 'remove');
+            $('#select_status_pedido').selectpicker('refresh');
+            
+            $('#select_status_pedido').selectpicker('setStyle', 'selectpicker form-control disabled');
+            $('#select_status_pedido').selectpicker('refresh');
+            
+            
+            let id_pedido = document.getElementById("id_pedido").value;
+            let id_adm = document.getElementById("id_adm").value;
+            
+            // Fazendo a consulta
+            $.getJSON('/salva_status_pedido?search=',{id_pedido:id_pedido, id_adm:id_adm, id_status_pedido: $(this).val(), ajax: 'true'}, function(j){
+
+                   //Erro. Busca vazia ou execucao da consulta
+                    if(j['erro']){
+                        $('#select_status_pedido').selectpicker('setStyle', 'selectpicker form-control is-invalid');
+                        $('#select_status_pedido').selectpicker('refresh');
+                        $('#select_status_pedido').selectpicker('setStyle', 'is-valid', 'remove');
+                        $('#select_status_pedido').selectpicker('refresh');
+                        document.getElementById("loading_status_pedido").className = "";
+                    }else{
+                        $('#select_status_pedido').selectpicker('setStyle', 'selectpicker form-control is-valid');
+                        $('#select_status_pedido').selectpicker('refresh');
+                        $('#select_status_pedido').selectpicker('setStyle', 'is-invalid', 'remove');
+                        $('#select_status_pedido').selectpicker('refresh');
+                        document.getElementById("loading_status_pedido").className = "";
+                    }
+            });
+        }
+    });
+});   
+
+
+
+
+
+//Select Forma Pagamento
 $(function(){
     $('#select_forma_pagamento').change(function(){
         //Setting Screen
@@ -162,9 +273,6 @@ $(function(){
         }
     });
 });   
-
-
-
 
 
 
@@ -241,7 +349,26 @@ function clearTable(_idTab, _linhaPersistente){
 
 
 
+/**
+ * Gerir Inclusao de Item
+ */
+function AddProduto(id_produto) {
 
+    $('#modal_cardapio').modal('hide');
+    
+    let imag = "pd_im_" + id_produto;
+    let nome = "pd_tt_" + id_produto;
+    let preco = "pd_pc_" + id_produto;
+    
+    document.getElementById("txt_add_descricao").innerHTML  = document.getElementById(nome).innerHTML;
+    document.getElementById("txt_add_preco").value          = document.getElementById(preco).innerHTML;
+    document.getElementById("txt_add_id").value             = id_produto;
+//    document.getElementById("txt_add_img").src = document.getElementById(imag).src;
+    
+
+    
+    $('#modal_confirma_add_produto').modal('show');
+}
 
 
 

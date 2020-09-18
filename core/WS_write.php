@@ -100,6 +100,7 @@ class WS_write
                 
                 $dados = array();
                 $dados['description']   = $data['description'];
+                $dados['sequence']      = $data['sequence'];
                 $dados['active']        = $data['active'];
                 $dados['created_at']    = $data['created_at'];
                 
@@ -219,6 +220,7 @@ class WS_write
                 $dados['fk_id_customer']    = $data['fk_id_customer'];
                 $dados['fk_id_address']     = $data['fk_id_address'];
                 $dados['payment_status']    = $data['payment_status'];
+                $dados['fk_id_status']      = $data['fk_id_status'];
                 $dados['created_at']        = $data['created_at'];
                 $dados['active']            = $data['active'];
                 
@@ -495,7 +497,7 @@ class WS_write
                 
                 $dados = array();
                 $dados['fk_id_adm']         = $data['fk_id_adm'];
-                $dados['fkr_id_order']      = $data['fkr_id_order'];
+                $dados['fk_id_order']       = $data['fk_id_order'];
                 $dados['fk_id_status']      = $data['fk_id_status'];
                 $dados['created_at']        = $data['created_at'];
                 

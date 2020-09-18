@@ -42,11 +42,12 @@ class Categoria
     
     
     //Busca adm com email para Login
-    public static function cadastrar_nova_categoria($description) {
+    public static function cadastrar_nova_categoria($description, $sequence) {
         //Dados obrigatorios
         $array = [
             "funcao"        => "cadastra_nova_categoria",
             "description"   => $description,
+            "sequence"      => $sequence,
             "active"        => 1,
             "created_at"    => Padroes_gerais::data_e_hora()
         ];
@@ -71,13 +72,14 @@ class Categoria
     
     
     //Busca adm com email para Login
-    public static function altera_categoria($id_category, $active, $description) {
+    public static function altera_categoria($id_category, $active, $description, $sequence) {
         //Dados obrigatorios
         $array = [
-            "funcao"    => "altera_categoria",
-            "id_category"   => $id_category,
-            "active"    => $active,
-            "description"      => $description
+            "funcao"            => "altera_categoria",
+            "id_category"       => $id_category,
+            "active"            => $active,
+            "description"       => $description,
+            "sequence"          => $sequence
         ];
         $resultado = WS_update::alterar_dados($array);
         return  json_decode($resultado);

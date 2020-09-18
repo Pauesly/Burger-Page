@@ -97,7 +97,8 @@ class CategoriaController extends BaseController
     public function cadastrar_nova_categoria($request){
         
         $resultado = Categoria::cadastrar_nova_categoria(
-                $request->post->description
+                $request->post->description,
+                $request->post->sequence
                 );
         
         if($resultado->erro){
@@ -144,7 +145,8 @@ class CategoriaController extends BaseController
         $resultado = Categoria::altera_categoria(
                 $request->post->id_category,
                 $request->post->active,
-                $request->post->description
+                $request->post->description,
+                $request->post->sequence
                 );
 
         if($resultado == 0){

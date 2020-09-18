@@ -129,6 +129,7 @@ class WS_update
 	        $array = array(
                     "active"            => $data['active'],
                     "description"       => $data['description'],
+                    "sequence"          => $data['sequence']
                 );
 
                 $result = BDUpdate('Category', $array, "id_category LIKE '$id_category'", true);
@@ -285,7 +286,25 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------ 
-            
+            /**
+             * Altera Forma PAgamento
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "salva_status_pedido":
+                
+                $id_order      = $data['id_pedido'];
+	    
+	        $array = array(
+                    "fk_id_status"            => $data['fk_id_status']
+                );
+
+                $result = BDUpdate('Orders', $array, "id_order LIKE '$id_order'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------
             
             
             

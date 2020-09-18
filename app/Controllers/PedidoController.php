@@ -10,6 +10,9 @@ use App\Models\ProdutoPedido;
 use App\Models\Customer;
 use App\Models\Endereco;
 use App\Models\PaymentTerm;
+use App\Models\Status;
+use App\Models\Produto;
+use App\Models\Categoria;
 use App\Models\OrderStatus;
 use App\Models\Bcrypt;
 use Core\Session;
@@ -96,12 +99,13 @@ class PedidoController extends BaseController
         $this->view->endereco_entrega   = $request->post->endereco_entrega;
         
         $this->view->dados_pedido       = Pedido::busca_dados_pedido($request->post->id_pedido);
-//        $this->view->product_order      = ProdutoPedido::busca_produtos_de_pedido($request->post->id_pedido);
         $this->view->endereco_entrega   = Endereco::busca_endereco_por_id($request->post->endereco_entrega);
         $this->view->formas_de_pagamento= PaymentTerm::busca_formas_de_pagamento();
-        $this->view->status_pedido      = OrderStatus::busca_status_de_pedido($request->post->id_pedido);
+        $this->view->status             = Status::relatorio_all_status();
+        $this->view->produtos           = Produto::relatorio_all_produtos_ativos_menu_no_pic();
+        $this->view->categorias         = Categoria::relatorio_all_categorias_ativas();
         
-//        var_dump($this->view->endereco_entrega); die;
+//        var_dump($this->view->produtos); die;
         
         $nome_array = explode(' ',$admin['name']);
         $this->view->nome = $nome_array[0];
@@ -145,11 +149,33 @@ class PedidoController extends BaseController
         echo(json_encode($resultado));
     }
     
+    public function salva_status_pedido($request){
+        $resultado = Pedido::salva_status_pedido($request->get->id_pedido, $request->get->id_status_pedido);
+        if($resultado == 0){
+            $array = [
+                "erro" => "true"];
+            echo(json_encode($array));
+        }else{
+            $restt = OrderStatus::altera_status_pedido($request->get->id_adm, $request->get->id_pedido, $request->get->id_status_pedido);
+            echo(json_encode($resultado));
+        }
+    }
+    
     
     public function carrega_produtos_pedido($request){
         $resultado = ProdutoPedido::busca_produtos_de_pedido($request->get->id_pedido);
         echo(json_encode($resultado));
     }
+    
+    
+    
+    public function carrega_historico_status_pedido($request){
+        $resultado = OrderStatus::busca_status_de_pedido($request->get->id_pedido);
+        echo(json_encode($resultado));
+    }
+    
+    
+    
     
     
     

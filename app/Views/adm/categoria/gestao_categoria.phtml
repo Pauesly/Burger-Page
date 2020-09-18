@@ -45,6 +45,7 @@
                       <th scope="col">#</th>
                       <th scope="col">ID</th>
                       <th scope="col">Nome</th>
+                      <th scope="col">Ordem</th>
                       <th scope="col">Ativo</th>
                     </tr>
                 </thead>
@@ -58,6 +59,7 @@
                                 <th scope="row"><a id="lll" onclick="LaunchLoading();" href="/edit_categoria?id=<?php echo $value->id_category?>" class="stretched-link"><?php echo $cont;?></a></th>
                                 <td><?php echo $value->id_category?></td>
                                 <td><?php echo $value->description?></td>
+                                <td><?php echo $value->sequence?></td>
                                 <td><?php echo $value->active == 1 ? "Sim" : "Não"?></td>
                             </tr>
                             

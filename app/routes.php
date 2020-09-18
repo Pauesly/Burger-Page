@@ -90,7 +90,9 @@ $route[] = ['/salva_pagamento_sim',                 'PedidoController@salva_paga
 $route[] = ['/salva_pagamento_nao',                 'PedidoController@salva_pagamento_nao',                         'auth'];
 $route[] = ['/salva_obs',                           'PedidoController@salva_obs',                                   'auth'];
 $route[] = ['/salva_forma_pagamento',               'PedidoController@salva_forma_pagamento',                       'auth'];
+$route[] = ['/salva_status_pedido',                 'PedidoController@salva_status_pedido'];
 $route[] = ['/carrega_produtos_pedido',             'PedidoController@carrega_produtos_pedido',                     'auth'];
+$route[] = ['/carrega_historico_status_pedido',     'PedidoController@carrega_historico_status_pedido'];
 
 
 

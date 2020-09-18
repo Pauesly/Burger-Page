@@ -20,11 +20,31 @@ class Produto
 
     
     
-    //Busca adm com email para Login
+    //Busca Produtos dados especificos
     public static function relatorio_all_produtos() {
         //Dados obrigatorios
         $array = [
             "funcao" => "relatorio_all_produtos"
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+     //Busca adm com email para Login
+    public static function relatorio_all_produtos_ativos_menu() {
+        //Dados obrigatorios
+        $array = [
+            "funcao" => "relatorio_all_produtos_ativos_menu"
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+     //Busca adm com email para Login
+    public static function relatorio_all_produtos_ativos_menu_no_pic() {
+        //Dados obrigatorios
+        $array = [
+            "funcao" => "relatorio_all_produtos_ativos_menu_no_pic"
         ];
         $resultado = WS_read::ler_dados($array);
         return  json_decode($resultado);

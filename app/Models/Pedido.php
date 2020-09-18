@@ -27,6 +27,7 @@ class Pedido
             "fk_id_adm"         => $fk_id_adm,
             "fk_id_customer"    => $fk_id_customer,
             "fk_id_address"     => $fk_id_address,
+            "fk_id_status"      => 1,
             "payment_status"    => 0,
             "created_at"        => Padroes_gerais::data_e_hora(),
             "active"            => 1
@@ -101,7 +102,20 @@ class Pedido
     }
     
     
-    
+    //Sallva OBS
+    public static function salva_status_pedido($id_pedido, $id_status_pedido) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "salva_status_pedido",
+            "id_pedido"         => $id_pedido,
+            "fk_id_status"      => $id_status_pedido
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        
+        
+        
+        return  json_decode($resultado);
+    }
     
     
     

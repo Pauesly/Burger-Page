@@ -19,6 +19,7 @@ function SalvarCliente(){
     
 //  Coletando e preenchendo todos os dados
     document.getElementById("description").value =              document.getElementById("txt_descricao").value;
+    document.getElementById("sequence").value =                 document.getElementById("txt_ordem").value;
 
     
     //Enviando
