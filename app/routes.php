@@ -90,9 +90,14 @@ $route[] = ['/salva_pagamento_sim',                 'PedidoController@salva_paga
 $route[] = ['/salva_pagamento_nao',                 'PedidoController@salva_pagamento_nao',                         'auth'];
 $route[] = ['/salva_obs',                           'PedidoController@salva_obs',                                   'auth'];
 $route[] = ['/salva_forma_pagamento',               'PedidoController@salva_forma_pagamento',                       'auth'];
-$route[] = ['/salva_status_pedido',                 'PedidoController@salva_status_pedido'];
+$route[] = ['/salva_status_pedido',                 'PedidoController@salva_status_pedido',                         'auth'];
 $route[] = ['/carrega_produtos_pedido',             'PedidoController@carrega_produtos_pedido',                     'auth'];
-$route[] = ['/carrega_historico_status_pedido',     'PedidoController@carrega_historico_status_pedido'];
+$route[] = ['/carrega_historico_status_pedido',     'PedidoController@carrega_historico_status_pedido',             'auth'];
+$route[] = ['/add_produto_pedido',                  'PedidoController@add_produto_pedido',                          'auth'];
+$route[] = ['/remove_produto_pedido',               'PedidoController@remove_produto_pedido',                       'auth'];
+$route[] = ['/apagar_pedido',                       'PedidoController@apagar_pedido',                               'auth'];
+
+$route[] = ['/consultar_pedidos',                   'PedidoController@consultar_pedidos',                           'auth'];
 
 
 

@@ -167,12 +167,94 @@ class PedidoController extends BaseController
         echo(json_encode($resultado));
     }
     
-    
-    
+  
     public function carrega_historico_status_pedido($request){
         $resultado = OrderStatus::busca_status_de_pedido($request->get->id_pedido);
         echo(json_encode($resultado));
     }
+    
+    
+    public function add_produto_pedido($request){
+        $resultado = ProdutoPedido::add_produto_pedido(
+                $request->get->fk_id_order, 
+                $request->get->fk_id_product, 
+                $request->get->qtd, 
+                $request->get->price_unit, 
+                $request->get->obs);
+        echo(json_encode($resultado));
+    }
+    
+    
+     public function remove_produto_pedido($request){
+        $resultado = ProdutoPedido::remove_produto_pedido($request->get->id_produto_order);
+        echo(json_encode($resultado));
+    }
+    
+    
+    public function apagar_pedido($request){
+        
+        $resultado = Pedido::apagar_pedido($request->post->id_pedido_del);
+        
+        if($resultado == 0){
+            return Redirect::route('/consultar_pedidos', [
+                'errors' => ['Erro 003 - Erro ao tentar salvar. Contate Administrador.'],
+                'inputs' => [""]
+            ]);
+        }else{
+            return Redirect::route('/consultar_pedidos', [
+                'success' => ["Pedido Cancelado com sucesso!"],
+                'inputs' => [""]
+            ]);
+        }
+    }
+    
+ 
+    public function consultar_pedidos(){
+        $admin  =  Session::get('adm');
+
+        $nome_array = explode(' ',$admin['name']);
+        $this->view->nome = $nome_array[0];
+        
+        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        
+        $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+        
+        $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
+                              . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<link rel="stylesheet" type="text/css" href="assets/js/data_table/datatables.css"/>'
+                              . '<script type="text/javascript" src="assets/js/data_table/datatables.js"></script>'
+                              . '<script src="/assets/js/date_picker.js" crossorigin="anonymous"></script>'
+                              . '<link rel="stylesheet" type="text/css" href="assets/css/date_picker.css"/>'
+                              . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<script type="text/javascript" src="assets/js/adm/pedido/consultar_pedido.js"></script>';
+        
+
+
+        $this->setPageTitle('Consultar Pedidos - Area Restrita');
+        $this->renderView('adm/pedido/consultar_pedidos', '/adm/adm_layout');
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

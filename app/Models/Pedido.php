@@ -111,14 +111,20 @@ class Pedido
             "fk_id_status"      => $id_status_pedido
         ];
         $resultado = WS_update::alterar_dados($array);
-        
-        
-        
         return  json_decode($resultado);
     }
     
     
-    
+    //Sallva OBS
+    public static function apagar_pedido($id_pedido) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "apagar_pedido",
+            "id_pedido"         => $id_pedido,
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
     
     
    

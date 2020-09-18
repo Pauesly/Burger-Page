@@ -15,6 +15,16 @@
     
     <div class="container">
         
+        <?php
+            if($this->view->dados_pedido->resultado[0]->active == 0){
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        PEDIDO CANCELADO
+                   </div
+                <?PHP
+            }
+        ?>
+        >
         
         <!--CABECALHO Dados Iniciais-->
         <div class="form-row" >
@@ -232,13 +242,13 @@
         
 
         
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br>
    
-        <dl class="row">
+        <dl class="row ">
                         
-            <dt class="col-sm-4">CANCELAR PEDIDO <div class="" id="loading_po" role="status"></div></dt>
-            <dd class="col-sm-8">
-                <a class="btn btn-danger btn-lg btn-block" id="" role="button">CANCELAR</a>
+            <dt class="col-sm-9"><div class=""  role="status"></div></dt>
+            <dd class="col-sm-3">
+                <a class="btn btn-danger  btn-block text-white" id="btn_cancelar_pedido" role="button">CANCELAR PEDIDO</a>
                 <hr>
             </dd>
 
@@ -249,12 +259,12 @@
         
     </div>
 <!--FIM DIV PRINCIPAL-->
-
+</div>
 
 
 
 <!--form Armazenando dados-->
-<form action="/gerir_pedido" method="POST" id="form_gerir_pedido" class="">
+<form action="/gerir_pedido" method="POST" id="form_gerir_pedido" class="esconder">
     <input type='text'    name="id_adm"                         id="id_adm"             value="<?php echo $this->view->id_adm ?>">
     <input type='text'    name="id_pedido"                      id="id_pedido"          value="<?= $this->view->dados_pedido->resultado[0]->id_order?>">
     <input type='text'    name="id_status_pedido"               id="id_status_pedido"   value="<?= $this->view->dados_pedido->resultado[0]->fk_id_payment_term?>">
@@ -264,6 +274,79 @@
 
 
 
+
+<!--CANCELAR PEDIDO-->
+<div class="modal fade bd-example-modal" tabindex="-1" role="dialog" id="modal_cancelar_pedido" >
+    <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title">CANCELAR PEDIDO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            Deseja cancelar o pedido?
+                        </div>
+                    </div>
+                    <div class="row mt-2">    
+                        <div class="col-sm">
+                            <div class="alert alert-danger" role="alert">
+                                Esta operação não pode ser desfeita.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn_cancela_cancelar_pedido">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btn_confirma_cancelar_pedido">
+                    <span class="" role="status" aria-hidden="true" id="spinner_cancela_pedido"></span> CANCELAR PEDIDO</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--CANCELAR PEDIDO-->
+<div class="modal fade bd-example-modal" tabindex="-1" role="dialog" id="modal_cancelando_pedido" data-backdrop="static">
+    <div class="modal-dialog modal modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title">CANCELANDO PEDIDO</h5>
+            </div>
+            
+            <div class="modal-body">
+                
+                <div class="container">
+                    <div class="row mt-2">    
+                        <div class="col-sm">
+                            <div class="alert alert-info" role="alert">
+                                O pedido está sendo cancelado. <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" ></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--form Armazenando dados-->
+<form action="/apagar_pedido" method="POST" id="form_apagar_pedido" class="esconder">
+    <input type='text'    name="id_pedido_del"                      id="id_pedido_del"          value="<?= $this->view->dados_pedido->resultado[0]->id_order?>">
+</form>
 
 
 
@@ -300,12 +383,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
@@ -379,10 +457,13 @@
                                                 <td>
                                                     <div class="row">
                                                             <div class="col-3">
-                                                                <img id='img-upload' name='img-upload' id="pd_im_<?=$this->view->produtos->resultado[$j]->id_product?>"
+                                                                <img id='img-upload' name='img-upload' 
                                                                     <?php echo $this->view->produtos->resultado[$j]->picture_thumb != "0" ? 
                                                                         'src="data:image/jpg;base64,' . $this->view->produtos->resultado[$j]->picture_thumb  . 
                                                                         '"' : "" ; ?>  width="90px"/>
+                                                                <input type="hidden"  
+                                                                       id="pd_im_<?=$this->view->produtos->resultado[$j]->id_product?>" 
+                                                                       value="<?=$this->view->produtos->resultado[$j]->picture_thumb?>">
                                                             </div>
                                                             <div class="col-8">
                                                                     <strong id="pd_tt_<?=$this->view->produtos->resultado[$j]->id_product?>"><?=$this->view->produtos->resultado[$j]->id_product . " - " . $this->view->produtos->resultado[$j]->name ?></strong> <br>
@@ -444,8 +525,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm">
-                            <input type='hidden'    name="txt_add_id_produto"   id="txt_add_id_produto">
-                            <img id='img-upload' name='img-upload' id="txt_add_img" width="90px"/>
+                            <input type='hidden'    name="txt_add_id"   id="txt_add_id">
+                            <img  name='txt_add_img' id="txt_add_img" width="90px" />
                         </div>
                         <div class="col-sm">
                             <p id="txt_add_descricao"></p>
@@ -453,10 +534,27 @@
                         <div class="col-sm">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">QTD</span>
+                                </div>
+                                <input type="number" class="form-control" id="txt_add_qtd"  aria-describedby="basic-addon1" value="1">
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">R$</span>
                                 </div>
-                                <input type="text" class="form-control" id="txt_add_preco" aria-label="Username" aria-describedby="basic-addon1">
-                                <input type="text"  id="txt_add_id">
+                                <input type="text" class="form-control" id="txt_add_preco"  aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">    
+                        <div class="col-sm">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">OBS</span>
+                                </div>
+                                <textarea class="form-control" id="txt_add_obs" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
@@ -465,8 +563,9 @@
             </div>
             
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Incluir Produto</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn_cancel_add_produto">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btn_incluir_produto">
+                    <span class="" role="status" aria-hidden="true" id="spinner_add_produto_pedido"></span> Incluir Produto</button>
             </div>
         </div>
     </div>

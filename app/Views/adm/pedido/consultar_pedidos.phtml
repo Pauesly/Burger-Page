@@ -1,0 +1,165 @@
+<div class="container" style="padding-bottom: 0px">
+    
+    <!-- Cabecalho Login -->
+    <div  style="background-color: #cbcbcb;">
+            <hr>
+            <h3 class="font-shadow" style="text-align: center;  font-family: Arial Black" >COSULTAR PEDIDOS</h3>
+            <hr>
+    </div>
+    
+    <!--Alerts-->
+    <div class="">
+        <?php $this->renderView('alerts/_success'); ?>
+        <?php $this->renderView('alerts/_errors') ?>
+    </div>
+    
+    <div class="container">
+        
+        <!--Cabecalho-->
+        <div class="row mb-2">
+            <div class="col-sm"></div>
+            <div class="col-sm mt-3">
+                <div class="row">
+                    <div class="col-sm">
+                        <a class="btn btn-outline-success btn-block" id="btn_rel_questao" href="/novo_pedido"  role="button" onclick="LaunchLoading();">
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp Adicionar Pedido</a>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        
+        <!--Titulo Escolha filtros-->
+        <div class="container">
+            <div class="alert alert-info" role="alert">
+                 Marque os filtros que quer aplicar.
+            </div>
+        
+            <!--Lista Filtros-->
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch_nome">
+                        <label class="custom-control-label" for="switch_nome">Nome</label>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch_telefone">
+                        <label class="custom-control-label" for="switch_telefone">Telefone</label>
+                    </div>
+                </div>
+                <div class="col-sm-10">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch_data">
+                        <label class="custom-control-label" for="switch_data">Data</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        
+        <div class="esconder" id="erro_no_filter" role="alert">Escolha pelo menos um (01) filtro.</div>
+        
+        <!--Filtro Nome-->
+        <div class="esconder" id="filter_nome">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;Digite Nome</span>
+                </div>
+                <input type="text" id="txt_busca_nome" class="form-control"  aria-describedby="basic-addon1">
+            </div>
+        </div>
+        
+        <!--filtro telefone-->
+        <div class="esconder" id="filter_telefone">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>&nbsp;&nbsp;Digite Telefone</span>
+                </div>
+                <input type="text" id="txt_busca_telefone" class="form-control" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        
+        <!--filtro Data-->
+        <div class="esconder" id="filter_data">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Data Inicial</span>
+                        </div>
+                        <input class="form-control" id="txt_data_inicial" name="date" placeholder="DD/MM/YYYY" type="text"/>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Data Final</span>
+                        </div>
+                        <input class="form-control" id="txt_data-final" name="date" placeholder="DD/MM/YYYY" type="text"/>
+                    </div>
+                </div>
+            </div>   
+        </div>
+        
+        <dl class="row">
+            <dt class="col-sm-9"><div class=""  role="status"></div></dt>
+            <dd class="col-sm-3">
+                <a class="btn btn-info  btn-block text-white" id="btn_realiza_filtro" role="button">
+                    <span class="esconder" id="spinner_realizando_busca"role="status" aria-hidden="true"></span>
+                    Realizar Busca
+                </a>
+                <hr>
+            </dd>
+
+        </dl>
+        
+        
+        <hr>
+
+         <!--TABELA PRINCIPAL-->
+        <div class="container_light text-left">
+            <table class="table  table-hover" id="tabela_principal" id="tabela_principal">
+                  <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">ID</th>
+                          <th scope="col">Cliente</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Data</th>
+                          <th scope="col">Ativo</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+        <!--                <tr style="transform: rotate(0);">
+                            <th scope="row"><a id="lll" onclick="LaunchLoading();" href="/edit_status?id=" class="stretched-link"></a></th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>-->
+                    </tbody>
+            </table>
+        </div>
+     
+    </div>
+    
+</div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		

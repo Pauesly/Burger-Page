@@ -294,7 +294,6 @@ function CarregaProdutosPedido() {
                 document.getElementById("loading_totais").className = "";
             }else{
                 //Setting Screen
-                console.log(retorno);
                 document.getElementById("loading_totais").className = "";
                 
                 let total_produtos = 0;
@@ -321,7 +320,22 @@ function CarregaProdutosPedido() {
                     celula5.innerHTML =  retorno['resultado'][i]['qtd'];
                     celula6.innerHTML =  "R$ " + retorno['resultado'][i]['price_total'];
                     celula7.innerHTML =  retorno['resultado'][i]['obs'];
-                    celula8.innerHTML =  '<a class="btn btn-outline-danger" id="btn_pago_sim" role="button">Retirar</a>';
+                    
+                    
+                    //Celula Botao Retirar
+                    
+                    
+                    let btn = '<button type="button" class="btn btn-outline-danger" id="btn_remove_';
+                    btn = btn + retorno['resultado'][i]['id_product_order'];
+                    btn = btn + '" ';
+                    btn = btn + 'onclick="DeletaProdutoPedido(';
+                    btn = btn + retorno['resultado'][i]['id_product_order'];
+                    btn = btn + ')" ';
+                    btn = btn + '>Remover <span class="" id="spinner_remove_produto_pedido_';
+                    btn = btn + retorno['resultado'][i]['id_product_order'];
+                    btn = btn + '" role="status" aria-hidden="true"></span></button>';
+                    celula8.innerHTML =  btn;
+//                    console.log(btn);
                     
                     total_produtos = parseInt(total_produtos) + parseInt(retorno['resultado'][i]['qtd']);
                     valor_total = parseFloat(valor_total) + parseFloat(retorno['resultado'][i]['price_total']); 
@@ -355,29 +369,135 @@ function clearTable(_idTab, _linhaPersistente){
 function AddProduto(id_produto) {
 
     $('#modal_cardapio').modal('hide');
-    
-    let imag = "pd_im_" + id_produto;
+
+    let imagem = "data:image/jpg;base64," + document.getElementById("pd_im_" + id_produto).value;
     let nome = "pd_tt_" + id_produto;
     let preco = "pd_pc_" + id_produto;
     
     document.getElementById("txt_add_descricao").innerHTML  = document.getElementById(nome).innerHTML;
     document.getElementById("txt_add_preco").value          = document.getElementById(preco).innerHTML;
     document.getElementById("txt_add_id").value             = id_produto;
-//    document.getElementById("txt_add_img").src = document.getElementById(imag).src;
-    
-
+    document.getElementById("txt_add_img").src              = imagem;
     
     $('#modal_confirma_add_produto').modal('show');
+    document.getElementById("txt_add_preco").focus();
+}
+
+
+// Listener botao Salva Produto
+document.getElementById("btn_incluir_produto").addEventListener("mousedown", function(event) {
+    AddProdutoLoadingOn();
+    SalvaIncluirProuto();
+});
+
+
+/**
+ * Salva Pagamento sim
+ */
+function SalvaIncluirProuto() {
+    
+    let fk_id_order     = document.getElementById("id_pedido").value;
+    let fk_id_product   = document.getElementById("txt_add_id").value;
+    let qtd             = document.getElementById("txt_add_qtd").value;
+    let price_unit      = document.getElementById("txt_add_preco").value;
+    let obs             = document.getElementById("txt_add_obs").value;
+    
+    
+    $.getJSON('/add_produto_pedido?search=',{
+        fk_id_order:fk_id_order, 
+        fk_id_product:fk_id_product, 
+        qtd:qtd, 
+        price_unit:price_unit, 
+        obs:obs, 
+        ajax: 'true'}, function(retorno){
+        
+            $('#modal_confirma_add_produto').modal('hide');
+            AddProdutoLoadingOff();
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                CarregaProdutosPedido();
+            }
+    });
+}
+
+
+/**
+ * bloqueia componentes add Produto (loading)
+ */
+function AddProdutoLoadingOn() {
+    document.getElementById("txt_add_qtd").disabled = true;
+    document.getElementById("txt_add_preco").disabled = true;
+    document.getElementById("txt_add_obs").disabled = true;
+    document.getElementById("btn_cancel_add_produto").disabled = true;
+    document.getElementById("btn_incluir_produto").disabled = true;
+    document.getElementById("spinner_add_produto_pedido").className = "spinner-border spinner-border-sm";
+}
+
+function AddProdutoLoadingOff() {
+    document.getElementById("txt_add_qtd").disabled = false;
+    document.getElementById("txt_add_preco").disabled = false;
+    document.getElementById("txt_add_obs").disabled = false;
+    document.getElementById("btn_cancel_add_produto").disabled = false;
+    document.getElementById("btn_incluir_produto").disabled = false;
+    document.getElementById("spinner_add_produto_pedido").className = "";
+    //Limpa Campos
+    document.getElementById("txt_add_qtd").value = "1";
+    document.getElementById("txt_add_preco").value = "";
+    document.getElementById("txt_add_obs").value = "";
+}
+
+
+
+/**
+ * Salva Pagamento sim
+ */
+function DeletaProdutoPedido(id_produto_order) {
+    
+    
+    document.getElementById("btn_remove_" + id_produto_order).disabled = true;
+    document.getElementById("spinner_remove_produto_pedido_" + id_produto_order).className = "spinner-border spinner-border-sm";
+    
+    console.log(id_produto_order);
+    
+    $.getJSON('/remove_produto_pedido?search=',{
+        id_produto_order:id_produto_order,  
+        ajax: 'true'}, function(retorno){
+        
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                CarregaProdutosPedido();
+            }
+    });
 }
 
 
 
 
+// Listener botao Salva Produto
+document.getElementById("btn_cancelar_pedido").addEventListener("mousedown", function(event) {
+    $('#modal_cancelar_pedido').modal('show');
+});
 
 
+// Listener botao Salva Produto
+document.getElementById("btn_confirma_cancelar_pedido").addEventListener("mousedown", function(event) {
+    document.getElementById("btn_cancela_cancelar_pedido").disabled = true;
+    document.getElementById("btn_confirma_cancelar_pedido").disabled = true;
+    document.getElementById("spinner_cancela_pedido").className = "spinner-border spinner-border-sm";
+    
+    $('#modal_cancelar_pedido').modal('hide');
+    $('#modal_cancelando_pedido').modal('show');
+    document.getElementById('form_apagar_pedido').submit();
 
-
-
+});
 
 
 

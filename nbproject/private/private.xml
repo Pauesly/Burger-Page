@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Burger-page/Burger-Page/core/WS_read.php</file>
+            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/pedido/consultar_pedidos.phtml</file>
             <file>file:/C:/Burger-page/Burger-Page/app/Controllers/PedidoController.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/pedido/gerir_pedido.phtml</file>
             <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/adm_menu.phtml</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Models/Categoria.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Models/Pedido.php</file>
+            <file>file:/C:/Burger-page/Burger-Page/public/assets/js/adm/pedido/consultar_pedido.js</file>
             <file>file:/C:/Burger-page/Burger-Page/app/routes.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/public/assets/js/adm/pedido/gerir_pedido.js</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Models/Produto.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/produto/edit_produto.phtml</file>
         </group>
     </open-files>
 </project-private>

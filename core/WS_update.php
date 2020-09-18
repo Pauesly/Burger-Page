@@ -305,7 +305,25 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------
-            
+            /**
+             * Cancela Pedido
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "apagar_pedido":
+                
+                $id_order      = $data['id_pedido'];
+	    
+	        $array = array(
+                    "active"            => 0
+                );
+
+                $result = BDUpdate('Orders', $array, "id_order LIKE '$id_order'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------
             
             
             
@@ -373,7 +391,22 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------ 
-
+            /**
+             * DELETA PRODUTO DO PEDIDO
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "remove_produto_pedido":
+                
+                $id      = $data['id_produto_order'];
+	    
+                $result = DBDelete('ProductOrder', "id_product_order LIKE $id");
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------ 
+        
 
 //------------------------------------------------------------------------------            
             /**
