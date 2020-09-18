@@ -237,7 +237,10 @@ class PedidoController extends BaseController
     }
     
     
-    
+    public function realizar_busca_pedido_filtros($request){
+        $resultado = Pedido::busca_pedido_nome_tel_data($request->get->nome, $request->get->telefone, $request->get->data_inicial, $request->get->data_final);
+        echo(json_encode($resultado));
+    }
     
     
     

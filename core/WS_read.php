@@ -691,9 +691,89 @@ class WS_read
                 }
             break;            
 //------------------------------------------------------------------------------ 
-            
-            
-            
+            /**
+             * Busca Pedido com varios filtros
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "busca_pedido_nome_tel_data":
+                
+                $fk_id_customer = $info['fk_id_customer'];
+                $created_at_ini = $info['created_at_ini'];
+                $created_at_fim = $info['created_at_fim'];
+                
+//                $result = DBRead('OrderStatus', "WHERE fkr_id_order LIKE '$id_pedido' ORDER BY created_at");
+                
+                $result = DBRead_retorna_query('Orders',
+                        
+//                        "JOIN Adm "
+//                            . "ON Adm.id_adm = OrderStatus.fk_id_adm "
+//                       ."JOIN Status "
+//                            . "ON Status.id_status = OrderStatus.fk_id_status " .
+                        
+			 " WHERE $fk_id_customer $created_at_ini $created_at_fim"
+                        
+//                               "OrderStatus.id_order_status     as id_order_status, 
+//                                OrderStatus.fk_id_adm           as fk_id_adm, 
+//                                OrderStatus.fk_id_order         as fk_id_order,
+//                                OrderStatus.fk_id_status        as fk_id_status,
+//                                OrderStatus.created_at          as created_at,
+//                                
+//                                Adm.name                    as adm_name,
+//                                Status.status               as status_name
+                                );
+                
+                
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            /**
+             * Seleciona todos os clientes com nome ou trecho de nome
+             * Retorna clientes
+             */
+            case "busca_cliente_nome_parcial":
+                
+                $campos = "id_customer, name";
+                
+                $id = $info['name'];
+                
+                $result = DBRead('Customer', "WHERE name LIKE '%$id%'", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * Busca Cliente por Telefone Parcial
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "busca_cliente_por_telefone_parcial":
+                
+                $campos = "id_customer, name";
+                
+                $phone = $info['phone'];
+                
+                $result = DBRead('Customer', "WHERE active LIKE 1 AND phone_number_1 LIKE '%$phone%' OR phone_number_2 LIKE '%$phone%' ", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
             
             
             

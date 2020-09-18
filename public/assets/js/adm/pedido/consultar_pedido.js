@@ -76,18 +76,101 @@ document.getElementById("btn_realiza_filtro").addEventListener("mousedown", func
 function RealizaBusca() {
     document.getElementById("btn_realiza_filtro").className = "btn btn-secondary btn-block text-white disabled";
     document.getElementById("spinner_realizando_busca").className = "spinner-border spinner-border-sm";
-    $$$$$$$$$$$$$$$$$$$$$ CHECAR FILTROS ATIVOS E BUSCAR
+    
+    if (ValidaCampos()){
+        Consultar();
+    }
 }
 
 
 /**
  * Verifica filtro ativo
  */
-function CheckFiltrosAtivos() {
+function ValidaCampos() {
     
+    let contador = 0;
+    
+    if($('#switch_nome').is(':checked')){
+        if(document.getElementById("txt_busca_nome").value.length > 1){
+            document.getElementById("txt_busca_nome").className = "form-control";
+        }else{
+            document.getElementById("txt_busca_nome").className = "form-control is-invalid";
+            contador++;
+        }
+    }
+    
+    if($('#switch_telefone').is(':checked')){
+        if(document.getElementById("txt_busca_telefone").value.length > 13){
+            document.getElementById("txt_busca_telefone").className = "form-control";
+        }else{
+            document.getElementById("txt_busca_telefone").className = "form-control is-invalid";
+            contador++;
+        }
+    }
+    
+    if($('#switch_data').is(':checked')){
+        if((document.getElementById("txt_data_inicial").value.length > 5) || (document.getElementById("txt_data_final").value.length > 5)){
+            document.getElementById("txt_data_inicial").className = "form-control";
+            document.getElementById("txt_data_final").className = "form-control";
+        }else{
+            document.getElementById("txt_data_inicial").className = "form-control is-invalid";
+            document.getElementById("txt_data_final").className = "form-control is-invalid";
+            contador++;
+        }
+    }
+
+    
+    if(contador === 0){
+        return true;
+    }else{
+        console.log(contador);
+        document.getElementById("btn_realiza_filtro").className = "btn btn-info btn-block text-white";
+        document.getElementById("spinner_realizando_busca").className = "esconder";
+        return false;
+    }
 }
 
 
+/**
+ * Realiza Busca
+ */
+function Consultar() {
+    
+    let nome;
+    let telefone;
+    let data_inicial;
+    let data_final;
+    
+    $('#switch_nome').is(':checked')     ? nome         = document.getElementById("txt_busca_nome").value       : nome         = "666";
+    $('#switch_telefone').is(':checked') ? telefone     = document.getElementById("txt_busca_telefone").value   : telefone     = "666";
+    $('#switch_data').is(':checked')     ? data_inicial = document.getElementById("txt_data_inicial").value     : data_inicial = "666";
+    $('#switch_data').is(':checked')     ? data_final   = document.getElementById("txt_data_final").value       : data_final   = "666";
+    
+    $.getJSON('/realizar_busca_pedido_filtros?search=',{
+        nome:nome, 
+        telefone:telefone, 
+        data_inicial:data_inicial, 
+        data_final:data_final, 
+        ajax: 'true'}, function(retorno){
+        
+            console.log(retorno);
+            
+            document.getElementById("btn_realiza_filtro").className = "btn btn-info btn-block text-white";
+            document.getElementById("spinner_realizando_busca").className = "esconder";
+        
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                
+            }
+    });
+    
+    
+    
+}
 
 
 

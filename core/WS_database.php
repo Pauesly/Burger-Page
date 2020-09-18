@@ -94,6 +94,20 @@
             }
     }
     
+    // Ler Registros
+    function DBRead_retorna_query($table, $params = null, $fields = '*'){
+		
+            // se Passou Params, entao recebe PARAMS com espaco. Senao, null
+            $params = ($params) ? " {$params}" : null;
+
+            $query = "SELECT {$fields} FROM {$table} {$params}";
+
+//            $result = DBExecute ($query);
+            return var_dump($query);
+
+            
+    }
+    
     
     
     // Ler Registros

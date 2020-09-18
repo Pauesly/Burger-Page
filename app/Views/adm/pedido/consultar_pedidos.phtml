@@ -3,7 +3,7 @@
     <!-- Cabecalho Login -->
     <div  style="background-color: #cbcbcb;">
             <hr>
-            <h3 class="font-shadow" style="text-align: center;  font-family: Arial Black" >COSULTAR PEDIDOS</h3>
+            <h3 class="font-shadow" style="text-align: center;  font-family: Arial Black" >CONSULTAR PEDIDOS</h3>
             <hr>
     </div>
     
@@ -69,6 +69,7 @@
                     <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;Digite Nome</span>
                 </div>
                 <input type="text" id="txt_busca_nome" class="form-control"  aria-describedby="basic-addon1">
+                <div class="invalid-feedback">Digite o nome.</div>
             </div>
         </div>
         
@@ -79,6 +80,7 @@
                     <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>&nbsp;&nbsp;Digite Telefone</span>
                 </div>
                 <input type="text" id="txt_busca_telefone" class="form-control" aria-describedby="basic-addon1">
+                <div class="invalid-feedback">Digite o Telefone.</div>
             </div>
         </div>
         
@@ -91,6 +93,7 @@
                             <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Data Inicial</span>
                         </div>
                         <input class="form-control" id="txt_data_inicial" name="date" placeholder="DD/MM/YYYY" type="text"/>
+                <div class="invalid-feedback">Digite alguma data.</div>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -98,7 +101,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Data Final</span>
                         </div>
-                        <input class="form-control" id="txt_data-final" name="date" placeholder="DD/MM/YYYY" type="text"/>
+                        <input class="form-control" id="txt_data_final" name="date" placeholder="DD/MM/YYYY" type="text"/>
                     </div>
                 </div>
             </div>   

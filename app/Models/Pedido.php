@@ -127,6 +127,65 @@ class Pedido
     }
     
     
+    //
+    public static function busca_pedido_nome_tel_data($nome, $tel, $data_inicial, $data_final) {
+        
+        $fr_id_customer = "";
+        
+        if($nome != "666"){
+            $array = [
+                "funcao"       => "busca_cliente_nome_parcial",
+                "name"         => $nome,
+            ];
+            $resultado_nome = WS_read::ler_dados($array);
+            $resultado_nome =  json_decode($resultado_nome);
+        }
+            
+        if($tel != "666"){
+            $array = [
+                "funcao"       => "busca_cliente_por_telefone_parcial",
+                "phone"         => $tel,
+            ];
+            $resultado_tel = WS_read::ler_dados($array);
+            $resultado_tel = json_decode($resultado_tel);
+        }
+        
+        //BUSCAR SIMILARIDADE DE ID ENTRE NOME E TELEFONE. Juntar os ID customer numa string com o comando SQL pronto
+        if(false){
+            
+        }
+        
+        //BUSCAR SIMILARIDADE DE ID ENTRE NOME E TELEFONE. Juntar os ID customer numa string com o comando SQL pronto
+//        $encontrado = ( strpos( $palheiro, $agulha ) !== 0 );
+//
+//        if ($encontrado) {
+//           echo 'Encontrado';
+//        } else {
+//           echo 'Não encontrado';
+//        }
+        
+        
+        $data_ini = str_replace("/", "-", $data_inicial);
+        $data_ini = $data_ini . " 00:00:00 ";
+        $data_ini =  date('Y-m-d H:i:s', strtotime($data_ini));
+        
+        $data_fin = str_replace("/", "-", $data_final);
+        $data_fin = $data_fin . " 00:00:00 ";
+        $data_fin =  date('Y-m-d H:i:s', strtotime($data_fin));
+        
+        $data_inicial   == "666" ? $data_ini   = " created_at BETWEEN 1900-01-01 00:00:00 " : $data_ini = " created_at BETWEEN " . $data_ini;
+        $data_final     == "666" ? $data_fin   = " AND 2900-01-01 23:59:59 "                : $data_fin   = " AND " . $data_fin;
+        
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "busca_pedido_nome_tel_data",
+            "fk_id_customer"    => $fr_id_customer,
+            "created_at_ini"    => $data_ini,
+            "created_at_fim"    => $data_fin,
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
    
     
     
