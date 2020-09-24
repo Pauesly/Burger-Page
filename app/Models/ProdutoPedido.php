@@ -63,8 +63,20 @@ class ProdutoPedido
     }
     
     
-    
+    //Busca adm com email para Login
+    public static function busca_total_pedido($id_order) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"             => "busca_total_pedido",
+            "fk_id_order"        => $id_order
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
    
+
+    
+    
     
     
 

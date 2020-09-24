@@ -98,7 +98,10 @@ $route[] = ['/remove_produto_pedido',               'PedidoController@remove_pro
 $route[] = ['/apagar_pedido',                       'PedidoController@apagar_pedido',                               'auth'];
 
 $route[] = ['/consultar_pedidos',                   'PedidoController@consultar_pedidos',                           'auth'];
-$route[] = ['/realizar_busca_pedido_filtros',       'PedidoController@realizar_busca_pedido_filtros'];
+$route[] = ['/realizar_busca_pedido_filtros',       'PedidoController@realizar_busca_pedido_filtros',               'auth'];
+
+$route[] = ['/gestao_a_vista',                      'PedidoController@gestao_a_vista',                              'auth'];
+
 
 
 

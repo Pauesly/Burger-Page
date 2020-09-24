@@ -24,25 +24,7 @@ $(document).ready(function() {
     $('#tabela_principal').DataTable();
 } );
 
-// Switch Nome
-$('#switch_nome').on('change.bootstrapSwitch', function(e) {
-    document.getElementById("erro_no_filter").className = "esconder";
-    if(e.target.checked){
-        document.getElementById("filter_nome").className = "container";
-    }else{
-        document.getElementById("filter_nome").className = "esconder";
-    }
-});
 
-//Switch Telefone
-$('#switch_telefone').on('change.bootstrapSwitch', function(e) {
-    document.getElementById("erro_no_filter").className = "esconder";
-    if(e.target.checked){
-        document.getElementById("filter_telefone").className = "container";
-    }else{
-        document.getElementById("filter_telefone").className = "esconder";
-    }
-});
 
 //Switch data
 $('#switch_data').on('change.bootstrapSwitch', function(e) {
@@ -56,79 +38,6 @@ $('#switch_data').on('change.bootstrapSwitch', function(e) {
 
 
 
-// Listener Botao Confirma filtro
-document.getElementById("btn_realiza_filtro").addEventListener("mousedown", function(event) {
-    if ($('#switch_nome').is(':checked') ||
-            $('#switch_telefone').is(':checked') ||
-            $('#switch_data').is(':checked')){
-        
-        RealizaBusca();
-    }else{
-        document.getElementById("erro_no_filter").className = "alert alert-danger";
-    }
-});
-
-
-
-/**
- * Realiza Busca deacordo com filtros selecionados
- */
-function RealizaBusca() {
-    document.getElementById("btn_realiza_filtro").className = "btn btn-secondary btn-block text-white disabled";
-    document.getElementById("spinner_realizando_busca").className = "spinner-border spinner-border-sm";
-    
-    if (ValidaCampos()){
-        Consultar();
-    }
-}
-
-
-/**
- * Verifica filtro ativo
- */
-function ValidaCampos() {
-    
-    let contador = 0;
-    
-    if($('#switch_nome').is(':checked')){
-        if(document.getElementById("txt_busca_nome").value.length > 1){
-            document.getElementById("txt_busca_nome").className = "form-control";
-        }else{
-            document.getElementById("txt_busca_nome").className = "form-control is-invalid";
-            contador++;
-        }
-    }
-    
-    if($('#switch_telefone').is(':checked')){
-        if(document.getElementById("txt_busca_telefone").value.length > 13){
-            document.getElementById("txt_busca_telefone").className = "form-control";
-        }else{
-            document.getElementById("txt_busca_telefone").className = "form-control is-invalid";
-            contador++;
-        }
-    }
-    
-    if($('#switch_data').is(':checked')){
-        if((document.getElementById("txt_data_inicial").value.length > 5) || (document.getElementById("txt_data_final").value.length > 5)){
-            document.getElementById("txt_data_inicial").className = "form-control";
-            document.getElementById("txt_data_final").className = "form-control";
-        }else{
-            document.getElementById("txt_data_inicial").className = "form-control is-invalid";
-            document.getElementById("txt_data_final").className = "form-control is-invalid";
-            contador++;
-        }
-    }
-
-    
-    if(contador === 0){
-        return true;
-    }else{
-        console.log(contador);
-        document.getElementById("btn_realiza_filtro").className = "btn btn-info btn-block text-white";
-        document.getElementById("spinner_realizando_busca").className = "esconder";
-        return false;
-    }
-}
 
 
 /**

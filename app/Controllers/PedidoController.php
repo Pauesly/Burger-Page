@@ -95,11 +95,11 @@ class PedidoController extends BaseController
         $admin  =  Session::get('adm');
 
         $this->view->id_pedido          = $request->post->id_pedido;
-        $this->view->id_customer        = $request->post->id_customer;
-        $this->view->endereco_entrega   = $request->post->endereco_entrega;
+//        $this->view->id_customer        = $request->post->id_customer;
+//        $this->view->endereco_entrega   = $request->post->endereco_entrega;
         
         $this->view->dados_pedido       = Pedido::busca_dados_pedido($request->post->id_pedido);
-        $this->view->endereco_entrega   = Endereco::busca_endereco_por_id($request->post->endereco_entrega);
+        $this->view->endereco_entrega   = Endereco::busca_endereco_por_id($this->view->dados_pedido->resultado[0]->fk_id_address);
         $this->view->formas_de_pagamento= PaymentTerm::busca_formas_de_pagamento();
         $this->view->status             = Status::relatorio_all_status();
         $this->view->produtos           = Produto::relatorio_all_produtos_ativos_menu_no_pic();
@@ -238,17 +238,49 @@ class PedidoController extends BaseController
     
     
     public function realizar_busca_pedido_filtros($request){
-        $resultado = Pedido::busca_pedido_nome_tel_data($request->get->nome, $request->get->telefone, $request->get->data_inicial, $request->get->data_final);
+        
+        $tel = self::FormataTelefone($request->get->telefone);
+        $resultado = Pedido::busca_pedido_nome_tel_data($request->get->nome, $tel, $request->get->data_inicial, $request->get->data_final);
         echo(json_encode($resultado));
     }
     
     
+    public static function FormataTelefone($tel){
+        $new_tel = str_replace(' ', '', $tel); 
+        $new_tel = str_replace('(', '', $new_tel); 
+        $new_tel = str_replace(')', '', $new_tel); 
+        $new_tel = str_replace('-', '', $new_tel); 
+        $new_tel = str_replace('%20', '', $new_tel); 
+        return $new_tel;
+    }
     
     
-    
-    
-    
-    
+    public function gestao_a_vista(){
+        $admin  =  Session::get('adm');
+
+        $nome_array = explode(' ',$admin['name']);
+        $this->view->nome = $nome_array[0];
+        
+        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        
+        $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+        
+        $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
+                              . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
+                              . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<link rel="stylesheet" type="text/css" href="assets/js/data_table/datatables.css"/>'
+                              . '<script type="text/javascript" src="assets/js/data_table/datatables.js"></script>'
+                              . '<script src="/assets/js/date_picker.js" crossorigin="anonymous"></script>'
+                              . '<link rel="stylesheet" type="text/css" href="assets/css/date_picker.css"/>'
+                              . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                              . '<script type="text/javascript" src="assets/js/adm/pedido/gestao_a_vista.js"></script>';
+        
+
+
+        $this->setPageTitle('Gestão à vista Pedidos - Area Restrita');
+        $this->renderView('adm/pedido/gestao_a_vista', '/adm/adm_layout');
+    }
     
     
     

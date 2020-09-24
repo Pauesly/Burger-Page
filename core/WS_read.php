@@ -702,26 +702,33 @@ class WS_read
                 $created_at_ini = $info['created_at_ini'];
                 $created_at_fim = $info['created_at_fim'];
                 
-//                $result = DBRead('OrderStatus', "WHERE fkr_id_order LIKE '$id_pedido' ORDER BY created_at");
-                
-                $result = DBRead_retorna_query('Orders',
+                $result = DBRead('Orders',
                         
-//                        "JOIN Adm "
-//                            . "ON Adm.id_adm = OrderStatus.fk_id_adm "
-//                       ."JOIN Status "
-//                            . "ON Status.id_status = OrderStatus.fk_id_status " .
+                        "JOIN Adm "
+                            . "ON Adm.id_adm = Orders.fk_id_adm "
+                       ."JOIN Status "
+                            . "ON Status.id_status = Orders.fk_id_status " 
+                       ."JOIN PaymentTerm "
+                            . "ON PaymentTerm.id_payment_term = Orders.fk_id_payment_term " 
+                       ."JOIN Customer "
+                            . "ON Customer.id_customer = Orders.fk_id_customer " .
                         
-			 " WHERE $fk_id_customer $created_at_ini $created_at_fim"
+			 " WHERE $fk_id_customer $created_at_ini $created_at_fim ORDER BY fk_id_status ",
                         
-//                               "OrderStatus.id_order_status     as id_order_status, 
-//                                OrderStatus.fk_id_adm           as fk_id_adm, 
-//                                OrderStatus.fk_id_order         as fk_id_order,
-//                                OrderStatus.fk_id_status        as fk_id_status,
-//                                OrderStatus.created_at          as created_at,
-//                                
-//                                Adm.name                    as adm_name,
-//                                Status.status               as status_name
-                                );
+                               "Orders.id_order             as id_order, 
+                                Orders.fk_id_adm            as fk_id_adm,
+                                Orders.fk_id_customer       as fk_id_customer,
+                                Orders.fk_id_payment_term   as fk_id_payment_term,
+                                Orders.fk_id_status         as fk_id_status,
+                                Orders.payment_status       as payment_status,
+                                Orders.created_at           as created_at,
+                                
+                                Status.status               as status_name,
+                                
+                                PaymentTerm.name            as payment_term_name,
+                                
+                                Customer.name               as customer_name
+                               ");
                 
                 
                 
@@ -774,7 +781,26 @@ class WS_read
                 }
             break;            
 //------------------------------------------------------------------------------ 
-            
+            /**
+             * Soma Valor por pedido
+             * Retorna clientes
+             */
+            case "busca_total_pedido":
+                
+                $id = $info['fk_id_order'];
+                
+                $result = DBRead('ProductOrder', "WHERE fk_id_order LIKE '$id'", "SUM(price_total) AS total");
+                
+                //    
+//    SELECT  FROM ProductOrder WHERE fk_id_order LIKE 3
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
             
             
             

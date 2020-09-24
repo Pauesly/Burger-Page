@@ -130,8 +130,12 @@ class Pedido
     //
     public static function busca_pedido_nome_tel_data($nome, $tel, $data_inicial, $data_final) {
         
+        
+        $res_busca_nome  = array();
+        $res_busca_tel = array();
         $fr_id_customer = "";
         
+        //NOME
         if($nome != "666"){
             $array = [
                 "funcao"       => "busca_cliente_nome_parcial",
@@ -139,42 +143,130 @@ class Pedido
             ];
             $resultado_nome = WS_read::ler_dados($array);
             $resultado_nome =  json_decode($resultado_nome);
+        }else{
+            $array = [ "erro"       => "true"  ];
+            $resultado_nome = json_encode($array);
+            $resultado_nome = json_decode($resultado_nome);
         }
-            
+                
+        //Coleta IDs da busca por nome
+        if($resultado_nome->erro == false){
+            foreach ($resultado_nome->resultado as $key => $valuei) {
+                $res_busca_nome[] = $valuei->id_customer;
+            }
+        }
+        
+        //TELEFONE    
         if($tel != "666"){
             $array = [
                 "funcao"       => "busca_cliente_por_telefone_parcial",
-                "phone"         => $tel,
+                "phone"        => $tel,
             ];
             $resultado_tel = WS_read::ler_dados($array);
             $resultado_tel = json_decode($resultado_tel);
+        }else{
+            $array = [ "erro"       => "true"  ];
+            $resultado_tel = json_encode($array);
+            $resultado_tel = json_decode($resultado_tel);
+        }
+
+        //Coleta IDs da busca por telefone se nao forem igual ao Nome
+        if($resultado_tel->erro == false){
+            foreach ($resultado_tel->resultado as $key => $valuej) {
+                $res_busca_tel[] = $valuej->id_customer;
+            }
         }
         
-        //BUSCAR SIMILARIDADE DE ID ENTRE NOME E TELEFONE. Juntar os ID customer numa string com o comando SQL pronto
-        if(false){
-            
-        }
-        
-        //BUSCAR SIMILARIDADE DE ID ENTRE NOME E TELEFONE. Juntar os ID customer numa string com o comando SQL pronto
-//        $encontrado = ( strpos( $palheiro, $agulha ) !== 0 );
-//
-//        if ($encontrado) {
-//           echo 'Encontrado';
-//        } else {
-//           echo 'Não encontrado';
-//        }
         
         
+        //Tratamento Data
         $data_ini = str_replace("/", "-", $data_inicial);
         $data_ini = $data_ini . " 00:00:00 ";
         $data_ini =  date('Y-m-d H:i:s', strtotime($data_ini));
         
         $data_fin = str_replace("/", "-", $data_final);
-        $data_fin = $data_fin . " 00:00:00 ";
+        $data_fin = $data_fin . "  23:59:59 ";
         $data_fin =  date('Y-m-d H:i:s', strtotime($data_fin));
         
-        $data_inicial   == "666" ? $data_ini   = " created_at BETWEEN 1900-01-01 00:00:00 " : $data_ini = " created_at BETWEEN " . $data_ini;
-        $data_final     == "666" ? $data_fin   = " AND 2900-01-01 23:59:59 "                : $data_fin   = " AND " . $data_fin;
+        $data_inicial   == "666" ? $data_ini   = " Orders.created_at BETWEEN '1900-01-01 00:00:00' " : $data_ini = " Orders.created_at BETWEEN '" . $data_ini."' ";
+        $data_final     == "666" ? $data_fin   = " AND '2900-01-01 23:59:59' "                       : $data_fin   = " AND '" . $data_fin . "' ";
+        
+//        echo "\n\nDataini: " . $data_ini . "\n\n";
+        
+//      busca apenas por NOME
+        if(
+                ($nome != "666")
+            &&
+                ($resultado_nome->erro == true)
+            &&
+                ($tel == "666")
+            &&
+                ($data_inicial   == "666")
+            &&
+                $data_final   == "666"
+                ){
+            $array = [ "erro"       => "true"  ];
+            $resultado_nn = json_encode($array);
+            return json_decode($resultado_nn);
+        }elseif (($resultado_nome->erro == false) && ($tel == "666")){
+            $fr_id_customer = "(";
+            foreach ($res_busca_nome as $key => $valuek) {
+                $fr_id_customer = $fr_id_customer . " fk_id_customer LIKE " . $valuek . " OR " ;
+            }
+            $fr_id_customer = $fr_id_customer . " fk_id_customer LIKE 0) AND ";
+        }
+        
+ //      busca apenas por TELEFONE
+        if(
+                ($nome == "666")
+            &&
+                ($resultado_tel->erro == true)
+            &&
+                ($tel != "666")
+            &&
+                ($data_inicial   == "666")
+            &&
+                $data_final   == "666"
+                ){
+            $array = [ "erro"       => "true"  ];
+            $resultado_nn = json_encode($array);
+            return json_decode($resultado_nn);
+        }elseif((strlen($fr_id_customer) < 2) && ($nome == "666") && ($tel != "666")){
+            $fr_id_customer = "(";
+            foreach ($res_busca_tel as $key => $valuet) {
+                $fr_id_customer = $fr_id_customer . " fk_id_customer LIKE " . $valuet . " OR " ;
+            }
+            $fr_id_customer = $fr_id_customer . " fk_id_customer LIKE 0) AND ";
+        }
+ 
+        
+ //      busca por NOME e TELEFONE
+        if(
+                (($nome != "666") && ($resultado_nome->erro == true))
+            ||
+                (($tel != "666") && ($resultado_tel->erro == true))
+           ){
+            $array = [ "erro"       => "true"  ];
+            $resultado_nn = json_encode($array);
+            return json_decode($resultado_nn);
+        }elseif(strlen($fr_id_customer) < 2){
+            $fr_id_customer = "(";
+            $count = 0;
+            foreach ($res_busca_nome as $key => $valuey) {
+                foreach ($res_busca_tel as $key => $valuex) {
+//                    echo "comp. Y: " . $valuey . "\n X: " . $valuex;
+                    if($valuex == $valuey){
+                        $fr_id_customer = $fr_id_customer . " fk_id_customer LIKE " . $valuex . " OR " ;
+                        $count++;
+                    }
+                }
+            }
+            
+            $fr_id_customer = $fr_id_customer . " fk_id_customer LIKE 0) AND ";
+            if($count == 0){
+                $fr_id_customer = "";
+            }
+        }
         
         //Dados obrigatorios
         $array = [
@@ -183,8 +275,17 @@ class Pedido
             "created_at_ini"    => $data_ini,
             "created_at_fim"    => $data_fin,
         ];
-        $resultado = WS_read::ler_dados($array);
-        return  json_decode($resultado);
+        $resultado_final = WS_read::ler_dados($array);
+        $resultado_final =  json_decode($resultado_final);
+        
+        if($resultado_final->erro == false){
+            foreach ($resultado_final->resultado as $key => $value_f) {
+                $tot = ProdutoPedido::busca_total_pedido($value_f->id_order);
+                $resultado_final->resultado[$key]->total = $tot->resultado[0]->total;
+            }
+        }
+        
+        return  $resultado_final;
     }
    
     
