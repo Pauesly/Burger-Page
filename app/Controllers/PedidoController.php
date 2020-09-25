@@ -308,10 +308,22 @@ class PedidoController extends BaseController
     
     
     
+    public function visualiza_romaneio($id_pedido){
+        
+        $dados_pedido   = Pedido::busca_dados_pedido($id_pedido);
+        $dados_produtos = ProdutoPedido::busca_produtos_de_pedido($id_pedido);
+        
+        $this->view->dados_pedido       = $dados_pedido->resultado[0];
+        $this->view->dados_produtos       = $dados_produtos->resultado;
+//        var_dump($dados_produtos); die;
+        $this->setPageTitle('Impressao Romaneio - Area Restrita');
+        $this->renderView('adm/pedido/visualiza_romaneio', '/adm/adm_layout_impressao');
+    }
     
     
-    
-    
+    public function imprime_romaneio($id_pedido){
+        var_dump($id_pedido);
+    }
     
     
     

@@ -1,0 +1,69 @@
+<div style="font-family: Courier New">
+    
+    <h3 class="font-shadow"  >Romaneio Pedido <?php echo $this->view->dados_pedido->id_order ?></h3>
+    <p><i>Emitido em: <?php echo App\Models\Padroes_gerais::data_e_hora(); ?></i></p>
+    
+    <table border="0">
+        <tr>
+            <td style="width:200px"></td>
+            <td style="width:200px"></td>
+            <td style="width:200px"></td>
+        </tr>
+        <tr>
+            <td><strong>Data Pedido: </strong></td>
+            <td><i><?php echo $this->view->dados_pedido->created_at ?></i></td>
+        </tr>
+        <tr>
+            <td><strong>Entrega: </strong></td>
+            <td><i><?php echo $this->view->dados_pedido->to_deliver_in ?></i></td>
+        </tr>
+        <tr>
+            <td><strong>Cliente: </strong></td>
+            <td><i><?php echo $this->view->dados_pedido->name ?></i></td>
+        </tr>
+    </table>    
+        
+    <table border="0">
+        <?php
+            $cont = 1;
+            foreach ($this->view->dados_produtos as  $value) { ?>
+                
+                <tr>
+                    <td style="width:500px">----------------------------------------------------</td>
+                </tr>
+                <tr>
+                    <td><strong>Item: </strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <?php echo $cont?></td>
+                </tr>
+                <tr>
+                    <td><strong>Produto: </strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <?php echo $value->fk_id_product?></td>
+                </tr>
+                <tr>
+                    <td><strong>Nome: </strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  <?php echo $value->name?></td>
+                </tr>
+                <tr>
+                    <td><strong>Descrição: </strong>&nbsp&nbsp&nbsp&nbsp <?php echo $value->description?></td>
+                </tr>
+                <tr>
+                    <td><strong>Quantidade: </strong>&nbsp&nbsp&nbsp <?php echo $value->qtd?></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Observações: </strong>&nbsp&nbsp   <strong><i><?php echo $value->obs?></i></strong></td>
+                    <td ></td>
+                </tr>
+
+        <?php    $cont++; } ?>
+                <tr>
+                    <td style="width:500px">----------------------------------------------------</td>
+                </tr>
+    </table>
+</div>
+	
+
+
+
+
+
+
+
+		

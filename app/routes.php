@@ -98,6 +98,8 @@ $route[] = ['/carrega_historico_status_pedido',     'PedidoController@carrega_hi
 $route[] = ['/add_produto_pedido',                  'PedidoController@add_produto_pedido',                          'auth'];
 $route[] = ['/remove_produto_pedido',               'PedidoController@remove_produto_pedido',                       'auth'];
 $route[] = ['/apagar_pedido',                       'PedidoController@apagar_pedido',                               'auth'];
+$route[] = ['/visualiza_romaneio/{id}',             'PedidoController@visualiza_romaneio',                          'auth'];
+$route[] = ['/imprime_romaneio/{id}',               'PedidoController@imprime_romaneio',                            'auth'];
 
 $route[] = ['/consultar_pedidos',                   'PedidoController@consultar_pedidos',                           'auth'];
 $route[] = ['/realizar_busca_pedido_filtros',       'PedidoController@realizar_busca_pedido_filtros',               'auth'];

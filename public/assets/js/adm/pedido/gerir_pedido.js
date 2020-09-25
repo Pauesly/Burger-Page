@@ -17,6 +17,14 @@ $(document).ready(function(){
 });
 
 
+$('#btn_visualizar_romaneio').click(function(){
+        let id_pedido = document.getElementById("id_pedido").value;
+        window.open('/visualiza_romaneio/' + id_pedido,'janela');
+  });
+$('#btn_imprimir_romaneio').click(function(){
+        let id_pedido = document.getElementById("id_pedido").value;
+        window.open('/imprime_romaneio/' + id_pedido,'janela');
+  });
 
 
 // Listener botao PAGAR SIM

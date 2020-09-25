@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Burger-page/Burger-Page/public/assets/js/adm/pedido/gestao_a_vista.js</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/pedido/gestao_a_vista.phtml</file>
             <file>file:/C:/Burger-page/Burger-Page/app/Controllers/PedidoController.php</file>
             <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/adm_menu.phtml</file>
+            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/pedido/visualiza_romaneio.phtml</file>
             <file>file:/C:/Burger-page/Burger-Page/app/routes.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/status/gestao_status.phtml</file>
         </group>
     </open-files>
 </project-private>

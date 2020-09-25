@@ -25,6 +25,18 @@
             }
         ?>
         
+        <div class="form-row mb-2" >
+            <dt class="col-sm-3">
+                <button type="button" class="btn btn-outline-secondary btn-lg" id="btn_imprimir_romaneio">
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir pedido
+                </button> 
+            </dt>
+            <dt class="col-sm-3">
+                <button type="button" class="btn btn-outline-secondary btn-lg" id="btn_visualizar_romaneio">
+                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Visualizar Romaneio
+                </button> 
+            </dt>
+        </div>
         
         <!--CABECALHO Dados Iniciais-->
         <div class="form-row" >
@@ -154,7 +166,6 @@
                         
                     </dl>
                 </div>
-                
         </div>
         
         
@@ -297,8 +308,6 @@
     </div>
 <!--FIM DIV PRINCIPAL-->
 </div>
-
-
 
 <!--form Armazenando dados-->
 <form action="/gerir_pedido" method="POST" id="form_gerir_pedido" class="esconder">
