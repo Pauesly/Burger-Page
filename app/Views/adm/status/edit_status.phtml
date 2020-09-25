@@ -76,6 +76,20 @@
                     </div>
             </div>
 	</div>
+        
+        <!--Cor-->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                    <label for="inputState">Codigo da cor (RGB 6 dígitos)</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Cor</span>
+                        </div>
+                        <input  type="text" class="form-control" id="txt_cor" name="txt_cor"  value="<?= $this->view->dados->color_code ?>"  aria-describedby="basic-addon1" maxlength="6">
+                        <div class="invalid-feedback">Cor obrigatório.</div>
+                    </div>
+            </div>
+	</div>
        
         <hr>
         
@@ -97,6 +111,7 @@
         <input type='hidden'    name="active"                    id="active"        value="<?= $this->view->dados->active ?>">
         <input type='hidden'    name="name"                      id="name">
         <input type='hidden'    name="sequence"                  id="sequence">
+        <input type='hidden'    name="color_code"                id="color_code">
         
     </form>
 

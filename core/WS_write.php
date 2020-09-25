@@ -145,6 +145,7 @@ class WS_write
                 $dados = array();
                 $dados['status']        = $data['status'];
                 $dados['sequence']      = $data['sequence'];
+                $dados['color_code']      = $data['color_code'];
                 $dados['active']        = $data['active'];
                 
                 if($status['id_cadastro'] = DBCreate('Status', $dados, true)){
@@ -220,6 +221,7 @@ class WS_write
                 $dados['fk_id_customer']    = $data['fk_id_customer'];
                 $dados['fk_id_address']     = $data['fk_id_address'];
                 $dados['payment_status']    = $data['payment_status'];
+                $dados['fk_id_payment_term']= $data['fk_id_payment_term'];
                 $dados['schedule_delivery'] = $data['schedule_delivery'];
                 $dados['to_deliver_in']     = $data['to_deliver_in'];
                 $dados['fk_id_status']      = $data['fk_id_status'];

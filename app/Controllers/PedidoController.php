@@ -255,7 +255,6 @@ class PedidoController extends BaseController
     
     
     public function realizar_busca_pedido_filtros($request){
-        
         $tel = self::FormataTelefone($request->get->telefone);
         $resultado = Pedido::busca_pedido_nome_tel_data($request->get->nome, $tel, $request->get->data_inicial, $request->get->data_final);
         echo(json_encode($resultado));
@@ -301,7 +300,10 @@ class PedidoController extends BaseController
     }
     
     
-    
+    public function carregar_gestao_a_vista($request){
+        $resultado = Pedido::carregar_gestao_a_vista($request->get->data_setted);
+        echo(json_encode($resultado));
+    }
     
     
     

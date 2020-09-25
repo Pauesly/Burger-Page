@@ -177,7 +177,8 @@ class WS_update
 	        $array = array(
                     "active"             => $data['active'],
                     "status"             => $data['name'],
-                    "sequence"           => $data['sequence']
+                    "sequence"           => $data['sequence'],
+                    "color_code"           => $data['color_code']
                 );
 
                 $result = BDUpdate('Status', $array, "id_status LIKE '$id_status'", true);

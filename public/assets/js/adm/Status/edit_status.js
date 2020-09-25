@@ -35,7 +35,7 @@ function SalvarCliente(){
 //  Coletando e preenchendo todos os dados
     document.getElementById("name").value =                     document.getElementById("txt_name").value;
     document.getElementById("sequence").value =                 document.getElementById("txt_ordem").value;
-
+    document.getElementById("color_code").value =               document.getElementById("txt_cor").value;
     
     //Enviando
     document.getElementById('cadastrar_novo_item').submit();
@@ -63,9 +63,13 @@ function ValidaCamposObrigatorios() {
         document.getElementById("txt_ordem").className = "form-control is-invalid";
     }
     
+    if(document.getElementById("txt_cor").value.length > 0){ 
+        validacoes++; 
+    }else{
+        document.getElementById("txt_cor").className = "form-control is-invalid";
+    }
     
-    
-    if(validacoes === 2){
+    if(validacoes === 3){
         return true;
     }else{
         return false;

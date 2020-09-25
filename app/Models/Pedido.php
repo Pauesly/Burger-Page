@@ -29,6 +29,7 @@ class Pedido
             "fk_id_address"     => $fk_id_address,
             "fk_id_status"      => 1,
             "payment_status"    => 0,
+            "fk_id_payment_term"=> 0,
             "created_at"        => Padroes_gerais::data_e_hora(),
             "schedule_delivery" => 0,
             "to_deliver_in"     => Padroes_gerais::data_e_hora(),
@@ -321,7 +322,34 @@ class Pedido
    
     
     
+    
 
+    //Sallva OBS
+    public static function carregar_gestao_a_vista($dt_gestao) {
+        
+        $dt =  str_replace("/", "-", $dt_gestao);
+        $data_hora = date('Y-m-d', strtotime($dt));
+        
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "carregar_gestao_a_vista",
+            "data_get"          => $data_hora
+        ];
+        $resultado_final = WS_read::ler_dados($array);
+        $resultado_final =  json_decode($resultado_final);
+        
+        if($resultado_final->erro == false){
+            foreach ($resultado_final->resultado as $key => $value_f) {
+                $tot = ProdutoPedido::busca_total_pedido($value_f->id_order);
+                $resultado_final->resultado[$key]->total = $tot->resultado[0]->total;
+            }
+        }
+        
+        return  $resultado_final;
+        
+    }
+    
+    
     
     
 

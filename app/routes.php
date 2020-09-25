@@ -88,8 +88,8 @@ $route[] = ['/abrir_pedido',                        'PedidoController@abrir_pedi
 $route[] = ['/gerir_pedido',                        'PedidoController@gerir_pedido',                                'auth'];
 $route[] = ['/salva_pagamento_sim',                 'PedidoController@salva_pagamento_sim',                         'auth'];
 $route[] = ['/salva_pagamento_nao',                 'PedidoController@salva_pagamento_nao',                         'auth'];
-$route[] = ['/salva_delivery_status',               'PedidoController@salva_delivery_status'];
-$route[] = ['/salva_data_hora_delivery',            'PedidoController@salva_data_hora_delivery'];
+$route[] = ['/salva_delivery_status',               'PedidoController@salva_delivery_status',                       'auth'];
+$route[] = ['/salva_data_hora_delivery',            'PedidoController@salva_data_hora_delivery',                    'auth'];
 $route[] = ['/salva_obs',                           'PedidoController@salva_obs',                                   'auth'];
 $route[] = ['/salva_forma_pagamento',               'PedidoController@salva_forma_pagamento',                       'auth'];
 $route[] = ['/salva_status_pedido',                 'PedidoController@salva_status_pedido',                         'auth'];
@@ -103,6 +103,7 @@ $route[] = ['/consultar_pedidos',                   'PedidoController@consultar_
 $route[] = ['/realizar_busca_pedido_filtros',       'PedidoController@realizar_busca_pedido_filtros',               'auth'];
 
 $route[] = ['/gestao_a_vista',                      'PedidoController@gestao_a_vista',                              'auth'];
+$route[] = ['/carregar_gestao_a_vista',             'PedidoController@carregar_gestao_a_vista',                     'auth'];
 
 
 

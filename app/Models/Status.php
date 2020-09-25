@@ -33,12 +33,13 @@ class Status
     
     
     //Busca adm com email para Login
-    public static function cadastra_novo_status($name, $sequence) {
+    public static function cadastra_novo_status($name, $sequence, $color_code) {
         //Dados obrigatorios
         $array = [
             "funcao"    => "cadastra_novo_status",
             "status"      => $name,
             "sequence" => $sequence,
+            "color_code" => $color_code,
             "active"   => 1
         ];
         $resultado = WS_write::white($array);
@@ -61,14 +62,15 @@ class Status
     
 
     //Busca adm com email para Login
-    public static function altera_status($id_status, $active, $name, $sequence) {
+    public static function altera_status($id_status, $active, $name, $sequence, $color_code) {
         //Dados obrigatorios
         $array = [
             "funcao"    => "altera_status",
             "id_status"   => $id_status,
             "active"    => $active,
             "name"      => $name,
-            "sequence" => $sequence
+            "sequence" => $sequence,
+            "color_code" => $color_code
         ];
         $resultado = WS_update::alterar_dados($array);
         return  json_decode($resultado);

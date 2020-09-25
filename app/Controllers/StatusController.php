@@ -101,7 +101,8 @@ class StatusController extends BaseController
         
         $resultado = Status::cadastra_novo_status(
                 $request->post->name,
-                $request->post->sequence
+                $request->post->sequence,
+                $request->post->color_code
                 );
         
         if($resultado->erro){
@@ -151,7 +152,8 @@ class StatusController extends BaseController
                 $request->post->id_status,
                 $request->post->active,
                 $request->post->name,
-                $request->post->sequence
+                $request->post->sequence,
+                $request->post->color_code
                 );
         
 //                var_dump($resultado);die;
