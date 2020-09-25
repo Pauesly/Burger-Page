@@ -30,6 +30,8 @@ class Pedido
             "fk_id_status"      => 1,
             "payment_status"    => 0,
             "created_at"        => Padroes_gerais::data_e_hora(),
+            "schedule_delivery" => 0,
+            "to_deliver_in"     => Padroes_gerais::data_e_hora(),
             "active"            => 1
         ];
         $resultado = WS_write::white($array);
@@ -74,6 +76,35 @@ class Pedido
         return  json_decode($resultado);
     }
     
+    
+    //Salva Status Delivery
+    public static function salva_delivery_status($id_pedido, $delivery_status, $created_at) {
+        
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "salva_delivery_status",
+            "schedule_delivery" => $delivery_status,
+            "id_pedido"         => $id_pedido,
+            "created_at"        => $created_at
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    //Salva Data e hora Delivery
+    public static function salva_data_hora_delivery($data, $hora, $id_pedido) {
+        
+        $dt =  str_replace("/", "-", $data);
+        $data_hora = date('Y-m-d', strtotime($dt)) . " " . $hora;
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "salva_data_hora_delivery",
+            "to_deliver_in"     => $data_hora,
+            "id_pedido"         => $id_pedido
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     //Sallva OBS

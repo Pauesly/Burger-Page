@@ -170,10 +170,8 @@ function Consultar() {
                 console.log("nenhum resultado");
             }else{
                 //Setting Screen
-                
-                
-               
                 retorno['resultado'].forEach(PreencheTabela);
+                document.getElementById('tabela_principal').scrollIntoView(true);
             }
     });
 }
@@ -196,6 +194,7 @@ function PreencheTabela(item, indice) {
 
 
 function edit_pedido(id_pedido) {
+    LaunchLoading();
     document.getElementById('id_pedido').value = id_pedido;
     document.getElementById('form_edit_pedido').submit();
 }

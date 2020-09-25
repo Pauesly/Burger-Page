@@ -558,6 +558,8 @@ class WS_read
                                 Orders.fk_id_address        as fk_id_address,
                                 Orders.fk_id_payment_term   as fk_id_payment_term,
                                 Orders.fk_id_status         as fk_id_status,
+                                Orders.schedule_delivery    as schedule_delivery,
+                                Orders.to_deliver_in        as to_deliver_in,
                                 Orders.obs                  as obs,
                                 Orders.payment_status       as payment_status,
                                 Orders.active               as active,

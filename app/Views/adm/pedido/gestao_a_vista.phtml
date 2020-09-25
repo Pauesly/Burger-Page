@@ -37,10 +37,10 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Data Inicial</span>
+                                <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Data gestão</span>
                             </div>
-                            <input class="form-control" id="txt_data_inicial" name="date" placeholder="DD/MM/YYYY" type="text"/>
-                    <div class="invalid-feedback">Digite alguma data.</div>
+                            <input class="form-control" id="txt_data_inicial" name="date" placeholder="DD/MM/YYYY" value="<?php echo $this->view->data?>" type="text"/>
+                            <div class="invalid-feedback">Digite alguma data.</div>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -48,14 +48,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;&nbsp;Taxa Atualização</span>
                             </div>
-                            <select class="form-control">
+                            <select class="form-control" id="select_time">
                                 <option value="10" selected>10 segundos</option>
-                                <option value="30" selected>30 segundos</option>
-                                <option value="60" selected>1 minuto</option>
-                                <option value="120" selected>2 minutos</option>
-                                <option value="300" selected>5 minutos</option>
-                                <option value="600" selected>10 minutos</option>
-                                <option value="1800" selected>30 minutos</option>
+                                <option value="30"      >30 segundos    </option>
+                                <option value="60"      >1 minuto   </option>
+                                <option value="120"     >2 minutos  </option>
+                                <option value="300"     >5 minutos  </option>
+                                <option value="600"     >10 minutos </option>
+                                <option value="1800"    >30 minutos </option>
                             </select>
                         </div>
                     </div>
@@ -65,7 +65,11 @@
         </div>
 
         <hr>
-        <h3 id="txt_count_down">Próxima Atualização: 55</h3>
+        <div class="row">
+            <div class="col-sm-5"><h3 id="txt_count_down">Próxima Atualização: 55 </h3></div>
+            <div class="col-sm-7"><div class="esconder" id="loading_table" role="status"></div></div>
+        </div>
+        
         <hr>
         
         

@@ -248,6 +248,50 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------ 
+        /**
+             * Altera Status Delivery
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "salva_delivery_status":
+                
+                $id_order      = $data['id_pedido'];
+	    
+	        $array = array(
+                    "schedule_delivery"            => $data['schedule_delivery']
+                );
+                $result = BDUpdate('Orders', $array, "id_order LIKE '$id_order'", true);
+                
+                if($data['schedule_delivery'] == 0){
+                    $array2 = array(
+                        "to_deliver_in"            => $data['created_at']
+                    );
+                    BDUpdate('Orders', $array2, "id_order LIKE '$id_order'", true);
+                }
+                
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------ 
+        /**
+             * Altera Condicao de pagamento Pedido
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "salva_data_hora_delivery":
+                
+                $id_order      = $data['id_pedido'];
+	    
+	        $array = array(
+                    "to_deliver_in"            => $data['to_deliver_in']
+                );
+                $result = BDUpdate('Orders', $array, "id_order LIKE '$id_order'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------ 
             /**
              * Altera OBS Pedido
              * Recebe dados

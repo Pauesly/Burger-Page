@@ -20,11 +20,11 @@
                 ?>
                     <div class="alert alert-danger" role="alert">
                         PEDIDO CANCELADO
-                   </div
+                    </div>
                 <?PHP
             }
         ?>
-        >
+        
         
         <!--CABECALHO Dados Iniciais-->
         <div class="form-row" >
@@ -75,6 +75,43 @@
                         <dd class="col-sm-8  text-right">
                             <a class="<?php echo $this->view->dados_pedido->resultado[0]->payment_status == 1 ? "btn btn-success text-white" : "btn btn-outline-success"?>" id="btn_pago_sim" role="button">SIM</a>
                             <a class="<?php echo $this->view->dados_pedido->resultado[0]->payment_status == 0 ? "btn btn-danger text-white" : "btn btn-outline-danger"?>" id="btn_pago_nao" role="button">NÃO</a>
+                        </dd>
+                        
+                        <dt class="col-sm-12 text-center"><hr></dt>
+                        
+                         <!--Entrega Agendamento-->
+                        <dt class="col-sm-4 float-left">Entrega Agendada <span class="" role="status" id="loading_delivery" aria-hidden="true"></span></dt>
+                        <dd class="col-sm-8  text-right">
+                            <a class="<?php echo $this->view->dados_pedido->resultado[0]->schedule_delivery == 1 ? "btn btn-success text-white" : "btn btn-outline-success"?>" id="btn_entrega_sim" role="button">SIM</a>
+                            <a class="<?php echo $this->view->dados_pedido->resultado[0]->schedule_delivery == 0 ? "btn btn-danger text-white" : "btn btn-outline-danger"?>" id="btn_entrega_nao" role="button">NÃO</a>
+                        </dd>
+                        <dd class="col-sm-12  text-right">
+                            <div id="div_data_delivery" class="<?php echo $this->view->dados_pedido->resultado[0]->schedule_delivery == 1 ? "" : "esconder"?>">
+                                <div class="col-sm-12 col-xs-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                                &nbsp;&nbsp;Data Entrega&nbsp;
+                                                <span class="" role="status" id="loading_data_delivery" aria-hidden="true">
+                                            </span>
+                                        </div>
+                                        <input class="form-control" id="txt_data_delivery" name="date" placeholder="DD/MM/YYYY" type="text" value="<?php echo $this->view->data_entrega?>"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                                &nbsp;&nbsp;Horário Entrega&nbsp;
+                                                <span class="" role="status" id="loading_hora_delivery" aria-hidden="true">
+                                            </span>
+                                        </div>
+                                        <input class="form-control" id="txt_hora_delivery" name="txt_hora_delivery" placeholder="" type="text" value="<?php echo $this->view->horario_entrega?>" />
+                                    </div>
+                                </div>
+                            </div>
                         </dd>
                         
                         <dt class="col-sm-12 text-center"><hr></dt>
@@ -269,6 +306,8 @@
     <input type='text'    name="id_pedido"                      id="id_pedido"          value="<?= $this->view->dados_pedido->resultado[0]->id_order?>">
     <input type='text'    name="id_status_pedido"               id="id_status_pedido"   value="<?= $this->view->dados_pedido->resultado[0]->fk_id_payment_term?>">
     <input type='text'    name="fk_id_status"                   id="fk_id_status"       value="<?= $this->view->dados_pedido->resultado[0]->fk_id_status?>">
+    <input type='text'    name="created_at"                     id="created_at"         value="<?= $this->view->dados_pedido->resultado[0]->created_at?>">
+    <input type='text'    name="txt_delivery_status"            id="txt_delivery_status">
 </form>
 
 

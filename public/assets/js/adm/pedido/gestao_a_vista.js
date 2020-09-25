@@ -9,32 +9,38 @@ $(document).ready(function() {
 			todayHighlight: true,
 			autoclose: true,
 		});
-    
-    //Mascara Telefone
-    var SPMaskBehavior = function (val) {
-      return val.replace(/\D/g, '').length === 11 ? '(00) 0 0000-0000' : '(00) 0000-00009';
-    },
-    spOptions = {
-      onKeyPress: function(val, e, field, options) {
-          field.mask(SPMaskBehavior.apply({}, arguments), options);
-        }
-    };
-    $('#txt_busca_telefone').mask(SPMaskBehavior, spOptions);
-    
+                
     $('#tabela_principal').DataTable();
+    
+    
+    cronometro();
+    
 } );
 
 
+function cronometro() {
+    var segundos = document.getElementById("select_time").value;
+    $('#txt_count_down').text("Próxima Atualização: " + segundos);
+    var contadorID = setInterval(function(){
+        if(segundos == 0){
+            clearInterval(contadorID);
+            AtualizaTabela();
+        }else{
+            segundos --;
+            $('#txt_count_down').text("Próxima Atualização: " + segundos);
+        }
+    }, 1000);
+}
 
-//Switch data
-$('#switch_data').on('change.bootstrapSwitch', function(e) {
-    document.getElementById("erro_no_filter").className = "esconder";
-    if(e.target.checked){
-        document.getElementById("filter_data").className = "container";
-    }else{
-        document.getElementById("filter_data").className = "esconder";
-    }
-});
+
+function AtualizaTabela() {
+    document.getElementById("loading_table").className = "spinner-border text-success";
+    console.log("Zerou");
+    cronometro();
+}
+
+
+
 
 
 
@@ -108,6 +114,62 @@ function edit_pedido(id_pedido) {
     document.getElementById('id_pedido').value = id_pedido;
     document.getElementById('form_edit_pedido').submit();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+var tempo = new Number();
+// Tempo em segundos
+tempo = 5;
+
+function startCountdown(){
+
+	// Se o tempo não for zerado
+	if((tempo - 1) >= 0){
+
+		// Pega a parte inteira dos minutos
+		var min = parseInt(tempo);
+		// Calcula os segundos restantes
+		var seg = tempo;
+
+		// Formata o número menor que dez, ex: 08, 07, ...
+		if(min < 10){
+			min = "0"+min;
+			min = min.substr(0, 2);
+		}
+		if(seg <=9){
+			seg = "0"+seg;
+		}
+
+		// Cria a variável para formatar no estilo hora/cronômetro
+		horaImprimivel = '00:' + min + ':' + seg;
+		//JQuery pra setar o valor
+		$("#sessao").html(horaImprimivel);
+                document.getElementById('txt_count_down').value = horaImprimivel;
+
+		// Define que a função será executada novamente em 1000ms = 1 segundo
+		setTimeout('startCountdown()',1000);
+
+		// diminui o tempo
+		tempo--;
+
+	// Quando o contador chegar a zero faz esta ação
+	} else {
+        console.log("Acabou");
+	}
+
+}
+
+
 
 
 

@@ -95,8 +95,7 @@ class PedidoController extends BaseController
         $admin  =  Session::get('adm');
 
         $this->view->id_pedido          = $request->post->id_pedido;
-//        $this->view->id_customer        = $request->post->id_customer;
-//        $this->view->endereco_entrega   = $request->post->endereco_entrega;
+
         
         $this->view->dados_pedido       = Pedido::busca_dados_pedido($request->post->id_pedido);
         $this->view->endereco_entrega   = Endereco::busca_endereco_por_id($this->view->dados_pedido->resultado[0]->fk_id_address);
@@ -105,7 +104,12 @@ class PedidoController extends BaseController
         $this->view->produtos           = Produto::relatorio_all_produtos_ativos_menu_no_pic();
         $this->view->categorias         = Categoria::relatorio_all_categorias_ativas();
         
-//        var_dump($this->view->produtos); die;
+        //data e hora entrega
+        $data_delivery_array = explode(' ',$this->view->dados_pedido->resultado[0]->to_deliver_in);
+        $this->view->data_entrega        = date('d/m/Y', strtotime($data_delivery_array[0]));
+        $this->view->horario_entrega     = $data_delivery_array[1];
+        
+        
         
         $nome_array = explode(' ',$admin['name']);
         $this->view->nome = $nome_array[0];
@@ -119,6 +123,8 @@ class PedidoController extends BaseController
                               . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
                               . '<script src="/assets/js/bootstrap-select.js"></script>'
+                              . '<script src="/assets/js/date_picker.js" crossorigin="anonymous"></script>'
+                              . '<link rel="stylesheet" type="text/css" href="assets/css/date_picker.css"/>'
                               . '<script src="/assets/js/adm/pedido/gerir_pedido.js" crossorigin="anonymous"></script>';
         $this->setPageTitle('Gerir Pedido - Area Restrita');
         $this->renderView('adm/pedido/gerir_pedido', '/adm/adm_layout');
@@ -134,6 +140,17 @@ class PedidoController extends BaseController
     
     public function salva_pagamento_nao($request){
         $resultado = Pedido::salva_pagamento_nao($request->get->id_pedido);
+        echo(json_encode($resultado));
+    }
+    
+    public function salva_delivery_status($request){
+        $resultado = Pedido::salva_delivery_status($request->get->id_pedido, $request->get->delivery_status, $request->get->created_at);
+        echo(json_encode($resultado));
+    }
+    
+    
+    public function salva_data_hora_delivery($request){
+        $resultado = Pedido::salva_data_hora_delivery($request->get->data, $request->get->hora, $request->get->id_pedido);
         echo(json_encode($resultado));
     }
     
@@ -261,6 +278,9 @@ class PedidoController extends BaseController
         $nome_array = explode(' ',$admin['name']);
         $this->view->nome = $nome_array[0];
         
+        date_default_timezone_set('America/Sao_Paulo');
+        $this->view->data = date('d/m/Y');
+        
         $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
         
         $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
@@ -276,8 +296,6 @@ class PedidoController extends BaseController
                               . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
                               . '<script type="text/javascript" src="assets/js/adm/pedido/gestao_a_vista.js"></script>';
         
-
-
         $this->setPageTitle('Gestão à vista Pedidos - Area Restrita');
         $this->renderView('adm/pedido/gestao_a_vista', '/adm/adm_layout');
     }

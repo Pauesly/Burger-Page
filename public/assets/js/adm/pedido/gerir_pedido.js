@@ -1,5 +1,16 @@
 $(document).ready(function(){
+    //Date Picker
+    var date_input=$('input[name="date"]'); //our date input has the name "date"
+		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+		date_input.datepicker({
+			format: 'dd/mm/yyyy',
+			container: container,
+			todayHighlight: true,
+			autoclose: true,
+		});
+    
     $('#txt_add_preco').mask("#,##0.00", {reverse: true});
+    $('#txt_hora_delivery').mask('00:00');
     $('#select_forma_pagamento')        .selectpicker('val', $("#id_status_pedido")       .val());
     $('#select_status_pedido')          .selectpicker('val', $("#fk_id_status")       .val());
     CarregaProdutosPedido();
@@ -49,7 +60,7 @@ document.getElementById("btn_pago_nao").addEventListener("mousedown", function(e
 
 
 /**
- * Salva Pagamento sim
+ * Salva Pagamento Nao
  */
 function SalvaPagamentoNAO() {
     let id_pedido = document.getElementById("id_pedido").value;
@@ -67,6 +78,117 @@ function SalvaPagamentoNAO() {
             }
     });
 }
+
+
+
+// Listener botao Sim agendar delivery
+document.getElementById("btn_entrega_sim").addEventListener("mousedown", function(event) {
+    document.getElementById("loading_delivery").className = "spinner-border spinner-border-sm text-primary";
+    document.getElementById("btn_entrega_sim").className = "disabled";
+    document.getElementById("btn_entrega_nao").className = "disabled";
+    document.getElementById("txt_delivery_status").value = 1;
+    SalvaDeliveryStatus();
+});
+// Listener botao Nao agendar delivery
+document.getElementById("btn_entrega_nao").addEventListener("mousedown", function(event) {
+    document.getElementById("loading_delivery").className = "spinner-border spinner-border-sm text-primary";
+    document.getElementById("btn_entrega_sim").className = "disabled";
+    document.getElementById("btn_entrega_nao").className = "disabled";
+    document.getElementById("txt_delivery_status").value = 0;
+    SalvaDeliveryStatus();
+});
+function SalvaDeliveryStatus() {
+    let id_pedido = document.getElementById("id_pedido").value;
+    let delivery_status = document.getElementById("txt_delivery_status").value;
+    let created_at = document.getElementById("created_at").value;
+    console.log(created_at);
+    $.getJSON('/salva_delivery_status?search=',{id_pedido:id_pedido, delivery_status:delivery_status, created_at:created_at, ajax: 'true'}, function(retorno){
+        
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                document.getElementById("loading_delivery").className = "";
+                if(delivery_status === "1"){
+                    document.getElementById("btn_entrega_sim").className = "btn btn-success text-white";
+                    document.getElementById("btn_entrega_nao").className = "btn btn-outline-danger";
+                    document.getElementById("div_data_delivery").className = "";
+                }else{
+                    document.getElementById("btn_entrega_sim").className = "btn btn-outline-success";
+                    document.getElementById("btn_entrega_nao").className = "btn btn-danger text-white";
+                    document.getElementById("div_data_delivery").className = "esconder";
+                }
+                
+            }
+    });
+}
+
+
+
+//Salva Data Delivery
+document.getElementById("txt_data_delivery").addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        SalvaDataDelivery();
+    }
+});
+//Salva Data Delivery
+document.getElementById("txt_hora_delivery").addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        SalvaDataDelivery();
+    }
+});
+document.getElementById("txt_hora_delivery").addEventListener("focusout", SalvaDataDelivery);
+
+document.getElementById("txt_data_delivery").addEventListener("focusin", SalvaDataAlert);
+document.getElementById("txt_hora_delivery").addEventListener("focusin", SalvaDataAlert);
+
+function SalvaDataAlert() {
+    document.getElementById("txt_data_delivery").className = "form-control";
+    document.getElementById("txt_hora_delivery").className = "form-control";
+}
+
+/**
+ * Salva Data Delivery
+ */
+function SalvaDataDelivery() {
+    
+    document.getElementById("loading_data_delivery").className = "spinner-border spinner-border-sm text-primary";
+    document.getElementById("loading_hora_delivery").className = "spinner-border spinner-border-sm text-primary";
+    document.getElementById("txt_data_delivery").disabled = true;
+    document.getElementById("txt_hora_delivery").disabled = true;
+    
+    let data = document.getElementById("txt_data_delivery").value;
+    let hora = document.getElementById("txt_hora_delivery").value;
+    let id_pedido = document.getElementById("id_pedido").value;
+    
+    $.getJSON('/salva_data_hora_delivery?search=',{data:data, hora:hora, id_pedido:id_pedido, ajax: 'true'}, function(retorno){
+        
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO ao salvar Data # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                document.getElementById("loading_data_delivery").className = "";
+                document.getElementById("loading_hora_delivery").className = "";
+                document.getElementById("txt_data_delivery").disabled = false;
+                document.getElementById("txt_hora_delivery").disabled = false;
+                document.getElementById("txt_data_delivery").className = "form-control is-valid";
+                document.getElementById("txt_hora_delivery").className = "form-control is-valid";
+            }
+    });
+}
+
+
+
+
+
+
+
 
 
 //LISTENERS DE DIGITACAO OBS
