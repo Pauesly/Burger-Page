@@ -179,16 +179,71 @@
                             <span class="" id="loading_totais" role="status" aria-hidden="true"></span>    
                     </h3>
                 </dt>
+                
                 <dt class="col-sm-12 text-center"><hr></dt>
             
+ 
                 <!--Canto Esquerdo-->
                 <div class="form-group col-md-6 ">
                     <dl class="row">
-                        
                         <!--ITENS-->
                         <dt class="col-sm-6 float-left"><h4>Total Itens</h4></dt>
                         <dd class="col-sm-6 "> <h4 id="txt_total_itens">0</h4> </dd>
-
+                    </dl>
+                </div>
+                
+                
+                <!--Canto Direito-->
+                <div class="form-group col-md-6" >
+                    <dl class="row">
+                        
+                        <!--VALOR TOTAL-->
+                        <dt class="col-sm-6 float-left"><h4>Total Produtos</h4></dt>
+                        <dd class="col-sm-6 ">  <h4 id="txt_valor_parcial">R$0,00</h4> </dd>
+                        
+                    </dl>
+                </div>
+                
+                <!--Canto Esquerdo FRETE-->
+                <div class="form-group col-md-6 ">
+                    <dl class="row">
+                        
+                    </dl>
+                </div>
+                
+                
+                <!--Canto Direito-->
+                <div class="form-group col-md-6" >
+                    <dl class="row">
+                        
+                        <dt class="col-sm-6 float-right">
+                            <!--ITENS-->
+                            <div class="input-group mb-12">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Frete R$ <span class="" id="loading_frete" role="status" aria-hidden="true"></span></span>
+                                </div>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txt_frete" 
+                                    name="txt_frete"  
+                                    value="<?php echo isset($this->view->dados_pedido->resultado[0]->shipping_fee) ? $this->view->dados_pedido->resultado[0]->shipping_fee : ""?>"  
+                                    aria-describedby="basic-addon1" 
+                                    maxlength="60">
+                            </div>
+                        </dt>
+                    </dl>
+                </div>
+                
+                
+                
+                <dt class="col-sm-12 text-center"><hr></dt>
+                
+                <!--Canto Esquerdo-->
+                <div class="form-group col-md-6 ">
+                    <dl class="row">
+                        <!--ITENS-->
+                        
                     </dl>
                 </div>
                 
@@ -203,6 +258,9 @@
                         
                     </dl>
                 </div>
+                
+                
+                
                 
                 <dt class="col-sm-12 text-center"><hr></dt>
                 

@@ -1,0 +1,3 @@
+FTP: ftp.jazzgrill.com.br
+User: u620166704.jg_grill_2020
+pass: Projetojazzgrill20

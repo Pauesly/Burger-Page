@@ -10,6 +10,7 @@ $(document).ready(function(){
 		});
     
     $('#txt_add_preco').mask("#,##0.00", {reverse: true});
+    $('#txt_frete').mask("#,##0.00", {reverse: true});
     $('#txt_hora_delivery').mask('00:00');
     $('#select_forma_pagamento')        .selectpicker('val', $("#id_status_pedido")       .val());
     $('#select_status_pedido')          .selectpicker('val', $("#fk_id_status")       .val());
@@ -55,7 +56,6 @@ function SalvaPagamentoSIM() {
             }
     });
 }
-
 
 
 // Listener botao PAGAR NAO
@@ -228,6 +228,49 @@ document.getElementById("btn_historico_status").addEventListener("mousedown", fu
 document.getElementById("btn_add_produto").addEventListener("mousedown", function(event) {
     $('#modal_cardapio').modal('show');
 });
+
+
+
+
+//Salva Data Delivery
+document.getElementById("txt_frete").addEventListener("keyup", function(event) {
+    document.getElementById("txt_frete").className = "form-control";
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        SalvaFrete();
+    }
+});
+document.getElementById("txt_frete").addEventListener("focusout", SalvaFrete);
+
+function SalvaFrete() {
+    
+    document.getElementById("loading_frete").className = "spinner-border spinner-border-sm text-primary";
+    document.getElementById("txt_frete").disabled = true;
+    
+    let id_pedido = document.getElementById("id_pedido").value;
+    let frete = document.getElementById("txt_frete").value;
+    
+    $.getJSON('/salva_frete?search=',{id_pedido:id_pedido, frete:frete, ajax: 'true'}, function(retorno){
+        
+        document.getElementById("loading_frete").className = "";
+        document.getElementById("txt_frete").disabled = false;
+
+        //Erro. Busca vazia ou execucao da consulta
+        if(retorno['erro']){
+            //Setting Screen
+            document.getElementById("txt_frete").className = "form-control is-invalid";
+        }else{
+            //Setting Screen
+            document.getElementById("txt_frete").className = "form-control is-valid";
+        }
+        CarregaProdutosPedido();
+    });
+}
+
+
+
+
+
 
 
 
@@ -471,8 +514,11 @@ function CarregaProdutosPedido() {
                     valor_total = parseFloat(valor_total) + parseFloat(retorno['resultado'][i]['price_total']); 
                 }
                 
+                document.getElementById("txt_valor_parcial").innerHTML = "R$ " + valor_total.toFixed(2);
+                let frete = document.getElementById("txt_frete").value.length === 0 ? "0" : document.getElementById("txt_frete").value;
+                let total_geral = valor_total + parseFloat(frete);
                 document.getElementById("txt_total_itens").innerHTML = total_produtos;
-                document.getElementById("txt_valor_total").innerHTML = "R$ " + valor_total.toFixed(2);
+                document.getElementById("txt_valor_total").innerHTML = "R$ " + total_geral.toFixed(2);
             }
     });
 }

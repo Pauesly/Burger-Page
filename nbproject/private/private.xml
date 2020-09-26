@@ -5,7 +5,7 @@
         <group>
             <file>file:/C:/Burger-page/Burger-Page/app/Controllers/PedidoController.php</file>
             <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/adm_menu.phtml</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/pedido/visualiza_romaneio.phtml</file>
+            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/pedido/visualiza_pedido.phtml</file>
             <file>file:/C:/Burger-page/Burger-Page/app/routes.php</file>
         </group>
     </open-files>

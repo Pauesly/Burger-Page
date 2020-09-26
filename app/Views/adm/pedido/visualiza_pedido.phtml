@@ -1,0 +1,173 @@
+
+<!--Cabecalho e titulo-->
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-sm text-center">
+            <img src="/images/logo-198x66.png" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="col-sm text-right">
+            <strong>
+                www.jazzgrill.com.br<br>
+                (27) 9 9855-1278<br>
+                @jazzgrillburger<br>
+                Vila Velha-ES
+            </strong>
+        </div>
+    </div>
+    <hr>
+</div>
+
+<!--ID e data-->
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h4><strong> Pedido <?php echo $this->view->dados_pedido->id_order?> </strong></h4>
+        </div>
+        <div class="col-sm text-right">
+            <i> Emissão <?php echo (new DateTime(App\Models\Padroes_gerais::data_e_hora()))->format('d/m/Y - H:i'); ?></i>
+        </div>
+    </div>
+    
+</div>
+
+<!--Dados do cliente-->
+<div class="container border-2 rounded mt-2 ">
+    <div class="row">
+        <div class="col-sm">
+            <strong><i>Dados do Cliente</i></strong> <br>
+            <?php echo $this->view->dados_pedido->name ?> <br>
+            <strong>Entrega:</strong> <br>
+            Local: <?php echo $this->view->endereco_entrega->local?> <br>
+            Endereço: <?php echo $this->view->endereco_entrega->rua?>, <?php echo $this->view->endereco_entrega->numero_complemento?> <br>
+            CEP: <?php echo $this->view->endereco_entrega->cep?> - <?php echo $this->view->endereco_entrega->estado?> <br>
+            Obs: <?php echo $this->view->endereco_entrega->obs?>
+        </div>
+        <div class="col-sm">
+            <br><br><br><br>
+            <?php echo $this->view->endereco_entrega->bairro?> - <?php echo $this->view->endereco_entrega->cidade?> <br>
+            <?php echo $this->view->endereco_entrega->referencia?>
+            
+        </div>
+        <div class="col-sm text-right">
+            Pedido: <i><?php echo (new DateTime($this->view->dados_pedido->created_at))->format('d/m/Y - H:i') ?></i>
+        </div>
+    </div>
+</div>
+
+
+<!--Dados Complementares do pedido-->
+<div class="container border-2 rounded mt-2 ">
+    <div class="row">
+        <div class="col-sm">
+            <strong><i>Status Atual: </i></strong><?php echo $this->view->dados_pedido->status_nome ?> <br>
+            <strong><i>Frete: </i></strong>R$ <?php echo $this->view->dados_pedido->shipping_fee ?> <br>
+        </div>
+        <div class="col-sm">
+            
+        </div>
+    </div>
+</div>
+
+
+<!--Tabela Produtos-->
+<div class="container border-2 rounded mt-2 ">
+    <div class="row">
+        <h4>Produtos</h4>
+    </div>
+    <div class="row">
+        <div class="col-1 border-2 text-center">
+            <strong>Item</strong>
+        </div>
+        <div class="col-1 border-2 text-center">
+            <strong>Código</strong>
+        </div>
+        <div class="col-4 border-2 text-center">
+            <strong>Descrição</strong>
+        </div>
+        <div class="col-2 border-2 text-center">
+            <strong>Valor UN</strong>
+        </div>
+        <div class="col-2 border-2 text-center">
+            <strong>QTD</strong>
+        </div>
+        <div class="col-2 border-2 text-center">
+            <strong>Total</strong>
+        </div>
+    </div>
+    
+    <?php
+        $cont = 1;
+        foreach ($this->view->dados_produtos as  $value) { ?>
+            <div class="row">
+                <div class="col-1 border text-center">
+                    <?php echo $cont?>
+                </div>
+                <div class="col-1 border text-center">
+                    <?php echo $value->fk_id_product?>
+                </div>
+                <div class="col-4 border text-left">
+                    <?php echo $value->name?>
+                </div>
+                <div class="col-2 border text-right">
+                    R$ <?php echo $value->price_unit?>
+                </div>
+                <div class="col-2 border text-center">
+                    <?php echo $value->qtd?>
+                </div>
+                <div class="col-2 border text-right">
+                    R$ <?php echo $value->price_total?>
+                </div>
+            </div>
+    <?php    $cont++; } ?>
+    
+    
+    <div class="row">
+        <div class="col-1 border text-center">
+            <?php echo $cont?>
+        </div>
+        <div class="col-1 border text-center">
+            <?php echo $value->fk_id_product?>
+        </div>
+        <div class="col-4 border text-left">
+            <?php echo $value->name?>
+        </div>
+        <div class="col-2 border text-right">
+            R$ <?php echo $value->price_unit?>
+        </div>
+        <div class="col-2 border text-center">
+            <?php echo $value->qtd?>
+        </div>
+        <div class="col-2 border text-right">
+            R$ <?php echo $value->price_total?>
+        </div>
+    </div>
+    
+    
+    
+    
+</div>
+
+
+
+
+
+
+
+
+
+<!--Rodape-->
+<div class="container mt-3">
+    <div class="row">
+        <div class="col col-md-6">
+            
+        </div>
+        <div class="col col-md-6 text-right">
+            Jazz Grill - Vila Velha/ES
+        </div>
+    </div>
+  
+</div>
+
+
+
+		

@@ -160,6 +160,10 @@ class PedidoController extends BaseController
         echo(json_encode($resultado));
     }
     
+    public function salva_frete($request){
+        $resultado = Pedido::salva_frete($request->get->id_pedido, $request->get->frete);
+        echo(json_encode($resultado));
+    }
     
     public function salva_forma_pagamento($request){
         $resultado = Pedido::salva_forma_pagamento($request->get->id_pedido, $request->get->id_forma_pagamento);
@@ -306,8 +310,6 @@ class PedidoController extends BaseController
     }
     
     
-    
-    
     public function visualiza_romaneio($id_pedido){
         
         $dados_pedido   = Pedido::busca_dados_pedido($id_pedido);
@@ -315,14 +317,28 @@ class PedidoController extends BaseController
         
         $this->view->dados_pedido       = $dados_pedido->resultado[0];
         $this->view->dados_produtos       = $dados_produtos->resultado;
-//        var_dump($dados_produtos); die;
+        
         $this->setPageTitle('Impressao Romaneio - Area Restrita');
         $this->renderView('adm/pedido/visualiza_romaneio', '/adm/adm_layout_impressao');
     }
     
     
     public function imprime_romaneio($id_pedido){
-        var_dump($id_pedido);
+        
+        $dados_pedido   = Pedido::busca_dados_pedido($id_pedido);
+        $dados_produtos = ProdutoPedido::busca_produtos_de_pedido($id_pedido);
+        $dados_entrega  = Endereco::busca_endereco_por_id($dados_pedido->resultado[0]->fk_id_address);
+        
+        
+        $this->view->dados_pedido       = $dados_pedido->resultado[0];
+        $this->view->dados_produtos     = $dados_produtos->resultado;
+        $this->view->endereco_entrega   = $dados_entrega->resultado[0]; 
+        
+//        var_dump($this->view->dados_pedido); die;
+        
+        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        $this->setPageTitle('Impressao Pedido - Area Restrita');
+        $this->renderView('adm/pedido/visualiza_pedido', '/adm/adm_layout_impressao');
     }
     
     

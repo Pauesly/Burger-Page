@@ -120,6 +120,17 @@ class Pedido
         return  json_decode($resultado);
     }
     
+    //Sallva FRETE
+    public static function salva_frete($id_pedido, $frete) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "salva_frete_pedido",
+            "id_pedido"         => $id_pedido,
+            "shipping_fee"      => $frete
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
     
     //Sallva OBS
     public static function salva_forma_pagamento($id_pedido, $id_forma) {

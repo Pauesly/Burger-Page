@@ -312,6 +312,25 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------ 
+        /**
+             * Altera FRETE Pedido
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "salva_frete_pedido":
+                
+                $id_order      = $data['id_pedido'];
+	    
+	        $array = array(
+                    "shipping_fee"            => $data['shipping_fee']
+                );
+
+                $result = BDUpdate('Orders', $array, "id_order LIKE '$id_order'", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------ 
             /**
              * Altera Forma PAgamento
              * Recebe dados

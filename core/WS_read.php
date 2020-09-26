@@ -546,8 +546,8 @@ class WS_read
                         
                         "JOIN Customer "
                             . "ON Customer.id_customer = Orders.fk_id_customer"
-//                       ."JOIN Adm "
-//                            . "ON Adm.id_adm = Orders.fk_id_adm"
+                       ." JOIN Status "
+                            . "ON Status.id_status = Orders.fk_id_status "
                         
                     	
 			. " WHERE id_order LIKE '$id' ",
@@ -564,10 +564,13 @@ class WS_read
                                 Orders.payment_status       as payment_status,
                                 Orders.active               as active,
                                 Orders.created_at           as created_at,
+                                Orders.shipping_fee         as shipping_fee,
                                 
                                 Customer.name               as name,
                                 Customer.phone_number_1     as phone_number_1,
-                                Customer.phone_number_2     as phone_number_2
+                                Customer.phone_number_2     as phone_number_2,
+                                
+                                Status.status               as status_nome
                                 ");
                 
                 if($result){
