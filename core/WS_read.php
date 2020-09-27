@@ -548,6 +548,8 @@ class WS_read
                             . "ON Customer.id_customer = Orders.fk_id_customer"
                        ." JOIN Status "
                             . "ON Status.id_status = Orders.fk_id_status "
+                       ." JOIN PaymentTerm "
+                            . "ON PaymentTerm.id_payment_term = Orders.fk_id_payment_term "
                         
                     	
 			. " WHERE id_order LIKE '$id' ",
@@ -570,7 +572,9 @@ class WS_read
                                 Customer.phone_number_1     as phone_number_1,
                                 Customer.phone_number_2     as phone_number_2,
                                 
-                                Status.status               as status_nome
+                                Status.status               as status_nome,
+                                
+                                PaymentTerm.name            as payment_term
                                 ");
                 
                 if($result){

@@ -18,6 +18,15 @@ use App\Models\Padroes_gerais;
 class Produto 
 {
 
+    //Busca adm com email para Login
+    public static function busca_cardapio_site() {
+        //Dados obrigatorios
+        $array = [
+            "funcao"     => "busca_cardapio_site"
+        ];
+        $resultado = WS_read_free::read_free($array);
+        return  json_decode($resultado);
+    }
     
     
     //Busca Produtos dados especificos

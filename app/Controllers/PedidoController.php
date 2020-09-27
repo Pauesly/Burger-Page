@@ -328,10 +328,15 @@ class PedidoController extends BaseController
         $dados_pedido   = Pedido::busca_dados_pedido($id_pedido);
         $dados_produtos = ProdutoPedido::busca_produtos_de_pedido($id_pedido);
         $dados_entrega  = Endereco::busca_endereco_por_id($dados_pedido->resultado[0]->fk_id_address);
+        $total_produtos = 0;
         
+        foreach ($dados_produtos->resultado as $key => $value) {
+            $total_produtos = $total_produtos + $value->price_total;
+        }
         
         $this->view->dados_pedido       = $dados_pedido->resultado[0];
         $this->view->dados_produtos     = $dados_produtos->resultado;
+        $this->view->total_produtos     = number_format($total_produtos, 2, '.', '');
         $this->view->endereco_entrega   = $dados_entrega->resultado[0]; 
         
 //        var_dump($this->view->dados_pedido); die;

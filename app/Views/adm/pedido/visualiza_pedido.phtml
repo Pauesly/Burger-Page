@@ -63,7 +63,8 @@
             <strong><i>Frete: </i></strong>R$ <?php echo $this->view->dados_pedido->shipping_fee ?> <br>
         </div>
         <div class="col-sm">
-            
+            <strong><i>Forma de Pagamento: </i></strong><?php echo $this->view->dados_pedido->payment_term?> <br>
+            <strong><i>Status Pagamento: </i></strong><?php echo $this->view->dados_pedido->payment_status == 1 ? "Pago" : "Pendete" ?> <br>
         </div>
     </div>
 </div>
@@ -121,28 +122,41 @@
     <?php    $cont++; } ?>
     
     
+    <!--Total Produtos-->
     <div class="row">
-        <div class="col-1 border text-center">
-            <?php echo $cont?>
+        <div class="col-8 text-right">
         </div>
-        <div class="col-1 border text-center">
-            <?php echo $value->fk_id_product?>
+        <div class="col-2 border-2 border-right-0 text-right">
+            Total Produtos 
         </div>
-        <div class="col-4 border text-left">
-            <?php echo $value->name?>
-        </div>
-        <div class="col-2 border text-right">
-            R$ <?php echo $value->price_unit?>
-        </div>
-        <div class="col-2 border text-center">
-            <?php echo $value->qtd?>
-        </div>
-        <div class="col-2 border text-right">
-            R$ <?php echo $value->price_total?>
+        <div class="col-2 border-2 border-left-0 text-right">
+            R$ <?php echo $this->view->total_produtos?>
         </div>
     </div>
     
     
+    <div class="row">
+        <div class="col-8 text-right">
+        </div>
+        <div class="col-2 border-2 border-right-0 text-right">
+            Frete
+        </div>
+        <div class="col-2 border-2 border-left-0 text-right">
+             R$ <?php echo $this->view->dados_pedido->shipping_fee?>
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        <div class="col-8 text-center">
+        </div>
+        <div class="col-2 border-2 border-right-0 text-right">
+            <strong>Total Pedido</strong>
+        </div>
+        <div class="col-2 border-2 border-left-0 text-right">
+            <strong>R$ <?php echo number_format($this->view->dados_pedido->shipping_fee + $this->view->total_produtos, 2, '.', '');?></strong>
+        </div>
+    </div>
     
     
 </div>

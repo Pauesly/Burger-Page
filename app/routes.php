@@ -6,7 +6,9 @@
 
 
 //Home - Pagina Inicial
-$route[] = ['/',            'HomeController@index'];
+$route[] = ['/',                    'HomeController@index'];
+$route[] = ['/carregar_categorias', 'HomeController@carregar_categorias'];
+$route[] = ['/carregar_cardapio',   'HomeController@carregar_cardapio'];
 
 
 $route[] = ['/adm',                     'AdmController@loginAdm'];
