@@ -72,7 +72,26 @@ class WS_read_free
                 }
             break;
 //------------------------------------------------------------------------------           
-            
+            /**
+             * Seleciona produto especifico
+             * Retorna clientes
+             */
+            case "busca_imagem_com_id":
+                
+                $campos = "picture_thumb";
+                
+                $id = $data['id_produto'];
+                
+                $result = DBRead('Product', "WHERE id_product LIKE '$id' limit 1", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
             
             
             

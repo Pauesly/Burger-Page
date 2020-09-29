@@ -24,10 +24,20 @@ class HomeController extends BaseController
     
     
     public function index(){
+        
+        $this->view->categorias = Categoria::relatorio_all_categorias_ativas();
+        $this->view->produtos = Produto::busca_cardapio_site();
+        
         $this->setPageTitle('Home');
         $this->renderView('home/index', 'layout_main');
     }
 
+    public function get_image($id){
+        $restultado = Produto::busca_imagem_com_id($id);
+        
+        echo(json_encode($restultado->resultado[0]->picture_thumb));
+    }
+    
 
     public function carregar_categorias(){
         $restultado = Categoria::relatorio_all_categorias_ativas();

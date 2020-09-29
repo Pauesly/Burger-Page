@@ -118,7 +118,16 @@ class Produto
     
     
     
-    
+    //Busca adm com email para Login
+    public static function busca_imagem_com_id($id) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"     => "busca_imagem_com_id",
+            "id_produto" => $id
+        ];
+        $resultado = WS_read_free::read_free($array);
+        return  json_decode($resultado);
+    }
     
     
     

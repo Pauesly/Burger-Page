@@ -9,6 +9,7 @@
 $route[] = ['/',                    'HomeController@index'];
 $route[] = ['/carregar_categorias', 'HomeController@carregar_categorias'];
 $route[] = ['/carregar_cardapio',   'HomeController@carregar_cardapio'];
+$route[] = ['/get_image/{id}',      'HomeController@get_image'];
 
 
 $route[] = ['/adm',                     'AdmController@loginAdm'];

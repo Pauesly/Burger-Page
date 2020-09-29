@@ -109,66 +109,133 @@
           
             <div class="container">
                 <h3 class="oh-desktop"><span class="d-inline-block wow slideInUp">Cardápio</span></h3>
-                <div class="row row-lg row-30">
+                
                     
                     
-                    <!--ID e ATIVO-->
-                    <div class="" id="loading_abrir_pedido">
-                        <div class="text-center" >
-                            <div class="alert alert-light" role="alert">
-                                <img class="brand-logo-dark" src="/images/loading.gif" alt=""/>Carregando Cardápio...
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                        for ($i = 0; $i < sizeof($this->view->categorias->resultado); $i++){
+                    ?>        
+                            <hr>
+                            <h4 class="oh-desktop">
+                                <span class="d-inline-block wow slideInUp">
+                                    <?php echo $this->view->categorias->resultado[$i]->description ?>
+                                </span>
+                            </h4>
+                            <div class="row row-lg row-30">
+                                
+                                <?php
+                                    for ($j = 0; $j < sizeof($this->view->produtos->resultado); $j++){
+                                        if($this->view->categorias->resultado[$i]->id_category == $this->view->produtos->resultado[$j]->fk_id_category){
+                                ?>
+                                    
+        <!--CONFIGURACOES DO PRODUTO-->                        
+        <div class="col-sm-6 col-lg-4 col-xl-3">
+            <article class="product wow fadeInLeft" data-wow-delay=".1s">
+                <div class="product-figure">
+                    <img <?php echo $this->view->produtos->resultado[$j]->picture_thumb != "0" ? 'src="data:image/jpg;base64,' . $this->view->produtos->resultado[$j]->picture_thumb  . '"' : "" ; ?> alt="" width="161" height="162"/>
+                </div>
+                <div class="product-rating">
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    <!-- Product-->
-<!--                    <div class="col-sm-6 col-lg-4 col-xl-3">
-                        <article class="product wow fadeInLeft" data-wow-delay=".1s">
-                            <div class="product-figure"><img src="images/product-2-161x162.png" alt="" width="161" height="162"/>
-                            </div>
-                            <div class="product-rating"><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span><span class="mdi mdi-star"></span>
-                            </div>
-                            <h6 class="product-title">Original EGG</h6>
-                            <div class="product-price-wrap">
-                                <div class="product-price">$17.00</div>
-                            </div>
-                            <div class="product-button">
-                                <div class="button-wrap">
-                                    <a class="button button-xs button-primary button-winona" href="http://api.whatsapp.com/send?1=pt_br&phone=5527981641870&text=Eu%20quero%20este%20hamburger" target="_blank">
-                                        Peça pelo Whatsapp
-                                    </a>
-                                </div>
-                                <div class="button-wrap">
-                                    <a class="button button-xs button-secondary button-winona" href="https://source.unsplash.com/0JYgd2QuMfw/1500x1000" data-fancybox data-caption="This image has a caption">
-                                            Ver detalhes
-                                    </a>
-                                </div>
-                            </div>
-                            <span class="product-badge product-badge-new">#2</span>
-                        </article>
-                    </div>-->
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                    <?php
+                        if($this->view->produtos->resultado[$j]->star == 1){ 
+                            ?>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <?php
+                        }
+                        if($this->view->produtos->resultado[$j]->star == 2){ 
+                            ?>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <?php
+                        }
+                        if($this->view->produtos->resultado[$j]->star == 3){ 
+                            ?>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <?php
+                        }
+                        if($this->view->produtos->resultado[$j]->star == 4){ 
+                            ?>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star text-gray-13"></span>
+                            <?php
+                        }
+                        if($this->view->produtos->resultado[$j]->star == 5){ 
+                            ?>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <span class="mdi mdi-star"></span>
+                            <?php
+                        }
+                    ?>
                     
                 </div>
+                <h6 class="product-title"><?php echo $this->view->produtos->resultado[$j]->name ?></h6>
+                <div class="product-price-wrap">
+                    <div class="product-price product-price-old"><?php echo $this->view->produtos->resultado[$j]->price_old ?></div>
+                    <div class="product-price"><?php echo $this->view->produtos->resultado[$j]->price_new ?></div>
+                </div>
+                <div class="product-button">
+                    <div class="button-wrap">
+                        <a class="button button-xs button-primary button-winona" href="http://api.whatsapp.com/send?1=pt_br&phone=5527981641870&text=Boa%20noite!%20Eu%20quero%20um%20<?php echo str_replace(" ","%20",$this->view->produtos->resultado[$j]->id_product); ?>%20-%20<?php echo str_replace(" ","%20",$this->view->produtos->resultado[$j]->name); ?>" target="_blank">
+                            Peça pelo Whatsapp
+                        </a>
+                    </div>
+                    <div class="button-wrap">
+                        <a 
+                            class="button button-xs button-secondary button-winona" 
+                            href="data:image/gif;base64,' . $Get['/get_image/<?php echo $this->view->produtos->resultado[$j]->id_product ?>'] . '"
+                            data-fancybox 
+                            data-caption="<?php echo $this->view->produtos->resultado[$j]->name . " - " . $this->view->produtos->resultado[$j]->description?>">
+                                Ver detalhes
+                        </a>
+                    </div>
+                </div>
+                <span class="product-badge product-badge-new">#<?php echo $this->view->produtos->resultado[$j]->id_product ?></span>
+            </article>
+        </div>
+        <!--FIM CONFIGURACOES DO PRODUTO-->                         
+                                
+                                        <?php   }     
+                                    }
+                                ?>
+                                
+                            </div>
+                            
+                            
+                    <?php        
+                        }
+                    ?>
+                    
+       
             </div>
         </section>
 
         
         
+<!--        <a class="fancybox" href="data:image/gif;base64,' . $Get['p_image'] . '">link img</a>
+        
+                            href="https://source.unsplash.com/0JYgd2QuMfw/1500x1000" -->
+
+
+
+
+<!--        VER O QUE EH ESSA BOSTA
         <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
             <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
             <div class="w3-modal-content w3-animate-zoom">
@@ -182,7 +249,7 @@
       document.getElementById("modal01").style.display = "block";
     }
 </script>
-        
+        -->
         
         
         
