@@ -153,7 +153,6 @@ class WS_update
                     "description"       => $data['description'],
                     "star"              => $data['star'],
                     "picture_thumb"     => $data['picture_thumb'],
-                    "picture_large"     => $data['picture_large'],
                     "active"            => $data['active'],
                     "price_new"         => $data['preco_new'],
                     "price_old"         => $data['preco_old']

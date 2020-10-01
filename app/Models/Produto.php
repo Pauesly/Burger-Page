@@ -97,7 +97,7 @@ class Produto
     
     
     //Busca adm com email para Login
-    public static function salva_edit_produto($id_product, $fk_id_category, $name, $description, $star, $picture_thumb, $picture_large, $active, $preco_new, $preco_old) {
+    public static function salva_edit_produto($id_product, $fk_id_category, $name, $description, $star, $picture_thumb, $active, $preco_new, $preco_old) {
         //Dados obrigatorios
         $array = [
             "funcao"            => "salva_edit_produto",
@@ -107,7 +107,6 @@ class Produto
             "description"       => $description,
             "star"              => $star,
             "picture_thumb"     => $picture_thumb,
-            "picture_large"     => $picture_large,
             "active"            => $active,
             "preco_new"         => $preco_new,
             "preco_old"         => $preco_old

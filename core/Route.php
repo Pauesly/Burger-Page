@@ -43,6 +43,9 @@ class Route
             @$obj->request->$key = $value;
         }
 
+        foreach ($_FILES as $key => $value){
+            @$obj->files->$key = $value;
+        }
 
         
         

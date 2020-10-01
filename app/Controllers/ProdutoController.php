@@ -11,6 +11,7 @@ use App\Models\Item;
 use App\Models\ItemProduto;
 use App\Models\Customer;
 use App\Models\Bcrypt;
+use App\Models\Padroes_gerais;
 use Core\Session;
 
 class ProdutoController extends BaseController
@@ -146,6 +147,8 @@ class ProdutoController extends BaseController
     public function edit_produto($request){
         $admin  =  Session::get('adm');
         
+        $this->view->url = Padroes_gerais::ulr();
+  
         $dados_item = Produto::busca_produto_com_id($request->get->id);
         
         $categorias = Categoria::relatorio_all_categorias_ativas();
@@ -153,10 +156,9 @@ class ProdutoController extends BaseController
         
         $itens = Item::relatorio_all_itens_ativos();
         $this->view->itens = $itens->resultado;
-        
-        
+     
         $this->view->dados = $dados_item->resultado[0];
-        
+     
         $nome_array = explode(' ',$admin['name']);
         $this->view->nome = $nome_array[0];
         
@@ -186,7 +188,6 @@ class ProdutoController extends BaseController
                 $request->post->description,
                 $request->post->star,
                 $request->post->picture_thumb,
-                $request->post->picture_large,
                 $request->post->active,
                 $preco_new,
                 $preco_old
@@ -198,12 +199,37 @@ class ProdutoController extends BaseController
                 'inputs' => [""]
             ]);
         }else{
+            self::SalvaArquivoProduto($request->files, $request->post->id_product);
             return Redirect::route('/gestao_produto', [
                 'success' => ["Produto alterado com sucesso!"],
                 'inputs' => [""]
             ]);
         }
     }
+    
+    
+    
+    
+    public  static function SalvaArquivoProduto($file, $name) {
+
+	//Pasta onde o arquivo vai ser salvo
+	$_UP['pasta'] = 'images/product/';
+	
+	//Verificar se é possive mover o arquivo para a pasta escolhida
+	if(move_uploaded_file($file->picture_large['tmp_name'],$_UP['pasta'].$name.".jpg")){
+		echo ""; //Imagem salva com sucesso!<br>
+	}
+    }
+
+
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     public function add_item_produto($request){
@@ -224,11 +250,6 @@ class ProdutoController extends BaseController
         $dados = ItemProduto::busca_itens_de_produto($request->get->id_produto);
         echo(json_encode($dados));
     }
-    
-    
-    
-    
-    
     
     
     public function menuonline(){

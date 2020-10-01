@@ -244,12 +244,12 @@
                                 <div class="input-group">
                                     <span class="input-group-btn">
                                         <span class="btn btn-default btn-file">
-                                            <input type="file" id="img_select2" name="img_select2" accept="image/*">
+                                            <input type="file" id="img_select2" name="img_select2" accept="image/*" >
                                         </span>
                                     </span>
                                     <input type="text" class="form-control" id="img_nome2" name="img_nome2" readonly>
                                 </div>
-                                <img id='img-upload2' name='img-upload2' <?php echo $this->view->dados->picture_large != "0" ? 'src="data:image/jpg;base64,' . $this->view->dados->picture_large  . '"' : "" ; ?>/>
+                                <img id='img-upload2' name='img-upload2' src="<?php echo $this->view->url . "/images/product/" . $this->view->dados->id_product . ".jpg" ?>"/>
                                     
                             </div>
                             <div class="text-left" style="color: white">
@@ -359,9 +359,8 @@
 
 
 
-
 <!--form salvar-->
-    <form action="/salva_edit_produto" method="POST" id="salva_edit_produto">
+<form action="/salva_edit_produto" method="POST" id="salva_edit_produto" class="esconder" enctype="multipart/form-data">
         
         <input type='hidden'    name="id_product"               id="id_product"     value="<?php echo $this->view->dados->id_product  ?>">
         <input type='hidden'    name="fk_id_category"           id="fk_id_category" value="<?php echo $this->view->dados->fk_id_category  ?>">
@@ -371,14 +370,10 @@
         <input type='hidden'    name="price_new"                id="price_new">
         <input type='hidden'    name="price_old"                id="price_old">
         <input type='hidden'    name="picture_thumb"            id="picture_thumb">
-        <input type='hidden'    name="picture_large"            id="picture_large">
+        <input type='file'      name="picture_large"            id="picture_large">
         <input type='hidden'    name="active"                   id="active"         value="<?php echo $this->view->dados->active  ?>">
         
-    </form>
-
-
-
-
+</form>
 
 
 

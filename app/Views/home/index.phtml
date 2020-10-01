@@ -197,11 +197,7 @@
                         </a>
                     </div>
                     <div class="button-wrap">
-                        <a 
-                            class="button button-xs button-secondary button-winona" 
-                            href="data:image/gif;base64,' . $Get['/get_image/<?php echo $this->view->produtos->resultado[$j]->id_product ?>'] . '"
-                            data-fancybox 
-                            data-caption="<?php echo $this->view->produtos->resultado[$j]->name . " - " . $this->view->produtos->resultado[$j]->description?>">
+                        <a class="button button-xs button-secondary button-winona" href="http://localhost:7777/images/product/<?php echo $this->view->produtos->resultado[$j]->id_product?>.jpg" data-fancybox data-caption="This image has a caption">
                                 Ver detalhes
                         </a>
                     </div>
@@ -226,16 +222,8 @@
             </div>
         </section>
 
-        
-        
-<!--        <a class="fancybox" href="data:image/gif;base64,' . $Get['p_image'] . '">link img</a>
-        
-                            href="https://source.unsplash.com/0JYgd2QuMfw/1500x1000" -->
+       
 
-
-
-
-<!--        VER O QUE EH ESSA BOSTA
         <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
             <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
             <div class="w3-modal-content w3-animate-zoom">
@@ -249,7 +237,7 @@
       document.getElementById("modal01").style.display = "block";
     }
 </script>
-        -->
+        
         
         
         
@@ -390,6 +378,12 @@
           </div>
         </div>
       </footer>
+      
+      
+      
+      
+      
+      
     </div>
     
     

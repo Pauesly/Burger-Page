@@ -25,7 +25,9 @@ class Padroes_gerais
     
     
     
-    
+    public static function ulr() {
+        return "localhost:7777";
+    }
     
     
     
