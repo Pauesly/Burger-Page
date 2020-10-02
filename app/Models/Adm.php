@@ -133,6 +133,15 @@ class Adm
     
     
     
+    //Busca Full data do Adm
+    public static function gerir_adm() {
+        //Dados obrigatorios
+        $array = [
+            "funcao" => "gerir_adm"
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     

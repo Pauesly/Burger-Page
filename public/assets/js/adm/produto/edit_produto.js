@@ -155,15 +155,9 @@ function ValidaCamposObrigatorios() {
         document.getElementById("card_img_1").className = "card card-body bg-warning";
     }
 
-    //Image
-    if(busca_img2() !== "0"){ 
-        validacoes++; 
-    }else{
-        document.getElementById("card_img_2").className = "card card-body bg-warning";
-    }
     
     
-    if(validacoes === 8){
+    if(validacoes === 7){
         return true;
     }else{
         return false;
@@ -640,38 +634,38 @@ $(document).ready( function() {
 });
 
 
-
-
-function busca_img2(){
-    if ( document.querySelector('input[name=img_select2]').files[0] != null ){
-        var image = new Image();
-        image.src = document.getElementById("img-upload2").src;
-        return  getBase64Image2(image);
-
-    }else if(document.getElementById("img-upload2").height != 0){
-        var image = new Image();
-        image.src = document.getElementById("img-upload2").src;
-        return  getBase64Image2(image);
-    }else{
-        return "0";
-    }
-}
-
-
-/*
-* CONVERTE IMAGEM PARA BASE64 String
- */
-function getBase64Image2(img) {
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL("image/png");
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, ""); // Limpa a String FIcando Sรณ o codigo base64
-}
-
-
+//
+//
+//function busca_img2(){
+//    if ( document.querySelector('input[name=img_select2]').files[0] != null ){
+//        var image = new Image();
+//        image.src = document.getElementById("img-upload2").src;
+//        return  getBase64Image2(image);
+//
+//    }else if(document.getElementById("img-upload2").height != 0){
+//        var image = new Image();
+//        image.src = document.getElementById("img-upload2").src;
+//        return  getBase64Image2(image);
+//    }else{
+//        return "0";
+//    }
+//}
+//
+//
+///*
+//* CONVERTE IMAGEM PARA BASE64 String
+// */
+//function getBase64Image2(img) {
+//    var canvas = document.createElement("canvas");
+//    canvas.width = img.width;
+//    canvas.height = img.height;
+//    var ctx = canvas.getContext("2d");
+//    ctx.drawImage(img, 0, 0);
+//    var dataURL = canvas.toDataURL("image/png");
+//    return dataURL.replace(/^data:image\/(png|jpg);base64,/, ""); // Limpa a String FIcando Sรณ o codigo base64
+//}
+//
+//
 
 function ResizeImage2() {
     
@@ -725,6 +719,10 @@ function ResizeImage2() {
         alert('The File APIs are not fully supported in this browser.');
     }
 }
+
+
+
+
 
 
 

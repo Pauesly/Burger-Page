@@ -33,7 +33,7 @@ function SalvarCliente(){
     document.getElementById("price_new").value =                document.getElementById("txt_preco_new").value;
     document.getElementById("price_old").value =                document.getElementById("txt_preco_old").value;
     document.getElementById("picture_thumb").value =            busca_img();
-    document.getElementById("picture_large").value =            busca_img2();
+    document.getElementById("picture_large").files =            document.getElementById("img_select2").files;
 //
 //    
 //    //Enviando

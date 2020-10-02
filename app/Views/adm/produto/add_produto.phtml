@@ -228,7 +228,7 @@
 
 
 <!--form salvar-->
-    <form action="/cadastrar_novo_produto" method="POST" id="cadastrar_novo_item">
+<form action="/cadastrar_novo_produto" method="POST" id="cadastrar_novo_item" class="esconder" enctype="multipart/form-data">
         
         <input type='hidden'    name="fk_id_category"           id="fk_id_category">
         <input type='hidden'    name="name"                     id="name">
@@ -237,7 +237,7 @@
         <input type='hidden'    name="price_new"                id="price_new">
         <input type='hidden'    name="price_old"                id="price_old">
         <input type='hidden'    name="picture_thumb"            id="picture_thumb">
-        <input type='hidden'    name="picture_large"            id="picture_large">
+        <input type='file'      name="picture_large"            id="picture_large">
         
     </form>
 

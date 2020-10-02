@@ -7,6 +7,8 @@ use Core\Redirect;
 use Core\Validator;
 use App\Models\Email;
 use App\Models\Produto;
+use App\Models\Testemunho;
+use App\Models\Padroes_gerais;
 use App\Models\Categoria;
 
 class HomeController extends BaseController
@@ -25,8 +27,12 @@ class HomeController extends BaseController
     
     public function index(){
         
+        $this->view->url = Padroes_gerais::ulr();
+        
         $this->view->categorias = Categoria::relatorio_all_categorias_ativas();
         $this->view->produtos = Produto::busca_cardapio_site();
+        
+        $this->view->testemunhos = Testemunho::testemunhos_to_page();
         
         $this->setPageTitle('Home');
         $this->renderView('home/index', 'layout_main');
@@ -50,7 +56,9 @@ class HomeController extends BaseController
         echo(json_encode($restultado_cardapio));
     }
     
-    
+    public function subscribe($request){
+        
+    }
     
     
     

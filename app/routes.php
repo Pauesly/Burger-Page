@@ -10,6 +10,7 @@ $route[] = ['/',                    'HomeController@index'];
 $route[] = ['/carregar_categorias', 'HomeController@carregar_categorias'];
 $route[] = ['/carregar_cardapio',   'HomeController@carregar_cardapio'];
 $route[] = ['/get_image/{id}',      'HomeController@get_image'];
+$route[] = ['/subscribe',           'HomeController@subscribe'];
 
 
 $route[] = ['/adm',                     'AdmController@loginAdm'];
@@ -20,6 +21,11 @@ $route[] = ['/logout',                  'AdmController@logout'];
 
 //ADM
 $route[] = ['/adm_index',               'AdmController@index',                  'auth'];
+$route[] = ['/adm_access',              'AdmController@adm_access',             'auth'];
+$route[] = ['/gerir_adm',               'AdmController@gerir_adm',              'auth'];
+$route[] = ['/add_adm',                 'AdmController@add_adm',                'auth'];
+$route[] = ['/cadastrar_novo_adm',      'AdmController@cadastrar_novo_adm',     'auth'];
+$route[] = ['/edit_adm',                'AdmController@edit_adm',               'auth'];
 
 
 //CUSTOMER

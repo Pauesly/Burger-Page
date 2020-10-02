@@ -124,6 +124,7 @@ class ProdutoController extends BaseController
                 'inputs' => [""]
             ]);
         }else{
+            self::SalvaArquivoProduto($request->files, $resultado->id_cadastro);
             return Redirect::route("/edit_produto?id=$resultado->id_cadastro" , [
                 'success' => ["Produto [  $resultado->id_cadastro ] cadastrado com sucesso! <br> Inclua abaixo os itens que o compõe."],
                 'inputs' => [""]

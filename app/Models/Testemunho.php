@@ -31,6 +31,18 @@ class Testemunho
     }
     
     
+    //Busca adm com email para Login
+    public static function testemunhos_to_page() {
+        //Dados obrigatorios
+        $array = [
+            "funcao" => "busca_testemunhos_site"
+        ];
+        $resultado = WS_read_free::read_free($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    
     
     //Busca adm com email para Login
     public static function cadastrar_novo_testemunho($name, $testimony, $status, $thumb) {

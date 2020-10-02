@@ -190,6 +190,126 @@ class AdmController extends BaseController
     
     
     
+    function adm_access() {
+        $admin  =  Session::get('adm');
+        
+        if($admin['id_adm'] == 1){
+            return Redirect::route('/gerir_adm');
+        }else{
+            return Redirect::route('/edit_adm');
+        }
+    }
+    
+    
+    
+    
+    public function gerir_adm(){
+        $admin  =  Session::get('adm');
+        if($admin['id_adm'] == 1){
+            $nome_array = explode(' ',$admin['name']);
+            
+            $this->view->adms = Adm::gerir_adm();
+            
+            $total_ativa = 0;
+            $total_inativa = 0;
+            foreach ($this->view->adms->resultado as $value) {
+                if($value->active == 1)
+                    $total_ativa++;
+                if($value->active == 0)
+                    $total_inativa++;
+            }
+
+            $this->view->total_ativa = $total_ativa;
+            $this->view->total_inativa = $total_inativa;
+            
+            $this->view->nome = $nome_array[0];
+
+            $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        
+            $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+
+            $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
+                                  . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
+                                  . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
+                                  . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                                  . '<link rel="stylesheet" type="text/css" href="assets/js/data_table/datatables.css"/>'
+                                  . '<script type="text/javascript" src="assets/js/data_table/datatables.js"></script>'
+                                  . '<script type="text/javascript" src="assets/js/adm/categoria/gestao_categoria.js"></script>';
+            $this->setPageTitle('Painel Administrativo de Administradores - Area Restrita');
+            $this->renderView('adm/perfil/gestao_adm', '/adm/adm_layout');
+        }else{
+            return Redirect::route('/edit_adm/' . $admin['id_adm']);
+        }
+    }
+    
+    
+    
+    public function add_adm(){
+        $admin  =  Session::get('adm');
+        if($admin['id_adm'] == 1){
+            $nome_array = explode(' ',$admin['name']);
+            $this->view->nome = $nome_array[0];
+
+            $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+            $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+            $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
+                                  . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
+                                  . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>'
+                                  . '<script src="/assets/js/jquery.mask.js" crossorigin="anonymous"></script>'
+                                  . '<script src="/assets/js/adm/perfil/add_perfil.js" crossorigin="anonymous"></script>';
+            $this->setPageTitle('Adicionar Administrador - Area Restrita');
+            $this->renderView('adm/perfil/add_adm', '/adm/adm_layout');
+        }else{
+            return Redirect::route('/edit_adm/' . $admin['id_adm']);
+        }
+    }
+    
+    
+    public function cadastrar_novo_adm($request){
+        
+        var_dump($request); die;
+        
+        FAZERROTINA DE SALVAR ADM
+        $resultado =?????????a::ca?????????????????_categoria(
+                $request->post->description,
+                $request->post->sequence
+                );
+        
+        if($resultado->erro){
+            return Redirect::route('/adm', [
+                'errors' => ['Erro 003 - Erro ao tentar salvar. Contate Administrador.'],
+                'inputs' => [""]
+            ]);
+        }else{
+            return Redirect::route('/adm', [
+                'success' => ["Categoria [  $resultado->id_cadastro ] cadastrada com sucesso!"],
+                'inputs' => [""]
+            ]);
+        }
+    }
+    
+    
+    
+    public function edit_adm($request){
+        $admin  =  Session::get('adm');
+        
+        echo "Soh Editar ADM: " . $request->get->id;
+        
+//        $nome_array = explode(' ',$admin['name']);
+//        $this->view->nome = $nome_array[0];
+//        
+//        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+//        $this->view->js_head =  '<script src="/assets/js/editor/jquery.min.js"></script>';
+//        $this->view->extra_js = '<script src="/assets/js/jquery.min.js"></script>'
+//                              . '<script src="/assets/js/popper.min.js" crossorigin="anonymous"></script>'
+//                              . '<script src="/assets/js/bootstrap.min.js" crossorigin="anonymous"></script>';
+//        $this->setPageTitle('Painel Administrativo - Area Restrita');
+//        $this->renderView('adm/home/adm_index', '/adm/adm_layout');
+    }
+    
+    
+    
+    
     
     
     

@@ -55,7 +55,23 @@ class WS_read
                     $status['resultado'] = 'Busca vazia';
                 }
             break;   
-//------------------------------------------------------------------------------             
+//------------------------------------------------------------------------------   
+            /**
+             * Seleciona o lista de ADM
+             * Retorna token do ADM
+             */
+            case "gerir_adm":
+                $campos = "id_adm, name, email, active";
+                
+                $result = DBRead('Adm', "", $campos);
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;   
+//------------------------------------------------------------------------------ 
             /**
              * Verifica se telefone ja foi cadastrado
              * Recebe TEL do cliente
@@ -446,6 +462,7 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
+            
             /**
              * Seleciona todos os itens do banco
              * Retorna clientes

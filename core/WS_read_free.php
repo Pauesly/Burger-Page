@@ -92,7 +92,24 @@ class WS_read_free
                 }
             break;
 //------------------------------------------------------------------------------ 
-            
+            /**
+             * Seleciona todos os testemunhos ativos do banco
+             * Retorna clientes
+             */
+            case "busca_testemunhos_site":
+                
+                $campos = "id_testimony, name, testimony, status, thumb";
+                
+                $result = DBRead('Testimony', "WHERE active LIKE 1", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------
             
             
             

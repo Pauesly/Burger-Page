@@ -73,7 +73,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/" onclick="LaunchLoading();"><span class="glyphicon glyphicon-usd"></span> Vendas</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/gestao_testemunho" onclick="LaunchLoading();"><span class="glyphicon glyphicon-bullhorn"></span> Testemunhos</a>
+                        <a class="dropdown-item" href="/gestao_testemunho" onclick="LaunchLoading();"><span class="glyphicon glyphicon-bullhorn"></span> Depoimentos</a>
                     </div>
                 </li>
                 
@@ -83,12 +83,12 @@
                 
                 <!--Adm-->
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-info text-green" type="button" href="/adm" onclick="LaunchLoading();" ><span class="glyphicon glyphicon-user"></span><?php echo $this->view->nome?></a>                  
+                    <a class="nav-link btn btn-outline-info text-green" type="button" href="/adm_access" onclick="LaunchLoading();" ><span class="glyphicon glyphicon-user"></span><?php echo $this->view->nome?></a>                  
                 </li>
                 
                 <!--Logout-->
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-danger text-green" type="button" href="/logout" data-target="#myModal">Logout</a>                  
+                    <a class="nav-link btn btn-outline-danger text-green" type="button" href="/logout" data-target="#myModal" onclick="LaunchLoading();">Logout</a>                  
                 </li>
             </ul>
         </div>

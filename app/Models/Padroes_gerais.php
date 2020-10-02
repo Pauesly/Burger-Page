@@ -26,7 +26,8 @@ class Padroes_gerais
     
     
     public static function ulr() {
-        return "localhost:7777";
+        return "https://jazzgrill.com.br";
+//        return "http://localhost:7777";
     }
     
     
