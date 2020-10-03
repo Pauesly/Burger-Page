@@ -145,22 +145,80 @@ class Adm
     
     
     
+    //Busca Full data do Adm
+    public static function salvar_novo_adm($name, $email, $obs) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"    => "salvar_novo_adm",
+            "name"      => $name,
+            "email"     => $email,
+            "obs"       => $obs,
+            "password"  => Bcrypt::hash("123456"),
+            "active"    => 1,
+            "created_at"=> Padroes_gerais::data_e_hora()
+        ];
+        $resultado = WS_write::white($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    
+    //Busca Full data do Adm
+    public static function busca_dados_adm_full($id) {
+        //Dados obrigatorios
+        $array = [
+            "funcao" => "busca_dados_adm_full",
+            "id_adm" => $id
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     
     
+    //Busca Full data do Adm
+    public static function salvar_edit_adm($id_adm, $active, $name, $email, $obs) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"    => "salvar_edit_adm",
+            "id_adm"    => $id_adm,
+            "active"    => $active,
+            "name"      => $name,
+            "email"     => $email,
+            "obs"       => $obs
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
     
     
+    //
+    public static function reset_senha_adm($id_adm) {
+        //Dados obrigatorios
+        $array = [
+            "funcao" => "reset_senha_adm",
+            "id_adm" => $id_adm,
+            "password" => Bcrypt::hash("123456"),
+            "token_login_web" => 0
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+    //
+    public static function adm_save_password($email, $password) {
+        //Dados obrigatorios
+        $array = [
+            "funcao" => "adm_save_password",
+            "email" => $email,
+            "password" => Bcrypt::hash($password),
+            "token_login_web" => 0
+        ];
+        $resultado = WS_update::alterar_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     

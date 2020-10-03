@@ -15,8 +15,12 @@ $route[] = ['/subscribe',           'HomeController@subscribe'];
 
 $route[] = ['/adm',                     'AdmController@loginAdm'];
 $route[] = ['/login',                   'AdmController@loginAdm'];
+$route[] = ['/to_login',                'AdmController@to_login'];
 $route[] = ['/login/valida_login',      'AdmController@validarLogin'];
 $route[] = ['/logout',                  'AdmController@logout'];
+
+$route[] = ['/adm_change_password',     'AdmController@adm_change_password'];
+$route[] = ['/adm_save_password',       'AdmController@adm_save_password'];
 
 
 //ADM
@@ -26,6 +30,8 @@ $route[] = ['/gerir_adm',               'AdmController@gerir_adm',              
 $route[] = ['/add_adm',                 'AdmController@add_adm',                'auth'];
 $route[] = ['/cadastrar_novo_adm',      'AdmController@cadastrar_novo_adm',     'auth'];
 $route[] = ['/edit_adm',                'AdmController@edit_adm',               'auth'];
+$route[] = ['/salva_editar_adm',        'AdmController@salva_editar_adm',       'auth'];
+$route[] = ['/reset_senha_adm',         'AdmController@reset_senha_adm',        'auth'];
 
 
 //CUSTOMER
@@ -116,6 +122,18 @@ $route[] = ['/realizar_busca_pedido_filtros',       'PedidoController@realizar_b
 
 $route[] = ['/gestao_a_vista',                      'PedidoController@gestao_a_vista',                              'auth'];
 $route[] = ['/carregar_gestao_a_vista',             'PedidoController@carregar_gestao_a_vista',                     'auth'];
+
+
+
+//RELATORIOS
+$route[] = ['/relatorios',                              'RelatorioController@relatorios_home',                          'auth'];
+
+
+
+
+
+
+
 
 
 

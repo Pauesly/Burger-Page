@@ -73,6 +73,23 @@ class WS_read
             break;   
 //------------------------------------------------------------------------------ 
             /**
+             * Seleciona o lista de ADM
+             * Retorna token do ADM
+             */
+            case "busca_dados_adm_full":
+                
+                $id_adm = $info['id_adm'];
+                
+                $result = DBRead('Adm', "WHERE id_adm LIKE $id_adm");
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;   
+//------------------------------------------------------------------------------ 
+            /**
              * Verifica se telefone ja foi cadastrado
              * Recebe TEL do cliente
              * Retorna true / false

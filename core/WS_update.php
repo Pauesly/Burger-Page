@@ -387,9 +387,68 @@ class WS_update
                 
             break;
 //------------------------------------------------------------------------------
-            
-            
-            
+            /**
+             * Salva Edicoes na conta do usuario
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "salvar_edit_adm":
+                
+                $id_adm     = $data['id_adm'];
+	    
+	        $array = array(
+                    "active"           => $data['active'],
+                    "name"             => $data['name'],
+                    "email"            => $data['email'],
+                    "obs"              => $data['obs']
+                );
+
+                $result = BDUpdate('Adm', $array, "id_adm LIKE '$id_adm' ", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------
+            /**
+             * Salva Edicoes na conta do usuario
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "reset_senha_adm":
+                
+                $id_adm     = $data['id_adm'];
+	    
+	        $array = array(
+                    "password"           => $data['password'],
+                    "token_login_web"    => $data['token_login_web']
+                );
+
+                $result = BDUpdate('Adm', $array, "id_adm LIKE '$id_adm' ", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------
+            /**
+             * Salva Edicoes na conta do usuario
+             * Recebe dados
+             * Retorna sucesso com ID ou erro
+             */
+            case "adm_save_password":
+                
+                $email     = $data['email'];
+	    
+	        $array = array(
+                    "password"           => $data['password'],
+                    "token_login_web"    => $data['token_login_web']
+                );
+
+                $result = BDUpdate('Adm', $array, "email LIKE '$email' ", true);
+                
+                return $result;
+                
+            break;
+//------------------------------------------------------------------------------
             
         
         

@@ -30,7 +30,7 @@ class WS_read_free
                 $campos = "id_adm, password, email, active";
                 $email = $data['email'];
                 
-                $result = DBRead('Adm', "WHERE email LIKE '$email' limit 1", $campos);
+                $result = DBRead('Adm', "WHERE email LIKE '$email' AND active LIKE 1 limit 1 ", $campos);
                 if($result){
                     $status['erro'] = false;
                     $status['resultado'] = $result;

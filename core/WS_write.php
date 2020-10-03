@@ -234,305 +234,40 @@ class WS_write
                 
             break;
 //------------------------------------------------------------------------------
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-//------------------------------------------------------------------------------
-            
             /**
-             * Salva Pagamento ADM
+             * Cadastra Novo pedido
              * Recebe Todos os dados relevantes
              * Retorna confirmacao de cadastro
              */
-            case "salva_pagamento_qce_adm":
+            case "salvar_novo_adm":
                 
                 $dados = array();
-                $dados['fk_id_adm']       = $data['fk_id_adm'];
-                $dados['qtd_pago']        = $data['qtd_pago'];
-                $dados['valor_pago']      = $data['valor_pago'];
-                $dados['created_at']      = $data['created_at'];
-                $dados['obs']             = $data['obs'];
+                $dados['name']          = $data['name'];
+                $dados['email']         = $data['email'];
+                $dados['obs']           = $data['obs'];
+                $dados['password']      = $data['password'];
+                $dados['active']        = $data['active'];
+                $dados['created_at']    = $data['created_at'];
                 
-                if($status['id_cadastro'] = DBCreate('QcePago', $dados, true)){
+                if($status['id_cadastro'] = DBCreate('Adm', $dados, true)){
                     $status['erro'] = false;
                 }   
                 
             break;
 //------------------------------------------------------------------------------
-            /**
-             * Salva Pagamento ADM
-             * Recebe Todos os dados relevantes
-             * Retorna confirmacao de cadastro
-             */
-            case "salva_pagamento_qme_adm":
-                
-                $dados = array();
-                $dados['fk_id_adm']       = $data['fk_id_adm'];
-                $dados['qtd_pago']        = $data['qtd_pago'];
-                $dados['valor_pago']      = $data['valor_pago'];
-                $dados['created_at']      = $data['created_at'];
-                $dados['obs']             = $data['obs'];
-                
-                if($status['id_cadastro'] = DBCreate('Qme5Pago', $dados, true)){
-                    $status['erro'] = false;
-                }   
-                
-            break;
-//------------------------------------------------------------------------------
-             /**
-             * Salva Pagamento ADM
-             * Recebe Todos os dados relevantes
-             * Retorna confirmacao de cadastro
-             */
-            case "salva_pagamento_qfac_adm":
-                
-                $dados = array();
-                $dados['fk_id_adm']       = $data['fk_id_adm'];
-                $dados['qtd_pago']        = $data['qtd_pago'];
-                $dados['valor_pago']      = $data['valor_pago'];
-                $dados['created_at']      = $data['created_at'];
-                $dados['obs']             = $data['obs'];
-                
-                if($status['id_cadastro'] = DBCreate('QfacPago', $dados, true)){
-                    $status['erro'] = false;
-                }   
-                
-            break;
-//------------------------------------------------------------------------------
-            /**
-             * Salva Nova Banca
-             * Recebe Todos os dados relevantes
-             * Retorna confirmacao de cadastro
-             */
-            case "salva_nova_banca":
-                
-                $dados = array();
-                $dados['id_banca']    = $data['id_banca'];
-                $dados['nome']        = $data['nome'];
-                $dados['ativo']       = $data['ativo'];
-                $dados['created_at']  = $data['created_at'];
-                
-                if($status['id_cadastro'] = DBCreate('Banca', $dados, false)){
-                    $status['erro'] = false;
-                }   
-                
-            break;
-//------------------------------------------------------------------------------
-            /**
-             * Salva Nova faculdade
-             * Recebe Todos os dados relevantes
-             * Retorna confirmacao de cadastro
-             */
-            case "salva_nova_faculdade":
-                
-                $dados = array();
-                $dados['nome']        = $data['nome'];
-                $dados['ativo']       = $data['ativo'];
-                $dados['created_at']  = $data['created_at'];
-                
-                if($status['id_cadastro'] = DBCreate('Faculdade', $dados, false)){
-                    $status['erro'] = false;
-                }   
-                
-            break;
-//------------------------------------------------------------------------------
-            /**
-             * Salva Novo curso
-             * Recebe Todos os dados relevantes
-             * Retorna confirmacao de cadastro
-             */
-            case "salva_novo_curso":
-                
-                $dados = array();
-                $dados['nome']        = $data['nome'];
-                $dados['ativo']       = $data['ativo'];
-                $dados['created_at']  = $data['created_at'];
-                $dados['fk_id_faculdade']  = $data['fk_id_faculdade'];
-                
-                if($status['id_cadastro'] = DBCreate('Curso', $dados, false)){
-                    $status['erro'] = false;
-                }   
-                
-            break;
-//------------------------------------------------------------------------------
-            /**
-             * Salva Nova disciplina
-             * Recebe Todos os dados relevantes
-             * Retorna confirmacao de cadastro
-             */
-            case "salva_nova_disciplina":
-                
-                $dados = array();
-                $dados['nome']        = $data['nome'];
-                $dados['ativo']       = $data['ativo'];
-                $dados['created_at']  = $data['created_at'];
-                $dados['fk_id_faculdade']  = $data['fk_id_faculdade'];
-                $dados['fk_id_curso']  = $data['fk_id_curso'];
-                
-                if($status['id_cadastro'] = DBCreate('DisciplinaFac', $dados, false)){
-                    $status['erro'] = false;
-                }   
-                
-            break;
-//------------------------------------------------------------------------------           
-            /**
-             * Salva Novo Administrador
-             * Recebe Todos os dados relevantes
-             * Retorna confirmacao de cadastro
-             */
-            case "cadastra_novo_adm":
-                
-                $dados = array();
-                $dados['perfil_master']         = $data['perfil_master'];
-                $dados['email']                 = $data['email'];
-                $dados['nome']                  = $data['nome'];
-                $dados['telefone']              = $data['telefone'];
-                $dados['observacoes']           = $data['observacoes'];
-                $dados['observacoes_internas']  = $data['observacoes_internas'];
-                $dados['password']              = $data['password'];
-                $dados['ativo']                 = $data['ativo'];
-                $dados['created_at']            = $data['created_at'];
-                $dados['foto_perfil']           = $data['foto_perfil'];
-                
-                if($status['id_cadastro'] = DBCreate('Adm', $dados, false)){
-                    $status['erro'] = false;
-                }   
-                
-            break;
-//------------------------------------------------------------------------------   
-            /**
-             * Salva Novo Status de Pedido
-             * Recebe Todos os dados relevantes
-             * Retorna confirmacao de cadastro
-             */
-            case "altera_status_pedido":
-                
-                $dados = array();
-                $dados['fk_id_adm']         = $data['fk_id_adm'];
-                $dados['fk_id_order']       = $data['fk_id_order'];
-                $dados['fk_id_status']      = $data['fk_id_status'];
-                $dados['created_at']        = $data['created_at'];
-                
-                if($status['id_cadastro'] = DBCreate('OrderStatus', $dados, false)){
-                    $status['erro'] = false;
-                }   
-                
-            break;
-//------------------------------------------------------------------------------  
-            /**
-             * Salva Novo Produto no pedido
-             * Recebe Todos os dados relevantes
-             * Retorna confirmacao de cadastro
-             */
-            case "add_produto_pedido":
-                
-                $dados = array();
-                $dados['fk_id_order']       = $data['fk_id_order'];
-                $dados['fk_id_product']     = $data['fk_id_product'];
-                $dados['qtd']               = $data['qtd'];
-                $dados['price_unit']        = $data['price_unit'];
-                $dados['price_total']       = $data['price_total'];
-                $dados['obs']               = $data['obs'];
-                $dados['created_at']        = $data['created_at'];
-                
-                if($status['id_cadastro'] = DBCreate('ProductOrder', $dados, false)){
-                    $status['erro'] = false;
-                }   
-                
-            break;
-//------------------------------------------------------------------------------ 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             

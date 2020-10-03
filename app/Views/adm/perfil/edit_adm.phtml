@@ -1,0 +1,212 @@
+<div class="container" style="padding-bottom: 0px">
+    
+    <!-- Cabecalho Login -->
+    <div  style="background-color: #cbcbcb;">
+            <hr>
+            <h3 class="font-shadow" style="text-align: center;  font-family: Arial Black" >EDITAR ADMINISTRADOR</h3>
+            <hr>
+    </div>
+    
+    <div class="">
+        <?php $this->renderView('alerts/_success'); ?>
+        <?php $this->renderView('alerts/_errors') ?>
+    </div>
+    
+	
+    
+    <div class="container">
+        
+        
+        <!--Created at-->
+        <div class="row mb-2">
+                <div class="col-sm">
+                    <!--ID-->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                                <label for="inputState">Identificador</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">ID</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txt_id" name="txt_id" disabled value="<?php echo $this->view->dados_adm->id_adm  ?>" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="14">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
+        
+        <!--ID e ATIVO-->
+        <div class="row mb-2">
+                <div class="col-sm">
+                    <!--ID-->
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                                <label for="inputState">Data Cadastro</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Cadastro</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="txt_created" name="txt_created" disabled value="<?php echo $this->view->dados_adm->created_at  ?>" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="14">
+                                </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="col-sm mt-2">
+                    <div class="row">&nbsp Usuario Ativo</div>
+                    <div class="row">
+                            <div class=" col-sm">
+                                <a class="<?= $this->view->dados_adm->active == 1 ? "btn btn-success btn-block" : "btn btn-outline-success btn-block"?>" id="ativo_sim" role="button">ATIVO</a>
+                            </div>
+                            <div class="col-sm">
+                                <a class="<?= $this->view->dados_adm->active == 0 ? "btn btn-danger btn-block" : "btn btn-outline-danger btn-block"?>" id="ativo_nao" role="button">INATIVO</a>
+                            </div>
+                    </div>
+                </div>
+        </div>
+        
+        
+       
+        
+        
+        <!--NOME-->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                    <label for="inputState">Nome</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Nome</span>
+                        </div>
+                        <input type="text" class="form-control" id="txt_name" name="txt_name" value="<?php echo $this->view->dados_adm->name  ?>" onblur="validaNome(this.value);"  placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="60">
+                        <div class="invalid-feedback">Nome obrigatório.</div>
+                    </div>
+            </div>
+	</div>
+        
+        
+        <!--Email-->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                    <label for="inputState">Email</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Email</span>
+                        </div>
+                        <input type="email" class="form-control" id="txt_email" name="txt_email" value="<?php echo $this->view->dados_adm->email  ?>" placeholder="" aria-label="Telefone" aria-describedby="basic-addon1" maxlength="60">
+                    </div>
+            </div>
+	</div>
+        
+        
+        <!--Observacoes-->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                    <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Observações</label>
+                    <textarea class="form-control" id="txt_obs_customer" rows="3" maxlength="255"><?php echo $this->view->dados_adm->obs  ?></textarea>
+                  </div>
+            </div>
+	</div>
+        
+        
+        
+        <hr>
+
+        <p>
+            <a class="btn btn-danger" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Trocar Senha
+            </a>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                
+                <div id="div_confirma_senha">
+                    Tem certeza que deseja resetar sua senha?
+                    <!--Sim nao-->
+                    <div class="row mb-2">
+                            <div class="col-sm mt-2">
+                                <div class="row">
+                                        <div class=" col-sm">
+                                            <a class="btn btn-outline-danger btn-block" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">NÃO</a>
+                                        </div>
+                                        <div class="col-sm">
+                                            <a class="btn btn-outline-success btn-block" id="btn_reset_senha" role="button">SIM</a>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                            </div>
+                    </div>
+                </div>
+                
+                <div id="div_apagando_senha" class="esconder">
+                    Por favor Aguarde
+                    <!--Sim nao-->
+                    <div class="row mb-2">
+                            <div class="col-sm mt-2">
+                                <div class="row">
+                                    <div class="" id="loading_abrir_pedido">
+                                        <div class="text-center" >
+                                            <div class="alert alert-light" role="alert">
+                                                <img class="brand-logo-dark" src="/images/loading.gif" alt=""/>Apagando Senha...
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                            </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <hr>
+        
+
+        <!--VALIDAR e SEGUIR-->
+        <div class="form-row mb-4 mt-3">
+            <a id="btn_validar" name="btn_validar" class="btn btn-outline-success btn-lg btn-block" href="#" role="button">Salvar</a>
+        </div>
+    </div>
+    
+    
+    
+</div>
+
+
+
+
+
+<!--form salvar-->
+<form action="/salva_editar_adm" method="POST" id="edit_cliente" class="esconder">
+        
+        <input type='text'    name="id_adm"                       id="id_adm" value="<?php echo $this->view->dados_adm->id_adm  ?>">
+        <input type='text'    name="active"                       id="active" value="<?= $this->view->dados_adm->active ?>">
+        <input type='text'    name="name"                         id="name">
+        <input type='text'    name="email"                        id="email">
+        <input type='text'    name="obs"                          id="obs">
+        
+</form>
+
+
+<input type='hidden'    name="id_adm_logged"    id="id_adm_logged" value="<?php echo $this->view->id_adm_logged ?>">
+
+<!--form salvar-->
+<form action="/logout" method="POST" id="logout" class="esconder">
+</form>
+<form action="/gerir_adm" method="POST" id="gerir_adm" class="esconder">
+</form>
+
+
+
+
+
+
+
+
+
+
