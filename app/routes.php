@@ -43,6 +43,7 @@ $route[] = ['/edit_customer',                   'CustomerController@edit_custome
 $route[] = ['/salva_editar_cliente',            'CustomerController@salva_editar_cliente',              'auth'];
 $route[] = ['/busca_cliente_por_telefone',      'CustomerController@busca_cliente_por_telefone',        'auth'];
 $route[] = ['/salva_edit_endereco',             'CustomerController@salva_edit_endereco',               'auth'];
+$route[] = ['/busca_cliente_to_select',         'CustomerController@busca_cliente_to_select',           'auth'];
 
 //ITENS
 $route[] = ['/gestao_item',             'ItemController@gestao_item',               'auth'];
@@ -127,6 +128,7 @@ $route[] = ['/carregar_gestao_a_vista',             'PedidoController@carregar_g
 
 //RELATORIOS
 $route[] = ['/relatorios',                              'RelatorioController@relatorios_home',                          'auth'];
+$route[] = ['/relatorio_full',                          'RelatorioController@relatorio_full',                          'auth'];
 
 
 

@@ -48,10 +48,10 @@
             <div class="row">&nbsp Tipo de busca</div>
             <div class="row">
                     <div class=" col-sm">
-                        <a class="btn btn-success btn-block text-white" id="ativo_sim" role="button">Todas as vendas</a>
+                        <a class="btn btn-success btn-block text-white" id="btn_completa" role="button">Todas as vendas</a>
                     </div>
                     <div class="col-sm">
-                        <a class="btn btn-outline-info btn-block" id="ativo_nao" role="button">Vendas Específicas</a>
+                        <a class="btn btn-outline-info btn-block" id="btn_parcial" role="button">Vendas Específicas</a>
                     </div>
             </div>
         </div>
@@ -60,85 +60,219 @@
         <hr>
         
         
-        
-        
-        
-        <!--Todas as vendas-->
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-dark" type="button">Todas as vendas</button>
-                    </div>
-                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+        <!--Colapsar Opcoes FILTRO-->
+        <div class="collapse" id="div_opcoes_filtro">
+            <div class="card card-body">
+                
+                <!--Cliente que comprou mais vezes-->
+                <div class="custom-control custom-radio">
+                    <input type="radio" class="custom-control-input" id="radio_cliente_vezes" name="radio-stacked" required>
+                    <label class="custom-control-label" for="radio_cliente_vezes">Cliente que comprou mais vezes</label>
                 </div>
-            </div>
-	</div>
-        
-        
-        
-        <!--Todas as vendas-->
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="button">Todas as vendas</button>
-                    </div>
-                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                
+                <!--Cliente que mais comprou-->
+                <div class="custom-control custom-radio mt-3">
+                    <input type="radio" class="custom-control-input" id="radio_cliente_valor" name="radio-stacked" required>
+                    <label class="custom-control-label" for="radio_cliente_valor">Cliente que mais comprou</label>
                 </div>
-            </div>
-	</div>
-        
-        
-        
-        <!--Todas as vendas-->
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="button">Todas as vendas</button>
-                    </div>
-                    <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                
+                <!--Produtos X Custos-->
+                <div class="custom-control custom-radio mt-3">
+                    <input type="radio" class="custom-control-input" id="radio_vendas_custo" name="radio-stacked" required>
+                    <label class="custom-control-label" for="radio_vendas_custo">Produtos X Custos</label>
                 </div>
-            </div>
-	</div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-  
-
-        <!--NOME-->
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" aria-label="Checkbox for following text input"> 
+                
+                <!--Curva ABC Produtos-->
+                <div class="custom-control custom-radio mt-3">
+                    <input type="radio" class="custom-control-input" id="radio_produto_abc" name="radio-stacked" required>
+                    <label class="custom-control-label" for="radio_produto_abc">Curva ABC Produtos</label>
+                </div>
+                
+                <hr>
+                
+                <!--Cliente-->
+                <div class="form-row mt-3">
+                    <div class="form-group col-md-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" id="btn_cliente" type="button">Cliente <span class="" role="status" id="loading_cliente" aria-hidden="true"></span></button>
+                            </div>
+                            <select disabled id="select_cliente" name="select_cliente" class="selectpicker form-control" data-live-search="true" data-header="Escolha um Cliente" data-style="btn-outline-dark">
+                                <?php
+                                    if (isset($this->view->categorias)){ 
+                                ?>
+                                        <option value="0" selected></option>
+                                <?php 
+                                        foreach ($this->view->categorias as $key => $value){ 
+                                ?>
+                                             <option value="<?php echo $value->id_category ?>" > <?php echo $value->description?> </option>
+                                <?php   }       
+                                    }else{
+                                ?>
+                                        <option value="" selected>Não há valores para mostrar.</option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
                         </div>
                     </div>
-                    <input type="text" class="form-control" aria-label="Text input with checkbox">
                 </div>
+                
+                
+                <!--Por Produto-->
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" id="btn_produto" type="button">Produto</button>
+                            </div>
+                            <select disabled id="select_produto" name="select_produto" class="selectpicker form-control" data-live-search="true" data-header="Escolha uma Produto" data-style="btn-outline-dark">
+                                <?php
+                                    if (isset($this->view->categorias)){ 
+                                ?>
+                                        <option value="0" selected></option>
+                                <?php 
+                                        foreach ($this->view->categorias as $key => $value){ 
+                                ?>
+                                             <option value="<?php echo $value->id_category ?>" > <?php echo $value->description?> </option>
+                                <?php   }       
+                                    }else{
+                                ?>
+                                        <option value="" selected>Não há valores para mostrar.</option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--categoria-->
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" id="btn_categoria" type="button">Categoria</button>
+                            </div>
+                            <select disabled id="select_categoria" name="select_categoria" class="selectpicker form-control" data-live-search="true" data-header="Escolha uma Categoria" data-style="btn-outline-dark">
+                                <?php
+                                    if (isset($this->view->categorias)){ 
+                                ?>
+                                        <option value="0" selected></option>
+                                <?php 
+                                        foreach ($this->view->categorias as $key => $value){ 
+                                ?>
+                                             <option value="<?php echo $value->id_category ?>" > <?php echo $value->description?> </option>
+                                <?php   }       
+                                    }else{
+                                ?>
+                                        <option value="" selected>Não há valores para mostrar.</option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!--municipio-->
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" id="btn_municipio" type="button">Municipio</button>
+                            </div>
+                            <select disabled id="select_municipio" name="select_municipio" class="selectpicker form-control" data-live-search="true" data-header="Escolha um Municipio" data-style="btn-outline-dark">
+                                <?php
+                                    if (isset($this->view->categorias)){ 
+                                ?>
+                                        <option value="0" selected></option>
+                                <?php 
+                                        foreach ($this->view->categorias as $key => $value){ 
+                                ?>
+                                             <option value="<?php echo $value->id_category ?>" > <?php echo $value->description?> </option>
+                                <?php   }       
+                                    }else{
+                                ?>
+                                        <option value="" selected>Não há valores para mostrar.</option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!--Cidade-->
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" id="btn_cidade" type="button">Cidade</button>
+                            </div>
+                            <select disabled id="select_cidade" name="select_cidade" class="selectpicker form-control" data-live-search="true" data-header="Escolha uma Cidade" data-style="btn-outline-dark">
+                                <?php
+                                    if (isset($this->view->categorias)){ 
+                                ?>
+                                        <option value="0" selected></option>
+                                <?php 
+                                        foreach ($this->view->categorias as $key => $value){ 
+                                ?>
+                                             <option value="<?php echo $value->id_category ?>" > <?php echo $value->description?> </option>
+                                <?php   }       
+                                    }else{
+                                ?>
+                                        <option value="" selected>Não há valores para mostrar.</option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!--Pagamento-->
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" id="btn_pagamento" type="button">Forma de Pagamento</button>
+                            </div>
+                            <select disabled id="select_pagamento" name="select_pagamento" class="selectpicker form-control" data-live-search="true" data-header="Escolha uma Cidade" data-style="btn-outline-dark">
+                                <?php
+                                    if (isset($this->view->categorias)){ 
+                                ?>
+                                        <option value="0" selected></option>
+                                <?php 
+                                        foreach ($this->view->categorias as $key => $value){ 
+                                ?>
+                                             <option value="<?php echo $value->id_category ?>" > <?php echo $value->description?> </option>
+                                <?php   }       
+                                    }else{
+                                ?>
+                                        <option value="" selected>Não há valores para mostrar.</option>
+                                <?php
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                
             </div>
-	</div>
-        
+        </div>
         
         
         <hr>
         
         <!--VALIDAR e SEGUIR-->
         <div class="form-row mb-4 mt-3">
-            <a id="btn_validar" name="btn_validar" class="btn btn-success btn-lg btn-block text-white" role="button">Consultar</a>
+            <a id="btn_validar" name="btn_validar" class="btn btn-success btn-lg btn-block text-white" role="button" target="_blank">Consultar</a>
         </div>
     </div>
 </div>
@@ -148,11 +282,27 @@
 
 
 <!--form salvar-->
-    <form action="/cadastrar_novo_adm" method="POST" id="cadastrar_novo_item">
-        <input type='hidden'    name="name"                      id="name">
-        <input type='hidden'    name="email"                     id="email">
-        <input type='hidden'    name="obs"                       id="obs">
-    </form>
+<form action="/" method="POST" id="form_dados_save" class="esconder">
+    <input type='text'    name="tipo_busca"              id="tipo_busca" value="1">
+    
+    <a id="btn_busca_full" name="btn_busca_full"    href="/" role="button" target="_blank"></a>
+    
+    <input type='text'    name="cliente_abc_valor"    id="cliente_abc_valor"    value="0">
+    <input type='text'    name="cliente_abc_qtd"      id="cliente_abc_qtd"      value="0">
+    <input type='text'    name="vendas_custo"         id="vendas_custo"         value="0">
+    <input type='text'    name="produto_abc"          id="produto_abc"          value="0">
+    
+    <input type='text'    name="produto"              id="produto"          value="0">
+    <input type='text'    name="categoria"            id="categoria"        value="0">
+    <input type='text'    name="municipio"            id="municipio"        value="0">
+    <input type='text'    name="cidade"               id="cidade"           value="0">
+    <input type='text'    name="cliente"              id="cliente"          value="0">
+    <input type='text'    name="pagamento"            id="pagamento"        value="0">
+    
+    
+    <a id="btn_busca_full" name="btn_busca_parcial" href="/" role="button" target="_blank"></a>
+    
+</form>
 
 
 

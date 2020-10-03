@@ -315,6 +315,19 @@ class Customer
     }
     
     
+    //Dados de cliente especifico
+    public static function busca_cliente_to_select() {
+        //Dados obrigatorios
+         $array = [
+            "funcao"          => "busca_cliente_to_select"
+        ];
+        
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    
     
     //Dados de cliente especifico
     public static function salva_edit_endereco(

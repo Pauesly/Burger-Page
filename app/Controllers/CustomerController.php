@@ -289,10 +289,14 @@ class CustomerController extends BaseController
     
     
     public function busca_cliente_por_telefone($request){
-        
         $resultado = Customer::busca_cliente_por_telefone(self::FormataTelefone($request->get->phone));
         echo(json_encode($resultado));
-
+    }
+    
+    
+    public function busca_cliente_to_select(){
+        $resultado = Customer::busca_cliente_to_select();
+        echo(json_encode($resultado));
     }
     
     

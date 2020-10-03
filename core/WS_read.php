@@ -834,9 +834,6 @@ class WS_read
                 
                 $result = DBRead('ProductOrder', "WHERE fk_id_order LIKE '$id'", "SUM(price_total) AS total");
                 
-                //    
-//    SELECT  FROM ProductOrder WHERE fk_id_order LIKE 3
-                
                 if($result){
                     $status['erro'] = false;
                     $status['resultado'] = $result;
@@ -844,7 +841,6 @@ class WS_read
                     $status['resultado'] = 'Busca vazia';
                 }
             break;
-            
 //------------------------------------------------------------------------------ 
             
             /**
@@ -893,7 +889,24 @@ class WS_read
                 }
             break;            
 //------------------------------------------------------------------------------ 
-            
+            /**
+             * S
+             * Retorna clientes
+             */
+            case "busca_cliente_to_select":
+                
+                $campos = "id_customer, name";
+                
+                $result = DBRead('Customer', "", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
             
             
             
