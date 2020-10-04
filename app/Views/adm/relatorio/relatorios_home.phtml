@@ -25,7 +25,7 @@
                             <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Data Inicial</span>
                         </div>
                         <input class="form-control" id="txt_data_inicial" name="date" placeholder="" type="text"/>
-                <div class="invalid-feedback">Digite alguma data.</div>
+                        <div class="invalid-feedback">Formato DD/MM/AAAA</div>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -34,6 +34,7 @@
                             <span class="input-group-text" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;&nbsp;Data Final</span>
                         </div>
                         <input class="form-control" id="txt_data_final" name="date" placeholder="" type="text"/>
+                        <div class="invalid-feedback">Formato DD/MM/AAAA</div>
                     </div>
                 </div>
             </div>   
@@ -270,6 +271,11 @@
         
         <hr>
         
+        <div class="esconder" id="div_alert_erro" role="alert">
+            Selecione pelo menos um filtro.
+        </div>
+        
+        
         <!--VALIDAR e SEGUIR-->
         <div class="form-row mb-4 mt-3">
             <a id="btn_validar" name="btn_validar" class="btn btn-success btn-lg btn-block text-white" role="button" target="_blank">Consultar</a>
@@ -300,7 +306,8 @@
     <input type='text'    name="pagamento"            id="pagamento"        value="0">
     
     
-    <a id="btn_busca_full" name="btn_busca_parcial" href="/" role="button" target="_blank"></a>
+    <input type='text'    name="filtro_selecionado"            id="filtro_selecionado"        value="0">
+    <a id="btn_busca_parcial" name="btn_busca_parcial" href="/" role="button" target="_blank"></a>
     
 </form>
 

@@ -55,7 +55,12 @@ class RelatorioController extends BaseController
     
     
     
-    
+    public function relatorio_parcial($request){
+       
+        var_dump($request);
+        
+        
+    }
     
     
     

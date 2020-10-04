@@ -68,12 +68,191 @@ function SelecionaConsulta() {
         link = link + "inicial=" +  document.getElementById("txt_data_inicial").value;
         link = link + "&final="   +  document.getElementById("txt_data_final").value;
         
-        document.getElementById("btn_busca_full").href=link; 
+        document.getElementById("btn_busca_full").href = link; 
         document.getElementById("btn_busca_full").click();
     }else{
         console.log("buscar com filtro");
-        
+        if(CheckSomeOptionSelected()){
+            document.getElementById("btn_busca_parcial").click();
+        }else{
+            AlertErro();
+        }
     }
+}
+
+
+function AlertErro() {
+    document.getElementById("div_alert_erro").className = "alert alert-danger";
+            
+    var segundos = 5;
+    console.log("Próxima Atualização: " + segundos);
+    var contadorID = setInterval(function(){
+        if(segundos == 0){
+            clearInterval(contadorID);
+            document.getElementById("div_alert_erro").className = "esconder";
+        }else{
+            segundos --;
+            console.log("Próxima Atualização: " + segundos);
+        }
+    }, 1000);
+}
+
+
+
+
+/**
+ * Verifica se existe alguma opcao selecionada e se e valida
+ */
+function CheckSomeOptionSelected() {
+    let check = 0;
+    
+    if((document.getElementById("txt_data_inicial").value.length > 9) && (document.getElementById("txt_data_final").value.length > 9)){
+        check++;
+    }else{
+        document.getElementById("txt_data_inicial").className = "txt_data_inicial is-invalid";
+        document.getElementById("txt_data_final").className = "txt_data_inicial is-invalid";
+    }
+    
+       
+    
+    if(document.getElementById("radio_cliente_vezes").checked){
+        SetFilter("cliente_vezes", "");
+        check++;
+    }
+    
+    if(document.getElementById("radio_cliente_valor").checked){
+        SetFilter("cliente_valor", "");
+        check++;
+    }
+    
+    if(document.getElementById("radio_vendas_custo").checked){
+        SetFilter("vendas_custo", "");
+        check++;
+    }
+    
+    if(document.getElementById("radio_produto_abc").checked){
+        SetFilter("produto_abc", "");
+        check++;
+    }
+    
+    if(document.getElementById("filtro_selecionado").value !== "0"){
+        check++;
+    }
+    
+    return check === 2 ? true : false;
+}
+
+
+/**
+ * PALAVRAS CHAVE FILTROS
+ * cliente_vezes
+ * cliente_valor
+ * vendas_custo
+ * produto_abc
+ * cliente
+ * produto
+ * categoria
+ * municipio
+ * cidade
+ * pagamento
+ */
+
+
+/**
+ * Set selected select
+ */
+$(function(){
+    
+    //Cliente
+    $('#select_cliente').change(function(){
+        //Setting Screen
+        if ($('#select_cliente').val() === "0"){
+            document.getElementById("filtro_selecionado").value = "0";
+        }else{
+            document.getElementById("filtro_selecionado").value = "1";
+            SetFilter("cliente", document.getElementById("select_cliente").value);
+        }
+    });
+
+    //Produto
+    $('#select_produto').change(function(){
+        //Setting Screen
+        if ($('#select_produto').val() === "0"){
+            document.getElementById("filtro_selecionado").value = "0";
+        }else{
+            document.getElementById("filtro_selecionado").value = "1";
+            SetFilter("produto", document.getElementById("select_produto").value);
+        }
+    });
+    
+    
+    //select_categoria
+    $('#select_categoria').change(function(){
+        //Setting Screen
+        if ($('#select_categoria').val() === "0"){
+            document.getElementById("filtro_selecionado").value = "0";
+        }else{
+            document.getElementById("filtro_selecionado").value = "1";
+            SetFilter("categoria", document.getElementById("select_categoria").value);
+        }
+    });
+    
+    
+    //select_municipio
+    $('#select_municipio').change(function(){
+        //Setting Screen
+        if ($('#select_municipio').val() === "0"){
+            document.getElementById("filtro_selecionado").value = "0";
+        }else{
+            document.getElementById("filtro_selecionado").value = "1";
+            SetFilter("municipio", document.getElementById("select_municipio").value);
+        }
+    });
+    
+    
+    //select_cidade
+    $('#select_cidade').change(function(){
+        //Setting Screen
+        if ($('#select_cidade').val() === "0"){
+            document.getElementById("filtro_selecionado").value = "0";
+        }else{
+            document.getElementById("filtro_selecionado").value = "1";
+            SetFilter("cidade", document.getElementById("select_cidade").value);
+        }
+    });
+    
+    
+    //select_pagamento
+    $('#select_pagamento').change(function(){
+        //Setting Screen
+        if ($('#select_pagamento').val() === "0"){
+            document.getElementById("filtro_selecionado").value = "0";
+        }else{
+            document.getElementById("filtro_selecionado").value = "1";
+            SetFilter("pagamento", document.getElementById("select_pagamento").value);
+        }
+    });
+    
+});    
+
+
+
+
+
+
+
+/**
+ * Marca opcao de filtro selecionada
+ */
+function SetFilter(filter, param) {
+    let link = "relatorio_parcial?"
+    link = link + "func=" +  filter;
+    link = link + "&param="   +  param;
+    link = link + "&data_inicio="   +  document.getElementById("txt_data_inicial").value;
+    link = link + "&data_fim="      +  document.getElementById("txt_data_final").value;
+    
+    document.getElementById("filtro_selecionado").value = 1;
+    document.getElementById("btn_busca_parcial").href = link;
 }
 
 
@@ -83,7 +262,7 @@ function SelecionaConsulta() {
  * Carregar Select Clientes
  */
 function LoadClientes() {
-    
+    document.getElementById("filtro_selecionado").value = "0";
     document.getElementById("loading_cliente").className = "spinner-border spinner-border-sm text-primary";
     $.getJSON('/busca_cliente_to_select',{}, function(retorno){
             document.getElementById("loading_cliente").className = "";
@@ -108,7 +287,7 @@ function LoadClientes() {
  * Carregar Select Clientes
  */
 function LoadClientes() {
-    
+    document.getElementById("filtro_selecionado").value = "0";
     document.getElementById("loading_cliente").className = "spinner-border spinner-border-sm text-primary";
     $.getJSON('/busca_clientes_to_select',{}, function(retorno){
             document.getElementById("loading_cliente").className = "";
@@ -132,7 +311,7 @@ function LoadClientes() {
  * Carregar Select Produtos
  */
 function LoadProdutos() {
-    
+    document.getElementById("filtro_selecionado").value = "0";
     document.getElementById("loading_produto").className = "spinner-border spinner-border-sm text-primary";
     $.getJSON('/busca_produtos_to_select',{}, function(retorno){
             document.getElementById("loading_produto").className = "";
@@ -156,7 +335,7 @@ function LoadProdutos() {
  * Carregar Select Categorias
  */
 function LoadCategorias() {
-    
+    document.getElementById("filtro_selecionado").value = "0";
     document.getElementById("loading_categoria").className = "spinner-border spinner-border-sm text-primary";
     $.getJSON('/busca_categorias_to_select',{}, function(retorno){
             document.getElementById("loading_categoria").className = "";
@@ -181,7 +360,7 @@ function LoadCategorias() {
  * Carregar Select LoadMunicipios
  */
 function LoadMunicipios() {
-    
+    document.getElementById("filtro_selecionado").value = "0";
     document.getElementById("loading_municipio").className = "spinner-border spinner-border-sm text-primary";
     $.getJSON('/busca_municipios_to_select',{}, function(retorno){
             document.getElementById("loading_municipio").className = "";
@@ -205,7 +384,7 @@ function LoadMunicipios() {
  * Carregar Select LoadMunicipios
  */
 function LoadCidades() {
-    
+    document.getElementById("filtro_selecionado").value = "0";
     document.getElementById("loading_cidade").className = "spinner-border spinner-border-sm text-primary";
     $.getJSON('/busca_cidades_to_select',{}, function(retorno){
             document.getElementById("loading_cidade").className = "";
@@ -229,7 +408,7 @@ function LoadCidades() {
  * Carregar Select LoadMunicipios
  */
 function LoadPagamentos() {
-    
+    document.getElementById("filtro_selecionado").value = "0";
     document.getElementById("loading_pagamento").className = "spinner-border spinner-border-sm text-primary";
     $.getJSON('/busca_pagamentos_to_select',{}, function(retorno){
             document.getElementById("loading_pagamento").className = "";
@@ -391,12 +570,6 @@ function UnsetRadios() {
 }
 
 
-/**
- * Unselect Every Filter
- */
-function UnselectEveryFilter() {
-    document.getElementById("radio_cliente_vezes").checked = false;
-}
 
 
 

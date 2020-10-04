@@ -133,8 +133,9 @@ $route[] = ['/carregar_gestao_a_vista',             'PedidoController@carregar_g
 
 
 //RELATORIOS
-$route[] = ['/relatorios',                              'RelatorioController@relatorios_home',                          'auth'];
+$route[] = ['/relatorios',                              'RelatorioController@relatorios_home',                         'auth'];
 $route[] = ['/relatorio_full',                          'RelatorioController@relatorio_full',                          'auth'];
+$route[] = ['/relatorio_parcial',                       'RelatorioController@relatorio_parcial',                       'auth'];
 
 
 
