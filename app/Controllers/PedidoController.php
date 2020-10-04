@@ -188,6 +188,12 @@ class PedidoController extends BaseController
         echo(json_encode($resultado));
     }
     
+    
+    public function busca_pagamentos_to_select(){
+        $resultado = PaymentTerm::busca_pagamentos_to_select();
+        echo(json_encode($resultado));
+    }
+    
   
     public function carrega_historico_status_pedido($request){
         $resultado = OrderStatus::busca_status_de_pedido($request->get->id_pedido);

@@ -43,7 +43,9 @@ $route[] = ['/edit_customer',                   'CustomerController@edit_custome
 $route[] = ['/salva_editar_cliente',            'CustomerController@salva_editar_cliente',              'auth'];
 $route[] = ['/busca_cliente_por_telefone',      'CustomerController@busca_cliente_por_telefone',        'auth'];
 $route[] = ['/salva_edit_endereco',             'CustomerController@salva_edit_endereco',               'auth'];
-$route[] = ['/busca_cliente_to_select',         'CustomerController@busca_cliente_to_select',           'auth'];
+$route[] = ['/busca_clientes_to_select',        'CustomerController@busca_clientes_to_select',          'auth'];
+$route[] = ['/busca_municipios_to_select',      'CustomerController@busca_municipios_to_select',        'auth'];
+$route[] = ['/busca_cidades_to_select',         'CustomerController@busca_cidades_to_select',           'auth'];
 
 //ITENS
 $route[] = ['/gestao_item',             'ItemController@gestao_item',               'auth'];
@@ -58,6 +60,7 @@ $route[] = ['/add_categoria',                   'CategoriaController@add_categor
 $route[] = ['/cadastrar_nova_categoria',        'CategoriaController@cadastrar_nova_categoria',  'auth'];
 $route[] = ['/edit_categoria',                  'CategoriaController@edit_categoria',            'auth'];
 $route[] = ['/salvar_edit_categoria',           'CategoriaController@salvar_edit_categoria',     'auth'];
+$route[] = ['/busca_categorias_to_select',      'CategoriaController@busca_categorias_to_select','auth'];
 
 //PRODUTO
 $route[] = ['/gestao_produto',                      'ProdutoController@gestao_produto',                 'auth'];
@@ -68,6 +71,7 @@ $route[] = ['/salva_edit_produto',                  'ProdutoController@salva_edi
 $route[] = ['/busca_itens_produto',                 'ProdutoController@busca_itens_produto',            'auth'];
 $route[] = ['/add_item_produto',                    'ProdutoController@add_item_produto',               'auth'];
 $route[] = ['/remove_item_produto',                 'ProdutoController@remove_item_produto',            'auth'];
+$route[] = ['/busca_produtos_to_select',            'ProdutoController@busca_produtos_to_select',       'auth'];
 
 $route[] = ['/menuonline',                          'HomeController@index'];
 
@@ -117,6 +121,8 @@ $route[] = ['/remove_produto_pedido',               'PedidoController@remove_pro
 $route[] = ['/apagar_pedido',                       'PedidoController@apagar_pedido',                               'auth'];
 $route[] = ['/visualiza_romaneio/{id}',             'PedidoController@visualiza_romaneio',                          'auth'];
 $route[] = ['/imprime_romaneio/{id}',               'PedidoController@imprime_romaneio',                            'auth'];
+
+$route[] = ['/busca_pagamentos_to_select',          'PedidoController@busca_pagamentos_to_select',                  'auth'];
 
 $route[] = ['/consultar_pedidos',                   'PedidoController@consultar_pedidos',                           'auth'];
 $route[] = ['/realizar_busca_pedido_filtros',       'PedidoController@realizar_busca_pedido_filtros',               'auth'];

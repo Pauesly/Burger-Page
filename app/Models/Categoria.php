@@ -87,7 +87,16 @@ class Categoria
     
     
     
-    
+    //Busca adm com email para Login
+    public static function busca_categorias_to_select() {
+        //Dados obrigatorios
+        $array = [
+            "funcao"  => "busca_categorias_to_select"
+            
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
 
     

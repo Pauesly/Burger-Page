@@ -164,7 +164,10 @@ class CategoriaController extends BaseController
     
     
     
-    
+    public function busca_categorias_to_select(){
+        $resultado = Categoria::busca_categorias_to_select();
+        echo(json_encode($resultado));
+    }
     
     
     

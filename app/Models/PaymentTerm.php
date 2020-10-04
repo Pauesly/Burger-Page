@@ -30,7 +30,15 @@ class PaymentTerm
     }
     
 
-    
+    //Busca adm com email para Login
+    public static function busca_pagamentos_to_select() {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "busca_pagamentos_to_select"
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     

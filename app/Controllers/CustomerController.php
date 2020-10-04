@@ -294,11 +294,21 @@ class CustomerController extends BaseController
     }
     
     
-    public function busca_cliente_to_select(){
-        $resultado = Customer::busca_cliente_to_select();
+    public function busca_clientes_to_select(){
+        $resultado = Customer::busca_clientes_to_select();
         echo(json_encode($resultado));
     }
     
+    public function busca_municipios_to_select(){
+        $resultado = Customer::busca_municipios_to_select();
+        echo(json_encode($resultado));
+    }
+    
+    
+    public function busca_cidades_to_select(){
+        $resultado = Customer::busca_cidades_to_select();
+        echo(json_encode($resultado));
+    }
     
     
     public function salva_edit_endereco($request){

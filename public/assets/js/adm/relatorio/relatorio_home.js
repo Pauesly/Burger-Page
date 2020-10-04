@@ -83,12 +83,10 @@ function SelecionaConsulta() {
  * Carregar Select Clientes
  */
 function LoadClientes() {
-    document.getElementById("loading_cliente").className = "spinner-border spinner-border-sm text-primary";
     
+    document.getElementById("loading_cliente").className = "spinner-border spinner-border-sm text-primary";
     $.getJSON('/busca_cliente_to_select',{}, function(retorno){
-        
-        document.getElementById("loading_cliente").className = "";
-        
+            document.getElementById("loading_cliente").className = "";
            //Erro. Busca vazia ou execucao da consulta
             if(retorno['erro']){
                 //Setting Screen
@@ -96,6 +94,9 @@ function LoadClientes() {
             }else{
                 //Setting Screen
                 EnableButtons();
+                document.getElementById("btn_cliente").className = "btn btn-info";
+                document.getElementById("select_cliente").disabled = false;
+                $('#select_cliente').selectpicker('refresh');
                 PreencheSelect("select_cliente", "id_customer", "name", retorno['resultado']);
             }
     });
@@ -103,29 +104,170 @@ function LoadClientes() {
 
 
 
+/**
+ * Carregar Select Clientes
+ */
+function LoadClientes() {
+    
+    document.getElementById("loading_cliente").className = "spinner-border spinner-border-sm text-primary";
+    $.getJSON('/busca_clientes_to_select',{}, function(retorno){
+            document.getElementById("loading_cliente").className = "";
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                EnableButtons();
+                document.getElementById("btn_cliente").className = "btn btn-info";
+                document.getElementById("select_cliente").disabled = false;
+                $('#select_cliente').selectpicker('refresh');
+                PreencheSelect("select_cliente", "id_customer", "name", retorno['resultado']);
+            }
+    });
+}
+
+
+/**
+ * Carregar Select Produtos
+ */
+function LoadProdutos() {
+    
+    document.getElementById("loading_produto").className = "spinner-border spinner-border-sm text-primary";
+    $.getJSON('/busca_produtos_to_select',{}, function(retorno){
+            document.getElementById("loading_produto").className = "";
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                EnableButtons();
+                document.getElementById("btn_produto").className = "btn btn-info";
+                document.getElementById("select_produto").disabled = false;
+                $('#select_produto').selectpicker('refresh');
+                PreencheSelect("select_produto", "id_product", "name", retorno['resultado']);
+            }
+    });
+}
+
+
+/**
+ * Carregar Select Categorias
+ */
+function LoadCategorias() {
+    
+    document.getElementById("loading_categoria").className = "spinner-border spinner-border-sm text-primary";
+    $.getJSON('/busca_categorias_to_select',{}, function(retorno){
+            document.getElementById("loading_categoria").className = "";
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                EnableButtons();
+                document.getElementById("btn_categoria").className = "btn btn-info";
+                document.getElementById("select_categoria").disabled = false;
+                $('#select_categoria').selectpicker('refresh');
+                PreencheSelect("select_categoria", "id_category", "description", retorno['resultado']);
+            }
+    });
+}
+
+
+
+/**
+ * Carregar Select LoadMunicipios
+ */
+function LoadMunicipios() {
+    
+    document.getElementById("loading_municipio").className = "spinner-border spinner-border-sm text-primary";
+    $.getJSON('/busca_municipios_to_select',{}, function(retorno){
+            document.getElementById("loading_municipio").className = "";
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                EnableButtons();
+                document.getElementById("btn_municipio").className = "btn btn-info";
+                document.getElementById("select_municipio").disabled = false;
+                $('#select_municipio').selectpicker('refresh');
+                PreencheSelect("select_municipio", "bairo", "bairo", retorno['resultado']);
+            }
+    });
+}
+
+
+/**
+ * Carregar Select LoadMunicipios
+ */
+function LoadCidades() {
+    
+    document.getElementById("loading_cidade").className = "spinner-border spinner-border-sm text-primary";
+    $.getJSON('/busca_cidades_to_select',{}, function(retorno){
+            document.getElementById("loading_cidade").className = "";
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                EnableButtons();
+                document.getElementById("btn_cidade").className = "btn btn-info";
+                document.getElementById("select_cidade").disabled = false;
+                $('#select_cidade').selectpicker('refresh');
+                PreencheSelect("select_cidade", "cidade", "cidade", retorno['resultado']);
+            }
+    });
+}
+
+
+/**
+ * Carregar Select LoadMunicipios
+ */
+function LoadPagamentos() {
+    
+    document.getElementById("loading_pagamento").className = "spinner-border spinner-border-sm text-primary";
+    $.getJSON('/busca_pagamentos_to_select',{}, function(retorno){
+            document.getElementById("loading_pagamento").className = "";
+           //Erro. Busca vazia ou execucao da consulta
+            if(retorno['erro']){
+                //Setting Screen
+                alert("ERRO # Contactar Administrador.");
+            }else{
+                //Setting Screen
+                EnableButtons();
+                document.getElementById("btn_pagamento").className = "btn btn-info";
+                document.getElementById("select_pagamento").disabled = false;
+                $('#select_pagamento').selectpicker('refresh');
+                PreencheSelect("select_pagamento", "id_payment_term", "name", retorno['resultado']);
+            }
+    });
+}
+
 
 
 /**
  * Preenche Select
  */
-function PreencheSelect(select, id, name, conteudo ) {
-    console.log(select);
+function PreencheSelect(select, id_tag, name, conteudo ) {
+    var options = '<option value="0"> </option>';
+    for (var i = 0; i < conteudo.length; i++) {
+        options += '<option value="' + conteudo[i][id_tag] + '">'+ conteudo[i][id_tag] + " - " + conteudo[i][name] + '</option>';
+    }
+    $('#' + select).html(options).selectpicker('refresh');
 }
-
-
-
-
-
-
-
 
 
 //Listeners Clickem Radio
 $(document).ready(function () {
-    $('#radio_cliente_vezes').click(function () {   UnsetButtons();   });
-    $('#radio_cliente_valor').click(function () {   UnsetButtons();   });
-    $('#radio_vendas_custo').click(function () {   UnsetButtons();   });
-    $('#radio_produto_abc').click(function () {   UnsetButtons();   });
+    $('#radio_cliente_vezes').click(function () {   UnsetButtons(); DisableSelects();  });
+    $('#radio_cliente_valor').click(function () {   UnsetButtons(); DisableSelects();  });
+    $('#radio_vendas_custo').click(function () {   UnsetButtons();  DisableSelects(); });
+    $('#radio_produto_abc').click(function () {   UnsetButtons();   DisableSelects(); });
 });
 
 
@@ -136,7 +278,6 @@ document.getElementById("btn_cliente").addEventListener("mousedown", function(ev
         DisableSelects();
         DisableButtons();
         LoadClientes();
-//        document.getElementById("btn_cliente").className = "btn btn-info";
 });
 
 document.getElementById("btn_produto").addEventListener("mousedown", function(event) {
@@ -229,6 +370,13 @@ function DisableSelects() {
     document.getElementById("select_municipio").disabled = true;
     document.getElementById("select_cidade").disabled = true;
     document.getElementById("select_pagamento").disabled = true;
+    
+    $('#select_cliente').selectpicker('refresh');
+    $('#select_produto').selectpicker('refresh');
+    $('#select_categoria').selectpicker('refresh');
+    $('#select_municipio').selectpicker('refresh');
+    $('#select_cidade').selectpicker('refresh');
+    $('#select_pagamento').selectpicker('refresh');
 }
 
 

@@ -893,7 +893,7 @@ class WS_read
              * S
              * Retorna clientes
              */
-            case "busca_cliente_to_select":
+            case "busca_clientes_to_select":
                 
                 $campos = "id_customer, name";
                 
@@ -907,11 +907,94 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
-            
-            
-            
-            
-            
+            /**
+             * S
+             * Retorna clientes
+             */
+            case "busca_produtos_to_select":
+                
+                $campos = "id_product, name";
+                
+                $result = DBRead('Product', "", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * S
+             * Retorna 
+             */
+            case "busca_categorias_to_select":
+                
+                $campos = "id_category, description";
+                
+                $result = DBRead('Category', "", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * S
+             * Retorna 
+             */
+            case "busca_municipios_to_select":
+                
+                $campos = "id_category, description";
+                
+                $result = DBRead('Address', " GROUP BY bairo ", "bairro AS bairo, COUNT(*) AS qtd");
+             
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * S
+             * Retorna 
+             */
+            case "busca_cidades_to_select":
+                
+                $result = DBRead('Address', " GROUP BY cidade ", "cidade AS cidade, COUNT(*) AS qtd");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
+            /**
+             * S
+             * Retorna 
+             */
+            case "busca_pagamentos_to_select":
+                
+                $campos = "id_payment_term, name";
+                
+                $result = DBRead('PaymentTerm', "", $campos);
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
             
             
             

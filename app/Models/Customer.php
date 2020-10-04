@@ -316,10 +316,10 @@ class Customer
     
     
     //Dados de cliente especifico
-    public static function busca_cliente_to_select() {
+    public static function busca_clientes_to_select() {
         //Dados obrigatorios
          $array = [
-            "funcao"          => "busca_cliente_to_select"
+            "funcao"          => "busca_clientes_to_select"
         ];
         
         $resultado = WS_read::ler_dados($array);
@@ -327,6 +327,28 @@ class Customer
     }
     
     
+    //Dados de cliente especifico
+    public static function busca_municipios_to_select() {
+        //Dados obrigatorios
+         $array = [
+            "funcao"          => "busca_municipios_to_select"
+        ];
+        
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    //Dados de cliente especifico
+    public static function busca_cidades_to_select() {
+        //Dados obrigatorios
+         $array = [
+            "funcao"          => "busca_cidades_to_select"
+        ];
+        
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     //Dados de cliente especifico

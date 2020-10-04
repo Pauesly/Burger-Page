@@ -279,7 +279,10 @@ class ProdutoController extends BaseController
     
     
     
-    
+    public function busca_produtos_to_select(){
+        $resultado = Produto::busca_produtos_to_select();
+        echo(json_encode($resultado));
+    }
     
     
     
