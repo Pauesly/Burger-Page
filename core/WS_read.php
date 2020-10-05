@@ -842,7 +842,6 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
-            
             /**
              * Busca Pedido com varios filtros
              * Recebe ID para buscar
@@ -995,6 +994,71 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
+            /**
+             * Busca Pedido p/Relatorio FULL
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "relatorio_full":
+                
+                $data_inicial = $info['data_inicial'];
+                $fata_final   = $info['fata_final'];
+                
+                $result = DBRead('Orders',
+                        
+                        "JOIN Adm "
+                            . "ON Adm.id_adm = Orders.fk_id_adm "
+                       ."JOIN Status "
+                            . "ON Status.id_status = Orders.fk_id_status " 
+                       ."JOIN PaymentTerm "
+                            . "ON PaymentTerm.id_payment_term = Orders.fk_id_payment_term " 
+                       ."JOIN Customer "
+                            . "ON Customer.id_customer = Orders.fk_id_customer " .
+                        
+			 " WHERE to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' ORDER BY id_order ",
+                        
+                               "Orders.id_order             as id_order, 
+                                Orders.fk_id_adm            as fk_id_adm,
+                                Orders.fk_id_customer       as fk_id_customer,
+                                Orders.fk_id_payment_term   as fk_id_payment_term,
+                                Orders.fk_id_status         as fk_id_status,
+                                Orders.payment_status       as payment_status,
+                                Orders.created_at           as created_at,
+                                
+                                Status.status               as status_name,
+                                Status.color_code           as color_code,
+                                
+                                PaymentTerm.name            as payment_term_name,
+                                
+                                Customer.name               as customer_name
+                               ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             

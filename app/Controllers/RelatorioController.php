@@ -5,8 +5,9 @@ namespace App\Controllers;
 use Core\BaseController;
 use Core\Redirect;
 use Core\Validator;
-use App\Models\Item;
+use App\Models\Relatorio;
 use App\Models\Customer;
+use App\Models\Padroes_gerais;
 use App\Models\Bcrypt;
 use Core\Session;
 
@@ -47,16 +48,48 @@ class RelatorioController extends BaseController
     
     
     public function relatorio_full($request){
-       
-        var_dump($request);
         
+        $pedidos = Relatorio::relatorio_full($request->get->inicial, $request->get->final);
+//         var_dump($pedidos); die;
         
+        $qtd_pedidos = 0;
+        for($i=0; $i < sizeof($pedidos->resultado); $i++ ){ $qtd_pedidos++; }
+        
+        $valor_pedidos = 0;
+        for($i=0; $i < sizeof($pedidos->resultado); $i++ ){
+            
+            
+            $valor_pedidos = $valor_pedidos + $pedidos->resultado[$i].
+            
+        }
+        
+        $this->view->pedidos = $pedidos->resultado;
+        $this->view->qtd_pedidos = $qtd_pedidos;
+        $this->view->valor_pedidos = $valor_pedidos;
+   
+        $this->view->periodo = $request->get->inicial . " - " . $request->get->final;
+         
+        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        $this->setPageTitle('Relatorio completo');
+        $this->renderView('adm/relatorio/full', '/adm/adm_layout_relatorio');
     }
     
     
     
     public function relatorio_parcial($request){
-       
+       /**
+        * PALAVRAS CHAVE FILTROS
+        * cliente_vezes
+        * cliente_valor
+        * vendas_custo
+        * produto_abc
+        * cliente
+        * produto
+        * categoria
+        * municipio
+        * cidade
+        * pagamento
+        */
         var_dump($request);
         
         

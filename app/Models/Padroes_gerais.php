@@ -32,11 +32,28 @@ class Padroes_gerais
     
     
     
+    public static function ConverteDataUS_BR($data) {
+        $data = str_replace("/", "-", $data);
+//        $data = $data . " 00:00:00 ";
+        return  date('d-m-Y', strtotime($data));
+    }
+    
+    public static function ConverteDataBR_US($data) {
+        $data = str_replace("/", "-", $data);
+//        $data = $data . " 00:00:00 ";
+        return  date('Y-m-d', strtotime($data));
+    }
     
     
+    public static function ConverteDataHoraBR_US($data) {
+        $data = str_replace("/", "-", $data);
+        return  date('Y-m-d H:i:s', strtotime($data));
+    }
     
-    
-    
+    public static function ConverteDataHoraUS_BR($data) {
+        $data = str_replace("/", "-", $data);
+        return  date('d-m-Y H:i:s', strtotime($data));
+    }
     
     
 }

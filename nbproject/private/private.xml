@@ -4,12 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Burger-page/Burger-Page/core/WS_read.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Controllers/PedidoController.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Models/PaymentTerm.php</file>
+            <file>file:/C:/Burger-page/Burger-Page/app/Models/Relatorio.php</file>
+            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/relatorio/full.phtml</file>
+            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/adm_menu.phtml</file>
             <file>file:/C:/Burger-page/Burger-Page/app/Controllers/RelatorioController.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/public/assets/js/adm/relatorio/relatorio_home.js</file>
+            <file>file:/C:/Burger-page/Burger-Page/app/Models/Pedido.php</file>
             <file>file:/C:/Burger-page/Burger-Page/app/routes.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/relatorio/relatorios_home.phtml</file>
         </group>
     </open-files>
 </project-private>

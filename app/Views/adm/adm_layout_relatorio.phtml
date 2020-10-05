@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="shortcut icon" href="imgages/favicon.ico">
+    
+    <!--CSS HEAD-->
+    <?php echo isset($this->view->css_head) ? $this->view->css_head : "" ?>
+    
+    <!--JS HEAD-->
+    <?php echo isset($this->view->js_head) ? $this->view->js_head : "" ?>
+    
+    <title>Jazz Grill | <?php echo $this->getPageTitle('|') ?></title>
+</head>
+
+
+
+    <body>
+   
+
+    <!-- Import do Conteudo principal -->
+    <?php $this->content() ?>
+
+
+    
+    
+    
+    
+    </body>
+</html>

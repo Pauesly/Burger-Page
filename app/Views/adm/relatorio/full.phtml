@@ -1,0 +1,107 @@
+<!--Cabecalho-->
+<div class="container border text-center"  style="background: #FAFAFA">
+    <div class="form-row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <img class="brand-logo-dark" src="/images/logo-198x66.png" alt="" width="198" height="66"/>
+        </div>
+        <div class="col-md-1">
+            <a   class="btn btn-light " onClick="window.print()" role="button"><span class='glyphicon glyphicon-print' ></span></a>
+        </div>
+    </div>
+    <h5><strong>Relatório de vendas Completo</strong></h5>
+    <i>Período <?= $this->view->periodo?></i>
+</div>
+
+
+<!--Resumo-->
+<div class="container border"  style="background: #FAFAFA">
+    <div class="form-row">
+        <div class="col-md-2">  Quantidade de Vendas: </div>
+        <div class="col-md-10"><?= $this->view->qtd_pedidos ?>     </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2">  Valor total: </div>
+        <div class="col-md-10"> R$      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container" style="padding-bottom: 0px">
+    
+
+	
+    
+    <div class="container">
+        
+
+        <!--NOME-->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                    <label for="inputState">Nome</label>
+                    <div class="input-group mb-12">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Nome</span>
+                        </div>
+                        <input type="text" class="form-control" id="txt_name" name="txt_name"  placeholder=""  aria-describedby="basic-addon1" maxlength="60">
+                        <div class="invalid-feedback">Nome obrigatório.</div>
+                    </div>
+            </div>
+	</div>
+        
+        <!--Descricao-->
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                    <label for="inputState">Descrição Detalhada</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Descrição</span>
+                        </div>
+                        <input type="text" class="form-control" id="txt_descricao" name="txt_descricao"  placeholder=""  aria-describedby="basic-addon1" maxlength="255">
+                        <div class="invalid-feedback">Descrição obrigatório.</div>
+                    </div>
+            </div>
+	</div>
+        
+        
+        
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
