@@ -8,6 +8,7 @@ use Core\Validator;
 use App\Models\Relatorio;
 use App\Models\Customer;
 use App\Models\Padroes_gerais;
+use App\Models\ProdutoPedido;
 use App\Models\Bcrypt;
 use Core\Session;
 
@@ -53,19 +54,27 @@ class RelatorioController extends BaseController
 //         var_dump($pedidos); die;
         
         $qtd_pedidos = 0;
-        for($i=0; $i < sizeof($pedidos->resultado); $i++ ){ $qtd_pedidos++; }
-        
         $valor_pedidos = 0;
-        for($i=0; $i < sizeof($pedidos->resultado); $i++ ){
-            
-            
-            $valor_pedidos = $valor_pedidos + $pedidos->resultado[$i].
-            
+        if($pedidos->erro == false){
+            for($i=0; $i < sizeof($pedidos->resultado); $i++ ){
+                $qtd_pedidos++;
+
+                $conta_total = ProdutoPedido::busca_produtos_de_pedido($pedidos->resultado[$i]->id_order);
+                
+                $tot = 0;
+                if($conta_total->erro == false){
+                    for($j = 0; $j < sizeof($conta_total->resultado); $j++){
+                        $tot = $tot + $conta_total->resultado[$j]->price_total;
+                    }
+                }
+                $pedidos->resultado[$i]->total_pedido = $tot;
+                $valor_pedidos = $valor_pedidos + $tot;
+            }
         }
         
-        $this->view->pedidos = $pedidos->resultado;
+        $this->view->pedidos = $pedidos;
         $this->view->qtd_pedidos = $qtd_pedidos;
-        $this->view->valor_pedidos = $valor_pedidos;
+        $this->view->valor_pedidos = number_format($valor_pedidos, 2, '.', '');
    
         $this->view->periodo = $request->get->inicial . " - " . $request->get->final;
          

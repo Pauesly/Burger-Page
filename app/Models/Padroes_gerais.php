@@ -56,6 +56,17 @@ class Padroes_gerais
     }
     
     
+    
+    
+    
+    public static function ValorDoisDigitos($valor) {
+        return number_format($valor, 2, '.', '');
+    }
+    
+    
+    
+    
+    
 }
 
     

@@ -15,75 +15,35 @@
 
 
 <!--Resumo-->
-<div class="container border"  style="background: #FAFAFA">
-    <div class="form-row">
-        <div class="col-md-2">  Quantidade de Vendas: </div>
-        <div class="col-md-10"><?= $this->view->qtd_pedidos ?>     </div>
-    </div>
-    <div class="form-row">
-        <div class="col-md-2">  Valor total: </div>
-        <div class="col-md-10"> R$      </div>
+<div class="container border mt-1"  style="background: #FAFAFA">
+    <div class="form-row text-center mt-2">
+        <div class="col-md-6"> <h3> Quantidade de Vendas: <?= $this->view->qtd_pedidos ?> </h3></div>
+        <div class="col-md-6"> <h3>Valor total: R$        <?= $this->view->valor_pedidos ?>   </h3> </div>
     </div>
 </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container" style="padding-bottom: 0px">
+<!--Relacao de pedidos-->
+<div class="container border mt-1">
     
-
-	
     
-    <div class="container">
-        
-
-        <!--NOME-->
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                    <label for="inputState">Nome</label>
-                    <div class="input-group mb-12">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Nome</span>
-                        </div>
-                        <input type="text" class="form-control" id="txt_name" name="txt_name"  placeholder=""  aria-describedby="basic-addon1" maxlength="60">
-                        <div class="invalid-feedback">Nome obrigatório.</div>
-                    </div>
-            </div>
-	</div>
-        
-        <!--Descricao-->
-        <div class="form-row">
-            <div class="form-group col-md-12">
-                    <label for="inputState">Descrição Detalhada</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Descrição</span>
-                        </div>
-                        <input type="text" class="form-control" id="txt_descricao" name="txt_descricao"  placeholder=""  aria-describedby="basic-addon1" maxlength="255">
-                        <div class="invalid-feedback">Descrição obrigatório.</div>
-                    </div>
-            </div>
-	</div>
-        
-        
-        
+    <?php
+        if($this->view->pedidos->erro == true){
+            for ($h=0; $h < sizeof($this->view->pedidos->resultado); $h++){
+            
+            }
+        }else{
+           ?>
+                <div class="form-row text-center mt-2">
+                    <div class="col-md-12"> <i>Não há pedidos a mostrar.</i></div>
+                </div>
+           <?php
+        }
+    ?>
+    
+    
+    
     
 </div>
 
@@ -91,17 +51,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="form-row text-center mt-2">
+        <div class="col-md-6"> <h3> Quantidade de Vendas: <?= $this->view->qtd_pedidos ?> </h3></div>
+        <div class="col-md-6"> <h3>Valor total: R$        <?= $this->view->valor_pedidos ?>   </h3> </div>
+    </div>
