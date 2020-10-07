@@ -51,7 +51,6 @@ class RelatorioController extends BaseController
     public function relatorio_full($request){
         
         $pedidos = Relatorio::relatorio_full($request->get->inicial, $request->get->final);
-//         var_dump($pedidos); die;
         
         $qtd_pedidos = 0;
         $valor_pedidos = 0;
@@ -88,20 +87,90 @@ class RelatorioController extends BaseController
     public function relatorio_parcial($request){
        /**
         * PALAVRAS CHAVE FILTROS
-        * cliente_vezes
-        * cliente_valor
-        * vendas_custo
-        * produto_abc
-        * cliente
-        * produto
-        * categoria
-        * municipio
-        * cidade
-        * pagamento
+        * cliente_vezes - Cliente que comprou mais vezes
+        * cliente_valor - Cliente que mais comprou
+        * vendas_custo - Produtos X Custos
+        * produto_abc - Curva ABC Produtos
+        * cliente - Compras porcliente
+        * produto - Compras por produto
+        * categoria - Compras por categoria
+        * municipio - Compras por municipio
+        * cidade - Compras por cidade
+        * pagamento - compras por forma de pagamento
         */
-        var_dump($request);
         
         
+        switch ($request->get->func) {
+        
+            //Cliente que comprou mais vezes
+            case "cliente_vezes":
+                $titulo_pagina = "Relatório CLientes X Compras";
+                $caminho_layout = 'adm/relatorio/cliente_vezes';
+                $this->view->periodo = $request->get->data_inicio . " - " . $request->get->data_fim;
+                
+                
+
+            break;
+
+            //Cliente que mais comprou
+            case "cliente_valor":
+                echo "cliente_valor;";
+            break;
+        
+            //Produtos X Custos
+            case "vendas_custo":
+                echo "vendas_custo;";
+            break;
+        
+            //Curva ABC Produtos
+            case "produto_abc":
+                echo "produto_abc;";
+            break;
+        
+            //Compras porcliente
+            case "cliente":
+                echo "cliente;";
+            break;
+        
+            //Compras por produto
+            case "produto":
+                echo "produto;";
+            break;
+        
+            //Compras por categoria
+            case "categoria":
+                echo "categoria;";
+            break;
+        
+            //Compras por municipio
+            case "municipio":
+                echo "municipio;";
+            break;
+        
+            //Compras por cidade
+            case "cidade":
+                echo "cidade;";
+            break;
+        
+            //compras por forma de pagamento
+            case "pagamento":
+                echo "pagamento;";
+            break;
+        
+        
+            default:
+            break;
+       }// fim Switch
+       
+
+   
+
+         
+        $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
+        $this->setPageTitle($titulo_pagina);
+        $this->renderView($caminho_layout, '/adm/adm_layout_relatorio');
+       
+       
     }
     
     

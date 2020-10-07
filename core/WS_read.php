@@ -1015,7 +1015,7 @@ class WS_read
                        ."JOIN Customer "
                             . "ON Customer.id_customer = Orders.fk_id_customer " .
                         
-			 " WHERE to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' ORDER BY id_order ",
+			 " WHERE to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' ORDER BY Orders.created_at ",
                         
                                "Orders.id_order             as id_order, 
                                 Orders.fk_id_adm            as fk_id_adm,

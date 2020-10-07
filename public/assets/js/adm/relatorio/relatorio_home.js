@@ -92,7 +92,7 @@ function AlertErro() {
             document.getElementById("div_alert_erro").className = "esconder";
         }else{
             segundos --;
-            console.log("Próxima Atualização: " + segundos);
+//            console.log("Próxima Atualização: " + segundos);
         }
     }, 1000);
 }
@@ -138,8 +138,8 @@ function CheckSomeOptionSelected() {
     if(document.getElementById("filtro_selecionado").value !== "0"){
         check++;
     }
-    
-    return check === 2 ? true : false;
+    console.log("check: " + check);
+    return check >= 2 ? true : false;
 }
 
 
