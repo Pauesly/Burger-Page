@@ -332,8 +332,6 @@ class Pedido
     }
    
     
-    
-    
 
     //Sallva OBS
     public static function carregar_gestao_a_vista($dt_gestao) {
@@ -362,7 +360,16 @@ class Pedido
     
     
     
-    
+    //Busca pedidos de cliente
+    public static function busca_pedidos_cliente($id_cliente) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"            => "busca_pedidos_cliente",
+            "id_customer"       => $id_cliente
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
 
     
     

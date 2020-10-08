@@ -32,10 +32,30 @@ class Relatorio
     
     
     
+    //Busca adm com email para Login
+    public static function relatorio_cliente_vezes($data_inicial, $data_final) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_cliente_vezes",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final)
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
-    
-    
+    //Busca adm com email para Login
+    public static function relatorio_cliente_valor($data_inicial, $data_final) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_cliente_valor",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final)
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     

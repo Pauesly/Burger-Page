@@ -1041,9 +1041,89 @@ class WS_read
                 }
             break;            
 //------------------------------------------------------------------------------ 
-            
-            
-            
+            /**
+             * Busca Pedido p/Relatorio relatorio_cliente_vezes
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "relatorio_cliente_vezes":
+                
+                $data_inicial = $info['data_inicial'];
+                $fata_final   = $info['fata_final'];
+                 
+                $result = DBRead('Orders',
+                        
+                        
+                        "JOIN Customer "
+                            . "ON Customer.id_customer = Orders.fk_id_customer " .
+                        
+			 " WHERE Orders.active LIKE 1 AND to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY fk_id_customer ORDER BY qtd desc",
+                        
+                               "Orders.id_order             as id_order,
+                                Customer.name               as customer_name,
+                                fk_id_customer              as fk_id_customer, 
+                                COUNT(*) AS qtd
+                               ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            /**
+             * Busca Pedido p/Relatorio relatorio_cliente_valor
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "relatorio_cliente_valor":
+                
+                $data_inicial = $info['data_inicial'];
+                $fata_final   = $info['fata_final'];
+                
+//                 $result = DBRead('Address', " GROUP BY cidade ", "cidade AS cidade, COUNT(*) AS qtd");
+                 
+                $result = DBRead('Orders',
+                        
+                        "JOIN Customer "
+                            . "ON Customer.id_customer = Orders.fk_id_customer " .
+                        
+			 " WHERE Orders.active LIKE 1 AND to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY fk_id_customer ORDER BY qtd desc",
+                        
+                               "Orders.id_order             as id_order,
+                                Customer.name               as customer_name,
+                                fk_id_customer              as fk_id_customer, 
+                                COUNT(*) AS qtd
+                               ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            /**
+             * Soma Valor por pedido
+             * Retorna clientes
+             */
+            case "busca_pedidos_cliente":
+                
+                $id = $info['id_customer'];
+                
+                $result = DBRead('Order', "WHERE fk_id_order LIKE '$id'", "SUM(price_total) AS total");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;
+//------------------------------------------------------------------------------ 
             
             
             
