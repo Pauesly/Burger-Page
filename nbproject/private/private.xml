@@ -5,11 +5,8 @@
         <group>
             <file>file:/C:/Burger-page/Burger-Page/core/WS_read.php</file>
             <file>file:/C:/Burger-page/Burger-Page/app/Models/Relatorio.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Models/ProdutoPedido.php</file>
             <file>file:/C:/Burger-page/Burger-Page/app/Controllers/RelatorioController.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Models/Pedido.php</file>
             <file>file:/C:/Burger-page/Burger-Page/app/routes.php</file>
-            <file>file:/C:/Burger-page/Burger-Page/app/Views/adm/relatorio/cliente_valor.phtml</file>
         </group>
     </open-files>
 </project-private>

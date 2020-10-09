@@ -141,7 +141,15 @@ class Produto
     }
     
     
-   
+   //Busca adm com email para Login
+    public static function calcula_custos_produtos() {
+        //Dados obrigatorios
+        $array = [
+            "funcao"     => "calcula_custos_produtos"
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     

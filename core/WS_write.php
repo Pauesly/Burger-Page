@@ -255,7 +255,48 @@ class WS_write
                 
             break;
 //------------------------------------------------------------------------------
-            
+ //------------------------------------------------------------------------------   
+            /**
+             * Salva Novo Status de Pedido
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "altera_status_pedido":
+                
+                $dados = array();
+                $dados['fk_id_adm']         = $data['fk_id_adm'];
+                $dados['fk_id_order']       = $data['fk_id_order'];
+                $dados['fk_id_status']      = $data['fk_id_status'];
+                $dados['created_at']        = $data['created_at'];
+                
+                if($status['id_cadastro'] = DBCreate('OrderStatus', $dados, false)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------  
+            /**
+             * Salva Novo Produto no pedido
+             * Recebe Todos os dados relevantes
+             * Retorna confirmacao de cadastro
+             */
+            case "add_produto_pedido":
+                
+                $dados = array();
+                $dados['fk_id_order']       = $data['fk_id_order'];
+                $dados['fk_id_product']     = $data['fk_id_product'];
+                $dados['qtd']               = $data['qtd'];
+                $dados['price_unit']        = $data['price_unit'];
+                $dados['price_total']       = $data['price_total'];
+                $dados['obs']               = $data['obs'];
+                $dados['created_at']        = $data['created_at'];
+                
+                if($status['id_cadastro'] = DBCreate('ProductOrder', $dados, false)){
+                    $status['erro'] = false;
+                }   
+                
+            break;
+//------------------------------------------------------------------------------            
             
             
             

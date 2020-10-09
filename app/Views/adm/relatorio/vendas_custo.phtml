@@ -1,0 +1,78 @@
+<!--Cabecalho-->
+<div class="container border text-center"  style="background: #FAFAFA">
+    <div class="form-row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <img class="brand-logo-dark" src="/images/logo-198x66.png" alt="" width="198" height="66"/>
+        </div>
+        <div class="col-md-1">
+            <a   class="btn btn-light " onClick="window.print()" role="button"><span class='glyphicon glyphicon-print' ></span></a>
+        </div>
+    </div>
+    <h5><strong>Relatório de Produto X Custo</strong></h5>
+    <i>Período <?= $this->view->periodo?></i>
+</div>
+
+<div class="container border"  style="background: #FAFAFA">
+    <div class="form-row mt-2">
+        <div class="col-md-4"> <h5> <i>Vendas no Periodo <strong>R$ <?= $this->view->vendas_periodo?></strong></i> </h5></div>
+        <div class="col-md-4"> <h5> <i>Custo do Periodo <strong>R$ <?= $this->view->custo_periodo?></strong></i> </h5></div>
+        <div class="col-md-4" 
+             style="color: <?= $this->view->lucro_periodo >=0 ? "#00238C" : "#B20000" ?>"
+             > <h5><i>Lucro no Periodo <strong>R$ <?= $this->view->lucro_periodo?></strong></i> </h5></div>
+    </div>
+</div>
+
+
+
+
+<!--Relacao de pedidos-->
+<div class="container border mt-1">
+    
+    <div class="form-row border mt-2">
+        <div class="col-md-1 text-center"> <strong>    ID Prod. </strong></div>
+        <div class="col-md-2 text-center"> <strong>    NOME     </strong></div>
+        <div class="col-md-2 text-center"> <strong>    VALOR TOTAL </strong></div>
+        <div class="col-md-1 text-center"> <strong>    QTD TOT </strong></div>
+        <div class="col-md-2 text-center"> <strong>    MEDIA UNIT </strong></div>
+        <div class="col-md-2 text-center"> <strong>    CUSTO UNIT </strong></div>
+        <div class="col-md-2 text-center"> <strong>    LUCRO </strong></div>
+        
+    </div>
+    
+    <?php
+        if($this->view->pedidos->erro == false){
+            for ($h=0; $h < sizeof($this->view->pedidos->resultado); $h++){
+                ?>
+                    <div class="form-row  mt-1">
+                        <div class="col-md-1 text-center">   <?= $this->view->pedidos->resultado[$h]->id_product ?>  </div>
+                        <div class="col-md-2 text-center">   <?= $this->view->pedidos->resultado[$h]->nome_prod ?> </div>
+                        <div class="col-md-2 text-center">R$ <?= $this->view->pedidos->resultado[$h]->valor ?> </div>
+                        <div class="col-md-1 text-center">   <?= $this->view->pedidos->resultado[$h]->qtd ?> </div>
+                        <div class="col-md-2 text-center">R$ <?= $this->view->pedidos->resultado[$h]->media_unit ?> </div>
+                        <div class="col-md-2 text-center">R$ <?= $this->view->pedidos->resultado[$h]->custo ?> </div>
+                        <div class="col-md-2 text-center" 
+                             style="color: <?= $this->view->pedidos->resultado[$h]->lucro >=0 ? "#00238C" : "#B20000" ?>"
+                             >R$ <?= $this->view->pedidos->resultado[$h]->lucro ?> </div>
+                    </div>
+               <?php
+            }
+        }else{
+           ?>
+                <div class="form-row text-center mt-2">
+                    <div class="col-md-12"> <i>Não há pedidos a mostrar.</i></div>
+                </div>
+           <?php
+        }
+    ?>
+</div>
+
+
+<div class="container border mt-1" style="background: #FAFAFA">
+    <div class="form-row mt-2">
+        <div class="col-md-6 text-left"> <i> Jazz Grill Burger</i></div>
+        <div class="col-md-6 text-right"> <i>Impresso em  <?= \App\Models\Padroes_gerais::Hoje() ?>   </i> </div>
+    </div>
+</div>
+
+

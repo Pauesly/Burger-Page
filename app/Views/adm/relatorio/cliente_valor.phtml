@@ -9,7 +9,7 @@
             <a   class="btn btn-light " onClick="window.print()" role="button"><span class='glyphicon glyphicon-print' ></span></a>
         </div>
     </div>
-    <h5><strong>Relatório de Clientes X Valor COmpra</strong></h5>
+    <h5><strong>Relatório de Clientes X Valor Compra</strong></h5>
     <i>Período <?= $this->view->periodo?></i>
 </div>
 
@@ -20,10 +20,9 @@
 <div class="container border mt-1">
     
     <div class="form-row border mt-2">
-        <div class="col-md-3 text-center"> <strong>    ID Cliente </strong></div>
-        <div class="col-md-3 text-center"> <strong>    NOME     </strong></div>
-        <div class="col-md-3 text-center"> <strong>    Qtd Compras </strong></div>
-        <div class="col-md-3 text-center"> <strong>    Valor em Compras </strong></div>
+        <div class="col-md-4 text-center"> <strong>    ID Cliente </strong></div>
+        <div class="col-md-4 text-center"> <strong>    NOME     </strong></div>
+        <div class="col-md-4 text-center"> <strong>    Valor em Compras </strong></div>
         
     </div>
     
@@ -32,10 +31,9 @@
             for ($h=0; $h < sizeof($this->view->pedidos->resultado); $h++){
                 ?>
                     <div class="form-row  mt-1">
-                        <div class="col-md-3 text-center"> <?= $this->view->pedidos->resultado[$h]->fk_id_customer ?>  </div>
-                        <div class="col-md-3 text-center">   <?= $this->view->pedidos->resultado[$h]->customer_name ?> </div>
-                        <div class="col-md-3 text-center">   <?= $this->view->pedidos->resultado[$h]->qtd ?> </div>
-                        <div class="col-md-3 text-center"> <?= $this->view->pedidos->resultado[$h]->total_pedido?>  </div>
+                        <div class="col-md-4 text-center"> <?= $this->view->pedidos->resultado[$h]->id_cliente ?>  </div>
+                        <div class="col-md-4 text-center">   <?= $this->view->pedidos->resultado[$h]->cliente ?> </div>
+                        <div class="col-md-4 text-center">   <?= $this->view->pedidos->resultado[$h]->valor ?> </div>
                     </div>
                <?php
             }

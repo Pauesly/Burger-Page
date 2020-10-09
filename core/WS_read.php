@@ -1053,7 +1053,6 @@ class WS_read
                  
                 $result = DBRead('Orders',
                         
-                        
                         "JOIN Customer "
                             . "ON Customer.id_customer = Orders.fk_id_customer " .
                         
@@ -1085,17 +1084,17 @@ class WS_read
                 
 //                 $result = DBRead('Address', " GROUP BY cidade ", "cidade AS cidade, COUNT(*) AS qtd");
                  
-                $result = DBRead('Orders',
+                $result = DBRead('Customer cli',
                         
-                        "JOIN Customer "
-                            . "ON Customer.id_customer = Orders.fk_id_customer " .
+                        "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
+                        "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
                         
-			 " WHERE Orders.active LIKE 1 AND to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY fk_id_customer ORDER BY qtd desc",
+			 " WHERE o.active LIKE 1 AND  o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY cli.name ORDER BY valor desc",
                         
-                               "Orders.id_order             as id_order,
-                                Customer.name               as customer_name,
-                                fk_id_customer              as fk_id_customer, 
-                                COUNT(*) AS qtd
+                               "cli.name AS cliente,
+                                cli.id_customer AS id_cliente,
+                                SUM(po.price_total) AS valor
                                ");
                 
                 if($result){
@@ -1124,8 +1123,70 @@ class WS_read
                 }
             break;
 //------------------------------------------------------------------------------ 
-            
-            
+            /**
+             * Busca Pedido p/Relatorio relatorio_vendas_custo
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "relatorio_vendas_custo":
+                
+                $data_inicial = $info['data_inicial'];
+                $fata_final   = $info['fata_final'];
+                 
+                $result = DBRead('Customer cli',
+                        
+                        "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
+                        "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
+                        
+			 " WHERE o.active LIKE 1 AND  o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY po.fk_id_product ORDER BY valor desc",
+                        
+                               "po.fk_id_product AS id_product,
+                                prod.name   AS nome_prod,
+                                SUM(po.price_total) AS valor,
+                                SUM(po.qtd) AS qtd
+                               ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            /**
+             * Calcula custo de todos os produtos cadsaatrados
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "calcula_custos_produtos":
+                
+                $data_inicial = "2020-01-01";
+                $fata_final   = "2020-12-31";
+                
+//                 $result = DBRead('Address', " GROUP BY cidade ", "cidade AS cidade, COUNT(*) AS qtd");
+                 
+                $result = DBRead('Product prod',
+                        
+                        "INNER JOIN ItemProduct ip 	ON ip.fk_id_product = prod.id_product " .
+                        "INNER JOIN Item item           ON item.id_item = ip.fk_id_item " .
+                        
+			 "  GROUP BY prod.id_product ORDER BY prod.id_product",
+                        
+                               "prod.id_product        AS id_prod,
+                                prod.name            AS name,
+                                SUM(item.cost)      AS custo
+                               ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------
             
             
             

@@ -7,6 +7,7 @@ use Core\Redirect;
 use Core\Validator;
 use App\Models\Relatorio;
 use App\Models\Pedido;
+use App\Models\Produto;
 use App\Models\Customer;
 use App\Models\Padroes_gerais;
 use App\Models\ProdutoPedido;
@@ -116,44 +117,50 @@ class RelatorioController extends BaseController
                 $titulo_pagina = "Relatório CLientes X Compras";
                 $caminho_layout = 'adm/relatorio/cliente_valor';
                 $this->view->periodo = $request->get->data_inicio . " - " . $request->get->data_fim;
-                
                 $this->view->pedidos = Relatorio::relatorio_cliente_valor($request->get->data_inicio, $request->get->data_fim);
-                
-                if($this->view->pedidos->erro == false){
-                    for($i=0; $i < sizeof($this->view->pedidos->resultado); $i++){
-                        
-                        $pedidos_do_cliente = "";
-                        $pedidos_do_cliente = Pedido::busca_dados_pedido($this->view->pedidos->resultado[$i]->id_order);
-                        
-                        if($pedidos_do_cliente->erro == false){
-                            $tot = 0;
-                            for($j=0; $j < sizeof($pedidos_do_cliente->resultado); $j++){
-                                $tot_each = ProdutoPedido::busca_total_pedido($pedidos_do_cliente->resultado[$j]->id_order);
-                                $tot = $tot + $tot_each->resultado[0]->total;
-                            }
-                            $this->view->pedidos->resultado[$i]->total_pedido = $tot;
-                        }
-                        
-                        
-                        
-                        
-                        
-//                        $busq = ProdutoPedido::busca_total_pedido($this->view->pedidos->resultado[$i]->id_order);
-//                        var_dump($busq->resultado[0]->total); die;
-                        
-                    }
-                }
-                
-//                var_dump($this->view->pedidos); die;
-                
-                
-//                var_dump($this->view->pedidos) ;
-//                die;
             break;
         
             //Produtos X Custos
             case "vendas_custo":
-                echo "vendas_custo;";
+                $titulo_pagina = "Relatório Vendas X Custo";
+                $caminho_layout = 'adm/relatorio/vendas_custo';
+                $this->view->periodo = $request->get->data_inicio . " - " . $request->get->data_fim;
+//                $this->view->pedidos = Relatorio::relatorio_vendas_custo($request->get->data_inicio, $request->get->data_fim);
+                $rel_main = Relatorio::relatorio_vendas_custo($request->get->data_inicio, $request->get->data_fim);
+                $custos = Produto::calcula_custos_produtos();
+                
+                $venda_periodo = 0;
+                $custo_periodo = 0;
+                $lucro_periodo = 0;
+                if($rel_main->erro == false){
+                    for($i=0; $i < sizeof($rel_main->resultado); $i++){
+                        $rel_main->resultado[$i]->media_unit = Padroes_gerais::ValorDoisDigitos($rel_main->resultado[$i]->valor / $rel_main->resultado[$i]->qtd);
+                        $rel_main->resultado[$i]->custo = 0;
+                        
+                        if($custos->erro == false){
+                            for($j=0; $j <sizeof($custos->resultado); $j++){
+                                if($rel_main->resultado[$i]->id_product == $custos->resultado[$j]->id_prod){
+                                    $rel_main->resultado[$i]->custo = $custos->resultado[$j]->custo;
+                                }
+                            }
+                        }
+                        
+                        $venda = $rel_main->resultado[$i]->valor;
+                        $custo = $rel_main->resultado[$i]->custo * $rel_main->resultado[$i]->qtd;
+                        $lucro = Padroes_gerais::ValorDoisDigitos($venda - $custo);
+                        $rel_main->resultado[$i]->lucro = $lucro;
+                        
+                        $custo_periodo = $custo_periodo + $custo;
+                        $venda_periodo = Padroes_gerais::ValorDoisDigitos($venda_periodo + $venda);
+                        $lucro_periodo = Padroes_gerais::ValorDoisDigitos($lucro_periodo + $lucro);
+                    }
+                }
+                $this->view->pedidos = $rel_main;
+                $this->view->vendas_periodo = $venda_periodo;
+                $this->view->custo_periodo = Padroes_gerais::ValorDoisDigitos($custo_periodo);
+                $this->view->lucro_periodo = $lucro_periodo;
+                
+//                var_dump($this->view->pedidos); die;
             break;
         
             //Curva ABC Produtos

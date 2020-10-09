@@ -18,7 +18,7 @@ use App\Models\Padroes_gerais;
 class Relatorio 
 {
 
-    //Busca adm com email para Login
+    //Busca 
     public static function relatorio_full($data_inicial, $data_final) {
         //Dados obrigatorios
         $array = [
@@ -32,7 +32,7 @@ class Relatorio
     
     
     
-    //Busca adm com email para Login
+    //Busca a
     public static function relatorio_cliente_vezes($data_inicial, $data_final) {
         //Dados obrigatorios
         $array = [
@@ -45,7 +45,7 @@ class Relatorio
     }
     
     
-    //Busca adm com email para Login
+    //Busca ad
     public static function relatorio_cliente_valor($data_inicial, $data_final) {
         //Dados obrigatorios
         $array = [
@@ -59,7 +59,17 @@ class Relatorio
     
     
     
-    
+    //Busca adm c
+    public static function relatorio_vendas_custo($data_inicial, $data_final) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_vendas_custo",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final)
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
 
     
     
