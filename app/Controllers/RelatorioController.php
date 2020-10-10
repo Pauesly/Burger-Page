@@ -108,7 +108,6 @@ class RelatorioController extends BaseController
             case "cliente_vezes":
                 $titulo_pagina = "Relatório CLientes X Compras";
                 $caminho_layout = 'adm/relatorio/cliente_vezes';
-                $this->view->periodo = $request->get->data_inicio . " - " . $request->get->data_fim;
                 $this->view->pedidos = Relatorio::relatorio_cliente_vezes($request->get->data_inicio, $request->get->data_fim);
             break;
 
@@ -116,7 +115,6 @@ class RelatorioController extends BaseController
             case "cliente_valor":
                 $titulo_pagina = "Relatório CLientes X Compras";
                 $caminho_layout = 'adm/relatorio/cliente_valor';
-                $this->view->periodo = $request->get->data_inicio . " - " . $request->get->data_fim;
                 $this->view->pedidos = Relatorio::relatorio_cliente_valor($request->get->data_inicio, $request->get->data_fim);
             break;
         
@@ -124,8 +122,6 @@ class RelatorioController extends BaseController
             case "vendas_custo":
                 $titulo_pagina = "Relatório Vendas X Custo";
                 $caminho_layout = 'adm/relatorio/vendas_custo';
-                $this->view->periodo = $request->get->data_inicio . " - " . $request->get->data_fim;
-//                $this->view->pedidos = Relatorio::relatorio_vendas_custo($request->get->data_inicio, $request->get->data_fim);
                 $rel_main = Relatorio::relatorio_vendas_custo($request->get->data_inicio, $request->get->data_fim);
                 $custos = Produto::calcula_custos_produtos();
                 
@@ -165,12 +161,33 @@ class RelatorioController extends BaseController
         
             //Curva ABC Produtos
             case "produto_abc":
-                echo "produto_abc;";
+                $this->view->pedidos = Relatorio::relatorio_produto_abc($request->get->data_inicio, $request->get->data_fim);
+                $titulo_pagina = "Relatório Produto ABC";
+                $caminho_layout = 'adm/relatorio/produto_abc';
             break;
         
             //Compras porcliente
             case "cliente":
-                echo "cliente;";
+                $compras_cliente = Relatorio::relatorio_cliente($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                
+                if($compras_cliente->erro == false){
+                    $totais = Relatorio::relatorio_cliente_soma_pedidos($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                    
+                    for($i=0; $i < sizeof($compras_cliente->resultado); $i++){
+                        for($j=0; $j < sizeof($totais->resultado); $j++){
+                            
+                            if($compras_cliente->resultado[$i]->id_order == $totais->resultado[$j]->id_order){
+                                $compras_cliente->resultado[$i]->total_order = $totais->resultado[$j]->valor;
+                            }
+                            
+                        }
+                    }
+                }
+                
+//                var_dump($totais); die;
+                $this->view->pedidos = $compras_cliente;
+                $titulo_pagina = "Relatório Compras Por Cliente";
+                $caminho_layout = 'adm/relatorio/cliente';
             break;
         
             //Compras por produto
@@ -206,7 +223,7 @@ class RelatorioController extends BaseController
 
    
 
-         
+        $this->view->periodo = $request->get->data_inicio . " - " . $request->get->data_fim;
         $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';
         $this->setPageTitle($titulo_pagina);
         $this->renderView($caminho_layout, '/adm/adm_layout_relatorio');

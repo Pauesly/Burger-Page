@@ -1,0 +1,60 @@
+<!--Cabecalho-->
+<div class="container border text-center"  style="background: #FAFAFA">
+    <div class="form-row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <img class="brand-logo-dark" src="/images/logo-198x66.png" alt="" width="198" height="66"/>
+        </div>
+        <div class="col-md-1">
+            <a   class="btn btn-light " onClick="window.print()" role="button"><span class='glyphicon glyphicon-print' ></span></a>
+        </div>
+    </div>
+    <h5><strong>Relatório Produto ABC</strong></h5>
+    <i>Período <?= $this->view->periodo?></i>
+</div>
+
+
+
+
+<!--Relacao de pedidos-->
+<div class="container border mt-1">
+    
+    <div class="form-row border mt-2">
+        <div class="col-md-2 text-center"> <strong>    ID Produto </strong></div>
+        <div class="col-md-4 text-left">   <strong>    NOME     </strong></div>
+        <div class="col-md-3 text-center"> <strong>    QTD vendida </strong></div>
+        <div class="col-md-3 text-center"> <strong>    Valor vendida </strong></div>
+        
+    </div>
+    
+    <?php
+        if($this->view->pedidos->erro == false){
+            for ($h=0; $h < sizeof($this->view->pedidos->resultado); $h++){
+                ?>
+                    <div class="form-row  mt-1">
+                        <div class="col-md-2 text-center">   <?= $this->view->pedidos->resultado[$h]->product ?> </div>
+                        <div class="col-md-4 text-left"> <?= $this->view->pedidos->resultado[$h]->name_prod?>  </div>
+                        <div class="col-md-3 text-center">   <?= $this->view->pedidos->resultado[$h]->qtd?>  </div>
+                        <div class="col-md-3 text-center">   <?= $this->view->pedidos->resultado[$h]->valor?>  </div>
+                    </div>
+               <?php
+            }
+        }else{
+           ?>
+                <div class="form-row text-center mt-2">
+                    <div class="col-md-12"> <i>Não há pedidos a mostrar.</i></div>
+                </div>
+           <?php
+        }
+    ?>
+</div>
+
+
+<div class="container border mt-1" style="background: #FAFAFA">
+    <div class="form-row mt-2">
+        <div class="col-md-6 text-left"> <i> Jazz Grill Burger</i></div>
+        <div class="col-md-6 text-right"> <i>Impresso em  <?= \App\Models\Padroes_gerais::Hoje() ?>   </i> </div>
+    </div>
+</div>
+
+

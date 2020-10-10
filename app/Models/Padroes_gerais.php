@@ -25,7 +25,7 @@ class Padroes_gerais
     
     //Data e hora Atual no servidor
     public static function Hoje(){
-        $data_tz_brasil = date_create('-3 hour')->format('d-m-Y');
+        $data_tz_brasil = date_create('-3 hour')->format('d-m-Y H:i:s');
         return  $data_tz_brasil;
     }
     

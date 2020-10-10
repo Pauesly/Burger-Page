@@ -72,11 +72,60 @@ class Relatorio
     }
 
     
+     //Busca produto ABC
+    public static function relatorio_produto_abc($data_inicial, $data_final) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_produto_abc",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final)
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
 
-    
+     //Busca por cliente
+    public static function relatorio_cliente($data_inicial, $data_final, $id_cliente) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_cliente",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final),
+            "id_cliente"       => $id_cliente
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
 
+     //Busca por cliente
+    public static function relatorio_cliente_soma_pedidos($data_inicial, $data_final, $id_cliente) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_cliente_soma_pedidos",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final),
+            "id_cliente"       => $id_cliente
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
