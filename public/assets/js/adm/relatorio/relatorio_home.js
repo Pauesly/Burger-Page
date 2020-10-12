@@ -201,12 +201,8 @@ $(function(){
     //select_municipio
     $('#select_municipio').change(function(){
         //Setting Screen
-        if ($('#select_municipio').val() === "0"){
-            document.getElementById("filtro_selecionado").value = "0";
-        }else{
             document.getElementById("filtro_selecionado").value = "1";
             SetFilter("municipio", document.getElementById("select_municipio").value);
-        }
     });
     
     
@@ -374,7 +370,10 @@ function LoadMunicipios() {
                 document.getElementById("btn_municipio").className = "btn btn-info";
                 document.getElementById("select_municipio").disabled = false;
                 $('#select_municipio').selectpicker('refresh');
+                
                 PreencheSelect("select_municipio", "bairo", "bairo", retorno['resultado']);
+                document.getElementById("filtro_selecionado").value = "1";
+                SetFilter("municipio", document.getElementById("select_municipio").value);
             }
     });
 }
@@ -423,6 +422,8 @@ function LoadPagamentos() {
                 document.getElementById("select_pagamento").disabled = false;
                 $('#select_pagamento').selectpicker('refresh');
                 PreencheSelect("select_pagamento", "id_payment_term", "name", retorno['resultado']);
+                document.getElementById("filtro_selecionado").value = "1";
+                SetFilter("pagamento", document.getElementById("select_pagamento").value);
             }
     });
 }

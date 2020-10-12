@@ -1324,6 +1324,112 @@ class WS_read
                 }
             break;            
 //------------------------------------------------------------------------------ 
+            /**
+             * Busca Pedido p/Relatorio relatorio_produto
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "relatorio_produto":
+                
+                $data_inicial = $info['data_inicial'];
+                $fata_final   = $info['fata_final'];
+                $id_produto   = $info['id_produto'];
+                 
+                $result = DBRead('Customer cli',
+                        
+                        "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
+                        "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
+                        
+			 " WHERE o.active LIKE 1 AND po.fk_id_product LIKE $id_produto AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY DATE(o.to_deliver_in)  ",
+                        
+                               "prod.name AS produto,
+                                prod.id_product AS id_produto,
+                                o.to_deliver_in AS delivered,
+                                SUM(po.qtd) as qtd,
+                                SUM(po.price_total) AS valor
+                               ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            /**
+             * Busca Pedido p/Relatorio relatorio_categoria
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "relatorio_categoria":
+                
+                $data_inicial = $info['data_inicial'];
+                $fata_final   = $info['fata_final'];
+                $id_cat       = $info['id_cat'];
+                
+                $result = DBRead('Customer cli',
+                        
+                        "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
+                        "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
+                        "INNER JOIN Category cat        ON cat.id_category = prod.fk_id_category " .
+                        
+			 " WHERE o.active LIKE 1 AND prod.fk_id_category LIKE $id_cat AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY DATE(o.to_deliver_in), prod.id_product   ",
+                        
+                               "prod.name AS produto,
+                                o.id_order AS id_order,
+                                prod.id_product AS id_produto,
+                                o.to_deliver_in AS delivered,
+                                cat.id_category AS id_category,
+                                cat.description AS category_name,
+                                SUM(po.qtd) as qtd,
+                                SUM(po.price_total) AS valor
+                               ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
+            /**
+             * Busca Pedido p/Relatorio relatorio_municipio_all
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "relatorio_municipio_all":
+                
+                $data_inicial = $info['data_inicial'];
+                $fata_final   = $info['fata_final'];
+                
+                $result = DBRead('Customer cli',
+                        
+                        "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
+                        "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
+                        "INNER JOIN Address local       ON local.fk_id_customer = cli.id_customer " .
+                        
+			 " WHERE o.active LIKE 1 AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY local.bairro ",
+                        
+                               "
+                                local.bairro AS bairro,
+                                
+                                SUM(po.qtd) as qtd,
+                                SUM(po.price_total) AS valor
+                               ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
             
             
             
@@ -1353,6 +1459,40 @@ class WS_read
             
             
             
+            
+            /**
+             * Busca Pedido p/Relatorio relatorio_pagamento_all
+             * Recebe ID para buscar
+             * Retorna todos os dados do User
+             */
+            case "relatorio_pagamento_all":
+                
+                $data_inicial = $info['data_inicial'];
+                $fata_final   = $info['fata_final'];
+                 
+                $result = DBRead('Customer cli',
+                        
+                        "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
+                        "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
+                        "INNER JOIN PaymentTerm pay     ON pay.id_payment_term = o.fk_id_payment_term " .
+                        
+			 " WHERE o.active LIKE 1 AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY o.fk_id_payment_term  ",
+                        
+                               "pay.id_payment_term as id_payment_term,
+                                pay.name as id_payment_term_name,
+                                SUM(o.active) as qtd,
+                                SUM(po.price_total) AS valor
+                               ");
+                
+                if($result){
+                    $status['erro'] = false;
+                    $status['resultado'] = $result;
+                }else{
+                    $status['resultado'] = 'Busca vazia';
+                }
+            break;            
+//------------------------------------------------------------------------------ 
             
             
             

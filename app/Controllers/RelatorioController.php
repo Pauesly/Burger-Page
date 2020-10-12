@@ -49,7 +49,6 @@ class RelatorioController extends BaseController
     }
     
     
-    
     public function relatorio_full($request){
         
         $pedidos = Relatorio::relatorio_full($request->get->inicial, $request->get->final);
@@ -83,7 +82,6 @@ class RelatorioController extends BaseController
         $this->setPageTitle('Relatorio completo');
         $this->renderView('adm/relatorio/full', '/adm/adm_layout_relatorio');
     }
-    
     
     
     public function relatorio_parcial($request){
@@ -192,27 +190,117 @@ class RelatorioController extends BaseController
         
             //Compras por produto
             case "produto":
-                echo "produto;";
+                $compras_produto = Relatorio::relatorio_produto($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                
+                $qtd = 0;
+                $vlr = 0;
+                
+                if($compras_produto->erro == false){
+                    for($i=0; $i < sizeof($compras_produto->resultado);  $i++){
+                        $qtd = $qtd + $compras_produto->resultado[$i]->qtd;
+                        $vlr = $vlr + $compras_produto->resultado[$i]->valor;
+                    }
+                }
+                
+                $this->view->qtd_total = $qtd;
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
+//                var_dump($totais); die;
+                $this->view->pedidos = $compras_produto;
+                $titulo_pagina = "Relatório Vendas por Produto";
+                $caminho_layout = 'adm/relatorio/produto';
             break;
         
             //Compras por categoria
             case "categoria":
-                echo "categoria;";
+                $compras_produto = Relatorio::relatorio_categoria($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                
+                $qtd = 0;
+                $vlr = 0;
+                
+                if($compras_produto->erro == false){
+                    for($i=0; $i < sizeof($compras_produto->resultado);  $i++){
+                        $qtd = $qtd + $compras_produto->resultado[$i]->qtd;
+                        $vlr = $vlr + $compras_produto->resultado[$i]->valor;
+                    }
+                }
+                
+                $this->view->qtd_total = $qtd;
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
+//                var_dump($totais); die;
+                $this->view->pedidos = $compras_produto;
+                $titulo_pagina = "Relatório Vendas por Categoria";
+                $caminho_layout = 'adm/relatorio/categoria';
             break;
         
             //Compras por municipio
             case "municipio":
-                echo "municipio;";
+                echo "municipio;"; die;
+                if($request->get->param == "0"){
+                    $compras_produto = Relatorio::relatorio_municipio_all($request->get->data_inicio, $request->get->data_fim);
+                    $this->view->bairro = "Todos";
+                }else{
+                    $compras_produto = Relatorio::relatorio_municipio($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                    $this->view->bairro = $this->view->pedidos->resultado[0]->bairro;
+                }
+
+                $qtd = 0;
+                $vlr = 0;
+                
+                if($compras_produto->erro == false){
+                    for($i=0; $i < sizeof($compras_produto->resultado);  $i++){
+                        $qtd = $qtd + $compras_produto->resultado[$i]->qtd;
+                        $vlr = $vlr + $compras_produto->resultado[$i]->valor;
+                    }
+                }
+                
+                $this->view->qtd_total = $qtd;
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
+                
+                
+                
+//                var_dump($compras_produto); die;
+                $this->view->pedidos = $compras_produto;
+                $titulo_pagina = "Relatório Vendas por Municipio";
+                $caminho_layout = 'adm/relatorio/municipio';
             break;
         
             //Compras por cidade
             case "cidade":
-                echo "cidade;";
+                echo "cidade;"; die;
             break;
         
             //compras por forma de pagamento
             case "pagamento":
-                echo "pagamento;";
+                if($request->get->param == "0"){
+                    $compras_produto = Relatorio::relatorio_pagamento_all($request->get->data_inicio, $request->get->data_fim);
+                    $this->view->bairro = "Todos";
+                }else{
+                    $compras_produto = Relatorio::relatorio_pagamento($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                    $this->view->bairro = $this->view->pedidos->resultado[0]->bairro;
+                }
+
+                $qtd = 0;
+                $vlr = 0;
+                
+                if($compras_produto->erro == false){
+                    for($i=0; $i < sizeof($compras_produto->resultado);  $i++){
+                        $qtd = $qtd + $compras_produto->resultado[$i]->qtd;
+                        $vlr = $vlr + $compras_produto->resultado[$i]->valor;
+                    }
+                }
+                
+                $this->view->qtd_total = $qtd;
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
+                
+                
+//                var_dump($compras_produto); die;
+                $this->view->pedidos = $compras_produto;
+                $titulo_pagina = "Relatório Vendas por Forma de Pagamento";
+                $caminho_layout = 'adm/relatorio/pagamento';
             break;
         
         
@@ -220,8 +308,6 @@ class RelatorioController extends BaseController
             break;
        }// fim Switch
        
-
-   
 
         $this->view->periodo = $request->get->data_inicio . " - " . $request->get->data_fim;
         $this->view->css_head =  '<link href="/assets/css/style_adm.css" rel="stylesheet">';

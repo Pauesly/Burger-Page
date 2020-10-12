@@ -113,10 +113,82 @@ class Relatorio
     }
     
     
+     //Busca por produto
+    public static function relatorio_produto($data_inicial, $data_final, $id_produto) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_produto",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final),
+            "id_produto"       => $id_produto
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    //Busca por produto
+    public static function relatorio_categoria($data_inicial, $data_final, $id_cat) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_categoria",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final),
+            "id_cat"           => $id_cat
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    //Busca por produto
+    public static function relatorio_municipio_all($data_inicial, $data_final) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_municipio_all",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final)
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //Busca por produto
+    public static function relatorio_pagamento_all($data_inicial, $data_final) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_pagamento_all",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final)
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
     

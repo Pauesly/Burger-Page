@@ -9,7 +9,7 @@
             <a   class="btn btn-light " onClick="window.print()" role="button"><span class='glyphicon glyphicon-print' ></span></a>
         </div>
     </div>
-    <h5><strong>Relatório compras Por Cliente</strong></h5>
+    <h5><strong>Relatório Vendas por Categoria</strong></h5>
     <i>Período <?= $this->view->periodo?></i>
 </div>
 
@@ -18,14 +18,19 @@
 
 <!--Relacao de pedidos-->
 <div class="container border mt-1">
-    <h5><strong>Cliente: <?= $this->view->pedidos->resultado[0]->fk_id_customer . " - " . $this->view->pedidos->resultado[0]->customer_name ?></strong></h5>
+    <h5><strong>Categoria: <?= $this->view->pedidos->resultado[0]->id_category . " - " . $this->view->pedidos->resultado[0]->category_name ?></strong></h5>
+    
     <div class="form-row border mt-2">
-        <div class="col-md-2 text-center"> <strong>    ID Pedido </strong></div>
-        <div class="col-md-2 text-left">   <strong>    Pagamento     </strong></div>
-        <div class="col-md-2 text-left"> <strong>      Status </strong></div>
-        <div class="col-md-2 text-center"> <strong>    Pago </strong></div>
+        <div class="col-md-6 text-center"> <strong>Quantidade Total: <?= $this->view->qtd_total ?> </strong></div>
+        <div class="col-md-6 text-center"> <strong>Valor Total: R$ <?= $this->view->valor_total ?> </strong></div>
+    </div>
+    
+    <div class="form-row border mt-2">
+        <div class="col-md-2 text-center"> <strong>    ID Produto </strong></div>
+        <div class="col-md-4 text-left">   <strong>    Produto     </strong></div>
+        <div class="col-md-2 text-center"> <strong>      Entrega </strong></div>
+        <div class="col-md-2 text-center"> <strong>    Qtd </strong></div>
         <div class="col-md-2 text-center"> <strong>    Valor </strong></div>
-        <div class="col-md-2 text-right"> <strong>     Data </strong></div>
         
     </div>
     
@@ -34,12 +39,11 @@
             for ($h=0; $h < sizeof($this->view->pedidos->resultado); $h++){
                 ?>
                     <div class="form-row  mt-1">
-                        <div class="col-md-2 text-center">  <?= $this->view->pedidos->resultado[$h]->id_order ?> </div>
-                        <div class="col-md-2 text-left">    <?= $this->view->pedidos->resultado[$h]->payment_term_name?>  </div>
-                        <div class="col-md-2 text-left">    <?= $this->view->pedidos->resultado[$h]->status_name?>  </div>
-                        <div class="col-md-2 text-center">  <?= $this->view->pedidos->resultado[$h]->payment_status?>  </div>
-                        <div class="col-md-2 text-center">  <?= $this->view->pedidos->resultado[$h]->total_order?>  </div>
-                        <div class="col-md-2 text-right">   <?= $this->view->pedidos->resultado[$h]->to_deliver_in?>  </div>
+                        <div class="col-md-2 text-center">  <?= $this->view->pedidos->resultado[$h]->id_produto ?> </div>
+                        <div class="col-md-4 text-left">    <?=  $this->view->pedidos->resultado[$h]->produto?>  </div>
+                        <div class="col-md-2 text-center">    <?= App\Models\Padroes_gerais::ConverteDataUS_BR($this->view->pedidos->resultado[$h]->delivered) ?>  </div>
+                        <div class="col-md-2 text-center">  <?= $this->view->pedidos->resultado[$h]->qtd?>  </div>
+                        <div class="col-md-2 text-center"> R$ <?= $this->view->pedidos->resultado[$h]->valor?>  </div>
                     </div>
                <?php
             }
