@@ -142,6 +142,61 @@ class Relatorio
     
     
     //Busca por produto
+    public static function relatorio_municipio($data_inicial, $data_final, $municipio) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_municipio",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final),
+            "municipio"        => $municipio
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    //Busca por produto
+    public static function relatorio_cidade($data_inicial, $data_final, $cidade) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_cidade",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final),
+            "cidade"           => $cidade
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    //Busca por produto
+    public static function relatorio_pagamento($data_inicial, $data_final, $pagamento) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_pagamento",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final),
+            "pagamento"        => $pagamento
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    
+    //Busca por produto
+    public static function relatorio_categoria_all($data_inicial, $data_final) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_categoria_all",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final)
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
+    
+    
+    //Busca por municipios
     public static function relatorio_municipio_all($data_inicial, $data_final) {
         //Dados obrigatorios
         $array = [
@@ -154,31 +209,20 @@ class Relatorio
     }
     
     
+    //Busca por cidade
+    public static function relatorio_cidade_all($data_inicial, $data_final) {
+        //Dados obrigatorios
+        $array = [
+            "funcao"           => "relatorio_cidade_all",
+            "data_inicial"     => Padroes_gerais::ConverteDataBR_US($data_inicial),
+            "fata_final"       => Padroes_gerais::ConverteDataBR_US($data_final)
+        ];
+        $resultado = WS_read::ler_dados($array);
+        return  json_decode($resultado);
+    }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //Busca por produto
+    //Busca por Pagamento
     public static function relatorio_pagamento_all($data_inicial, $data_final) {
         //Dados obrigatorios
         $array = [

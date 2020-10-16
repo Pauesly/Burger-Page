@@ -1,5 +1,8 @@
 $(document).ready(function(){
     
+    $('#txt_preco_new').mask("#,##0.00", {reverse: true});
+    $('#txt_preco_old').mask("#,##0.00", {reverse: true});
+    
     //PREENCHENDO DADOS INICIAIS
     let id_produto = document.getElementById("id_product").value;
         

@@ -9,7 +9,7 @@
             <a   class="btn btn-light " onClick="window.print()" role="button"><span class='glyphicon glyphicon-print' ></span></a>
         </div>
     </div>
-    <h5><strong>Relatório Vendas Forma de Pagamento</strong></h5>
+    <h5><strong>Relatório Vendas por Municipios</strong></h5>
     <i>Período <?= $this->view->periodo?></i>
 </div>
 
@@ -18,7 +18,6 @@
 
 <!--Relacao de pedidos-->
 <div class="container border mt-1">
-    <h5><strong>Produto: <?= $this->view->pag ?></strong></h5>
     
     <div class="form-row border mt-2">
         <div class="col-md-6 text-center"> <strong>Quantidade Total: <?= $this->view->qtd_total ?> </strong></div>
@@ -26,10 +25,10 @@
     </div>
     
     <div class="form-row border mt-2">
-        <div class="col-md-3 text-center"> <strong>    ID Cliente </strong></div>
-        <div class="col-md-3 text-center">   <strong>    Nome Cliente     </strong></div>
-        <div class="col-md-3 text-center"> <strong>      Quantidade </strong></div>
-        <div class="col-md-3 text-center"> <strong>      Valor Total </strong></div>
+        <div class="col-md-4 text-left">   <strong>    Municipio     </strong></div>
+        <div class="col-md-2 text-center"> <strong>    Qtd </strong></div>
+        <div class="col-md-2 text-center"> <strong>    Valor </strong></div>
+        
     </div>
     
     <?php
@@ -37,10 +36,9 @@
             for ($h=0; $h < sizeof($this->view->pedidos->resultado); $h++){
                 ?>
                     <div class="form-row  mt-1">
-                        <div class="col-md-3 text-center">  <?= $this->view->pedidos->resultado[$h]->id_customer ?> </div>
-                        <div class="col-md-3 text-center">  <?= $this->view->pedidos->resultado[$h]->nome_cliente ?> </div>
-                        <div class="col-md-3 text-center">    <?= $this->view->pedidos->resultado[$h]->qtd?>  </div>
-                        <div class="col-md-3 text-center">  R$  <?= $this->view->pedidos->resultado[$h]->valor?>  </div>
+                        <div class="col-md-4 text-left">    <?=  $this->view->pedidos->resultado[$h]->bairro?>  </div>
+                        <div class="col-md-2 text-center">  <?= $this->view->pedidos->resultado[$h]->qtd?>  </div>
+                        <div class="col-md-2 text-center"> R$ <?= $this->view->pedidos->resultado[$h]->valor?>  </div>
                     </div>
                <?php
             }

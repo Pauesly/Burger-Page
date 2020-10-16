@@ -135,6 +135,28 @@ function CheckSomeOptionSelected() {
         check++;
     }
     
+    
+    if(document.getElementById("radio_categorias").checked){
+        SetFilter("categorias", "");
+        check++;
+    }
+    
+    if(document.getElementById("radio_municipios").checked){
+        SetFilter("municipios", "");
+        check++;
+    }
+    
+    if(document.getElementById("radio_cidades").checked){
+        SetFilter("cidades", "");
+        check++;
+    }
+    
+    if(document.getElementById("radio_pagamentos").checked){
+        SetFilter("pagamentos", "");
+        check++;
+    }
+    
+    
     if(document.getElementById("filtro_selecionado").value !== "0"){
         check++;
     }
@@ -201,8 +223,12 @@ $(function(){
     //select_municipio
     $('#select_municipio').change(function(){
         //Setting Screen
+        if ($('#select_municipio').val() === "0"){
+            document.getElementById("filtro_selecionado").value = "0";
+        }else{
             document.getElementById("filtro_selecionado").value = "1";
             SetFilter("municipio", document.getElementById("select_municipio").value);
+        }
     });
     
     
@@ -372,8 +398,7 @@ function LoadMunicipios() {
                 $('#select_municipio').selectpicker('refresh');
                 
                 PreencheSelect("select_municipio", "bairo", "bairo", retorno['resultado']);
-                document.getElementById("filtro_selecionado").value = "1";
-                SetFilter("municipio", document.getElementById("select_municipio").value);
+                
             }
     });
 }
@@ -448,6 +473,10 @@ $(document).ready(function () {
     $('#radio_cliente_valor').click(function () {   UnsetButtons(); DisableSelects();  });
     $('#radio_vendas_custo').click(function () {   UnsetButtons();  DisableSelects(); });
     $('#radio_produto_abc').click(function () {   UnsetButtons();   DisableSelects(); });
+    $('#radio_categorias').click(function () {   UnsetButtons();   DisableSelects(); });
+    $('#radio_municipios').click(function () {   UnsetButtons();   DisableSelects(); });
+    $('#radio_cidades').click(function () {   UnsetButtons();   DisableSelects(); });
+    $('#radio_pagamentos').click(function () {   UnsetButtons();   DisableSelects(); });
 });
 
 
@@ -568,6 +597,10 @@ function UnsetRadios() {
     document.getElementById("radio_cliente_valor").checked = false;
     document.getElementById("radio_vendas_custo").checked = false;
     document.getElementById("radio_produto_abc").checked = false;
+    document.getElementById("radio_categorias").checked = false;
+    document.getElementById("radio_municipios").checked = false;
+    document.getElementById("radio_cidades").checked = false;
+    document.getElementById("radio_pagamentos").checked = false;
 }
 
 

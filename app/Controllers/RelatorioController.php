@@ -236,14 +236,10 @@ class RelatorioController extends BaseController
         
             //Compras por municipio
             case "municipio":
-                echo "municipio;"; die;
-                if($request->get->param == "0"){
-                    $compras_produto = Relatorio::relatorio_municipio_all($request->get->data_inicio, $request->get->data_fim);
-                    $this->view->bairro = "Todos";
-                }else{
-                    $compras_produto = Relatorio::relatorio_municipio($request->get->data_inicio, $request->get->data_fim, $request->get->param);
-                    $this->view->bairro = $this->view->pedidos->resultado[0]->bairro;
-                }
+
+                $compras_produto = Relatorio::relatorio_municipio($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                
+                $this->view->bairro = $compras_produto->resultado[0]->bairro;
 
                 $qtd = 0;
                 $vlr = 0;
@@ -257,9 +253,6 @@ class RelatorioController extends BaseController
                 
                 $this->view->qtd_total = $qtd;
                 $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
-                
-                
-                
                 
 //                var_dump($compras_produto); die;
                 $this->view->pedidos = $compras_produto;
@@ -269,18 +262,33 @@ class RelatorioController extends BaseController
         
             //Compras por cidade
             case "cidade":
-                echo "cidade;"; die;
+                $compras_produto = Relatorio::relatorio_cidade($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                $this->view->bairro = $compras_produto->resultado[0]->cidade;
+
+                $qtd = 0;
+                $vlr = 0;
+                
+                if($compras_produto->erro == false){
+                    for($i=0; $i < sizeof($compras_produto->resultado);  $i++){
+                        $qtd = $qtd + $compras_produto->resultado[$i]->qtd;
+                        $vlr = $vlr + $compras_produto->resultado[$i]->valor;
+                    }
+                }
+                
+                $this->view->qtd_total = $qtd;
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
+//                var_dump($compras_produto); die;
+                $this->view->pedidos = $compras_produto;
+                $titulo_pagina = "Relatório Vendas por Cidade";
+                $caminho_layout = 'adm/relatorio/cidade';
             break;
         
             //compras por forma de pagamento
             case "pagamento":
-                if($request->get->param == "0"){
-                    $compras_produto = Relatorio::relatorio_pagamento_all($request->get->data_inicio, $request->get->data_fim);
-                    $this->view->bairro = "Todos";
-                }else{
-                    $compras_produto = Relatorio::relatorio_pagamento($request->get->data_inicio, $request->get->data_fim, $request->get->param);
-                    $this->view->bairro = $this->view->pedidos->resultado[0]->bairro;
-                }
+
+                $compras_produto = Relatorio::relatorio_pagamento($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                $this->view->pag = $compras_produto->resultado[0]->pag;
 
                 $qtd = 0;
                 $vlr = 0;
@@ -296,11 +304,114 @@ class RelatorioController extends BaseController
                 $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
                 
                 
-                
 //                var_dump($compras_produto); die;
                 $this->view->pedidos = $compras_produto;
                 $titulo_pagina = "Relatório Vendas por Forma de Pagamento";
                 $caminho_layout = 'adm/relatorio/pagamento';
+            break;
+            
+            
+            //compras por categorias
+            case "categorias":
+
+               $compras_produto = Relatorio::relatorio_categoria_all($request->get->data_inicio, $request->get->data_fim);
+
+                $qtd = 0;
+                $vlr = 0;
+                
+                if($compras_produto->erro == false){
+                    for($i=0; $i < sizeof($compras_produto->resultado);  $i++){
+                        $qtd = $qtd + $compras_produto->resultado[$i]->qtd;
+                        $vlr = $vlr + $compras_produto->resultado[$i]->valor;
+                    }
+                }
+                
+                $this->view->qtd_total = $qtd;
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
+                
+//                var_dump($compras_produto); die;
+                $this->view->pedidos = $compras_produto;
+                $titulo_pagina = "Relatório Vendas por Categorias";
+                $caminho_layout = 'adm/relatorio/categorias';
+            break;
+            
+        
+            //compras por municipios
+            case "municipios":
+
+               $compras_produto = Relatorio::relatorio_municipio_all($request->get->data_inicio, $request->get->data_fim);
+
+                $qtd = 0;
+                $vlr = 0;
+                
+                if($compras_produto->erro == false){
+                    for($i=0; $i < sizeof($compras_produto->resultado);  $i++){
+                        $qtd = $qtd + $compras_produto->resultado[$i]->qtd;
+                        $vlr = $vlr + $compras_produto->resultado[$i]->valor;
+                    }
+                }
+                
+                $this->view->qtd_total = $qtd;
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
+                
+//                var_dump($compras_produto); die;
+                $this->view->pedidos = $compras_produto;
+                $titulo_pagina = "Relatório Vendas por Municipios";
+                $caminho_layout = 'adm/relatorio/municipios';
+            break;
+        
+        
+            //compras por cidades
+            case "cidades":
+
+               $compras_produto = Relatorio::relatorio_cidade_all($request->get->data_inicio, $request->get->data_fim);
+
+                $qtd = 0;
+                $vlr = 0;
+                
+                if($compras_produto->erro == false){
+                    for($i=0; $i < sizeof($compras_produto->resultado);  $i++){
+                        $qtd = $qtd + $compras_produto->resultado[$i]->qtd;
+                        $vlr = $vlr + $compras_produto->resultado[$i]->valor;
+                    }
+                }
+                
+                $this->view->qtd_total = $qtd;
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
+                
+//                var_dump($compras_produto); die;
+                $this->view->pedidos = $compras_produto;
+                $titulo_pagina = "Relatório Vendas por Municipios";
+                $caminho_layout = 'adm/relatorio/cidades';
+            break;
+        
+        
+            //compras por pagamentos
+            case "pagamentos":
+
+               $compras_produto = Relatorio::relatorio_pagamento_all($request->get->data_inicio, $request->get->data_fim);
+
+                $qtd = 0;
+                $vlr = 0;
+                
+                if($compras_produto->erro == false){
+                    for($i=0; $i < sizeof($compras_produto->resultado);  $i++){
+                        $qtd = $qtd + $compras_produto->resultado[$i]->qtd;
+                        $vlr = $vlr + $compras_produto->resultado[$i]->valor;
+                    }
+                }
+                
+                $this->view->qtd_total = $qtd;
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
+                
+//                var_dump($compras_produto); die;
+                $this->view->pedidos = $compras_produto;
+                $titulo_pagina = "Relatório Vendas por Cidades";
+                $caminho_layout = 'adm/relatorio/pagamentos';
             break;
         
         
