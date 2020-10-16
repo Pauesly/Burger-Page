@@ -45,7 +45,7 @@
                         <div class="col-md-1 text-center"> <?= $this->view->pedidos->resultado[$h]->id_order ?>  </div>
                         <div class="col-md-2 text-left">   <?= $this->view->pedidos->resultado[$h]->customer_name ?> </div>
                         <div class="col-md-1 text-center"> R$ <?= \App\Models\Padroes_gerais::ValorDoisDigitos($this->view->pedidos->resultado[$h]->total_pedido) ?> </div>
-                        <div class="col-md-2 text-center"> <?= \App\Models\Padroes_gerais::ConverteDataHoraUS_BR($this->view->pedidos->resultado[$h]->created_at) ?>   </div>
+                        <div class="col-md-2 text-center"> <?= \App\Models\Padroes_gerais::ConverteDataHoraUS_BR($this->view->pedidos->resultado[$h]->to_deliver_in) ?>   </div>
                         <div class="col-md-2 text-center"> <?= $this->view->pedidos->resultado[$h]->status_name ?>  </div>
                         <div class="col-md-1 text-center"> <?= $this->view->pedidos->resultado[$h]->payment_status == 1 ? "SIM" : "NÃO"?>  </div>
                         <div class="col-md-1 text-left">   <?= $this->view->pedidos->resultado[$h]->payment_term_name?>  </div>

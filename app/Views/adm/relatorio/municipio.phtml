@@ -26,8 +26,7 @@
     </div>
     
     <div class="form-row border mt-2">
-        <div class="col-md-3 text-center"> <strong>    ID Cliente </strong></div>
-        <div class="col-md-3 text-center"> <strong>    CLiente     </strong></div>
+        <div class="col-md-3 text-center"> <strong>    Data     </strong></div>
         <div class="col-md-3 text-center"> <strong>      Quantidade </strong></div>
         <div class="col-md-3 text-center"> <strong>      Valor Total </strong></div>
     </div>
@@ -37,8 +36,7 @@
             for ($h=0; $h < sizeof($this->view->pedidos->resultado); $h++){
                 ?>
                     <div class="form-row  mt-1">
-                        <div class="col-md-3 text-center">  <?= $this->view->pedidos->resultado[$h]->id_cliente ?> </div>
-                        <div class="col-md-3 text-center">  <?= $this->view->pedidos->resultado[$h]->nome_cliente ?> </div>
+                        <div class="col-md-3 text-center">  <?= App\Models\Padroes_gerais::ConverteDataUS_BR($this->view->pedidos->resultado[$h]->data) ?> </div>
                         <div class="col-md-3 text-center">    <?= $this->view->pedidos->resultado[$h]->qtd?>  </div>
                         <div class="col-md-3 text-center">  R$  <?= $this->view->pedidos->resultado[$h]->valor?>  </div>
                     </div>

@@ -32,8 +32,8 @@
     <div class="form-row border mt-2">
         <div class="col-md-1 text-center"> <strong>    ID Prod. </strong></div>
         <div class="col-md-2 text-center"> <strong>    NOME     </strong></div>
-        <div class="col-md-2 text-center"> <strong>    VALOR TOTAL </strong></div>
         <div class="col-md-1 text-center"> <strong>    QTD TOT </strong></div>
+        <div class="col-md-2 text-center"> <strong>    VALOR TOTAL </strong></div>
         <div class="col-md-2 text-center"> <strong>    MEDIA UNIT </strong></div>
         <div class="col-md-2 text-center"> <strong>    CUSTO UNIT </strong></div>
         <div class="col-md-2 text-center"> <strong>    LUCRO </strong></div>
@@ -47,8 +47,8 @@
                     <div class="form-row  mt-1">
                         <div class="col-md-1 text-center">   <?= $this->view->pedidos->resultado[$h]->id_product ?>  </div>
                         <div class="col-md-2 text-center">   <?= $this->view->pedidos->resultado[$h]->nome_prod ?> </div>
-                        <div class="col-md-2 text-center">R$ <?= $this->view->pedidos->resultado[$h]->valor ?> </div>
                         <div class="col-md-1 text-center">   <?= $this->view->pedidos->resultado[$h]->qtd ?> </div>
+                        <div class="col-md-2 text-center">R$ <?= $this->view->pedidos->resultado[$h]->valor ?> </div>
                         <div class="col-md-2 text-center">R$ <?= $this->view->pedidos->resultado[$h]->media_unit ?> </div>
                         <div class="col-md-2 text-center">R$ <?= $this->view->pedidos->resultado[$h]->custo ?> </div>
                         <div class="col-md-2 text-center" 

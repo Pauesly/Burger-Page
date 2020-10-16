@@ -164,23 +164,27 @@ class RelatorioController extends BaseController
                 $caminho_layout = 'adm/relatorio/produto_abc';
             break;
         
-            //Compras porcliente
+            //Compras por cliente
             case "cliente":
                 $compras_cliente = Relatorio::relatorio_cliente($request->get->data_inicio, $request->get->data_fim, $request->get->param);
+                
+                $vlr = 0;
                 
                 if($compras_cliente->erro == false){
                     $totais = Relatorio::relatorio_cliente_soma_pedidos($request->get->data_inicio, $request->get->data_fim, $request->get->param);
                     
                     for($i=0; $i < sizeof($compras_cliente->resultado); $i++){
                         for($j=0; $j < sizeof($totais->resultado); $j++){
-                            
                             if($compras_cliente->resultado[$i]->id_order == $totais->resultado[$j]->id_order){
                                 $compras_cliente->resultado[$i]->total_order = $totais->resultado[$j]->valor;
                             }
-                            
                         }
+                        $vlr = $vlr + $compras_cliente->resultado[$i]->total_order;
                     }
                 }
+                
+                $this->view->valor_total = Padroes_gerais::ValorDoisDigitos($vlr);
+                
                 
 //                var_dump($totais); die;
                 $this->view->pedidos = $compras_cliente;

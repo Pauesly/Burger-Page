@@ -23,7 +23,7 @@
         <div class="col-md-2 text-center"> <strong>    ID Produto </strong></div>
         <div class="col-md-4 text-left">   <strong>    NOME     </strong></div>
         <div class="col-md-3 text-center"> <strong>    QTD vendida </strong></div>
-        <div class="col-md-3 text-center"> <strong>    Valor vendida </strong></div>
+        <div class="col-md-3 text-center"> <strong>    Valor vendido </strong></div>
         
     </div>
     
@@ -35,7 +35,7 @@
                         <div class="col-md-2 text-center">   <?= $this->view->pedidos->resultado[$h]->product ?> </div>
                         <div class="col-md-4 text-left"> <?= $this->view->pedidos->resultado[$h]->name_prod?>  </div>
                         <div class="col-md-3 text-center">   <?= $this->view->pedidos->resultado[$h]->qtd?>  </div>
-                        <div class="col-md-3 text-center">   <?= $this->view->pedidos->resultado[$h]->valor?>  </div>
+                        <div class="col-md-3 text-center"> R$   <?= $this->view->pedidos->resultado[$h]->valor?>  </div>
                     </div>
                <?php
             }

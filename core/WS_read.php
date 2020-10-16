@@ -1015,7 +1015,7 @@ class WS_read
                        ."JOIN Customer "
                             . "ON Customer.id_customer = Orders.fk_id_customer " .
                         
-			 " WHERE to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' ORDER BY Orders.created_at ",
+			 " WHERE to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' ORDER BY Orders.to_deliver_in ",
                         
                                "Orders.id_order             as id_order, 
                                 Orders.fk_id_adm            as fk_id_adm,
@@ -1023,7 +1023,7 @@ class WS_read
                                 Orders.fk_id_payment_term   as fk_id_payment_term,
                                 Orders.fk_id_status         as fk_id_status,
                                 Orders.payment_status       as payment_status,
-                                Orders.created_at           as created_at,
+                                Orders.to_deliver_in           as to_deliver_in,
                                 
                                 Status.status               as status_name,
                                 Status.color_code           as color_code,
@@ -1230,7 +1230,7 @@ class WS_read
                         "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
                         "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
                         
-			 " WHERE o.active LIKE 1 AND  o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY po.fk_id_product ORDER BY qtd desc",
+			 " WHERE o.active LIKE 1 AND  o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY po.fk_id_product ORDER BY qtd DESC, valor DESC ",
                         
                                "prod.id_product AS product,
                                 prod.name AS name_prod,
@@ -1411,14 +1411,14 @@ class WS_read
                         "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
                         "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
                         "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
-                        "INNER JOIN Address local       ON local.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN Address local       ON local.id_address = o.fk_id_address " .
                         
 			 " WHERE o.active LIKE 1 AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY local.bairro ",
                         
                                "
                                 local.bairro AS bairro,
                                 
-                                SUM(po.qtd) as qtd,
+                                COUNT(DISTINCT(o.id_order)) as qtd,
                                 SUM(po.price_total) AS valor
                                ");
                 
@@ -1446,15 +1446,14 @@ class WS_read
                         "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
                         "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
                         "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
-                        "INNER JOIN Address local       ON local.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN Address local       ON local.id_address = o.fk_id_address " .
                         
-			 " WHERE o.active LIKE 1 AND local.bairro LIKE '$municipio' AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY cli.id_customer ",
+			 " WHERE o.active LIKE 1 AND local.bairro LIKE '$municipio' AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY DATE(data) ",
                         
-                               "cli.id_customer as id_cliente,
-                                cli.name as nome_cliente,
+                               "o.to_deliver_in AS data,
                                 local.bairro AS bairro,
                                 
-                                SUM(po.qtd) as qtd,
+                                COUNT(DISTINCT(o.id_order)) as qtd,
                                 SUM(po.price_total) AS valor
                                ");
                 
@@ -1482,15 +1481,14 @@ class WS_read
                         "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
                         "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
                         "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
-                        "INNER JOIN Address local       ON local.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN Address local       ON local.id_address = o.fk_id_address " .
                         
-			 " WHERE o.active LIKE 1 AND local.cidade LIKE '$cidade' AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY cli.id_customer ",
+			 " WHERE o.active LIKE 1 AND local.cidade LIKE '$cidade' AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY DATE(data) ",
                         
-                               "cli.id_customer as id_cliente,
-                                cli.name as nome_cliente,
+                               "o.to_deliver_in AS data,
                                 local.cidade AS cidade,
                                 
-                                SUM(po.qtd) as qtd,
+                                COUNT(DISTINCT(o.id_order)) as qtd,
                                 SUM(po.price_total) AS valor
                                ");
                 
@@ -1525,7 +1523,7 @@ class WS_read
                                "cli.id_customer as id_customer,
                                 cli.name as nome_cliente,
                                 pay.name as pag,
-                                COUNT(o.fk_id_customer) as qtd,
+                                COUNT(DISTINCT(o.id_order)) as qtd,
                                 SUM(po.price_total) AS valor
                                ");
                 
@@ -1558,7 +1556,7 @@ class WS_read
                         
                                "pay.id_payment_term as id_payment_term,
                                 pay.name as id_payment_term_name,
-                                SUM(o.active) as qtd,
+                                COUNT(DISTINCT(o.id_order)) as qtd,
                                 SUM(po.price_total) AS valor
                                ");
                 
@@ -1619,14 +1617,14 @@ class WS_read
                         "INNER JOIN Orders o            ON o.fk_id_customer = cli.id_customer " .
                         "INNER JOIN ProductOrder po 	ON po.fk_id_order = o.id_order " .
                         "INNER JOIN Product prod        ON prod.id_product = po.fk_id_product " .
-                        "INNER JOIN Address local       ON local.fk_id_customer = cli.id_customer " .
+                        "INNER JOIN Address local       ON local.id_address = o.fk_id_address " .
                         
 			 " WHERE o.active LIKE 1 AND o.to_deliver_in BETWEEN '$data_inicial 00:00:00' AND '$fata_final 23:59:59' GROUP BY local.cidade ",
                         
                                "
                                 local.cidade AS cidade,
                                 
-                                SUM(po.qtd) as qtd,
+                                COUNT(DISTINCT(o.id_order)) as qtd,
                                 SUM(po.price_total) AS valor
                                ");
                 
